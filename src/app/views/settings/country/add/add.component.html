@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header"><i class="fa fa-edit"></i>{{(id!='')?'Edit':'Add'}} Country
+    </div>
+    <div class="card-body" style="overflow: visible; height: auto; display: block;" aria-expanded="true"
+        aria-hidden="false">
+        <form [formGroup]="countryForm" class="form-horizontal" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field style="width:100%">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="country name" formControlName="name" required>
+                        <mat-error *ngIf="f.name.errors">
+                            <span *ngIf="f.name.errors.required"> Country name is required</span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Save changes</button>
+                <button class="btn btn-secondary" type="button" (click)="cancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

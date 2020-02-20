@@ -1,0 +1,454 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            
+            <mat-horizontal-stepper labelPosition="bottom" linear #stepper>
+                <mat-step [stepControl]="firstFormGroup">
+                    <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Company Details</ng-template>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Company name" formControlName="companyname" required>
+                                    <mat-error *ngIf="f1.companyname.errors">
+                                        <span *ngIf="f1.companyname.errors.required"> Company name is required</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Brand Name</mat-label>
+                                    <input matInput placeholder="Brand name" formControlName="brandname" required>
+                                    <mat-error *ngIf="f1.brandname.errors">
+                                        <span *ngIf="f1.brandname.errors.required"> Brand name is required</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Website</mat-label>
+                                    <input matInput placeholder="Website url" formControlName="website" required>
+                                    <mat-error *ngIf="f1.website.errors">
+                                        <span *ngIf="f1.website.errors.required"> Website name is required</span>
+                                        <span *ngIf="f1.website.errors.pattern"> Website name is invalid</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div layout-xs="column" formArrayName="social">
+                            <mat-label>Social Profiles</mat-label>
+                            <div class="row" *ngFor="let addr of social.controls; let i = index" [formGroupName]="i">
+                                <div class="col-md-4">
+                                    <mat-form-field style="width:100%">
+                                        <mat-label>LinkedIn</mat-label>
+                                        <input matInput placeholder="Linked In" formControlName="linkedin">
+                                        <mat-error *ngIf="addr.invalid && addr.get('linkedin').errors">
+                                            <span *ngIf="addr.get('linkedin').errors?.pattern"> URL is invalid</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field style="width:100%">
+                                        <mat-label>Facebook</mat-label>
+                                        <input matInput placeholder="Facebook" formControlName="facebook">
+                                        <mat-error *ngIf="addr.invalid && addr.get('facebook').errors">
+                                            <span *ngIf="addr.get('facebook').errors?.pattern"> URL is invalid</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field style="width:100%">
+                                        <mat-label>Twitter</mat-label>
+                                        <input matInput placeholder="Twitter" formControlName="twitter">
+                                        <mat-error *ngIf="addr.invalid && addr.get('twitter').errors">
+                                            <span *ngIf="addr.get('twitter').errors?.pattern"> URL is invalid</span>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button mat-flat-button color="primary" matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+                    <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Basic Details</ng-template>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Currency</mat-label>
+                                    <select matNativeControl required formControlName="homecurrency">
+                                        <option label="--Select Currency--"></option>
+                                        <option value="1">USD</option>
+                                        <option value="2">INR</option>
+                                    </select>
+                                    <mat-error *ngIf="f2.homecurrency.errors">
+                                        <span *ngIf="f2.homecurrency.errors.required"> Currency is required</span>
+                                        <span *ngIf="f2.homecurrency.errors.pattern"> Currency is invalid</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="pull-right" mat-mini-fab color="primary" (click)="addAddressValue()"><i
+                                        class="fa fa-plus"></i></button>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <th>Address</th>
+                                        <th>Pincode</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Country</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody formArrayName="companyaddress">
+                                        <tr *ngFor="let addr of register_office.controls; let i = index" [formGroupName]="i">
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Address" formControlName="address" required><mat-error *ngIf="addr.invalid && addr.get('address').errors">
+                                                        <span *ngIf="addr.get('address').errors?.required"> Address is required</span>
+                                                    </mat-error></mat-form-field>
+
+                                            </td>
+                                            <td>
+                                                <mat-form-field>
+                                                    <input matInput placeholder="Pincode" formControlName="pincode" required>
+                                                    <mat-error *ngIf="addr.invalid && addr.get('pincode').errors">
+                                                        <span *ngIf="addr.get('pincode').errors?.required"> Pincode is required</span>
+                                                        <span *ngIf="addr.get('pincode').errors?.pattern || addr.get('pincode').errors?.min"> Pincode is invalid</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><select matNativeControl formControlName="city" required>
+                                                        <option value=''>--Select City--</option>
+                                                        <option *ngFor="let item of dropdown.city" value="{{item.id}}">{{item.name}}</option>
+                                                    </select>
+<mat-error *ngIf="addr.invalid && addr.get('city').errors">
+                                                        <span *ngIf="addr.get('city').errors?.required"> State is required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><select matNativeControl formControlName="state" required>
+                                                        <option value=''>--Select State--</option>
+                                                        <option *ngFor="let item of dropdown.state" value="{{item.id}}">{{item.name}}</option>
+                                                    </select>
+<mat-error *ngIf="addr.invalid && addr.get('state').errors">
+                                                        <span *ngIf="addr.get('state').errors?.required"> State is required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><select matNativeControl formControlName="country" required>
+                                                        <option value=''>--Select Country--</option>
+                                                        <option *ngFor="let item of dropdown.country" value="{{item.id}}">{{item.name}}</option>
+                                                    </select>
+<mat-error *ngIf="addr.invalid && addr.get('country').errors">
+                                                        <span *ngIf="addr.get('country').errors?.required"> Country is required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </td>
+                                            <td><button mat-mini-fab color="warn" type="button" (click)="deleteAddressValue(i)"><i
+                                                        class="fa fa-trash"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                            <button mat-flat-button color="primary" matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
+                    <form [formGroup]="thirdFormGroup">
+                        <ng-template matStepLabel>Contacts Details</ng-template>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Contact Person</mat-label>
+                                    <input matInput placeholder="Contact Person" formControlName="contactperson" required>
+                                    <mat-error *ngIf="f3.contactperson.errors">
+                                        <span *ngIf="f3.contactperson.errors.required"> Contact Person is required</span>
+                                        <span *ngIf="f3.contactperson.errors.pattern"> Contact Person is invalid</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Phone No</mat-label>
+                                    <input matInput placeholder="Phone No" formControlName="phonenumber" required>
+                                    <mat-error *ngIf="f3.phonenumber.errors">
+                                        <span *ngIf="f3.phonenumber.errors.required"> Phone No. is required</span>
+                                        <span *ngIf="f3.phonenumber.errors.pattern"> Phone No. is invalid</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput placeholder="Email" formControlName="emialid" required>
+                                    <mat-error *ngIf="f3.emialid.errors">
+                                        <span *ngIf="f3.emialid.errors.required"> Email is required</span>
+                                        <span *ngIf="f3.emialid.errors.pattern"> Email is invalid</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                            <button mat-flat-button color="primary" matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="fourthFormGroup" [optional]="isOptional">
+                    <form [formGroup]="fourthFormGroup">
+                        <ng-template matStepLabel>Identity Details</ng-template>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>PAN</mat-label>
+                                    <input matInput placeholder="PAN" formControlName="pan" required>
+                                    <mat-error *ngIf="f4.pan.errors">
+                                        <span *ngIf="f4.pan.errors.required"> PAN is required</span>
+                                        <span *ngIf="f4.pan.errors.pattern"> PAN is invalid</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>TAN</mat-label>
+                                    <input matInput placeholder="TAN" formControlName="tan" required>
+                                    <mat-error *ngIf="f4.tan.errors">
+                                        <span *ngIf="f4.tan.errors.required"> TAN is required</span>
+                                        <span *ngIf="f4.tan.errors.pattern"> TAN is invalid</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>GSTN</mat-label>
+                                    <input matInput placeholder="GSTN" formControlName="gstin">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>CIN</mat-label>
+                                    <input matInput placeholder="CIN" formControlName="cin">
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <input matInput placeholder="DOI" formControlName="doi">
+                                </mat-form-field>
+                            </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Company Entity</mat-label>
+                                    <input matInput placeholder="company entity" formControlName="companyentity" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                            <button mat-flat-button color="primary" matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="fifthFormGroup" [optional]="isOptional">
+                    <form [formGroup]="fifthFormGroup">
+                        <ng-template matStepLabel>Bank</ng-template>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="pull-right" mat-mini-fab color="primary" (click)="addBankValue()"><i
+                                        class="fa fa-plus"></i></button>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <th>Bank</th>
+                                        <th>Account No.</th>
+                                        <th>branch</th>
+                                        <th>ifsc</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody formArrayName="bank">
+                                        <tr *ngFor="let addr of bank_details.controls; let i = index" [formGroupName]="i">
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Bank" formControlName="bankname">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="AC NO." formControlName="accountnumber"><mat-error *ngIf="addr.invalid && addr.get('accountnumber').errors">
+                                                        <span *ngIf="addr.get('accountnumber').errors?.max"> Account No. is required</span>
+                                                    </mat-error></mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Branch" formControlName="branch"></mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="IFSC" formControlName="ifsc"><mat-error *ngIf="addr.invalid && addr.get('ifsc').errors">
+                                                        <span *ngIf="addr.get('ifsc').errors?.max"> Account No. is required</span>
+                                                    </mat-error></mat-form-field>
+                                            </td>
+                                            <td><button mat-mini-fab color="warn" type="button" (click)="deleteBankValue(i)"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                            <button mat-flat-button color="primary" matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="sixthFormGroup" [optional]="isOptional">
+                    <form [formGroup]="sixthFormGroup">
+                        <ng-template matStepLabel>Directors</ng-template>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="pull-right" mat-mini-fab color="primary" (click)="addDirectorsValue()"><i
+                                        class="fa fa-plus"></i></button>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>DIN</th>
+                                        <th>Phone No.</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody formArrayName="director">
+                                        <tr *ngFor="let addr of directors.controls; let i = index" [formGroupName]="i">
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Name" formControlName="name"></mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Email" formControlName="emailid"><mat-error *ngIf="addr.invalid && addr.get('emailid').errors">
+                                                        <span *ngIf="addr.get('emailid').errors?.pattern"> Email is invalid</span>
+                                                    </mat-error></mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="DIN" formControlName="din"></mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Phone No." formControlName="phonenumber"><mat-error *ngIf="addr.invalid && addr.get('phonenumber').errors">
+                                                        <span *ngIf="addr.get('phonenumber').errors?.pattern || addr.get('phonenumber').errors?.min"> Phone no. is invalid</span>
+                                                    </mat-error></mat-form-field>
+                                            </td>
+                                            <td><button mat-mini-fab color="warn" type="button" (click)="deleteDirectorsValue(i)"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                            <button mat-flat-button color="primary" matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="fifthFormGroup" [optional]="isOptional">
+                    <form [formGroup]="seventhFormGroup">
+                        <ng-template matStepLabel>Auditors</ng-template>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="pull-right" mat-mini-fab color="primary" (click)="addAuditorsValue()"><i
+                                        class="fa fa-plus"></i></button>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Type</th>
+                                        <th>Phone No.</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody formArrayName="auditor">
+                                        <tr *ngFor="let addr of auditors.controls; let i = index" [formGroupName]="i">
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Name" formControlName="name"></mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Email" formControlName="emailid"><mat-error *ngIf="addr.invalid && addr.get('emailid').errors">
+                                                        <span *ngIf="addr.get('emailid').errors?.pattern"> Email is invalid</span></mat-error></mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field>
+                                                    <select matNativeControl formControlName="type">
+                                                        <option value="">--select--</option>
+                                                        <option value="1">Internal</option>
+                                                        <option value="2">Statutory</option>
+                                                    </select>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Phone No." formControlName="phonenumber"><mat-error *ngIf="addr.invalid && addr.get('phonenumber').errors">
+                                                        <span *ngIf="addr.get('phonenumber').errors?.pattern || addr.get('phonenumber').errors?.min"> Phone no. is invalid</span></mat-error></mat-form-field>
+                                            </td>
+                                            <td><button mat-mini-fab color="warn" type="button" (click)="deleteAuditorsValue(i)"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                            <button mat-flat-button color="primary" matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="eightFormGroup" [optional]="isOptional">
+                    <form [formGroup]="eightFormGroup"  (ngSubmit)="onSubmit()">
+                        <ng-template matStepLabel>Secretary</ng-template>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="pull-right" mat-mini-fab color="primary" (click)="addCompanySecretaryValue()"><i
+                                        class="fa fa-plus"></i></button>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone No.</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody formArrayName="secretary">
+                                        <tr *ngFor="let addr of companysecretary.controls; let i = index" [formGroupName]="i">
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Name" formControlName="name"></mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Email" formControlName="emailid"><mat-error *ngIf="addr.invalid && addr.get('emailid').errors">
+                                                        <span *ngIf="addr.get('emailid').errors?.pattern"> Email is invalid</span></mat-error></mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field><input matInput placeholder="Phone No." formControlName="phonenumber"><mat-error *ngIf="addr.invalid && addr.get('phonenumber').errors">
+                                                        <span *ngIf="addr.get('phonenumber').errors?.pattern || addr.get('phonenumber').errors?.min"> Phone no. is invalid</span></mat-error></mat-form-field>
+                                            </td>
+                                            <td><button mat-mini-fab color="warn" type="button" (click)="deleteCompanySecretaryValue(i)"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                            <button mat-button (click)="stepper.reset()">Reset</button>
+                            <button mat-flat-button type="submit" color="primary" matStepperNext>Submit</button>
+                        </div>
+                    </form>
+                </mat-step>
+            </mat-horizontal-stepper>
+            <div class="pull-right text-danger"><b><sup>*</sup> are mandatory fields.</b></div>
+        </div>
+    </div>
+</div>
