@@ -24,7 +24,28 @@ export class ListComponent implements OnInit {
           }
         });
   }
-
+  getCountryList() {
+    this.temp = false;
+    this.commonService.get('country/get', {})
+      .subscribe(
+        data => {
+          if (data.success) {
+            this.getCountryList = data.message;
+            this.temp = true;
+          }
+        });
+  }
+  getStateList() {
+    this.temp = false;
+    this.commonService.get('state/get', {})
+      .subscribe(
+        data => {
+          if (data.success) {
+            this.getStateList = data.message;
+            this.temp = true;
+          }
+        });
+  }
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -32,6 +53,8 @@ export class ListComponent implements OnInit {
       processing: true
     };
     this.getList();
+    this.getStateList();
+    this.getCountryList();
   }
   deleteAction(params: any) {
     this.commonService.get('city/delete/' + params, {}).subscribe(
@@ -39,8 +62,8 @@ export class ListComponent implements OnInit {
         if (data.success) {
           this.toastr.successToastr('City deleted sucessfully');
           this.getList();
-          console.log(data);
-          // this.dataList=data.message;
+          this.getStateList();
+          this.getCountryList();
         }
       });
   }

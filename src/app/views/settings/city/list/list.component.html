@@ -23,8 +23,9 @@
                         <tbody>
                             <tr *ngFor="let group of dataList">
                                 <td>{{group.name}}</td>
-                                <td>{{group.state_name}}</td>
-                                <td>{{group.country_name}}</td>
+                                <td *ngFor="let state of getStateList" > <span  *ngIf="state.id == group.state_id">{{state.name}}</span></td>
+                                <td *ngFor="let country of getCountryList" > <span  *ngIf="country.id == group.country_id">{{country.name}}</span></td>
+                                
                                 <td>
                                     <button mat-mini-fab color="primary" type="button"
                                         [routerLink]="['/home/settings/city/edit',group.id]"><i

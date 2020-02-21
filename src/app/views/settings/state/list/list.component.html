@@ -22,7 +22,7 @@
                         <tbody>
                             <tr *ngFor="let group of dataList">
                                 <td>{{group.name}}</td>
-                                <td>{{group.country_name}}</td>
+                                <td *ngFor="let country of getCountryList" > <span  *ngIf="country.id == group.country_id">{{country.name}}</span></td>
                                 <td>
                                     <button mat-mini-fab color="primary" type="button"
                                         [routerLink]="['/home/settings/state/edit',group.id]"><i
