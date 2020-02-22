@@ -26,12 +26,6 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string){
-<<<<<<< HEAD
-       // console.log({username: username, password: password });
-        // return this.http.post(environment.apiUrl + 'login', {email: username, password: password });
-=======
-        console.log({username: username, password: password });
->>>>>>> 6a282023f392bfcb16360beac6c4bf6905f93819
         return this.http.post<any>(environment.apiUrl + 'login', {email: username, password: password })
             .pipe(map(user => {
                 console.log(user);
@@ -70,11 +64,6 @@ export class AuthenticationService {
     }
     logout() {
         // remove user from local storage to log user out
-<<<<<<< HEAD
-        localStorage.removeItem('currentUser');
-        this.currentUser=null;
-        // console.log(this.currentUser);
-=======
         let currentUser: any;
         currentUser = this.currentUserValue;
         if (currentUser && currentUser.token) {
@@ -99,6 +88,5 @@ export class AuthenticationService {
             this.currentUser = null;
             this.router.navigate(['/login']);
         }
->>>>>>> 6a282023f392bfcb16360beac6c4bf6905f93819
     }
 }
