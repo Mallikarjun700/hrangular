@@ -43,15 +43,13 @@ export class AddComponent implements OnInit {
   get f() { return this.countryForm.controls; }
 
   onSubmit() {
-    console.log(this.f)
-
     // stop here if form is invalid
     if (this.countryForm.invalid) {
       return;
     }
     let URL = 'country/post';
     if (this.route.snapshot.params['id']) {
-      URL = 'country/update/' + this.id
+      URL = 'country/update/' + this.id;
     }
     this.commonService.post(URL, { name: this.f.name.value })
       .subscribe(

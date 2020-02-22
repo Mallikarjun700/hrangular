@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from  '@angular/material/form-field';
 import {MatInputModule} from  '@angular/material/input';
 import {MatButtonModule} from  '@angular/material/button';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 
 import { CountryRoutingModule } from './country-routing.module';
 import { CountryLayoutComponent } from './country-layout/country-layout.component';
@@ -23,7 +24,8 @@ import { AddComponent } from './add/add.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSlideToggleModule
   ]
 })
 export class CountryModule { }

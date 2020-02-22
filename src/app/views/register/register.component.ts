@@ -40,6 +40,22 @@ ngOnInit() {
 // convenience getter for easy access to form fields
 get f() { return this.registerForm.controls; }
 
+checkExist(){
+  if (this.f.email.invalid) {
+      return;
+  }
+  this.authenticationService.registerMailCheck(this.f.email.value)
+    .pipe(first())
+    .subscribe(
+      data => {
+        if (data.success) {
+          this.toastr.errorToastr(data.message);
+        }
+      },
+      error => {
+        //this.toastr.errorToastr(error.message);
+      });
+}
 
 onSubmit() {
     this.submitted = true;

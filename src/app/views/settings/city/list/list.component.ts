@@ -24,28 +24,7 @@ export class ListComponent implements OnInit {
           }
         });
   }
-  getCountryList() {
-    this.temp = false;
-    this.commonService.get('country/get', {})
-      .subscribe(
-        data => {
-          if (data.success) {
-            this.getCountryList = data.message;
-            this.temp = true;
-          }
-        });
-  }
-  getStateList() {
-    this.temp = false;
-    this.commonService.get('state/get', {})
-      .subscribe(
-        data => {
-          if (data.success) {
-            this.getStateList = data.message;
-            this.temp = true;
-          }
-        });
-  }
+
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -53,17 +32,31 @@ export class ListComponent implements OnInit {
       processing: true
     };
     this.getList();
-    this.getStateList();
-    this.getCountryList();
   }
+
+  toggleStatus(eventchecked: any, params: any) {
+    params.status = (eventchecked) ? '1' : '0';
+    this.commonService.post('city/update/' + params.id, params)
+      .subscribe(
+        details => {
+          if (details.success) {
+            this.toastr.successToastr('City saved sucessfully');
+            this.getList();
+          }
+        },
+        error => {
+          this.toastr.errorToastr(error);
+        });
+  }
+
   deleteAction(params: any) {
     this.commonService.get('city/delete/' + params, {}).subscribe(
       data => {
         if (data.success) {
           this.toastr.successToastr('City deleted sucessfully');
           this.getList();
-          this.getStateList();
-          this.getCountryList();
+          console.log(data);
+          // this.dataList=data.message;
         }
       });
   }

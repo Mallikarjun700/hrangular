@@ -33,7 +33,11 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        if (this.route.snapshot.queryParams['returnUrl']) {
+            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+            this.router.navigate([this.returnUrl]);
+        }
+
     }
 
     // convenience getter for easy access to form fields
@@ -54,7 +58,7 @@ export class LoginComponent implements OnInit {
                 data => {
                     if (data.success) {
                         this.toastr.successToastr('Welcome to dashboard');
-                        window.location.reload();
+                       this.router.navigate(['/home']);
                     }
                 },
                 error => {

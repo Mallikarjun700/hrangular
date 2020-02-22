@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { CurdcommonserviceService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -35,6 +36,22 @@ export class ListComponent implements OnInit {
     };
     this.getList();
   }
+
+  toggleStatus(eventchecked: any, params: any) {
+    params.status = (eventchecked) ? '1' : '0';
+    this.commonService.post('country/update/' + params.id, params)
+      .subscribe(
+        details => {
+          if (details.success) {
+            this.toastr.successToastr('Country saved sucessfully');
+            this.getList();
+          }
+        },
+        error => {
+          this.toastr.errorToastr(error);
+        });
+  }
+
   deleteAction(params: any) {
     this.commonService.get('country/delete/' + params, {}).pipe().subscribe(
       data => {
