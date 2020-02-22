@@ -25,13 +25,11 @@ export class ListComponent implements OnInit {
         });
   }
   getCountryList() {
-    this.temp = false;
     this.commonService.get('country/get', {})
       .subscribe(
         data => {
           if (data.success) {
             this.getCountryList = data.message;
-            this.temp = true;
           }
         });
   }

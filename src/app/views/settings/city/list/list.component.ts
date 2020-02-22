@@ -25,24 +25,20 @@ export class ListComponent implements OnInit {
         });
   }
   getCountryList() {
-    this.temp = false;
     this.commonService.get('country/get', {})
       .subscribe(
         data => {
           if (data.success) {
             this.getCountryList = data.message;
-            this.temp = true;
           }
         });
   }
   getStateList() {
-    this.temp = false;
     this.commonService.get('state/get', {})
       .subscribe(
         data => {
           if (data.success) {
             this.getStateList = data.message;
-            this.temp = true;
           }
         });
   }
@@ -52,18 +48,18 @@ export class ListComponent implements OnInit {
       pageLength: 10,
       processing: true
     };
-    this.getList();
-    this.getStateList();
     this.getCountryList();
+    this.getStateList();
+    this.getList();
   }
   deleteAction(params: any) {
     this.commonService.get('city/delete/' + params, {}).subscribe(
       data => {
         if (data.success) {
           this.toastr.successToastr('City deleted sucessfully');
-          this.getList();
-          this.getStateList();
           this.getCountryList();
+          this.getStateList();
+          this.getList();
         }
       });
   }

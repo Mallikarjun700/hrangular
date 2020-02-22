@@ -5,8 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CompanyprofileComponent } from './companyprofile/companyprofile.component';
 import { AddComponent } from './companyprofile/add/add.component';
 import { CompanyprofileLayoutComponent } from './companyprofile/companyprofile-layout/companyprofile-layout.component';
-
-
+import { ControlpanelComponent } from './controlpanel/controlpanel.component';
 const routes: Routes = [
   {
     path: '',
@@ -17,6 +16,23 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'companyprofile'
+      },
+      {
+        path: 'controlpanel',
+        component: ControlpanelComponent,
+        data: {
+          title: 'Control Panel'
+        },
+        children: [
+          {
+            path: 'organization',
+            component: ControlpanelComponent,
+            data: {
+              title: 'Control Panel'
+            }
+          }
+        ]
+
       },
       {
         path: 'companyprofile',
@@ -48,7 +64,7 @@ const routes: Routes = [
           }
         ]
 
-      }
+      }    
     ]
   }
 ];

@@ -18,7 +18,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string){
-        console.log({username: username, password: password });
+       // console.log({username: username, password: password });
         // return this.http.post(environment.apiUrl + 'login', {email: username, password: password });
         return this.http.post<any>(environment.apiUrl + 'login', {email: username, password: password })
             .pipe(map(user => {
@@ -30,7 +30,7 @@ export class AuthenticationService {
 
     }
     register(username: string, email: string, password: string){
-        console.log({username: username, password: password });
+       // console.log({username: username, password: password });
         // return this.http.post(environment.apiUrl + 'login', {email: username, password: password });
         return this.http.post<any>(environment.apiUrl + 'register',
             { name: username, email: email, password: password, confirme_password: password }
@@ -47,6 +47,6 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUser=null;
-        console.log(this.currentUser);
+        // console.log(this.currentUser);
     }
 }

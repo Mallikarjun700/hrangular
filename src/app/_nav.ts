@@ -29,6 +29,31 @@ export const navItems: INavData[] = [
         name: 'Company Profile',
         url: '/home/organization/companyprofile',
         icon: 'fa fa-table'
+      },
+      {
+        name: 'Control Panel',
+        url: '/home/organization/controlpanel',
+        icon: 'fa fa-table'
+      },
+      {
+        name: 'Master',
+        url: '/home/organization/master',
+        icon: 'fa fa-table'
+      },
+      {
+        name: 'User Management',
+        url: '/home/organization/usermanagement',
+        icon: 'fa fa-table'
+      },
+      {
+        name: 'Audit Log',
+        url: '/home/organization/auditlog',
+        icon: 'fa fa-table'
+      },
+      {
+        name: 'Calender',
+        url: '/home/organization/calender',
+        icon: 'fa fa-table'
       }
     ]
   },
@@ -51,10 +76,26 @@ export const navItems: INavData[] = [
         name: 'City',
         url: '/home/settings/city',
         icon: 'fa fa-table'
+      },
+      {
+        name: 'Roles',
+        url: '/home/settings/roles',
+        icon: 'fa fa-table'
       }
     ]
   },
-  
+  {
+    name: 'Customize',
+    url: '/home/customize',
+    icon: 'fa fa-cog',
+    children: [
+      {
+        name: 'Provident Fund',
+        url: '/home/customize/providentfund',
+        icon: 'fa fa-table'
+      }
+    ]
+  },
   {
     divider: true
   },

@@ -14,9 +14,10 @@ import { OrganizationRoutingModule } from './organization-routing.module';
 import { CompanyprofileLayoutComponent } from './companyprofile/companyprofile-layout/companyprofile-layout.component';
 import { CompanyprofileComponent } from './companyprofile/companyprofile.component';
 import { AddComponent } from './companyprofile/add/add.component';
+import { ControlpanelComponent } from './controlpanel/controlpanel.component';
 
 @NgModule({
-  declarations: [CompanyprofileComponent,CompanyprofileLayoutComponent, AddComponent],
+  declarations: [CompanyprofileComponent,CompanyprofileLayoutComponent, AddComponent, ControlpanelComponent],
   imports: [
     CommonModule,
     OrganizationRoutingModule,
