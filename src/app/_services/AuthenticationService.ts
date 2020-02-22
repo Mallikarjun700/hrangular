@@ -1,33 +1,58 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { environment } from '../../environments/environment';
-
+import { CurdcommonserviceService } from './curdcommonservice.service';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     public currentUser: any;
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+        private commonService: CurdcommonserviceService,
+        public toastr: ToastrManager
+    ) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 
     public get currentUserValue() {
+        if (!this.currentUser) {
+            this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        }
         return this.currentUser;
     }
 
     login(username: string, password: string){
+<<<<<<< HEAD
        // console.log({username: username, password: password });
         // return this.http.post(environment.apiUrl + 'login', {email: username, password: password });
+=======
+        console.log({username: username, password: password });
+>>>>>>> 6a282023f392bfcb16360beac6c4bf6905f93819
         return this.http.post<any>(environment.apiUrl + 'login', {email: username, password: password })
             .pipe(map(user => {
+                console.log(user);
                 if (user.success) {
                     localStorage.setItem('currentUser', JSON.stringify(user));
                 }
                 return user;
             }));
 
+    }
+    forgetPasswordMailCheck(email: string){
+        return this.http.get<any>(environment.apiUrl + 'forget/' + email)
+            .pipe(map(user => {
+                return user;
+            }));
+    }
+    registerMailCheck(email: string){
+        return this.http.get<any>(environment.apiUrl + 'email/'+ email)
+            .pipe(map(user => {
+                return user;
+            }));
     }
     register(username: string, email: string, password: string){
        // console.log({username: username, password: password });
@@ -45,8 +70,35 @@ export class AuthenticationService {
     }
     logout() {
         // remove user from local storage to log user out
+<<<<<<< HEAD
         localStorage.removeItem('currentUser');
         this.currentUser=null;
         // console.log(this.currentUser);
+=======
+        let currentUser: any;
+        currentUser = this.currentUserValue;
+        if (currentUser && currentUser.token) {
+            let params: any;
+            params = {token : currentUser.token}
+            console.log(params)
+            this.commonService.post('logout', params)
+            .subscribe(
+              data => {
+                localStorage.removeItem('currentUser');
+                this.currentUser = null;
+                this.toastr.successToastr(data.message);
+                this.router.navigate(['/login']);
+              },
+              error => {
+                localStorage.removeItem('currentUser');
+                this.currentUser = null;
+                this.toastr.errorToastr(error);
+              });
+        } else {
+            localStorage.removeItem('currentUser');
+            this.currentUser = null;
+            this.router.navigate(['/login']);
+        }
+>>>>>>> 6a282023f392bfcb16360beac6c4bf6905f93819
     }
 }

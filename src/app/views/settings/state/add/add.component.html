@@ -5,16 +5,7 @@
         aria-hidden="false">
         <form [formGroup]="stateForm" class="form-horizontal" (ngSubmit)="onSubmit()">
             <div class="row">
-                <div class="col-md-4">
-                    <mat-form-field style="width:100%">
-                        <mat-label>Name</mat-label>
-                        <input matInput placeholder="state name" formControlName="name" required>
-                        <mat-error *ngIf="f.name.errors">
-                            <span *ngIf="f.name.errors.required"> State name is required</span>
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-md-4">
+		<div class="col-md-4">
                     <mat-form-field style="width:100%">
                         <mat-label>Country</mat-label>
                         <select matNativeControl formControlName="country_id">
@@ -26,6 +17,15 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
+                <div class="col-md-4">
+                    <mat-form-field style="width:100%">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="state name" formControlName="name" required>
+                        <mat-error *ngIf="f.name.errors">
+                            <span *ngIf="f.name.errors.required"> State name is required</span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>                
             </div>
 
             <div class="form-actions">

@@ -15,12 +15,19 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let group of dataList">
                                 <td>{{group.name}}</td>
+                                <td>
+                                    <mat-slide-toggle (change)="toggleStatus($event.checked, group)"
+                                                        [(ngModel)]="group.status"
+                                                        color="primary">
+                                    </mat-slide-toggle>
+                                </td>
                                 <td>
                                     <button mat-mini-fab color="primary" type="button"
                                         [routerLink]="['/home/settings/country/edit',group.id]"><i

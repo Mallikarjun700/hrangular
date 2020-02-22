@@ -9,6 +9,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { ForgetComponent } from './views/forget/forget.component';
 import { SettingsLayoutComponent } from './views/settings/settings-layout/settings-layout.component';
 
 export const routes: Routes = [
@@ -46,6 +47,13 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'forgetpassword',
+    component: ForgetComponent,
+    data: {
+      title: 'Forget Password'
+    }
+  },
+  {
     path: 'home',
     component: DefaultLayoutComponent,
     canActivate: [AuthGuard],
@@ -53,6 +61,11 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
       {
         path: 'organization',
         canActivate: [AuthGuard],

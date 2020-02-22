@@ -11,7 +11,7 @@ const routes: Routes = [
       title: 'Country'
     },
     children: [
-      {
+{
         path: '',
         redirectTo: 'list'
       },      {
