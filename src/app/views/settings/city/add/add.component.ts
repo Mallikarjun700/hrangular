@@ -29,8 +29,12 @@ export class AddComponent implements OnInit {
           }
         });
   }
-  getStateDependency() {
-    this.commonService.get('state/get', {})
+  getStateDependency(countryId?: any) {
+    let URL_GET = 'state/get';
+    if ((countryId)){
+      URL_GET = 'state/country/' + countryId;
+    }
+    this.commonService.get(URL_GET, {})
       .subscribe(
         data => {
           if (data.success) {

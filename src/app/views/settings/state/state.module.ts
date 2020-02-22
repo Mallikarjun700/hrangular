@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from  '@angular/material/form-field';
 import {MatInputModule} from  '@angular/material/input';
 import {MatButtonModule} from  '@angular/material/button';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 
 import { StateRoutingModule } from './state-routing.module';
 import { StateLayoutComponent } from './state-layout/state-layout.component';
@@ -23,7 +24,8 @@ import { ListComponent } from './list/list.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSlideToggleModule
   ]
 })
 export class StateModule { }
