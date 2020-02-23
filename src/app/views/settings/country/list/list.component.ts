@@ -21,7 +21,6 @@ export class ListComponent implements OnInit {
       .subscribe(
         data => {
           if (data.success) {
-
             this.dataList = data.message;
             this.temp = true;
           }

@@ -1,7 +1,7 @@
 {
     "/api/*": {
-        "target": "http://bv-b25.yuvanetworks.in/",
+        "target": "http://127.0.0.1:8000",
         "secure": true,
         "logLevel": "debug"
     }
-}
+} 

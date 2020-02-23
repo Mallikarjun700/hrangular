@@ -100,7 +100,7 @@ export const routes: Routes = [
             loadChildren: () => import('./views/settings/state/state.module').then(m => m.StateModule)
           },
           {
-            path: 'roles',
+            path: 'role',
             canActivate: [AuthGuard],
             loadChildren: () => import('./views/settings/roles/roles.module').then(m => m.RolesModule)
           }

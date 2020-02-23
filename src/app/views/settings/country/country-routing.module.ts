@@ -11,7 +11,7 @@ const routes: Routes = [
       title: 'Country'
     },
     children: [
-{
+      {
         path: '',
         redirectTo: 'list'
       },      {
@@ -35,7 +35,7 @@ const routes: Routes = [
               title: 'Country Add'
             }
           },
-	{
+	        {
             path: 'edit/:id',
             component: AddComponent,
             data: {

@@ -1,19 +1,5 @@
 import { INavData } from '@coreui/angular';
-/*
-{
-    name: 'Onboarding',
-    url: '/home/onboarding',
-    icon: 'fa fa-th',
-    children: [
-      {
-        name: 'Personal Info',
-        url: '/home/onboarding/personalinfo',
-        icon: 'fa fa-table'
-      }
-    ]
-  },	
 
-*/
 export const navItems: INavData[] = [
   {
     name: 'Dashboard',
@@ -79,7 +65,7 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Roles',
-        url: '/home/settings/roles',
+        url: '/home/settings/role',
         icon: 'fa fa-table'
       }
     ]

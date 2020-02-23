@@ -5,13 +5,13 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-align-justify"></i> Roles List
-                    <div class="pull-right"><a class="btn btn-primary" [routerLink]="['/home/settings/roles/add']"><i
+                    <div class="pull-right"><a class="btn btn-primary" [routerLink]="['/home/settings/role/add']"><i
                                 class="fa fa-plus"></i> &nbsp;Add Roles</a></div>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info" *ngIf="!this.temp">No Data found</div>
-                    <table class="table table-striped table-bordered table-sm row-border hover" > <!-- datatable
-                        [dtOptions]="dtOptions" *ngIf="this.temp"-->
+                    <table class="table table-striped table-bordered table-sm row-border hover" datatable
+                    [dtOptions]="dtOptions" *ngIf="this.temp">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -19,16 +19,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                          <!--  <tr *ngFor="let group of dataList">
+                            <tr *ngFor="let group of dataList">
                                 <td>{{group.name}}</td>
                                 <td>
                                     <button mat-mini-fab color="primary" type="button"
-                                        [routerLink]="['/home/settings/country/edit',group.id]"><i
+                                        [routerLink]="['/home/settings/role/edit',group.id]"><i
                                             class="fa fa-edit"></i></button>
                                     <button mat-mini-fab color="warn" type="button" (click)="deleteAction(group.id)"><i
                                             class="fa fa-trash"></i></button>
                                 </td>
-                            </tr>-->
+                            </tr>
                         </tbody>
                     </table>
                 </div>
