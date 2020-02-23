@@ -105,7 +105,7 @@ export class AddComponent implements OnInit {
   }
   createBankDetailsFormGroup(data?: any) {
     return this._formBuilder.group({
-      id: [(data) ? data.id : '', Validators.required],
+      id: [(data) ? data.id : ''],
       bankname: [(data) ? data.bankname : '', Validators.required],
       accountnumber: [(data) ? data.accountnumber : '', Validators.required],
       branch: [(data) ? data.branch : '', Validators.required],
