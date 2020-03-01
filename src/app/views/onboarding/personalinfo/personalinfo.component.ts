@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CurdcommonserviceService } from '../../../_services';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-personalinfo',
@@ -6,21 +9,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./personalinfo.component.scss']
 })
 export class PersonalinfoComponent implements OnInit {
-public data = [
-      {name: 'therichpost1', email: 'therichpost1@gmail.com'},
-      {name: 'therichpost2', email: 'therichpost2@gmail.com'},
-      {name: 'therichpost3', email: 'therichpost3@gmail.com'},
-      {name: 'therichpost4', email: 'therichpost4@gmail.com'},
-  ];
+  public dataList = [];
+  public temp: Object = false;
   dtOptions: DataTables.Settings = {};
-  constructor() { }
+  constructor(private commonService: CurdcommonserviceService, private route: ActivatedRoute,
+    private router: Router, public toastr: ToastrManager) { }
 
-  ngOnInit() {
-this.dtOptions = {
+  getList() {
+    this.temp = false;
+    this.commonService.get('employee/get', {})
+      .subscribe(
+        data => {
+          if (data.success) {
+            this.dataList = data.message;
+            this.temp = true;
+          }
+        });
+  }
+  ngOnInit(): void {
+    this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       processing: true
     };
+    this.getList();
+  }
+  deleteAction(params: any) {
+    this.commonService.get('employee/delete/' + params, {}).subscribe(
+      data => {
+        if (data.success) {
+          this.toastr.successToastr('Employee deleted sucessfully');
+          this.getList();
+          console.log(data);
+          // this.dataList=data.message;
+        }
+      });
   }
 
 }

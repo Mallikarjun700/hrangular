@@ -16,7 +16,9 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.authenticationService.logout();
                 location.reload(true);
             }
-
+            if (err.status === 401 && err.error.message=='Token is Expired') {
+                this.authenticationService.tokenExpired();
+            }
             const error = err.error.message || err.statusText;
             return throwError(error);
         }))

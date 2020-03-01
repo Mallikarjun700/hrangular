@@ -38,6 +38,13 @@ const routes: Routes = [
             data: {
               title: 'Add Profile'
             }
+          },
+          {
+            path: 'edit/:id',
+            component: AddComponent,
+            data: {
+              title: 'Edit Company Profile'
+            }
           }
         ]
 

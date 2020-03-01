@@ -44,6 +44,18 @@ export const navItems: INavData[] = [
     ]
   },
   {
+    name: 'Onboarding',
+    url: '/home/onboarding',
+    icon: 'fa fa-th',
+    children: [
+      {
+        name: 'Personal Info',
+        url: '/home/onboarding/personalinfo',
+        icon: 'fa fa-table'
+      }
+    ]
+  },	
+  {
     name: 'Settings',
     url: '/home/settings',
     icon: 'fa fa-cog',

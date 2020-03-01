@@ -62,6 +62,12 @@ export class AuthenticationService {
             }));
 
     }
+    tokenExpired(){
+      localStorage.removeItem('currentUser');
+      this.currentUser = null;
+      this.toastr.errorToastr('Token has expired');
+      this.router.navigate(['/login']);
+    }
     logout() {
         // remove user from local storage to log user out
         let currentUser: any;
@@ -82,6 +88,7 @@ export class AuthenticationService {
                 localStorage.removeItem('currentUser');
                 this.currentUser = null;
                 this.toastr.errorToastr(error);
+                this.router.navigate(['/login']);
               });
         } else {
             localStorage.removeItem('currentUser');
