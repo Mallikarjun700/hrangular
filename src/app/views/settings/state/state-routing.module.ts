@@ -35,7 +35,7 @@ const routes: Routes = [
               title: 'State Add'
             }
           },
-	{
+        	{
             path: 'edit/:id',
             component: AddComponent,
             data: {

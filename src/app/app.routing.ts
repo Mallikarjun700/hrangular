@@ -103,6 +103,11 @@ export const routes: Routes = [
             path: 'role',
             canActivate: [AuthGuard],
             loadChildren: () => import('./views/settings/roles/roles.module').then(m => m.RolesModule)
+          },
+          {
+            path: 'companyevent',
+            canActivate: [AuthGuard],
+            loadChildren: () => import('./views/settings/companyevents/companyevents.module').then(m => m.CompanyeventsModule)
           }
         ]
       },

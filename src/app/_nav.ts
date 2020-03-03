@@ -67,6 +67,11 @@ export const navItems: INavData[] = [
         name: 'Roles',
         url: '/home/settings/role',
         icon: 'fa fa-table'
+      },
+      {
+        name: 'Company Events',
+        url: '/home/settings/companyevent',
+        icon: 'fa fa-table'
       }
     ]
   },

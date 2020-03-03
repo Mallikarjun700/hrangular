@@ -1,45 +1,46 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RolesLayoutComponent } from './roles-layout/roles-layout.component';
-import { ListComponent } from './list/list.component';
+import { CompanyeventsLayoutComponent } from './companyevents-layout/companyevents-layout.component';
 import { AddComponent } from './add/add.component';
+import { ListComponent } from './list/list.component';
+
+
 const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Role'
+      title: 'Company Events'
     },
     children: [
-      {
+{
         path: '',
         redirectTo: 'list'
-      },
-      {
+      },      {
         path: 'list',
-        component: RolesLayoutComponent,
+        component: CompanyeventsLayoutComponent,
         data: {
-          title: 'Role'
+          title: 'Company Events'
         },
         children: [
           {
             path: '',
             component: ListComponent,
             data: {
-              title: 'Role List'
+              title: 'Company Events List'
             }
           },
           {
             path: 'add',
             component: AddComponent,
             data: {
-              title: 'Role Add'
+              title: 'Company Events Add'
             }
           },
 	        {
             path: 'edit/:id',
             component: AddComponent,
             data: {
-              title: 'Role Edit'
+              title: 'Company Events Edit'
             }
           }
         ]
@@ -52,4 +53,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class RolesRoutingModule { }
+export class CompanyeventsRoutingModule { }
