@@ -1,5 +1,5 @@
-First create -->   ng generate module roles --routing 
-Second create --> ng generate component roles-layout
+First create -->   ng generate module masters --routing 
+Second create --> ng generate component masters-layout
 
 Git command to add all but not one folder
 git add -- . ':!node_modules'

@@ -7,38 +7,33 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer'
   },
   {
-    name: 'Organization',
-    url: '/home/organization',
+    name: 'Organizations',
+    url: '/home/organizations',
     icon: 'fa fa-th',
     children: [
       {
         name: 'Company Profile',
-        url: '/home/organization/companyprofile',
+        url: '/home/organizations/companyprofile',
         icon: 'fa fa-table'
       },
       {
-        name: 'Control Panel',
-        url: '/home/organization/controlpanel',
-        icon: 'fa fa-table'
-      },
-      {
-        name: 'Master',
-        url: '/home/organization/master',
+        name: 'Masters',
+        url: '/home/organizations/masters',
         icon: 'fa fa-table'
       },
       {
         name: 'User Management',
-        url: '/home/organization/usermanagement',
+        url: '/home/organizations/usermanagement',
         icon: 'fa fa-table'
       },
       {
         name: 'Audit Log',
-        url: '/home/organization/auditlog',
+        url: '/home/organizations/auditlog',
         icon: 'fa fa-table'
       },
       {
         name: 'Calender',
-        url: '/home/organization/calender',
+        url: '/home/organizations/calender',
         icon: 'fa fa-table'
       }
     ]

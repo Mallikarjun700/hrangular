@@ -38,6 +38,14 @@
                 </div>   
                 <div class="col-md-3">
                     <span *ngIf="iconData" class="btn btn-primary"><i class="{{ iconData }}"></i> </span> 
+                    <mat-form-field style="width:100%">
+                            <mat-label>Event Color</mat-label>
+                            <input (change)="iconChanged($event)"
+                            matInput placeholder="Event Color" formControlName="color" required>
+                            <mat-error *ngIf="f.name.errors">
+                                <span *ngIf="f.name.errors.required"> Event Color is required</span>
+                            </mat-error>
+                    </mat-form-field>
                 </div>             
             </div>
 

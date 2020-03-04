@@ -42,6 +42,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import { OrganizationsLayoutComponent } from './views/organizations/organizations-layout/organizations-layout.component';
 
 @NgModule({
   imports: [
@@ -69,7 +70,8 @@ SettingsLayoutComponent,
     P500Component,
     LoginComponent,
     RegisterComponent,
-    ForgetComponent
+    ForgetComponent,
+    OrganizationsLayoutComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

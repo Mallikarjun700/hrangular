@@ -44,6 +44,7 @@ export class AddComponent implements OnInit {
       id: [''],
       name: ['', Validators.required],
       icon: ['', Validators.required],
+      color: ['', Validators.required],
       company_id: ['', Validators.required],
     });
     if (this.route.snapshot.params['id']) {
@@ -55,8 +56,9 @@ export class AddComponent implements OnInit {
               this.companyeventForm = this.formBuilder.group({
                 id: [data.message.id],
                 name: [data.message.name, Validators.required],
-                company_id: [data.message.company_id, Validators.required],
                 icon: [data.message.icon, Validators.required],
+                color: [data.message.color, Validators.required],
+                company_id: [data.message.company_id, Validators.required],
               });
             }
           });
@@ -77,7 +79,7 @@ export class AddComponent implements OnInit {
     if (this.route.snapshot.params['id']) {
       URL = 'companyevent/update/' + this.id
     }
-    this.commonService.post(URL, { name: this.f.name.value,company_id:this.f.company_id.value,icon:this.f.icon.value  })
+    this.commonService.post(URL, { name: this.f.name.value,company_id:this.f.company_id.value,icon:this.f.icon.value,color:this.f.color.value  })
       .subscribe(
         details => {
           if (details.success) {

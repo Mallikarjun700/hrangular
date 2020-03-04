@@ -11,7 +11,7 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { ForgetComponent } from './views/forget/forget.component';
 import { SettingsLayoutComponent } from './views/settings/settings-layout/settings-layout.component';
-
+import { OrganizationsLayoutComponent } from './views/organizations/organizations-layout/organizations-layout.component';
 export const routes: Routes = [
   {
     path: '',
@@ -67,9 +67,24 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'organization',
+        path: 'organizations',
         canActivate: [AuthGuard],
-        loadChildren: () => import('./views/organization/organization.module').then(m => m.OrganizationModule)
+        component: OrganizationsLayoutComponent,
+        data: {
+          title: 'Organizations'
+        },
+        children: [
+          {
+            path: 'companyprofile',
+            canActivate: [AuthGuard],
+            loadChildren: () => import('./views/organizations/companyprofile/companyprofile.module').then(m => m.OrganizationModule)
+          },
+          {
+            path: 'masters',
+            canActivate: [AuthGuard],
+            loadChildren: () => import('./views/organizations/masters/masters.module').then(m => m.MastersModule)
+          }
+        ]
       },
       {
         path: 'onboarding',

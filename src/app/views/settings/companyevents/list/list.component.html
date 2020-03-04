@@ -17,6 +17,7 @@
                                 <th>Name</th>
                                 <th>Company Name</th>
                                 <th>Event Icon</th>
+                                <th>Event Color</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -29,6 +30,7 @@
                                    <span *ngIf="group.icon"> <i class="{{group.icon}}"></i></span> 
                                    <span *ngIf="!group.icon"> No Icon</span> 
                                 </td>
+                                <td>{{group.color}}</td>
                                 <td>
                                     <mat-slide-toggle (change)="toggleStatus($event.checked, group)"
                                                         [(ngModel)]="group.status"
