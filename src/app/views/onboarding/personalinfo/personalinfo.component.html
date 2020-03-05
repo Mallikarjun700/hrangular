@@ -8,7 +8,7 @@
                     <div class="pull-right"><a class="btn btn-primary" [routerLink]="['/home/onboarding/personalinfo/add']"><i class="fa fa-plus"></i> &nbsp;Add Employee</a></div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
+                    <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions" *ngIf="this.temp">
                         <thead>
                             <tr>
                                 <th>Employee Id</th>

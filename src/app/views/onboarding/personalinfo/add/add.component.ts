@@ -23,6 +23,7 @@ export class AddComponent implements OnInit {
   public nineFormGroup: FormGroup;
   public EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   public PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/;
+  public MOBILE = /^[0-9]{10,10}$/;
   constructor(
     private _formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -67,21 +68,21 @@ export class AddComponent implements OnInit {
   initiateFirstFormGroup(data?: any) {
     this.firstFormGroup = this._formBuilder.group({
       id: [(data) ? data.id : ''],
-      employee_id: [(data) ? data.employee_id : '',Validators.required],
+      employee_id: [(data) ? data.employee_id : '', Validators.required],
       password: [(data) ? data.password : '', [Validators.required, Validators.pattern(this.PASSWORD_REGEX)]],
-      name: this._formBuilder.array([],[Validators.required]),
-      gender: [(data) ? data.gender : '1',Validators.required],
-      family: this._formBuilder.array([],[Validators.required]),
-      date_of_birth: [(data) ? data.date_of_birth : '',Validators.required],  
-      blood_group: [(data) ? data.blood_group : '1',Validators.required], 
-      email: this._formBuilder.array([],[Validators.required]), 
-      date_of_join: [(data) ? data.date_of_join : '',Validators.required],  
-      mobile_number: [(data) ? data.mobile_number : '', [Validators.min(10)]], 
-      marital_status: [(data) ? data.marital_status : '',Validators.required], 
-      phone_number: [(data) ? data.mobile_number : '', [Validators.min(10)]],
-      temporary_address: [(data) ? data.temporary_address : ''], 
-      permanent_address: [(data) ? data.permanent_address : ''],  
-      international_worker: [(data) ? data.international_worker : '',Validators.required],
+      name: this._formBuilder.array([]),
+      gender: [(data) ? data.gender : '1', Validators.required],
+      family: this._formBuilder.array([]),
+      date_of_birth: [(data) ? data.date_of_birth : '', Validators.required],
+      blood_group: [(data) ? data.blood_group : '1', Validators.required],
+      email: this._formBuilder.array([]),
+      date_of_join: [(data) ? data.date_of_join : '', Validators.required],
+      mobile_number: [(data) ? data.mobile_number : '', [Validators.pattern(this.MOBILE)]],
+      marital_status: [(data) ? data.marital_status : '1', Validators.required],
+      phone_number: [(data) ? data.mobile_number : '', [Validators.pattern(this.MOBILE)]],
+      temporary_address: [(data) ? data.temporary_address : ''],
+      permanent_address: [(data) ? data.permanent_address : ''],
+      international_worker: [(data) ? data.international_worker : 1],
       country_origin: [(data) ? data.country_origin : ''],
     });
   }
@@ -109,9 +110,9 @@ export class AddComponent implements OnInit {
 
   createPassportFormGroup(data?: any) {
     return this._formBuilder.group({
-      number: [(data) ? data.number : '', [Validators.required]],
-      valid_from: [(data) ? data.valid_from : '', [Validators.required]],
-      valid_till: [(data) ? data.valid_till : '', [Validators.required]],
+      number: [(data) ? data.number : ''],
+      valid_from: [(data) ? data.valid_from : ''],
+      valid_till: [(data) ? data.valid_till : ''],
     });
   }
   initiateSecondFormGroup(data?: any) {
@@ -214,7 +215,7 @@ export class AddComponent implements OnInit {
       date_of_birth: [(data) ? data.date_of_birth : ''],
       dependent :[(data) ? data.dependent : '', Validators.required],
       Address:[(data) ? data.Address : ''],
-      contact_number:[(data) ? data.contact_number : '', [Validators.min(10)]]
+      contact_number:[(data) ? data.contact_number : '', [Validators.pattern(this.MOBILE)]]
     });
   }
   initiateSixthFormGroup(data?: any) {
@@ -242,7 +243,7 @@ export class AddComponent implements OnInit {
       department: [(data) ? data.department : ''],
       experience_from :[(data) ? data.experience_from : ''],
       experience_to:[(data) ? data.experience_to : ''],
-      contact_number:[(data) ? data.contact_number : '', [Validators.min(10)]]
+      contact_number:[(data) ? data.contact_number : '', [Validators.pattern(this.MOBILE)]]
     });
   }
   initiateSeventhFormGroup(data?: any) {
@@ -314,6 +315,14 @@ export class AddComponent implements OnInit {
         [Validators.required])
     });
   }
+  IsJsonString(str) {
+      try {
+          JSON.parse(str);
+      } catch (e) {
+          return false;
+      }
+      return true;
+  }
   ngOnInit() {
     this.dropdown = [{ country: [], state: [], city: [] }];
     this.dropdownmain = { country: [], state: [], city: [] };
@@ -333,6 +342,13 @@ export class AddComponent implements OnInit {
         .subscribe(
           data => {
             if (data.success) {
+              console.log(data.message);
+              Object.keys(data.message).forEach((keys: any, vals: any) => {
+                const jsonCheck = this.IsJsonString(data.message[keys])
+                if (jsonCheck) {
+                  data.message[keys] = (JSON.parse(data.message[keys]));
+                }
+              });
               this.initiateFirstFormGroup(data.message);
               data.message.name.forEach(element => {
                 this.addNameValue(element);
@@ -349,11 +365,11 @@ export class AddComponent implements OnInit {
               });
               this.initiateThirdFormGroup(data.message);
               data.message.general_details.forEach(element => {
-                this.createGDFormGroup(element);
+                this.addGDValue(element);
               });
               this.initiateFourthFormGroup(data.message);
               data.message.general_proof.forEach(element => {
-                this.createGPFormGroup(element);
+                this.addGPValue(element);
               });
               this.initiateFifthFormGroup(data.message);
               data.message.education.forEach(element => {
@@ -361,19 +377,19 @@ export class AddComponent implements OnInit {
               });
               this.initiateSixthFormGroup(data.message);
               data.message.relationship.forEach(element => {
-                this.createRelationShipFormGroup(element);
+                this.addRelationShipValue(element);
               });
               this.initiateSeventhFormGroup(data.message);
               data.message.previous_company.forEach(element => {
-                this.createPCompanyDetailsFormGroup(element);
+                this.addPreviousCompanyValue(element);
               });
               this.initiateEightFormGroup(data.message);
               data.message.bank_details.forEach(element => {
-                this.createBankDetailsFormGroup(element);
+                this.addBankDetailsValue(element);
               });
               this.initiateNineFormGroupGroup(data.message);
               data.message.saving_details.forEach(element => {
-                this.createSavingsFormGroup(element);
+                this.addSavingDetailsValue(element);
               });
             }
           });
@@ -382,13 +398,13 @@ export class AddComponent implements OnInit {
       this.addFamilyValue();
       this.addEmailValue();
       this.addPassportValue();
-      this.createGDFormGroup();
-      this.createGPFormGroup();
+      this.addGDValue();
+      this.addGPValue();
       this.addEducationValue();
-      this.createRelationShipFormGroup();
-      this.createPCompanyDetailsFormGroup();
-      this.createBankDetailsFormGroup();
-      this.createSavingsFormGroup();
+      this.addRelationShipValue();
+      this.addPreviousCompanyValue();
+      this.addBankDetailsValue();
+      this.addSavingDetailsValue();
     }
   }
   // convenience getter for easy access to form fields
@@ -418,6 +434,12 @@ export class AddComponent implements OnInit {
     if (this.route.snapshot.params['id']) {
       URL = 'employee/update/' + this.id
     }
+    console.log(params);
+    Object.keys(params).forEach((keys: any, vals: any) => {
+      if(typeof params[keys] !== 'string' && params[keys].length > 0){
+        params[keys] = (JSON.stringify(params[keys]));
+      }
+    });
     console.log(params);
     this.commonService.post(URL, params)
       .subscribe(

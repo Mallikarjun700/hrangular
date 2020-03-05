@@ -6,6 +6,10 @@ import {MatFormFieldModule} from  '@angular/material/form-field';
 import {MatInputModule} from  '@angular/material/input';
 import {MatButtonModule} from  '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 // Tabs Component
 import { TabsModule } from 'ngx-bootstrap/tabs';
 // Import routing module
@@ -20,7 +24,7 @@ import { AddComponent } from './personalinfo/add/add.component';
   declarations: [PersonalinfoComponent,PersonalinfoLayoutComponent, AddComponent],
   imports: [
     CommonModule,
-	OnboardingRoutingModule,
+	  OnboardingRoutingModule,
     TabsModule,
     DataTablesModule,
     FormsModule,
@@ -28,7 +32,10 @@ import { AddComponent } from './personalinfo/add/add.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule
   ]
 })
 export class OnboardingModule { }

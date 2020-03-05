@@ -7,6 +7,9 @@ import {MatFormFieldModule} from  '@angular/material/form-field';
 import {MatInputModule} from  '@angular/material/input';
 import {MatButtonModule} from  '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
+import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
+
+
 // Tabs Component
 import { TabsModule } from 'ngx-bootstrap/tabs';
 // Import routing module
@@ -15,9 +18,10 @@ import { CompanyprofileLayoutComponent } from './companyprofile/companyprofile-l
 import { CompanyprofileComponent } from './companyprofile/companyprofile.component';
 import { AddComponent } from './companyprofile/add/add.component';
 import { ControlpanelComponent } from './controlpanel/controlpanel.component';
+import { CalenderComponent } from './calender/calender.component';
 
 @NgModule({
-  declarations: [CompanyprofileComponent,CompanyprofileLayoutComponent, AddComponent, ControlpanelComponent],
+  declarations: [CompanyprofileComponent,CompanyprofileLayoutComponent, AddComponent, ControlpanelComponent, CalenderComponent],
   imports: [
     CommonModule,
     OrganizationRoutingModule,
@@ -28,8 +32,8 @@ import { ControlpanelComponent } from './controlpanel/controlpanel.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatStepperModule
-
+    MatStepperModule,
+    FullCalendarModule
 ]
 })
 export class OrganizationModule { }

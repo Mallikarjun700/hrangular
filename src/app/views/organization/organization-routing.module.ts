@@ -6,6 +6,7 @@ import { CompanyprofileComponent } from './companyprofile/companyprofile.compone
 import { AddComponent } from './companyprofile/add/add.component';
 import { CompanyprofileLayoutComponent } from './companyprofile/companyprofile-layout/companyprofile-layout.component';
 import { ControlpanelComponent } from './controlpanel/controlpanel.component';
+import { CalenderComponent } from './calender/calender.component';
 const routes: Routes = [
   {
     path: '',
@@ -63,8 +64,23 @@ const routes: Routes = [
             }
           }
         ]
-
-      }    
+      },
+      {
+        path: 'calender',
+        component: CompanyprofileLayoutComponent,
+        data: {
+          title: 'Calendar'
+        },
+        children: [
+          {
+            path: '',
+            component: CalenderComponent,
+            data: {
+              title: 'Calendar'
+            }
+          },
+        ]
+      }
     ]
   }
 ];
