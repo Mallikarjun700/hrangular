@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {DataTablesModule} from 'angular-datatables';
+import { DataTablesModule } from 'angular-datatables';
 // import { FormsModule } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule} from  '@angular/material/form-field';
-import {MatInputModule} from  '@angular/material/input';
-import {MatButtonModule} from  '@angular/material/button';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 // Tabs Component
@@ -19,9 +20,17 @@ import { CompanyprofileComponent } from './companyprofile/companyprofile.compone
 import { AddComponent } from './companyprofile/add/add.component';
 import { ControlpanelComponent } from './controlpanel/controlpanel.component';
 import { CalenderComponent } from './calender/calender.component';
+import { AddeventComponent } from './calender/addevent/addevent.component';
 
 @NgModule({
-  declarations: [CompanyprofileComponent,CompanyprofileLayoutComponent, AddComponent, ControlpanelComponent, CalenderComponent],
+  declarations: [
+    CompanyprofileComponent, 
+    CompanyprofileLayoutComponent, 
+    AddComponent, 
+    ControlpanelComponent, 
+    CalenderComponent,
+    AddeventComponent
+  ],
   imports: [
     CommonModule,
     OrganizationRoutingModule,
@@ -33,7 +42,11 @@ import { CalenderComponent } from './calender/calender.component';
     MatInputModule,
     MatButtonModule,
     MatStepperModule,
-    FullCalendarModule
-]
+    FullCalendarModule,
+    MatDialogModule
+  ],
+  entryComponents:[
+    AddeventComponent
+  ]
 })
 export class OrganizationModule { }
