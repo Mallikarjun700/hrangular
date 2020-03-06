@@ -7,7 +7,7 @@
                     <i class="fa fa-align-justify"></i> Calendar
                 </div>
                 <div class="card-body">
-                    <full-calendar #calendar [schedulerLicenseKey]="GPL-My-Project-Is-Open-Source"  [events]="calendarEvents" [editable]="true" [selectable]="true" (select)="handleDateClick($event)" [plugins]="calendarPlugins"></full-calendar>
+                        <full-calendar #calendar [editable]="true" (dateClick)="openDialog($event)" [plugins]="calendarOptions.plugins"></full-calendar>
                 </div>
             </div>
         </div>
