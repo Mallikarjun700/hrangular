@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
+import {MatIconModule} from '@angular/material/icon';
+
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import {MatDialogModule} from '@angular/material/dialog';
 
@@ -17,7 +19,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { OrganizationRoutingModule } from './organization-routing.module';
 import { CompanyprofileLayoutComponent } from './companyprofile/companyprofile-layout/companyprofile-layout.component';
 import { CompanyprofileComponent } from './companyprofile/companyprofile.component';
-import { AddComponent } from './companyprofile/add/add.component';
+import { AddCompanyProfileComponent } from './companyprofile/add/addCompanyProfile.component';
 import { ControlpanelComponent } from './controlpanel/controlpanel.component';
 import { CalenderComponent } from './calender/calender.component';
 import { AddeventComponent } from './calender/addevent/addevent.component';
@@ -26,7 +28,7 @@ import { AddeventComponent } from './calender/addevent/addevent.component';
   declarations: [
     CompanyprofileComponent, 
     CompanyprofileLayoutComponent, 
-    AddComponent, 
+    AddCompanyProfileComponent, 
     ControlpanelComponent, 
     CalenderComponent,
     AddeventComponent
@@ -43,7 +45,8 @@ import { AddeventComponent } from './calender/addevent/addevent.component';
     MatButtonModule,
     MatStepperModule,
     FullCalendarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   entryComponents:[
     AddeventComponent

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { PersonalinfoComponent } from './personalinfo/personalinfo.component';
-import { AddComponent } from './personalinfo/add/add.component';
+import { AddPersonalInfoComponent } from './personalinfo/add/addPersonalInfo.component';
 import { PersonalinfoLayoutComponent } from './personalinfo/personalinfo-layout/personalinfo-layout.component';
 
 
@@ -34,14 +34,14 @@ const routes: Routes = [
           },
           {
             path: 'add',
-            component: AddComponent,
+            component: AddPersonalInfoComponent,
             data: {
               title: 'Add Profile'
             }
           },
           {
             path: 'edit/:id',
-            component: AddComponent,
+            component: AddPersonalInfoComponent,
             data: {
               title: 'Edit Company Profile'
             }

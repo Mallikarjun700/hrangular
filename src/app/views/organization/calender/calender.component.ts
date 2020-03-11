@@ -24,7 +24,7 @@ export class CalenderComponent implements OnInit {
 
   openDialog(arg: any): void {
     const dialogRef = this.dialog.open(AddeventComponent, {
-      width: '400px',
+      width: '500px',
       data: {name: 'test', date: arg.dateStr}
     });
 
