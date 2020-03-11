@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataTablesModule } from 'angular-datatables';
-// import { FormsModule } from '@angular/forms';
+import {MatTabsModule} from '@angular/material/tabs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatIconModule} from '@angular/material/icon';
+
 
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import {MatDialogModule} from '@angular/material/dialog';
@@ -23,6 +24,7 @@ import { AddCompanyProfileComponent } from './companyprofile/add/addCompanyProfi
 import { ControlpanelComponent } from './controlpanel/controlpanel.component';
 import { CalenderComponent } from './calender/calender.component';
 import { AddeventComponent } from './calender/addevent/addevent.component';
+import { MasterComponent } from './master/master.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { AddeventComponent } from './calender/addevent/addevent.component';
     AddCompanyProfileComponent, 
     ControlpanelComponent, 
     CalenderComponent,
-    AddeventComponent
+    AddeventComponent,
+    MasterComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,8 @@ import { AddeventComponent } from './calender/addevent/addevent.component';
     MatStepperModule,
     FullCalendarModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatTabsModule
   ],
   entryComponents:[
     AddeventComponent

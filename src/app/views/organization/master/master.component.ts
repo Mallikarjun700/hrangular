@@ -5,11 +5,11 @@ import { CurdcommonserviceService } from '../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
-  selector: 'app-systemsettings',
-  templateUrl: './systemsettings.component.html',
-  styleUrls: ['./systemsettings.component.scss']
+  selector: 'app-master',
+  templateUrl: './master.component.html',
+  styleUrls: ['./master.component.scss']
 })
-export class SystemsettingsComponent implements OnInit {
+export class MasterComponent implements OnInit {
   commonDataForm: FormGroup;
   dropdown: any;
   constructor(private _formBuilder: FormBuilder,

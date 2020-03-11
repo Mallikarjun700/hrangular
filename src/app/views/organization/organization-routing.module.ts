@@ -7,6 +7,8 @@ import { AddCompanyProfileComponent } from './companyprofile/add/addCompanyProfi
 import { CompanyprofileLayoutComponent } from './companyprofile/companyprofile-layout/companyprofile-layout.component';
 import { ControlpanelComponent } from './controlpanel/controlpanel.component';
 import { CalenderComponent } from './calender/calender.component';
+import { MasterComponent } from './master/master.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -77,6 +79,22 @@ const routes: Routes = [
             component: CalenderComponent,
             data: {
               title: 'Calendar'
+            }
+          },
+        ]
+      },
+      {
+        path: 'master',
+        component: CompanyprofileLayoutComponent,
+        data: {
+          title: 'Master'
+        },
+        children: [
+          {
+            path: '',
+            component: MasterComponent,
+            data: {
+              title: 'Master'
             }
           },
         ]
