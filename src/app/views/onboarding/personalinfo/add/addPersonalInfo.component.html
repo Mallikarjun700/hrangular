@@ -859,17 +859,12 @@
                         <ng-template matStepLabel>Savings</ng-template>
                         <div class="row">
                             <div class="col-md-12">
-                                <button class="pull-right"
-                                        mat-mini-fab
-                                        color="primary"
-                                        (click)="addSavingDetailsValue()"><i class="fa fa-plus"></i></button>
                                 <table class="table table-bordered">
                                     <thead>
                                         <th>UAN Number</th>
                                         <th>PF A/C No</th>
                                         <th>ESI No</th>
                                         <th>PF Member ID</th>
-                                        <th>Action</th>
                                     </thead>
                                     <tbody formArrayName="saving_details">
                                         <tr *ngFor="let addr of saving_details.controls; let i = index"
@@ -913,12 +908,6 @@
                                                             is required</span>
                                                     </mat-error>
                                                 </mat-form-field>
-                                            </td>
-                                            <td><button mat-mini-fab
-                                                        color="warn"
-                                                        type="button"
-                                                        (click)="deleteSavingDetailsValue(i)"><i
-                                                       class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>

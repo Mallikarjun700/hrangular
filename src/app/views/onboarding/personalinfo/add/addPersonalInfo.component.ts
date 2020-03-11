@@ -305,9 +305,9 @@ export class AddPersonalInfoComponent implements OnInit {
     let fg = this.createSavingsFormGroup(data);
     this.saving_details.push(fg);
   }
-  deleteSavingDetailsValue(idx: number) {
-    this.saving_details.removeAt(idx);
-  }
+  // deleteSavingDetailsValue(idx: number) {
+  //   this.saving_details.removeAt(idx);
+  // }
   initiateNineFormGroupGroup(data?: any) {
     this.nineFormGroup = this._formBuilder.group({
       saving_details: this._formBuilder.array(
