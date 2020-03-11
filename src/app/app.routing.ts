@@ -108,12 +108,7 @@ export const routes: Routes = [
             path: 'companyevent',
             canActivate: [AuthGuard],
             loadChildren: () => import('./views/settings/companyevent/companyevent.module').then(m => m.CompanyeventModule)
-          },
-          {
-            path: 'systemsettings',
-            canActivate: [AuthGuard],
-            loadChildren: () => import('./views/settings/systemsettings/systemsettings.module').then(m => m.SystemsettingsModule)
-          },
+          }
         ]
       },
       {
