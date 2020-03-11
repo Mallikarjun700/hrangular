@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { CompanyprofileComponent } from './companyprofile/companyprofile.component';
-import { AddComponent } from './companyprofile/add/add.component';
+import { AddCompanyProfileComponent } from './companyprofile/add/addCompanyProfile.component';
 import { CompanyprofileLayoutComponent } from './companyprofile/companyprofile-layout/companyprofile-layout.component';
 import { ControlpanelComponent } from './controlpanel/controlpanel.component';
 import { CalenderComponent } from './calender/calender.component';
@@ -51,14 +51,14 @@ const routes: Routes = [
           },
           {
             path: 'add',
-            component: AddComponent,
+            component: AddCompanyProfileComponent,
             data: {
               title: 'Add Company Profile'
             }
           },
           {
             path: 'edit/:id',
-            component: AddComponent,
+            component: AddCompanyProfileComponent,
             data: {
               title: 'Edit Company Profile'
             }

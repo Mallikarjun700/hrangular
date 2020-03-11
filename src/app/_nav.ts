@@ -14,32 +14,32 @@ export const navItems: INavData[] = [
       {
         name: 'Company Profile',
         url: '/home/organization/companyprofile',
-        icon: 'fa fa-table'
+        icon: 'fa fa-users'
       },
       {
         name: 'Control Panel',
         url: '/home/organization/controlpanel',
-        icon: 'fa fa-table'
+        icon: 'fa fa-wrench'
       },
       {
         name: 'Master',
         url: '/home/organization/master',
-        icon: 'fa fa-table'
+        icon: 'fa fa-cogs'
       },
       {
         name: 'User Management',
         url: '/home/organization/usermanagement',
-        icon: 'fa fa-table'
+        icon: 'fa fa-user-o'
       },
       {
         name: 'Audit Log',
         url: '/home/organization/auditlog',
-        icon: 'fa fa-table'
+        icon: 'fa fa-file-text-o'
       },
       {
         name: 'Calender',
         url: '/home/organization/calender',
-        icon: 'fa fa-table'
+        icon: 'fa fa-calendar'
       }
     ]
   },
@@ -51,38 +51,43 @@ export const navItems: INavData[] = [
       {
         name: 'Personal Info',
         url: '/home/onboarding/personalinfo',
-        icon: 'fa fa-table'
+        icon: 'fa fa-users'
       }
     ]
   },	
   {
     name: 'Settings',
     url: '/home/settings',
-    icon: 'fa fa-cog',
+    icon: 'fa fa-cogs',
     children: [
       {
         name: 'Country',
         url: '/home/settings/country',
-        icon: 'fa fa-table'
+        icon: 'fa fa-globe'
       },
       {
         name: 'State',
         url: '/home/settings/state',
-        icon: 'fa fa-table'
+        icon: 'fa fa-globe'
       },
       {
         name: 'City',
         url: '/home/settings/city',
-        icon: 'fa fa-table'
+        icon: 'fa fa-globe'
       },
       {
         name: 'Roles',
         url: '/home/settings/role',
+        icon: 'fa fa-user'
+      },
+      {
+        name: 'Company Events',
+        url: '/home/settings/companyevent',
         icon: 'fa fa-table'
       },
       {
-        name: 'Comapny Events',
-        url: '/home/settings/companyevent',
+        name: 'System Settings',
+        url: '/home/settings/systemsettings',
         icon: 'fa fa-table'
       }
     ]

@@ -16,12 +16,12 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { OnboardingRoutingModule } from './onboarding-routing.module';
 import { PersonalinfoLayoutComponent } from './personalinfo/personalinfo-layout/personalinfo-layout.component';
 import { PersonalinfoComponent } from './personalinfo/personalinfo.component';
-import { AddComponent } from './personalinfo/add/add.component';
+import { AddPersonalInfoComponent } from './personalinfo/add/addPersonalInfo.component';
 
 
 
 @NgModule({
-  declarations: [PersonalinfoComponent,PersonalinfoLayoutComponent, AddComponent],
+  declarations: [PersonalinfoComponent,PersonalinfoLayoutComponent, AddPersonalInfoComponent],
   imports: [
     CommonModule,
 	  OnboardingRoutingModule,

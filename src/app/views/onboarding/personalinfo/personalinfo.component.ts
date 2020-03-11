@@ -22,9 +22,27 @@ export class PersonalinfoComponent implements OnInit {
         data => {
           if (data.success) {
             this.dataList = data.message;
+            this.dataList.forEach((keyIndex: any, valArray: any) => {
+              console.log(this.dataList[valArray]);
+              Object.keys(this.dataList[valArray]).forEach((keys: any, vals: any) => {
+                const jsonCheck = this.IsJsonString(this.dataList[valArray][keys]);
+                if (jsonCheck && keys=='name') {
+                  this.dataList[valArray][keys] = (JSON.parse(this.dataList[valArray][keys]));
+                }
+              });
+            });
+            console.log(this.dataList);
             this.temp = true;
           }
         });
+  }
+  IsJsonString(str) {
+      try {
+          JSON.parse(str);
+      } catch (e) {
+          return false;
+      }
+      return true;
   }
   ngOnInit(): void {
     this.dtOptions = {
