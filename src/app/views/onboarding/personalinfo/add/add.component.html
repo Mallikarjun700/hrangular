@@ -302,8 +302,7 @@
                         </div>
                     </form>
                 </mat-step>
-                <mat-step [stepControl]="secondFormGroup"
-                          [optional]="isOptional">
+                <mat-step [stepControl]="secondFormGroup">
                     <form [formGroup]="secondFormGroup">
                         <ng-template matStepLabel>Passport Details</ng-template>
                         <div layout-xs="column"
@@ -361,8 +360,7 @@
                         </div>
                     </form>
                 </mat-step>
-                <mat-step [stepControl]="thirdFormGroup"
-                          [optional]="isOptional">
+                <mat-step [stepControl]="thirdFormGroup">
                     <form [formGroup]="thirdFormGroup">
                         <ng-template matStepLabel>General Details</ng-template>
                         <div layout-xs="column"
@@ -416,8 +414,7 @@
                         </div>
                     </form>
                 </mat-step>
-                <mat-step [stepControl]="fourthFormGroup"
-                          [optional]="isOptional">
+                <mat-step [stepControl]="fourthFormGroup">
                     <form [formGroup]="fourthFormGroup">
                         <ng-template matStepLabel>General Proof</ng-template>
                         <div layout-xs="column"
@@ -465,8 +462,7 @@
                         </div>
                     </form>
                 </mat-step>
-                <mat-step [stepControl]="fifthFormGroup"
-                          [optional]="isOptional">
+                <mat-step [stepControl]="fifthFormGroup">
                     <form [formGroup]="fifthFormGroup">
                         <ng-template matStepLabel>Education</ng-template>
                         <div class="row">
@@ -582,8 +578,7 @@
                         </div>
                     </form>
                 </mat-step>
-                <mat-step [stepControl]="sixthFormGroup"
-                          [optional]="isOptional">
+                <mat-step [stepControl]="sixthFormGroup">
                     <form [formGroup]="sixthFormGroup">
                         <ng-template matStepLabel>Relationship</ng-template>
                         <div class="row">
@@ -673,8 +668,7 @@
                         </div>
                     </form>
                 </mat-step>
-                <mat-step [stepControl]="seventhFormGroup"
-                          [optional]="isOptional">
+                <mat-step [stepControl]="seventhFormGroup">
                     <form [formGroup]="seventhFormGroup">
                         <ng-template matStepLabel>Previous Company</ng-template>
                         <div class="row">
@@ -770,8 +764,7 @@
                         </div>
                     </form>
                 </mat-step>
-                <mat-step [stepControl]="eightFormGroup"
-                          [optional]="isOptional">
+                <mat-step [stepControl]="eightFormGroup">
                     <form [formGroup]="eightFormGroup">
                         <ng-template matStepLabel>Bank</ng-template>
                         <div class="row">
@@ -852,8 +845,7 @@
                         </div>
                     </form>
                 </mat-step>
-                <mat-step [stepControl]="nineFormGroup"
-                          [optional]="isOptional">
+                <mat-step [stepControl]="nineFormGroup">
                     <form [formGroup]="nineFormGroup"
                           (ngSubmit)="onSubmit()">
                         <ng-template matStepLabel>Savings</ng-template>
