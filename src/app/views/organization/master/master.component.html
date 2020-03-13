@@ -12,15 +12,15 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form [formGroup]="commonDataForm" class="form-horizontal"
-                                        (ngSubmit)="onSubmitCommonData()">
+                                    <!-- (ngSubmit)="onSubmitCommonData()" -->
+                                    <form [formGroup]="commonDataForm" class="form-horizontal" (ngSubmit)="onSubmitCommonData()">
                                         <table class="table">
                                             <tr>
                                                 <td style="width:10%">
-                                                    <mat-label>Locations </mat-label>
+                                                    <mat-label>Locations</mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="locations">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="locations">
                                                         <tr *ngFor="let addr of locations.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -35,7 +35,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="locations.controls.length>1" type="button"
                                                                     (click)="deleteLocationValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -49,7 +49,7 @@
                                                     <mat-label>Departments </mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="department">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="department">
                                                         <tr *ngFor="let addr of department.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -66,7 +66,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="department.controls.length>1" type="button"
                                                                     (click)="deleteDepartmentValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -81,7 +81,7 @@
                                                     <mat-label>Sub Departments</mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="sub_departments">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="sub_departments">
                                                         <tr *ngFor="let addr of sub_departments.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -96,7 +96,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="sub_departments.controls.length>1" type="button"
                                                                     (click)="deleteSubDepartmentsValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -110,7 +110,7 @@
                                                     <mat-label>Cost Centers</mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="cost_centers">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="cost_centers">
                                                         <tr *ngFor="let addr of cost_centers.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -126,7 +126,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="cost_centers.controls.length>1" type="button"
                                                                     (click)="deleteCostCentersValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -141,7 +141,7 @@
                                                     <mat-label>Pay Grades </mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="pay_grades">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="pay_grades">
                                                         <tr *ngFor="let addr of pay_grades.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -156,7 +156,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="pay_grades.controls.length>1" type="button"
                                                                     (click)="deletePayGradesValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -170,7 +170,7 @@
                                                     <mat-label>Bands </mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="bands">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="bands">
                                                         <tr *ngFor="let addr of bands.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -186,7 +186,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="bands.controls.length>1" type="button"
                                                                     (click)="deleteBandsValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -201,7 +201,7 @@
                                                     <mat-label>Designation </mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="designation">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="designation">
                                                         <tr *ngFor="let addr of designation.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -216,7 +216,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="designation.controls.length>1" type="button"
                                                                     (click)="deleteDesignationValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -230,7 +230,7 @@
                                                     <mat-label>Job Code </mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="job_code">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="job_code">
                                                         <tr *ngFor="let addr of job_code.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -246,7 +246,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="job_code.controls.length>1" type="button"
                                                                     (click)="deleteJobCodeValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -261,7 +261,7 @@
                                                     <mat-label>Job Role </mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="job_role">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="job_role">
                                                         <tr *ngFor="let addr of job_role.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -276,7 +276,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="job_role.controls.length>1" type="button"
                                                                     (click)="deleteJobRoleValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -290,7 +290,7 @@
                                                     <mat-label>Job Title/Profile </mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="job_title">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="job_title">
                                                         <tr *ngFor="let addr of job_title.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -306,7 +306,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="job_title.controls.length>1" type="button"
                                                                     (click)="deleteJobTitleValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -321,7 +321,7 @@
                                                     <mat-label>Work Levels </mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="work_levels">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="work_levels">
                                                         <tr *ngFor="let addr of work_levels.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -336,7 +336,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="work_levels.controls.length>1" type="button"
                                                                     (click)="deleteWorkLevelsValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
@@ -350,7 +350,7 @@
                                                     <mat-label>Position Code </mat-label>
                                                 </td>
                                                 <td style="width:30%">
-                                                    <table class="table" layout-xs="column" formArrayName="position_code">
+                                                    <table class="table first-td" layout-xs="column" formArrayName="position_code">
                                                         <tr *ngFor="let addr of position_code.controls; let i = index"
                                                             [formGroupName]="i">
                                                             <td>
@@ -366,7 +366,7 @@
                                                                     </mat-error>
                                                                 </mat-form-field>
                                                             </td>
-                                                            <td><button mat-mini-fab color="warn" type="button"
+                                                            <td><button mat-mini-fab color="warn" *ngIf="position_code.controls.length>1" type="button"
                                                                     (click)="deletePositionCodeValue(i)"><i
                                                                         class="fa fa-trash"></i></button></td>
                                                         </tr>
