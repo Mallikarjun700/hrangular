@@ -47,8 +47,17 @@ export class MasterComponent implements OnInit {
     return this.commonDataForm.get('locations') as FormArray;
   }
   addLocationValue(data?: any) {
-    let fg = this.createLocationFormGroup(data);
-    this.locations.push(fg);
+    console.log(this.locations.controls)
+    let invalidCount=0;
+    this.locations.controls.forEach(element => {
+      if(element.invalid && element.get('location_code').errors){
+        invalidCount++;
+      }
+    });
+    if(invalidCount==0){
+      let fg = this.createLocationFormGroup(data);
+      this.locations.push(fg);
+    }
   }
   deleteLocationValue(idx: number) {
     this.locations.removeAt(idx);
@@ -259,5 +268,30 @@ export class MasterComponent implements OnInit {
     if (this.commonDataForm.invalid) {
       return;
     }
+    let URL = 'maplist/post';
+    let params=this.commonDataForm.value;
+    Object.keys(params).forEach((keys: any, vals: any) => {
+      if(typeof params[keys] !== 'string' && params[keys].length > 0){
+        params[keys] = (JSON.stringify(params[keys]));
+      }
+    });
+    console.log(params);
+    this.commonService.post(URL, params)
+      .subscribe(
+        details => {
+          // if (details.success) {
+          //   this.toastr.successToastr('Profile saved sucessfully');
+          //   this.router.navigate(['/home/onboarding/personalinfo']);
+          // } else {
+          //   this.toastr.errorToastr(details.message);
+          // }
+        },
+        error => {
+          const error_array = (JSON.parse(error));
+          const keys = Object.keys(error_array);
+          keys.forEach(element => {
+            this.toastr.errorToastr(error_array[element][0]);
+          });
+        });
   }
 }
