@@ -7,7 +7,9 @@ import { AddCompanyProfileComponent } from './companyprofile/add/addCompanyProfi
 import { CompanyprofileLayoutComponent } from './companyprofile/companyprofile-layout/companyprofile-layout.component';
 import { ControlpanelComponent } from './controlpanel/controlpanel.component';
 import { CalenderComponent } from './calender/calender.component';
+import { AddeventComponent } from './calender/addevent/addevent.component';
 import { MasterComponent } from './master/master.component';
+
 
 const routes: Routes = [
   {
@@ -81,6 +83,20 @@ const routes: Routes = [
               title: 'Calendar'
             }
           },
+          {
+            path: 'add',
+            component: AddeventComponent,
+            data: {
+              title: 'Add Calendar Event'
+            }
+          },
+          {
+            path: 'edit/:id',
+            component: AddeventComponent,
+            data: {
+              title: 'Edit Calendar Event'
+            }
+          }
         ]
       },
       {

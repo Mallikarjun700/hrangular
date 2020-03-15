@@ -31,19 +31,18 @@
                         <mat-label>Event Icon Text</mat-label>
                         <input (change)="iconChanged($event)"
                         matInput placeholder="Event Icon Text" formControlName="icon" required>
-                        <mat-error *ngIf="f.name.errors">
-                            <span *ngIf="f.name.errors.required"> Event Icon Text is required</span>
+                        <mat-error *ngIf="f.icon.errors">
+                            <span *ngIf="f.icon.errors.required"> Event Icon Text is required</span>
                         </mat-error>
                     </mat-form-field>
                 </div>   
                 <div class="col-md-3">
-                    <span *ngIf="iconData" class="btn btn-primary"><i class="{{ iconData }}"></i> </span> 
                     <mat-form-field style="width:100%">
                             <mat-label>Event Color</mat-label>
-                            <input (change)="iconChanged($event)"
+                            <input type="color" (change)="iconChanged($event)"
                             matInput placeholder="Event Color" formControlName="color" required>
-                            <mat-error *ngIf="f.name.errors">
-                                <span *ngIf="f.name.errors.required"> Event Color is required</span>
+                            <mat-error *ngIf="f.color.errors">
+                                <span *ngIf="f.color.errors.required"> Event Color is required</span>
                             </mat-error>
                     </mat-form-field>
                 </div>             

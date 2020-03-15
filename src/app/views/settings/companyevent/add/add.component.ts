@@ -11,9 +11,9 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 })
 export class AddComponent implements OnInit {
   companyeventForm: FormGroup;
-  dropdown:any;
+  dropdown: any;
   id: any;
-  iconData : any;
+  iconData: any;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -21,7 +21,7 @@ export class AddComponent implements OnInit {
     private commonService: CurdcommonserviceService,
     public toastr: ToastrManager) { }
 
-  getCompanyProfileDependency(){
+  getCompanyProfileDependency() {
     this.commonService.get('companyprofile/get', {})
       .subscribe(
         data => {
@@ -38,7 +38,7 @@ export class AddComponent implements OnInit {
 
 
   ngOnInit() {
-    this.dropdown={company_profiles:[]};
+    this.dropdown = { company_profiles: [] };
     this.getCompanyProfileDependency();
     this.companyeventForm = this.formBuilder.group({
       id: [''],
@@ -65,7 +65,7 @@ export class AddComponent implements OnInit {
     }
 
   }
-  
+
   get f() { return this.companyeventForm.controls; }
 
   onSubmit() {
@@ -79,7 +79,7 @@ export class AddComponent implements OnInit {
     if (this.route.snapshot.params['id']) {
       URL = 'companyevent/update/' + this.id
     }
-    this.commonService.post(URL, { name: this.f.name.value,company_id:this.f.company_id.value,icon:this.f.icon.value,color:this.f.color.value  })
+    this.commonService.post(URL, { name: this.f.name.value, company_id: this.f.company_id.value, icon: this.f.icon.value, color: this.f.color.value })
       .subscribe(
         details => {
           if (details.success) {
