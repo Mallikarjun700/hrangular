@@ -5,9 +5,10 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-align-justify"></i> Calendar
+                    <div class="pull-right"><a class="btn btn-primary" [routerLink]="['/home/organization/calender/add']"><i class="fa fa-plus"></i> &nbsp;Add Event</a></div>
                 </div>
                 <div class="card-body">
-                        <full-calendar #calendar [editable]="true" (dateClick)="openDialog($event)" [plugins]="calendarOptions.plugins"></full-calendar>
+                        <full-calendar #calendar [header]="calendarOptions.header" [editable]="true" [events]="calendarOptions.events" (eventClick)="eventClick($event)" [plugins]="calendarOptions.plugins" (eventRender)="eventRender($event)"></full-calendar>
                 </div>
             </div>
         </div>

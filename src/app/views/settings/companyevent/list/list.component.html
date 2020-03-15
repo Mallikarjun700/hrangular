@@ -30,7 +30,7 @@
                                    <span *ngIf="group.icon"> <i class="{{group.icon}}"></i></span> 
                                    <span *ngIf="!group.icon"> No Icon</span> 
                                 </td>
-                                <td>{{group.color}}</td>
+                                <td><span class="btn btn-lg" [style.background-color]="group.color"></span></td>
                                 <td>
                                     <mat-slide-toggle (change)="toggleStatus($event.checked, group)"
                                                         [(ngModel)]="group.status"
