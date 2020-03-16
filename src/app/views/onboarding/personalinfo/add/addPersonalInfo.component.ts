@@ -12,6 +12,7 @@ export class AddPersonalInfoComponent implements OnInit {
   dropdown: any;
   dropdownmain: any;
   id: any;
+  public isOptional : FormGroup;
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;

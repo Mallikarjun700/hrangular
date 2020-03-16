@@ -294,4 +294,9 @@ export class MasterComponent implements OnInit {
           });
         });
   }
+
+  cancel(){
+    
+  }
+
 }
