@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CurdcommonserviceService } from '../../../_services';
+import { CurdcommonserviceService,AuthenticationService } from '../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
@@ -12,7 +12,7 @@ export class PersonalinfoComponent implements OnInit {
   public dataList = [];
   public temp: Object = false;
   dtOptions: DataTables.Settings = {};
-  constructor(private commonService: CurdcommonserviceService, private route: ActivatedRoute,
+  constructor(private commonService: CurdcommonserviceService,private authenticationService: AuthenticationService, private route: ActivatedRoute,
     private router: Router, public toastr: ToastrManager) { }
 
   getList() {
@@ -20,6 +20,7 @@ export class PersonalinfoComponent implements OnInit {
     this.commonService.get('employee/get', {})
       .subscribe(
         data => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (data.success) {
             this.dataList = data.message;
             this.dataList.forEach((keyIndex: any, valArray: any) => {
@@ -55,6 +56,7 @@ export class PersonalinfoComponent implements OnInit {
   deleteAction(params: any) {
     this.commonService.get('employee/delete/' + params, {}).subscribe(
       data => {
+        setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
         if (data.success) {
           this.toastr.successToastr('Employee deleted sucessfully');
           this.getList();

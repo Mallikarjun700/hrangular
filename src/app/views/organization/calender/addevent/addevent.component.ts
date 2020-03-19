@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CurdcommonserviceService } from '../../../../_services';
+import { CurdcommonserviceService,AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DatePipe } from '@angular/common';
+import {removeSpaces}  from '../../../../_helpers/customvalidator';
 
 @Component({
   selector: 'app-addevent',
@@ -54,6 +55,7 @@ export class AddeventComponent implements OnInit {
     this.commonService.get('companyevent/get', {})
       .subscribe(
         data => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (data.success) {
             this.dropdown.company_event = data.message;
           }
@@ -63,10 +65,10 @@ export class AddeventComponent implements OnInit {
   initiateFirstFormGroup(data?: any) {
     this.firstFormGroup = this._formBuilder.group({
       id: [(data) ? data.id : ''],
-      title: [(data) ? data.title : '', Validators.required],
-      companyevent_id: [(data) ? data.companyevent_id : '', Validators.required],
-      startdate: [(data) ? data.startdate : this.minFromDate, Validators.required],
-      enddate: [(data) ? data.enddate : '', Validators.required],
+      title: [(data) ? data.title : '', [Validators.required, removeSpaces]],
+      companyevent_id: [(data) ? data.companyevent_id : '', [Validators.required, removeSpaces]],
+      startdate: [(data) ? data.startdate : this.minFromDate, [Validators.required, removeSpaces]],
+      enddate: [(data) ? data.enddate : '', [Validators.required, removeSpaces]],
       eventemailids: [(data) ? data.eventemailids : ''],
       emaildescription: [(data) ? data.emaildescription : ''],
       visibility: [(data) ? data.visibility : '']
@@ -104,6 +106,7 @@ export class AddeventComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private commonService: CurdcommonserviceService,
+    private authenticationService: AuthenticationService,
     public toastr: ToastrManager,
     public datepipe: DatePipe) {
     this.dropdown = [];
@@ -117,6 +120,7 @@ export class AddeventComponent implements OnInit {
       this.commonService.get('eventdata/show/' + this.id, {})
         .subscribe(
           data => {
+            setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
             if (data.success) {
               data.message.startdate=new Date(data.message.startdate);
               data.message.enddate=new Date(data.message.enddate);
@@ -163,6 +167,7 @@ export class AddeventComponent implements OnInit {
     this.commonService.post(URL, params)
       .subscribe(
         details => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (details.success) {
             this.toastr.successToastr('Event saved sucessfully');
             this.router.navigate(['/home/organization/calender']);
@@ -171,6 +176,7 @@ export class AddeventComponent implements OnInit {
           }
         },
         error => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           const error_array = (JSON.parse(error));
           const keys = Object.keys(error_array);
           keys.forEach(element => {

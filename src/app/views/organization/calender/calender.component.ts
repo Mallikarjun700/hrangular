@@ -5,7 +5,7 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 // import { AddeventComponent } from './addevent/addevent.component';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CurdcommonserviceService } from '../../../_services';
+import { CurdcommonserviceService,AuthenticationService } from '../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
@@ -18,7 +18,7 @@ export class CalenderComponent implements OnInit {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   // constructor(public dialog: MatDialog, private commonService: CurdcommonserviceService, private route: ActivatedRoute,
   //   private router: Router, public toastr: ToastrManager) { }
-  constructor(private commonService: CurdcommonserviceService, private route: ActivatedRoute,
+  constructor(private commonService: CurdcommonserviceService,private authenticationService: AuthenticationService, private route: ActivatedRoute,
     private router: Router, public toastr: ToastrManager) { }
 
   ngOnInit() {
@@ -40,6 +40,7 @@ export class CalenderComponent implements OnInit {
     this.commonService.get('eventdata/get', {})
       .subscribe(
         data => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (data.success && data.message) {
             let eventList = [];
             data.message.forEach((obj: any) => {

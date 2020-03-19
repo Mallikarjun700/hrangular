@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CurdcommonserviceService } from '../../../../_services';
+import { CurdcommonserviceService, AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {removeSpaces}  from '../../../../_helpers/customvalidator';
 @Component({
   selector: 'app-add-personal-info',
   templateUrl: './addPersonalInfo.component.html',
@@ -30,6 +31,7 @@ export class AddPersonalInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private commonService: CurdcommonserviceService,
+    private authenticationService: AuthenticationService,
     public toastr: ToastrManager) {
   }
 
@@ -37,6 +39,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.commonService.get('country/get', {})
       .subscribe(
         data => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (data.success) {
             this.dropdown[index].country = data.message;
             if (this.dropdownmain.country.length === 0) {
@@ -48,43 +51,43 @@ export class AddPersonalInfoComponent implements OnInit {
 
   createNameFormGroup(data?: any) {
     return this._formBuilder.group({
-      first_name: [(data) ? data.first_name : '', [Validators.required]],
+      first_name: [(data) ? data.first_name : '', [Validators.required, removeSpaces]],
       middle_name: [(data) ? data.middle_name : ''],
-      last_name: [(data) ? data.last_name : '', [Validators.required]],
+      last_name: [(data) ? data.last_name : '', [Validators.required,removeSpaces]],
     });
   }
   
   createFamilyFormGroup(data?: any) {
     return this._formBuilder.group({
-      father: [(data) ? data.father : '', [Validators.required]],
-      mother: [(data) ? data.mother : '', [Validators.required]],
+      father: [(data) ? data.father : '', [Validators.required,removeSpaces]],
+      mother: [(data) ? data.mother : '', [Validators.required, removeSpaces]],
     });
   }
   createEmailFormGroup(data?: any) {
     return this._formBuilder.group({
-      office: [(data) ? data.office : '', [Validators.required, Validators.pattern(this.EMAIL_REGEX)]],
-      personal: [(data) ? data.personal : '', [Validators.pattern(this.EMAIL_REGEX)]]
+      office: [(data) ? data.office : '', [Validators.required, removeSpaces, Validators.pattern(this.EMAIL_REGEX)]],
+      personal: [(data) ? data.personal : '', [Validators.pattern(this.EMAIL_REGEX), removeSpaces]]
     });
   }
   initiateFirstFormGroup(data?: any) {
     this.firstFormGroup = this._formBuilder.group({
       id: [(data) ? data.id : ''],
-      employee_id: [(data) ? data.employee_id : '', Validators.required],
-      password: [(data) ? data.password : '', [Validators.required, Validators.pattern(this.PASSWORD_REGEX)]],
+      employee_id: [(data) ? data.employee_id : '', [Validators.required, removeSpaces]],
+      password: [(data) ? data.password : '', [Validators.required, removeSpaces, Validators.pattern(this.PASSWORD_REGEX)]],
       name: this._formBuilder.array([]),
-      gender: [(data) ? data.gender : '1', Validators.required],
+      gender: [(data) ? data.gender : '1', [Validators.required, removeSpaces]],
       family: this._formBuilder.array([]),
-      date_of_birth: [(data) ? data.date_of_birth : '', Validators.required],
-      blood_group: [(data) ? data.blood_group : '1', Validators.required],
+      date_of_birth: [(data) ? data.date_of_birth : '', [Validators.required, removeSpaces]],
+      blood_group: [(data) ? data.blood_group : '1', [Validators.required, removeSpaces]],
       email: this._formBuilder.array([]),
-      date_of_join: [(data) ? data.date_of_join : '', Validators.required],
-      mobile_number: [(data) ? data.mobile_number : '', [Validators.required, Validators.pattern(this.MOBILE)]],
-      marital_status: [(data) ? data.marital_status : '1', Validators.required],
+      date_of_join: [(data) ? data.date_of_join : '', [Validators.required, removeSpaces]],
+      mobile_number: [(data) ? data.mobile_number : '', [Validators.required, removeSpaces, Validators.pattern(this.MOBILE)]],
+      marital_status: [(data) ? data.marital_status : '1', [Validators.required, removeSpaces]],
       phone_number: [(data) ? data.mobile_number : '', [Validators.pattern(this.MOBILE)]],
-      temporary_address: [(data) ? data.temporary_address : '', Validators.required],
-      permanent_address: [(data) ? data.permanent_address : '', Validators.required],
+      temporary_address: [(data) ? data.temporary_address : '', [Validators.required, removeSpaces]],
+      permanent_address: [(data) ? data.permanent_address : '', [Validators.required, removeSpaces]],
       international_worker: [(data) ? data.international_worker : 1],
-      country_origin: [(data) ? data.country_origin : '', Validators.required],
+      country_origin: [(data) ? data.country_origin : '', [Validators.required, removeSpaces]],
     });
   }
   get name(): FormArray {
@@ -120,7 +123,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       passport: this._formBuilder.array(
         [],
-        [Validators.required])
+        [Validators.required, removeSpaces])
     });
   }
   get passport(): FormArray {
@@ -133,17 +136,17 @@ export class AddPersonalInfoComponent implements OnInit {
 
   createGDFormGroup(data?: any) {
     return this._formBuilder.group({
-      phisically_handicapped: [(data) ? data.phisically_handicapped : '', [Validators.required]],
-      locomotive: [(data) ? data.locomotive : '', [Validators.required]],
-      hearing: [(data) ? data.hearing : '', [Validators.required]],
-      visual: [(data) ? data.visual : '', [Validators.required]],
+      phisically_handicapped: [(data) ? data.phisically_handicapped : '', [Validators.required, removeSpaces]],
+      locomotive: [(data) ? data.locomotive : '', [Validators.required, removeSpaces]],
+      hearing: [(data) ? data.hearing : '', [Validators.required, removeSpaces]],
+      visual: [(data) ? data.visual : '', [Validators.required, removeSpaces]],
     });
   }
   initiateThirdFormGroup(data?: any) {
     this.thirdFormGroup = this._formBuilder.group({
       general_details: this._formBuilder.array(
         [],
-        [Validators.required])
+        [Validators.required, removeSpaces])
     });
   }
   get general_details(): FormArray {
@@ -166,7 +169,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.fourthFormGroup = this._formBuilder.group({
       general_proof: this._formBuilder.array(
         [],
-        [Validators.required])
+        [Validators.required, removeSpaces])
     });
   }
   get general_proof(): FormArray {
@@ -195,7 +198,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.fifthFormGroup = this._formBuilder.group({
       education: this._formBuilder.array(
         [],
-        [Validators.required])
+        [Validators.required, removeSpaces])
     });
   }
   get education(): FormArray {
@@ -223,7 +226,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.sixthFormGroup = this._formBuilder.group({
       relationship: this._formBuilder.array(
         [],
-        [Validators.required])
+        [Validators.required, removeSpaces])
     });
   }
   get relationship(): FormArray {
@@ -251,7 +254,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.seventhFormGroup = this._formBuilder.group({
       previous_company: this._formBuilder.array(
         [],
-        [Validators.required])
+        [Validators.required, removeSpaces])
     });
   }
   get previous_company(): FormArray {
@@ -267,10 +270,10 @@ export class AddPersonalInfoComponent implements OnInit {
 
   createBankDetailsFormGroup(data?: any) {
     return this._formBuilder.group({
-      account_no: [(data) ? data.account_no : '', Validators.required],
-      bank_name: [(data) ? data.bank_name : '', Validators.required],
-      branch: [(data) ? data.branch : '', Validators.required],
-      ifsc_code: [(data) ? data.ifsc_code : '', Validators.required],
+      account_no: [(data) ? data.account_no : '', [Validators.required, removeSpaces]],
+      bank_name: [(data) ? data.bank_name : '', [Validators.required, removeSpaces]],
+      branch: [(data) ? data.branch : '', [Validators.required, removeSpaces]],
+      ifsc_code: [(data) ? data.ifsc_code : '', [Validators.required, removeSpaces]],
     })
   }
   get bank_details(): FormArray {
@@ -287,7 +290,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.eightFormGroup = this._formBuilder.group({
       bank_details: this._formBuilder.array(
         [],
-        [Validators.required])
+        [Validators.required, removeSpaces])
     });
   }
 
@@ -313,7 +316,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.nineFormGroup = this._formBuilder.group({
       saving_details: this._formBuilder.array(
         [],
-        [Validators.required])
+        [Validators.required, removeSpaces])
     });
   }
   IsJsonString(str) {
@@ -342,6 +345,7 @@ export class AddPersonalInfoComponent implements OnInit {
       this.commonService.get('employee/show/' + this.id, {})
         .subscribe(
           data => {
+            setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
             if (data.success) {
               console.log(data.message);
               Object.keys(data.message).forEach((keys: any, vals: any) => {
@@ -445,6 +449,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.commonService.post(URL, params)
       .subscribe(
         details => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (details.success) {
             this.toastr.successToastr('Profile saved sucessfully');
             this.router.navigate(['/home/onboarding/personalinfo']);
@@ -453,6 +458,7 @@ export class AddPersonalInfoComponent implements OnInit {
           }
         },
         error => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           const error_array = (JSON.parse(error));
           const keys = Object.keys(error_array);
           keys.forEach(element => {

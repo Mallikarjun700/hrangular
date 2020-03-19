@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {removeSpaces}  from '../../_helpers/customvalidator';
+
 @Component({
     selector: 'app-dashboard',
     templateUrl: 'login.component.html'
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
+            username: ['', [Validators.required, removeSpaces]],
             password: ['', Validators.required]
         });
         if (this.route.snapshot.queryParams['returnUrl']) {

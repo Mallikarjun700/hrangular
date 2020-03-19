@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CurdcommonserviceService } from '../../../../_services';
+import { CurdcommonserviceService,AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {removeSpaces}  from '../../../../_helpers/customvalidator';
 @Component({
   selector: 'app-add-company-profile',
   templateUrl: './addCompanyProfile.component.html',
@@ -34,12 +35,14 @@ export class AddCompanyProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private commonService: CurdcommonserviceService,
+    private authenticationService: AuthenticationService,
     public toastr: ToastrManager) {
   }
   getCountryDependency(index?: any) {
     this.commonService.get('country/get', {})
       .subscribe(
         data => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (data.success) {
             this.dropdown[index].country = data.message;
             if (this.dropdownmain.country.length === 0) {
@@ -61,6 +64,7 @@ export class AddCompanyProfileComponent implements OnInit {
     this.commonService.get(URL_GET, {})
       .subscribe(
         data => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (data.success) {
             this.dropdown[index].state = data.message;
             if (this.dropdownmain.state.length === 0) {
@@ -84,6 +88,7 @@ export class AddCompanyProfileComponent implements OnInit {
       .subscribe(
         data => {
           if (data.success) {
+            setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
             this.dropdown[index].city = data.message;
             if (this.dropdownmain.city.length === 0) {
               this.dropdownmain.city = data.message;
@@ -96,20 +101,20 @@ export class AddCompanyProfileComponent implements OnInit {
   createRegOfficeFormGroup(data?: any) {
     return this._formBuilder.group({
       id: [(data) ? data.id : ''],
-      address: [(data) ? data.address : '', [Validators.required]],
-      pincode: [(data) ? data.pincode : '', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(6)]],
-      city: [(data) ? data.city : '', [Validators.required]],
-      state: [(data) ? data.state : '', [Validators.required]],
-      country: [(data) ? data.country : '', [Validators.required]],
+      address: [(data) ? data.address : '', [Validators.required, removeSpaces]],
+      pincode: [(data) ? data.pincode : '', [Validators.required, removeSpaces, Validators.pattern("^[0-9]*$"), Validators.min(6)]],
+      city: [(data) ? data.city : '', [Validators.required, removeSpaces]],
+      state: [(data) ? data.state : '', [Validators.required, removeSpaces]],
+      country: [(data) ? data.country : '', [Validators.required, removeSpaces]],
     })
   }
   createBankDetailsFormGroup(data?: any) {
     return this._formBuilder.group({
       id: [(data) ? data.id : ''],
-      bankname: [(data) ? data.bankname : '', Validators.required],
-      accountnumber: [(data) ? data.accountnumber : '', Validators.required],
-      branch: [(data) ? data.branch : '', Validators.required],
-      ifsc: [(data) ? data.ifsc : '', Validators.required],
+      bankname: [(data) ? data.bankname : '', [Validators.required, removeSpaces]],
+      accountnumber: [(data) ? data.accountnumber : '', [Validators.required, removeSpaces]],
+      branch: [(data) ? data.branch : '', [Validators.required, removeSpaces]],
+      ifsc: [(data) ? data.ifsc : '', [Validators.required, removeSpaces]],
     })
   }
   createDirectorsGroup(data?: any) {
@@ -117,9 +122,9 @@ export class AddCompanyProfileComponent implements OnInit {
       id: [(data) ? data.id : ''],
       peoplestype: ['1'],
       name: [(data) ? data.name : ''],
-      emailid: [(data) ? data.emailid : '', [Validators.pattern(this.EMAIL_REGEX)]],
+      emailid: [(data) ? data.emailid : '', [Validators.pattern(this.EMAIL_REGEX), removeSpaces]],
       din: [(data) ? data.din : ''],
-      phonenumber: [(data) ? data.phonenumber : '', [Validators.pattern("^[0-9]*$"), Validators.min(10)]],
+      phonenumber: [(data) ? data.phonenumber : '', [Validators.pattern("^[0-9]*$"), removeSpaces, Validators.min(10)]],
     })
   }
   createAuditorsFormGroup(data?: any) {
@@ -127,9 +132,9 @@ export class AddCompanyProfileComponent implements OnInit {
       id: [(data) ? data.id : ''],
       peoplestype: ['2'],
       name: [(data) ? data.name : ''],
-      emailid: [(data) ? data.emailid : '', [Validators.pattern(this.EMAIL_REGEX)]],
+      emailid: [(data) ? data.emailid : '', [Validators.pattern(this.EMAIL_REGEX), removeSpaces]],
       type: [(data) ? data.type : ''],
-      phonenumber: [(data) ? data.phonenumber : '', [Validators.pattern("^[0-9]*$"), Validators.min(10)]],
+      phonenumber: [(data) ? data.phonenumber : '', [Validators.pattern("^[0-9]*$"), removeSpaces, Validators.min(10)]],
     })
   }
   createCompanySecretaryFormGroup(data?: any) {
@@ -152,9 +157,9 @@ export class AddCompanyProfileComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       id: [(data) ? data.id : ''],
       companylogo: [(data) ? data.logo : ''],
-      companyname: [(data) ? data.companyname : '', Validators.required],
-      brandname: [(data) ? data.brandname : '', Validators.required],
-      website: [(data) ? data.website : '', [Validators.required, Validators.pattern(this.URL_REGEX)]],
+      companyname: [(data) ? data.companyname : '', [Validators.required, removeSpaces]],
+      brandname: [(data) ? data.brandname : '', [Validators.required, removeSpaces]],
+      website: [(data) ? data.website : '', [Validators.required, removeSpaces, Validators.pattern(this.URL_REGEX)]],
       social: this._formBuilder.array(
         [],
         [Validators.required]),
@@ -162,7 +167,7 @@ export class AddCompanyProfileComponent implements OnInit {
   }
   initiateSecondFormGroup(data?: any) {
     this.secondFormGroup = this._formBuilder.group({
-      homecurrency: [(data) ? data.homecurrency : '', Validators.required],
+      homecurrency: [(data) ? data.homecurrency : '', [Validators.required, removeSpaces]],
       companyaddress: this._formBuilder.array(
         [],
         [Validators.required])
@@ -170,17 +175,17 @@ export class AddCompanyProfileComponent implements OnInit {
   }
   initiateThirdFormGroup(data?: any) {
     this.thirdFormGroup = this._formBuilder.group({
-      contactperson: [(data) ? data.contactperson : '', Validators.required],
-      phonenumber: [(data) ? data.phonenumber : '', [Validators.required, Validators.min(10)]],
-      emialid: [(data) ? data.emialid : '', [Validators.required, Validators.pattern(this.EMAIL_REGEX)]],
+      contactperson: [(data) ? data.contactperson : '', [Validators.required, removeSpaces]],
+      phonenumber: [(data) ? data.phonenumber : '', [Validators.required, removeSpaces, Validators.min(10)]],
+      emialid: [(data) ? data.emialid : '', [Validators.required, removeSpaces, Validators.pattern(this.EMAIL_REGEX)]],
     });
   }
   initiateFourthFormGroup(data?: any) {
     this.fourthFormGroup = this._formBuilder.group({
-      pan: [(data) ? data.pan : '', Validators.required],
-      tan: [(data) ? data.tan : '', Validators.required],
-      gstin: [(data) ? data.gstin : '', Validators.required],
-      cin: [(data) ? data.cin : '', Validators.required],
+      pan: [(data) ? data.pan : '', [Validators.required, removeSpaces]],
+      tan: [(data) ? data.tan : '', [Validators.required, removeSpaces]],
+      gstin: [(data) ? data.gstin : '', [Validators.required, removeSpaces]],
+      cin: [(data) ? data.cin : '', [Validators.required, removeSpaces]],
       companyentity: [(data) ? data.companyentity : ''],
     });
   }
@@ -233,6 +238,7 @@ export class AddCompanyProfileComponent implements OnInit {
       this.commonService.get('companyprofile/show/' + this.id, {})
         .subscribe(
           data => {
+            setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
             if (data.success) {
               this.showImage = data.message.logo;
               this.initiateFirstFormGroup(data.message);
@@ -421,6 +427,7 @@ export class AddCompanyProfileComponent implements OnInit {
     this.commonService.post(URL, params)
       .subscribe(
         details => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (details.success) {
             this.toastr.successToastr('Profile saved sucessfully');
             this.router.navigate(['/home/organization/companyprofile']);
@@ -429,6 +436,7 @@ export class AddCompanyProfileComponent implements OnInit {
           }
         },
         error => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           const error_array = (JSON.parse(error));
           const keys = Object.keys(error_array);
           keys.forEach(element => {

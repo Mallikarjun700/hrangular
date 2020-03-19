@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CurdcommonserviceService } from '../../../../_services';
+import { CurdcommonserviceService,AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {removeSpaces}  from '../../../../_helpers/customvalidator';
 
 @Component({
   selector: 'app-add',
@@ -19,12 +20,14 @@ export class AddComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private commonService: CurdcommonserviceService,
+    private authenticationService: AuthenticationService,
     public toastr: ToastrManager) { }
 
   getCompanyProfileDependency() {
     this.commonService.get('companyprofile/get', {})
       .subscribe(
         data => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (data.success) {
             this.dropdown.company_profiles = data.message;
           }
@@ -42,23 +45,24 @@ export class AddComponent implements OnInit {
     this.getCompanyProfileDependency();
     this.companyeventForm = this.formBuilder.group({
       id: [''],
-      name: ['', Validators.required],
-      icon: ['', Validators.required],
-      color: ['', Validators.required],
-      company_id: ['', Validators.required],
+      name: ['', [Validators.required, removeSpaces]],
+      icon: ['', [Validators.required, removeSpaces]],
+      color: ['', [Validators.required, removeSpaces]],
+      company_id: ['', [Validators.required, removeSpaces]],
     });
     if (this.route.snapshot.params['id']) {
       this.id = this.route.snapshot.params['id'];
       this.commonService.get('companyevent/show/' + this.id, {})
         .subscribe(
           data => {
+            setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
             if (data.success) {
               this.companyeventForm = this.formBuilder.group({
                 id: [data.message.id],
-                name: [data.message.name, Validators.required],
-                icon: [data.message.icon, Validators.required],
-                color: [data.message.color, Validators.required],
-                company_id: [data.message.company_id, Validators.required],
+                name: [data.message.name, [Validators.required, removeSpaces]],
+                icon: [data.message.icon, [Validators.required, removeSpaces]],
+                color: [data.message.color, [Validators.required, removeSpaces]],
+                company_id: [data.message.company_id, [Validators.required, removeSpaces]],
               });
             }
           });
@@ -82,12 +86,14 @@ export class AddComponent implements OnInit {
     this.commonService.post(URL, { name: this.f.name.value, company_id: this.f.company_id.value, icon: this.f.icon.value, color: this.f.color.value })
       .subscribe(
         details => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (details.success) {
             this.toastr.successToastr('Company Event saved sucessfully');
             this.router.navigate(['/home/settings/companyevent/list']);
           }
         },
         error => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           this.toastr.errorToastr(error);
         });
   }
