@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {removeSpaces}  from '../../_helpers/customvalidator';
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'register.component.html'
@@ -30,10 +31,10 @@ export class RegisterComponent implements OnInit {
 
 ngOnInit() {
     this.registerForm = this.formBuilder.group({
-        username: ['',  Validators.required],
-        email: ['', [Validators.required, Validators.pattern(this.EMAIL_REGEX)]],
-        password: ['', [Validators.required, Validators.pattern(this.PASSWORD_REGEX)]],
-        confirmpassword: ['', [Validators.required, Validators.pattern(this.PASSWORD_REGEX)]]
+        username: ['', [Validators.required, removeSpaces]],
+        email: ['', [Validators.required, removeSpaces, Validators.pattern(this.EMAIL_REGEX)]],
+        password: ['', [Validators.required, removeSpaces, Validators.pattern(this.PASSWORD_REGEX)]],
+        confirmpassword: ['', [Validators.required, removeSpaces, Validators.pattern(this.PASSWORD_REGEX)]]
     });
 }
 

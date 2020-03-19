@@ -12,7 +12,7 @@ export class DefaultLayoutComponent {
   public navItems = navItems;
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    public authenticationService: AuthenticationService
 ) { 
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) { 

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {removeSpaces}  from '../../_helpers/customvalidator';
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'forget.component.html'
@@ -30,7 +31,7 @@ export class ForgetComponent implements OnInit {
 
 ngOnInit() {
     this.forgetForm = this.formBuilder.group({
-        email: ['', [Validators.required, Validators.pattern(this.EMAIL_REGEX)]],
+        email: ['', [Validators.required, removeSpaces, Validators.pattern(this.EMAIL_REGEX)]],
     });
 }
 // convenience getter for easy access to form fields

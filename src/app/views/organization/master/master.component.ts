@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { CurdcommonserviceService } from '../../../_services';
+import { CurdcommonserviceService,AuthenticationService } from '../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {removeSpaces}  from '../../../_helpers/customvalidator';
 
 @Component({
   selector: 'app-master',
@@ -16,6 +17,7 @@ export class MasterComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private commonService: CurdcommonserviceService,
+    private authenticationService: AuthenticationService,
     public toastr: ToastrManager) { }
 
 
@@ -40,7 +42,7 @@ export class MasterComponent implements OnInit {
 
   createLocationFormGroup(data?: any) {
     return this._formBuilder.group({
-      location_code: [(data) ? data.location_code : '', [Validators.required]]
+      location_code: [(data) ? data.location_code : '', [Validators.required, removeSpaces]]
     });
   }
   get locations(): FormArray {
@@ -65,7 +67,7 @@ export class MasterComponent implements OnInit {
 
   createDepartmentFormGroup(data?: any) {
     return this._formBuilder.group({
-      department: [(data) ? data.department : '', [Validators.required]]
+      department: [(data) ? data.department : '', [Validators.required, removeSpaces]]
     });
   }
   get department(): FormArray {
@@ -81,7 +83,7 @@ export class MasterComponent implements OnInit {
 
   createSubDepartmentsFormGroup(data?: any) {
     return this._formBuilder.group({
-      sub_departments: [(data) ? data.sub_departments : '', [Validators.required]]
+      sub_departments: [(data) ? data.sub_departments : '', [Validators.required, removeSpaces]]
     });
   }
   get sub_departments(): FormArray {
@@ -97,7 +99,7 @@ export class MasterComponent implements OnInit {
   
   createCostCentersFormGroup(data?: any) {
     return this._formBuilder.group({
-      cost_centers: [(data) ? data.cost_centers : '', [Validators.required]]
+      cost_centers: [(data) ? data.cost_centers : '', [Validators.required, removeSpaces]]
     });
   }
   get cost_centers(): FormArray {
@@ -113,7 +115,7 @@ export class MasterComponent implements OnInit {
 
   createPayGradesFormGroup(data?: any) {
     return this._formBuilder.group({
-      pay_grades: [(data) ? data.pay_grades : '', [Validators.required]]
+      pay_grades: [(data) ? data.pay_grades : '', [Validators.required, removeSpaces]]
     });
   }
   get pay_grades(): FormArray {
@@ -129,7 +131,7 @@ export class MasterComponent implements OnInit {
 
   createBandsFormGroup(data?: any) {
     return this._formBuilder.group({
-      bands: [(data) ? data.bands : '', [Validators.required]]
+      bands: [(data) ? data.bands : '', [Validators.required, removeSpaces]]
     });
   }
   get bands(): FormArray {
@@ -145,7 +147,7 @@ export class MasterComponent implements OnInit {
 
   createDesignationFormGroup(data?: any) {
     return this._formBuilder.group({
-      designation: [(data) ? data.designation : '', [Validators.required]]
+      designation: [(data) ? data.designation : '', [Validators.required, removeSpaces]]
     });
   }
   get designation(): FormArray {
@@ -161,7 +163,7 @@ export class MasterComponent implements OnInit {
 
   createJobCodeFormGroup(data?: any) {
     return this._formBuilder.group({
-      job_code: [(data) ? data.job_code : '', [Validators.required]]
+      job_code: [(data) ? data.job_code : '', [Validators.required, removeSpaces]]
     });
   }
   get job_code(): FormArray {
@@ -177,7 +179,7 @@ export class MasterComponent implements OnInit {
 
   createJobRoleFormGroup(data?: any) {
     return this._formBuilder.group({
-      job_role: [(data) ? data.job_role : '', [Validators.required]]
+      job_role: [(data) ? data.job_role : '', [Validators.required, removeSpaces]]
     });
   }
   get job_role(): FormArray {
@@ -194,7 +196,7 @@ export class MasterComponent implements OnInit {
 
   createJobTitleFormGroup(data?: any) {
     return this._formBuilder.group({
-      job_title: [(data) ? data.job_title : '', [Validators.required]]
+      job_title: [(data) ? data.job_title : '', [Validators.required, removeSpaces]]
     });
   }
   get job_title(): FormArray {
@@ -210,7 +212,7 @@ export class MasterComponent implements OnInit {
 
   createWorkLevelsFormGroup(data?: any) {
     return this._formBuilder.group({
-      work_levels: [(data) ? data.work_levels : '', [Validators.required]]
+      work_levels: [(data) ? data.work_levels : '', [Validators.required, removeSpaces]]
     });
   }
   get work_levels(): FormArray {
@@ -226,7 +228,7 @@ export class MasterComponent implements OnInit {
 
   createPositionCodeFormGroup(data?: any) {
     return this._formBuilder.group({
-      position_code: [(data) ? data.position_code : '', [Validators.required]]
+      position_code: [(data) ? data.position_code : '', [Validators.required, removeSpaces]]
     });
   }
   get position_code(): FormArray {
@@ -279,6 +281,7 @@ export class MasterComponent implements OnInit {
     this.commonService.post(URL, params)
       .subscribe(
         details => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           // if (details.success) {
           //   this.toastr.successToastr('Profile saved sucessfully');
           //   this.router.navigate(['/home/onboarding/personalinfo']);

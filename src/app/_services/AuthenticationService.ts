@@ -8,7 +8,7 @@ import { CurdcommonserviceService } from './curdcommonservice.service';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     public currentUser: any;
-
+    public loader=false;
     constructor(
         private http: HttpClient,
         private router: Router,
@@ -24,7 +24,12 @@ export class AuthenticationService {
         }
         return this.currentUser;
     }
-
+    loaderStart() {
+        this.loader=true;
+    }
+    loaderEnd() {
+        this.loader=false;
+    }
     login(username: string, password: string){
         return this.http.post<any>(environment.apiUrl + 'login', {email: username, password: password })
             .pipe(map(user => {

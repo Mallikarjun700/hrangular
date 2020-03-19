@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { CurdcommonserviceService } from '../../../../_services';
+import { CurdcommonserviceService,AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import {removeSpaces}  from '../../../../_helpers/customvalidator';
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -17,22 +18,24 @@ export class AddComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private commonService: CurdcommonserviceService,
+    private authenticationService: AuthenticationService,
     public toastr: ToastrManager) { }
 
   ngOnInit() {
     this.countryForm = this.formBuilder.group({
       id: [''],
-      name: ['', Validators.required]
+      name: ['', [Validators.required,removeSpaces]]
     });
     if (this.route.snapshot.params['id']) {
       this.id = this.route.snapshot.params['id'];
       this.commonService.get('country/show/' + this.id, {})
         .subscribe(
           data => {
+            setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
             if (data.success) {
               this.countryForm = this.formBuilder.group({
                 id: [data.message.id],
-                name: [data.message.name, Validators.required],
+                name: [data.message.name, [Validators.required,removeSpaces]],
               });
             }
           });
@@ -54,6 +57,7 @@ export class AddComponent implements OnInit {
     this.commonService.post(URL, { name: this.f.name.value })
       .subscribe(
         details => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
           if (details.success) {
             this.toastr.successToastr('Country saved sucessfully');
             this.router.navigate(['/home/settings/country/list']);
