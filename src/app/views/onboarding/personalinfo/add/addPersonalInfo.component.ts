@@ -123,7 +123,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       passport: this._formBuilder.array(
         [],
-        [Validators.required, removeSpaces])
+        [Validators.required])
     });
   }
   get passport(): FormArray {
@@ -146,7 +146,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       general_details: this._formBuilder.array(
         [],
-        [Validators.required, removeSpaces])
+        [Validators.required])
     });
   }
   get general_details(): FormArray {
@@ -169,7 +169,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.fourthFormGroup = this._formBuilder.group({
       general_proof: this._formBuilder.array(
         [],
-        [Validators.required, removeSpaces])
+        [Validators.required])
     });
   }
   get general_proof(): FormArray {
@@ -198,7 +198,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.fifthFormGroup = this._formBuilder.group({
       education: this._formBuilder.array(
         [],
-        [Validators.required, removeSpaces])
+        [Validators.required])
     });
   }
   get education(): FormArray {
@@ -226,7 +226,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.sixthFormGroup = this._formBuilder.group({
       relationship: this._formBuilder.array(
         [],
-        [Validators.required, removeSpaces])
+        [Validators.required])
     });
   }
   get relationship(): FormArray {
@@ -254,7 +254,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.seventhFormGroup = this._formBuilder.group({
       previous_company: this._formBuilder.array(
         [],
-        [Validators.required, removeSpaces])
+        [Validators.required])
     });
   }
   get previous_company(): FormArray {
@@ -290,7 +290,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.eightFormGroup = this._formBuilder.group({
       bank_details: this._formBuilder.array(
         [],
-        [Validators.required, removeSpaces])
+        [Validators.required])
     });
   }
 
@@ -316,7 +316,7 @@ export class AddPersonalInfoComponent implements OnInit {
     this.nineFormGroup = this._formBuilder.group({
       saving_details: this._formBuilder.array(
         [],
-        [Validators.required, removeSpaces])
+        [Validators.required])
     });
   }
   IsJsonString(str) {
