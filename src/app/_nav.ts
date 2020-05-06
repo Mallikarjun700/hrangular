@@ -101,6 +101,11 @@ export const navItems: INavData[] = [
         name: 'Provident Fund',
         url: '/home/customize/providentfund',
         icon: 'fa fa-table'
+      },
+      {
+        name: 'Professional Tax',
+        url: '/home/customize/professionaltax',
+        icon: 'fa fa-table'
       }
     ]
   },
