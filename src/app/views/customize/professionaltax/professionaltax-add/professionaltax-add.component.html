@@ -13,7 +13,7 @@
       class="form-horizontal"
       (ngSubmit)="onSubmit()"
     >
-      <div class="row">
+      <div class="row m-b-10">
         <div class="col-md-4">
           <mat-form-field style="width:100%">
             <mat-label>County</mat-label>
@@ -55,7 +55,7 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="row">
+      <div class="row m-b-10">
         <div class="col-md-12">
           <button
             class="pull-right"
@@ -67,8 +67,7 @@
           </button>
         </div>
       </div>
-      <br/>
-      <div class="row">
+      <div class="row m-b-10">
         <div class="col-md-12">
           <ng-template [ngIf]="taxdetails">
             <mat-accordion formArrayName="taxdetails">
@@ -79,11 +78,20 @@
                 class="m-b-10 expansion-header-custom"
               >
                 <mat-expansion-panel-header>
-                  <mat-panel-title> Tax Set {{ i + 1 }} 
+                  <mat-panel-title>Tax Set {{ i + 1 }}
                   </mat-panel-title>
-                  <mat-panel-description> </mat-panel-description>
+                  <mat-panel-description>
+                    <div class="col-md-12 p-r-0">
+                      <button type="button"
+                              style="background: transparent;"
+                              class="btn  btn-icon btn-default task-add-btn float-right">
+                          <i (click)="$event.stopPropagation();deleteTaxdetailsValue(i)"
+                             class="fa fa-trash"></i>
+                      </button>
+                  </div>
+                </mat-panel-description>
                 </mat-expansion-panel-header>
-                <div class="row">
+                <div class="row m-t-20">
                   <div class="col-md-4">
                     <mat-form-field style="width:100%">
                       <mat-label> Salary </mat-label>
@@ -98,7 +106,7 @@
                         *ngIf="addr.invalid && addr.get('salary_range').errors"
                       >
                         <span *ngIf="addr.get('salary_range').errors?.required"
-                          >Phone no. is required</span
+                          >Salary Range is required</span
                         >
                       </mat-error>
                     </mat-form-field>
@@ -110,14 +118,17 @@
                         *ngIf="addr.invalid && addr.get('salary_from').errors"
                       >
                         <span *ngIf="addr.get('salary_from').errors?.required">
-                          Account No is required</span
+                          Salary is required</span
                         >
+                        <span *ngIf="addr.get('salary_from').errors?.pattern">
+                            Salary is invalid</span
+                          >
                       </mat-error>
                     </mat-form-field>
                   </div>
                   <div
                     class="col-md-4"
-                    *ngIf="addr.get('exemption')?.value == 2"
+                    *ngIf="addr.get('salary_range')?.value == 2"
                   >
                     <mat-form-field style="width:100%">
                       <input matInput formControlName="salary_to" />
@@ -125,8 +136,9 @@
                         *ngIf="addr.invalid && addr.get('salary_to').errors"
                       >
                         <span *ngIf="addr.get('salary_to').errors?.required">
-                          Account No is required</span
-                        >
+                          Salary to is required</span>
+                        <span *ngIf="addr.get('salary_to').errors?.pattern">
+                          Salary to is invalid</span>
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -167,9 +179,9 @@
                   </div>
                   <div class="col-md-4">
                     <mat-slide-toggle
-                      (change)="toggleExemptionStatus($event.checked, group)"
                       formControlName="exemption"
                       color="primary"
+                      style="padding-top: 14px;"
                     >
                       {{
                         addr.get("exemption")?.value
@@ -250,12 +262,12 @@
                         *ngIf="addr.invalid && addr.get('returns').errors"
                       >
                         <span *ngIf="addr.get('returns').errors?.required"
-                          >Slab is required</span
+                          >Returns is required</span
                         >
                       </mat-error>
                     </mat-form-field>
                   </div>
-                  <div class="col-md-4">
+                  <!-- <div class="col-md-4">
                     <input
                       #csvInput
                       hidden="true"
@@ -271,18 +283,17 @@
                     >
                       <i class="fa fa-upload"></i>
                     </button>
-                  </div>
+                  </div> -->
                 </div>
               </mat-expansion-panel>
             </mat-accordion>
           </ng-template>
         </div>
       </div>
-      <br/>
       <div class="row">
         <div class="col-md-12">
           <div class="pull-right">
-            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button (click)="resetForm()">Cancel</button>
             <button mat-flat-button type="submit" color="primary">
               Submit
             </button>

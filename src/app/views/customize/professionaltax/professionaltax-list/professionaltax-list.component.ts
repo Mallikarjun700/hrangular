@@ -17,25 +17,16 @@ export class ProfessionaltaxListComponent implements OnInit {
 
   getList() {
     this.temp = false;
-    // this.commonService.get('employee/get', {})
-    //   .subscribe(
-    //     data => {
-    //       setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
-    //       if (data.success) {
-    //         this.dataList = data.message;
-    //         this.dataList.forEach((keyIndex: any, valArray: any) => {
-    //           console.log(this.dataList[valArray]);
-    //           Object.keys(this.dataList[valArray]).forEach((keys: any, vals: any) => {
-    //             const jsonCheck = this.IsJsonString(this.dataList[valArray][keys]);
-    //             if (jsonCheck && keys === 'name') {
-    //               this.dataList[valArray][keys] = (JSON.parse(this.dataList[valArray][keys]));
-    //             }
-    //           });
-    //         });
-    //         console.log(this.dataList);
-    //         this.temp = true;
-    //       }
-    //     });
+    this.commonService.get('professionaltax/get', {})
+      .subscribe(
+        data => {
+          setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+          if (data.success) {
+            this.dataList = data.message;
+            console.log(this.dataList);
+            this.temp = true;
+          }
+        });
   }
   IsJsonString(str) {
     try {
@@ -54,16 +45,16 @@ export class ProfessionaltaxListComponent implements OnInit {
     this.getList();
   }
   deleteAction(params: any) {
-    // this.commonService.get('employee/delete/' + params, {}).subscribe(
-    //   data => {
-    //     setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
-    //     if (data.success) {
-    //       this.toastr.successToastr('Employee deleted sucessfully');
-    //       this.getList();
-    //       console.log(data);
-    //       // this.dataList=data.message;
-    //     }
-    //   });
+    this.commonService.get('professionaltax/delete/' + params, {}).subscribe(
+      data => {
+        setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+        if (data.success) {
+          this.toastr.successToastr('Tax deleted sucessfully');
+          this.getList();
+          console.log(data);
+          // this.dataList=data.message;
+        }
+      });
   }
 
 }

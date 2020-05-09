@@ -18,8 +18,8 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let group of dataList">
-                                <td>{{group.country}}</td>
-                                <td>{{group.state}}</td>
+                                <td>{{group.country_name}}</td>
+                                <td>{{group.state_name}}</td>
                                 <td>
                                     <button mat-mini-fab color="primary" type="button"
                                         [routerLink]="['/home/customize/professionaltax/edit',group.id]"><i

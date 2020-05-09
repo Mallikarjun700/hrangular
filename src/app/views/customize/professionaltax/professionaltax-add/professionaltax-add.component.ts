@@ -14,6 +14,7 @@ export class ProfessionaltaxAddComponent implements OnInit {
   dropdown: any;
   dropdownmain: any;
   id: any;
+  public NUMBER = /^(0|[1-9][0-9]*)$/;
   public professionalTaxFormGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -52,17 +53,17 @@ export class ProfessionaltaxAddComponent implements OnInit {
   createTaxdetailsFormGroup(data?: any) {
     return this.formBuilder.group({
       salary_range: [(data) ? data.salary_range : 1, [Validators.required, removeSpaces]],
-      salary_from: [(data) ? data.salary_from : 0, [Validators.required, removeSpaces]],
-      salary_to: [(data) ? data.salary_to : 0, [Validators.required, removeSpaces]],
+      salary_from: [(data) ? data.salary_from : 0, [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
+      salary_to: [(data) ? data.salary_to : 0, [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
       slab: [(data) ? data.slab : 1, [Validators.required, removeSpaces]],
-      pt_amount: [(data) ? data.pt_amount : 1, [Validators.required, removeSpaces]],
+      pt_amount: [(data) ? data.pt_amount : 1, [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
       exemption: [(data) ? data.exemption : 0],
-      exemption_age: [(data) ? data.exemption_age : ''],
+      exemption_age: [(data) ? data.exemption_age : '', Validators.pattern(this.NUMBER)],
       exemption_details: [(data) ? data.exemption_details : ''],
       remarks: [(data) ? data.remarks : ''],
       reminder_days: [(data) ? data.reminder_days : ''],
       returns: [(data) ? data.returns : ''],
-      document: [(data) ? data.document : '']
+      // document: [(data) ? data.document : '']
     });
   }
 
@@ -115,6 +116,24 @@ export class ProfessionaltaxAddComponent implements OnInit {
     this.initiateProfessionalTaxFormGroup();
     if (this.route.snapshot.params['id']) {
       this.id = this.route.snapshot.params['id'];
+      this.commonService.get('professionaltax/show/' + this.id, {})
+        .subscribe(
+          data => {
+            setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
+            if (data.success) {
+              console.log(data.message);
+              Object.keys(data.message).forEach((keys: any, vals: any) => {
+                const jsonCheck = this.IsJsonString(data.message[keys])
+                if (jsonCheck) {
+                  data.message[keys] = (JSON.parse(data.message[keys]));
+                }
+              });
+              this.initiateProfessionalTaxFormGroup(data.message);
+              data.message.taxdetails.forEach(element => {
+                this.addTaxdetailsValue(element);
+              });
+            }
+          });
     } else {
       this.addTaxdetailsValue();
     }
@@ -124,14 +143,42 @@ export class ProfessionaltaxAddComponent implements OnInit {
 
   onSubmit() {
     let params = Object.assign({},this.professionalTaxFormGroup.value);
-    let URL = 'employee/post';
+    let URL = 'professionaltax/post';
     if (this.route.snapshot.params['id']) {
-      URL = 'employee/update/' + this.id;
+      URL = 'professionaltax/update/' + this.id;
     }
+    Object.keys(params).forEach((keys: any, vals: any) => {
+      if(typeof params[keys] !== 'string' && params[keys].length > 0){
+        params[keys] = (JSON.stringify(params[keys]));
+      }
+    });
     console.log(params);
+    this.commonService.post(URL, params)
+      .subscribe(
+        details => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
+          if (details.success) {
+            this.toastr.successToastr('Professional tax saved sucessfully');
+            this.router.navigate(['/home/customize/professionaltax']);
+          } else {
+            this.toastr.errorToastr(details.message);
+          }
+        },
+        error => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
+          const error_array = (JSON.parse(error));
+          const keys = Object.keys(error_array);
+          keys.forEach(element => {
+            this.toastr.errorToastr(error_array[element][0]);
+          });
+        });
   }
 
   toggleExemptionStatus(eventchecked: any, params: any) {
     params.status = (eventchecked) ? '1' : '0';
+  }
+  resetForm(){
+    this.professionalTaxFormGroup.reset();
+    this.router.navigate(['/home/customize/professionaltax']);
   }
 }
