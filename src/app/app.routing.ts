@@ -115,7 +115,12 @@ export const routes: Routes = [
         path: 'dashboard',
         canActivate: [AuthGuard],
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
-      }
+      },
+      {
+        path: 'customize',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./views/customize/customize.module').then(m => m.CustomizeModule)
+      },
     ]
   },
   { path: '**', component: P404Component }

@@ -95,3 +95,28 @@ $color: #ffffff;
   }
 }
 /*Loader End*/
+
+
+.expansion-header-custom .mat-expansion-panel-header, .expansion-header-custom .mat-expansion-panel-header:hover{
+  background: #d2d9d9 !important;
+  padding: 0 15px;
+  height: 48px !important;
+}
+
+.expansion-header-custom .mat-expansion-panel-header-title{
+  margin-top: 5px;
+}
+
+.m-t-20 {
+  margin-top: 20px;
+}
+.m-b-10 {
+  margin-bottom: 10px;
+}
+
+.task-add-btn {
+  font-size: 18px;
+  background: #fff;
+  width: 35px !important;
+  height: 35px !important;
+}
