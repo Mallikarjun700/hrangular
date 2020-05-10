@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CurdcommonserviceService, AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ProfessionaltaxViewComponent } from '../professionaltax-view/professionaltax-view.component';
 
 @Component({
   selector: 'app-professionaltax-list',
@@ -13,7 +15,7 @@ export class ProfessionaltaxListComponent implements OnInit {
   public temp: Object = false;
   dtOptions: DataTables.Settings = {};
   constructor(private commonService: CurdcommonserviceService, private authenticationService: AuthenticationService, private route: ActivatedRoute,
-    private router: Router, public toastr: ToastrManager) { }
+    private router: Router, public toastr: ToastrManager, private matDialog: MatDialog) { }
 
   getList() {
     this.temp = false;
@@ -44,6 +46,31 @@ export class ProfessionaltaxListComponent implements OnInit {
     };
     this.getList();
   }
+
+  openDialog(details: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '400px';
+    dialogConfig.width = '1000px';
+    this.commonService.get('professionaltax/show/' + details.id, {})
+      .subscribe(
+        data => {
+          setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+          if (data.success) {
+            Object.keys(data.message).forEach((keys: any, vals: any) => {
+              const jsonCheck = this.IsJsonString(data.message[keys])
+              if (jsonCheck) {
+                data.message[keys] = (JSON.parse(data.message[keys]));
+              }
+            });
+            console.log(data.message);
+            setTimeout(() => { dialogConfig.data = data.message;
+              this.matDialog.open(ProfessionaltaxViewComponent, dialogConfig); }, 100);
+            
+          }
+        });
+  }
   deleteAction(params: any) {
     this.commonService.get('professionaltax/delete/' + params, {}).subscribe(
       data => {
@@ -56,5 +83,20 @@ export class ProfessionaltaxListComponent implements OnInit {
         }
       });
   }
-
+  toggleStatus(eventchecked: any, params: any) {
+    params.status = (eventchecked) ? '1' : '0';
+    this.commonService.post('professionaltax/update/' + params.id, params)
+      .subscribe(
+        details => {
+          setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+          if (details.success) {
+            this.toastr.successToastr('Tax status changed sucessfully');
+            this.getList();
+          }
+        },
+        error => {
+          setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+          this.toastr.errorToastr(error);
+        });
+  }
 }

@@ -13,6 +13,7 @@
                             <tr>
                                 <th>Country</th>
                                 <th>State</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -21,9 +22,18 @@
                                 <td>{{group.country_name}}</td>
                                 <td>{{group.state_name}}</td>
                                 <td>
+                                    <mat-slide-toggle (change)="toggleStatus($event.checked, group)"
+                                                        [(ngModel)]="group.status"
+                                                        color="primary">
+                                    </mat-slide-toggle>
+                                </td>
+                                <td>
                                     <button mat-mini-fab color="primary" type="button"
                                         [routerLink]="['/home/customize/professionaltax/edit',group.id]"><i
                                             class="fa fa-edit"></i></button>
+                                    <button mat-mini-fab style="background-color: #39f;" type="button"
+                                            (click)="openDialog(group)"><i
+                                                class="fa fa-file"></i></button>
                                     <button mat-mini-fab color="warn" type="button" (click)="deleteAction(group.id)"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>

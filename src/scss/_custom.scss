@@ -120,3 +120,6 @@ $color: #ffffff;
   width: 35px !important;
   height: 35px !important;
 }
+.cdk-overlay-container {
+  z-index: 9999 !important;
+}
