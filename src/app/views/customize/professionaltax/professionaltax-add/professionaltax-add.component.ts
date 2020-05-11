@@ -63,7 +63,7 @@ export class ProfessionaltaxAddComponent implements OnInit {
       remarks: [(data) ? data.remarks : ''],
       reminder_days: [(data) ? data.reminder_days : ''],
       returns: [(data) ? data.returns : ''],
-      // document: [(data) ? data.document : '']
+      document_name: [(data) ? data.document_name : '']
     });
   }
 
@@ -85,8 +85,6 @@ export class ProfessionaltaxAddComponent implements OnInit {
       invalidCount++;
     }
     this.taxdetails.controls.forEach(element => {
-      console.log(element)
-      console.log(element.get('pt_amount'))
       if (element.invalid && element.get('pt_amount').errors) {
         invalidCount++;
       }
@@ -142,6 +140,9 @@ export class ProfessionaltaxAddComponent implements OnInit {
   get f() { return this.professionalTaxFormGroup.controls; }
 
   onSubmit() {
+    if (this.professionalTaxFormGroup.invalid) {
+      return;
+    }
     let params = Object.assign({},this.professionalTaxFormGroup.value);
     let URL = 'professionaltax/post';
     if (this.route.snapshot.params['id']) {

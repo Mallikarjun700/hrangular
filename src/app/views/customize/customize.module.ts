@@ -8,16 +8,18 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDialogModule} from "@angular/material/dialog";
 
 import { CustomizeRoutingModule } from './customize-routing.module';
 import { CustomizeLayoutComponent } from './customize-layout/customize-layout.component';
 import { ProfessionaltaxListComponent } from './professionaltax/professionaltax-list/professionaltax-list.component';
 import { ProfessionaltaxAddComponent } from './professionaltax/professionaltax-add/professionaltax-add.component';
+import { ProfessionaltaxViewComponent } from './professionaltax/professionaltax-view/professionaltax-view.component';
 
 
 
 @NgModule({
-  declarations: [CustomizeLayoutComponent, ProfessionaltaxListComponent, ProfessionaltaxAddComponent, ],
+  declarations: [CustomizeLayoutComponent, ProfessionaltaxListComponent, ProfessionaltaxAddComponent, ProfessionaltaxViewComponent, ],
   imports: [
     CommonModule,
     CustomizeRoutingModule,
@@ -29,7 +31,9 @@ import { ProfessionaltaxAddComponent } from './professionaltax/professionaltax-a
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatSlideToggleModule
-  ]
+    MatSlideToggleModule,
+    MatDialogModule
+  ],
+  entryComponents: [ProfessionaltaxViewComponent]
 })
 export class CustomizeModule { }

@@ -1,0 +1,82 @@
+<h2 class="modal-header" mat-dialog-title>Professional Tax View</h2>
+
+<mat-dialog-content class="modal-body">
+  <div class="row m-b-10">
+    <div class="col-md-12">
+      <table style="width:100%" class="table table-striped">
+        <thead>
+          <th>Salary</th>
+          <th>Slab</th>
+          <th>PT Amount</th>
+          <th>Exemption</th>
+          <th>Remarks</th>
+          <th>PT Reminder Days</th>
+          <th>Return</th>
+          <th>Forms</th>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let addr of formdata.taxdetails;">
+            <td>
+              <div class="form-group">
+                <label *ngIf="(addr.salary_range == 1)"> Upto {{addr.salary_from}} </label>
+                <label *ngIf="(addr.salary_range == 2)"> {{addr.salary_from}} Between {{addr.salary_to}} </label>
+                <label *ngIf="(addr.salary_range == 3)"> Above {{addr.salary_from}} </label>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <label *ngIf="(addr.salary_range == 1)"> Monthly </label>
+                <label *ngIf="(addr.salary_range == 2)"> Yearly </label>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <label> {{addr.pt_amount}}</label>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <label> {{
+                    addr.exemption
+                      ? "Applicable"
+                      : "Not Applicable"
+                  }}</label>
+                <br/>
+                <label *ngIf="addr.exemption"> Age: {{addr.exemption_age }}</label><br/>
+                <label *ngIf="addr.exemption"> Exemption Details: {{addr.exemption_details}}</label>
+              </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label> {{addr.remarks}}</label>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                  <label *ngIf="(addr.reminder_days!='')"> {{addr.reminder_days}} Days </label>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label *ngIf="(addr.returns == 1)"> Quarterly </label>
+                    <label *ngIf="(addr.returns == 2)"> Half Yearly </label>
+                    <label *ngIf="(addr.returns == 3)"> Yearly </label>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                  <label > {{addr.document_name}} </label>
+                </div>
+            </td>
+          </tr>
+          <tr *ngIf="formdata.taxdetails.length==0"> <td colspan="9">No data found</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="modal-footer">
+  <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>
