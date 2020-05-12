@@ -4,7 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CurdcommonserviceService, AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import {removeSpaces} from '../../../../_helpers/customvalidator';
-
+import * as moment from 'moment';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 @Component({
   selector: 'app-lwf-add',
   templateUrl: './lwf-add.component.html',
@@ -52,7 +53,7 @@ export class LwfAddComponent implements OnInit {
 
   createLWFDetailsFormGroup(data?: any) {
     return this.formBuilder.group({
-      applicability: [(data) ? data.salary_range : 1, [Validators.required, removeSpaces]],
+      applicability: [(data) ? data.applicability : '', [Validators.required, removeSpaces]],
       category: [(data) ? data.category : ''],
       employee_contribution: [(data) ? data.employee_contribution : 0,
         [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
@@ -75,7 +76,7 @@ export class LwfAddComponent implements OnInit {
       lwfdetails: this.formBuilder.array([]),
     });
   }
-
+  
   get lwfdetails(): FormArray {
     return this.lwfFormGroup.get('lwfdetails') as FormArray;
   }
@@ -119,15 +120,14 @@ export class LwfAddComponent implements OnInit {
           data => {
             setTimeout(() => {this.authenticationService.loaderEnd(); }, 10);
             if (data.success) {
-              console.log(data.message);
               Object.keys(data.message).forEach((keys: any, vals: any) => {
-                const jsonCheck = this.IsJsonString(data.message[keys])
+                const jsonCheck = this.IsJsonString(data.message[keys]);
                 if (jsonCheck) {
                   data.message[keys] = (JSON.parse(data.message[keys]));
                 }
               });
               this.initiateLWFFormGroup(data.message);
-              data.message.details.forEach(element => {
+              data.message.lwfdetails.forEach(element => {
                 this.addLWFDetailsValue(element);
               });
             }
@@ -156,11 +156,10 @@ export class LwfAddComponent implements OnInit {
       URL = 'lwf/update/' + this.id;
     }
     Object.keys(params).forEach((keys: any, vals: any) => {
-      if (typeof params[keys] !== 'string' && params[keys].length > 0){
+      if (typeof params[keys] !== 'string' && params[keys].length > 0) {
         params[keys] = (JSON.stringify(params[keys]));
       }
     });
-    console.log(params);
     this.commonService.post(URL, params)
       .subscribe(
         details => {

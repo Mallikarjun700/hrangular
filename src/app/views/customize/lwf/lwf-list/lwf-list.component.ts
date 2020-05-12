@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CurdcommonserviceService, AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-
+import { LwfViewComponent } from '../lwf-view/lwf-view.component';
 @Component({
   selector: 'app-lwf-list',
   templateUrl: './lwf-list.component.html',
@@ -28,7 +28,6 @@ export class LwfListComponent implements OnInit {
           setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
           if (data.success) {
             this.dataList = data.message;
-            console.log(this.dataList);
             this.temp = true;
           }
         });
@@ -67,9 +66,11 @@ export class LwfListComponent implements OnInit {
                 data.message[keys] = (JSON.parse(data.message[keys]));
               }
             });
-            console.log(data.message);
-            // setTimeout(() => { dialogConfig.data = data.message;
-            //   this.matDialog.open(LwfViewComponent, dialogConfig); }, 100);
+            setTimeout(() => {
+              dialogConfig.data = data.message;
+              dialogConfig.data.country_name = details.country_name;
+              dialogConfig.data.state_name = details.state_name;
+              this.matDialog.open(LwfViewComponent, dialogConfig); }, 100);
           }
         });
   }
@@ -80,7 +81,6 @@ export class LwfListComponent implements OnInit {
         if (data.success) {
           this.toastr.successToastr('LWF deleted sucessfully');
           this.getList();
-          console.log(data);
           // this.dataList=data.message;
         }
       });

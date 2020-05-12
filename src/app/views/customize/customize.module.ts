@@ -8,7 +8,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 import { CustomizeRoutingModule } from './customize-routing.module';
 import { CustomizeLayoutComponent } from './customize-layout/customize-layout.component';
@@ -17,12 +18,13 @@ import { ProfessionaltaxAddComponent } from './professionaltax/professionaltax-a
 import { ProfessionaltaxViewComponent } from './professionaltax/professionaltax-view/professionaltax-view.component';
 import { LwfListComponent } from './lwf/lwf-list/lwf-list.component';
 import { LwfAddComponent } from './lwf/lwf-add/lwf-add.component';
+import { LwfViewComponent } from './lwf/lwf-view/lwf-view.component';
 
 
 
 @NgModule({
   declarations: [CustomizeLayoutComponent, ProfessionaltaxListComponent, 
-    ProfessionaltaxAddComponent, ProfessionaltaxViewComponent, LwfListComponent, LwfAddComponent, ],
+    ProfessionaltaxAddComponent, ProfessionaltaxViewComponent, LwfListComponent, LwfAddComponent, LwfViewComponent, ],
   imports: [
     CommonModule,
     CustomizeRoutingModule,
@@ -37,6 +39,6 @@ import { LwfAddComponent } from './lwf/lwf-add/lwf-add.component';
     MatSlideToggleModule,
     MatDialogModule
   ],
-  entryComponents: [ProfessionaltaxViewComponent]
+  entryComponents: [ProfessionaltaxViewComponent, LwfViewComponent]
 })
 export class CustomizeModule { }

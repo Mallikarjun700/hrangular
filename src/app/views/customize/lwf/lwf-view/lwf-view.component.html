@@ -1,0 +1,81 @@
+<h2 class="modal-header" mat-dialog-title>LWF View</h2>
+
+<mat-dialog-content class="modal-body">
+  <div class="row m-b-10">
+    <div class="col-md-12">
+      <table style="width:100%" class="table table-striped">
+        <thead>
+            <th>Applicability</th>
+            <th>Categroy</th>
+            <th>Employee Contribution</th>
+            <th>Employer Contribution</th>
+            <th>Total Contribution</th>
+            <th>Date of Deduction</th>
+            <th>Last of Deduction</th>
+            <th>Forms</th>
+            <th>Frequency</th>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let addr of formdata.lwfdetails">
+            <td>
+                <div class="form-group">
+                    <label> {{ addr.applicability }}</label>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label> {{ addr.category }}</label>
+                </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <label> {{ addr.employee_contribution }}</label>
+              </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label> {{ addr.employer_contribution }}</label>
+                </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <label> {{ addr.total_contribution }}</label>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <label> {{ addr.dod }}</label>
+              </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <label> {{ addr.last_dod }}</label>
+              </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label> {{ addr.document_name }} </label>
+                </div>
+            </td>
+            <td>
+              <div class="form-group">
+                <label *ngIf="addr.returns == 1"> Quarterly </label>
+                <label *ngIf="addr.returns == 2"> Half Yearly </label>
+                <label *ngIf="addr.returns == 3"> Yearly </label>
+              </div>
+            </td>
+            
+          </tr>
+          <tr *ngIf="formdata.lwfdetails.length == 0">
+            <td colspan="9">No data found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="modal-footer">
+  <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>
