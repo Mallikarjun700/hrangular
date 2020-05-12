@@ -106,6 +106,11 @@ export const navItems: INavData[] = [
         name: 'Professional Tax',
         url: '/home/customize/professionaltax',
         icon: 'fa fa-table'
+      },
+      {
+        name: 'LWF',
+        url: '/home/customize/lwf',
+        icon: 'fa fa-table'
       }
     ]
   },

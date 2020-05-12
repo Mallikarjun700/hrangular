@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { CustomizeLayoutComponent } from './customize-layout/customize-layout.component';
 import { ProfessionaltaxListComponent } from './professionaltax/professionaltax-list/professionaltax-list.component';
 import { ProfessionaltaxAddComponent } from './professionaltax/professionaltax-add/professionaltax-add.component';
+import { LwfListComponent } from './lwf/lwf-list/lwf-list.component';
+import { LwfAddComponent } from './lwf/lwf-add/lwf-add.component';
 
 
 const routes: Routes = [{
@@ -41,6 +43,36 @@ const routes: Routes = [{
           component: ProfessionaltaxAddComponent,
           data: {
             title: 'Edit Professional Tax'
+          }
+        }
+      ]
+    },
+    {
+      path: 'lwf',
+      component: CustomizeLayoutComponent,
+      data: {
+        title: 'LWF'
+      },
+      children: [
+        {
+          path: '',
+          component: LwfListComponent,
+          data: {
+            title: 'LWF'
+          }
+        },
+        {
+          path: 'add',
+          component: LwfAddComponent,
+          data: {
+            title: 'Add LWF'
+          }
+        },
+        {
+          path: 'edit/:id',
+          component: LwfAddComponent,
+          data: {
+            title: 'Edit LWF'
           }
         }
       ]
