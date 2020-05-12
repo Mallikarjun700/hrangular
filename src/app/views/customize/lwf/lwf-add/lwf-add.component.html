@@ -1,0 +1,226 @@
+<p>lwf-add works!</p>
+<div class="card">
+    <div class="card-header">
+      <i class="fa fa-edit"></i>{{ id ? "Edit" : "Add" }} LWF
+    </div>
+    <div
+      class="card-body"
+      style="overflow: visible; height: auto; display: block;"
+      aria-expanded="true"
+      aria-hidden="false"
+    >
+      <form
+        [formGroup]="lwfFormGroup"
+        class="form-horizontal"
+        (ngSubmit)="onSubmit()"
+      >
+        <!-- -->
+        <div class="row m-b-10">
+          <div class="col-md-3">
+            <mat-form-field style="width:100%">
+              <mat-label>County</mat-label>
+              <select
+                matNativeControl
+                formControlName="country_id"
+                (change)="getStateDependency(f.country_id.value)"
+              >
+                <option value="">--Select country--</option>
+                <option
+                  *ngFor="let item of dropdown.country"
+                  value="{{ item.id }}"
+                  >{{ item.name }}</option
+                >
+              </select>
+              <mat-error *ngIf="f.country_id.errors">
+                <span *ngIf="f.country_id.errors.required">
+                  Country name is required</span
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field style="width:100%">
+              <mat-label>State</mat-label>
+              <select matNativeControl formControlName="state_id">
+                <option value="">--Select state--</option>
+                <option
+                  *ngFor="let item of dropdown.state"
+                  value="{{ item.id }}"
+                  >{{ item.name }}</option
+                >
+              </select>
+              <mat-error *ngIf="f.state_id.errors">
+                <span *ngIf="f.state_id.errors.required">
+                  State name is required</span
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+  
+          <div class="col-md-6">
+            <button
+              type="button"
+              class="pull-right"
+              mat-mini-fab
+              [disabled]="lwfdetails.invalid"
+              (click)="addLWFDetailsValue()"
+              color="primary"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+  
+        <ng-template [ngIf]="lwfdetails"></ng-template>
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-bordered table-responsive">
+              <thead>
+                <th>Applicability</th>
+                <th>Categroy</th>
+                <th>Employee Contribution</th>
+                <th>Employer Contribution</th>
+                <th>Total Contribution</th>
+                <th>Date of Deduction</th>
+                <th>Last of Deduction</th>
+                <th>Forms</th>
+                <th>Frequency</th>
+                <th>Action</th>
+              </thead>
+  
+              <tbody formArrayName="lwfdetails">
+                <ng-template [ngIf]="lwfdetails">
+                  <tr
+                    *ngFor="let addr of lwfdetails.controls; let i = index"
+                    [formGroupName]="i"
+                  >
+                    <td>
+                      <mat-form-field
+                        style="width:100%"
+                      >
+                        <input matInput formControlName="applicability" />
+                        <mat-error
+                          *ngIf="addr.invalid && addr.get('applicability').errors"
+                        >
+                          <span *ngIf="addr.get('applicability').errors?.required">
+                            Applicability is required</span
+                          >
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field style="width:100%">
+                            <textarea
+                            matInput
+                            placeholder="Category"
+                            formControlName="category"
+                            ></textarea>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field style="width:100%">
+                        <input matInput formControlName="employee_contribution"  (change)="totalContributionCalc(i)"/>
+                        <mat-error
+                          *ngIf="addr.invalid && addr.get('employee_contribution').errors"
+                        >
+                          <span *ngIf="addr.get('employee_contribution').errors?.required">
+                            Employee Contribution is required</span
+                          >
+                          <span *ngIf="addr.get('employee_contribution').errors?.pattern">
+                            Employee Contribution is invalid</span
+                          >
+                        </mat-error>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field style="width:100%">
+                            <input matInput formControlName="employer_contribution" (change)="totalContributionCalc(i)"/>
+                            <mat-error
+                            *ngIf="addr.invalid && addr.get('employer_contribution').errors"
+                            >
+                            <span *ngIf="addr.get('employer_contribution').errors?.required">
+                                Employer Contribution is required</span
+                            >
+                            <span *ngIf="addr.get('employer_contribution').errors?.pattern">
+                                Employer Contribution is invalid</span
+                            >
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        {{addr.get('total_contribution')?.value}}
+                    </td>
+                    <td>
+                        <!-- [required]="addr.get('dod').value!=''" -->
+                        <mat-form-field style="width:100%">
+                            <input matInput
+                                    [matDatepicker]="dod"
+                                    formControlName="dod" >
+                            <mat-datepicker-toggle matSuffix
+                                                    [for]="dod"></mat-datepicker-toggle>
+                            <mat-datepicker #dod></mat-datepicker>
+                            <mat-error *ngIf="addr.invalid && addr.get('dod').errors">
+                                <span *ngIf="addr.get('dod').errors?.required"> Date of detection is required</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field style="width:100%">
+                            <input matInput
+                                    [matDatepicker]="last_dod"
+                                    formControlName="last_dod" >
+                            <mat-datepicker-toggle matSuffix
+                                                    [for]="last_dod"></mat-datepicker-toggle>
+                            <mat-datepicker #last_dod></mat-datepicker>
+                            <mat-error *ngIf="addr.invalid && addr.get('last_dod').errors">
+                                <span *ngIf="addr.get('last_dod').errors?.required">Last Date of detection is required</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field style="width:100%">
+                        <input matInput formControlName="document_name" />
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field style="width:100%">
+                        <select matNativeControl formControlName="frequency">
+                          <option value="">--Select Returns--</option>
+                          <option value="1"> Quarterly </option>
+                          <option value="2"> Half Yearly </option>
+                          <option value="3"> Yearly </option>
+                        </select>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <button
+                        mat-mini-fab
+                        color="warn"
+                        type="button"
+                        [disabled]="lwfdetails.length == 1 ? true : false"
+                        (click)="deleteLWFDetailsValue(i)"
+                      >
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </tbody>
+            </table>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-md-12">
+            <div class="pull-right">
+              <button mat-button (click)="resetForm()">Cancel</button>
+              <button mat-flat-button type="submit" color="primary">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
