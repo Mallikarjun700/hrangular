@@ -1,0 +1,127 @@
+<div class="card">
+    <div class="card-header">
+      <i class="fa fa-edit"></i>{{ id ? "Edit" : "Add" }} ESI
+    </div>
+    <div
+      class="card-body"
+      style="overflow: visible; height: auto; display: block;"
+      aria-expanded="true"
+      aria-hidden="false"
+    >
+      <form
+        [formGroup]="esiFormGroup"
+        class="form-horizontal"
+        (ngSubmit)="onSubmit()"
+      >
+        <!-- -->
+        <div class="row">
+            <div class="col-md-3 m-t-20">
+                <mat-label>Statutory Max. Monthly Gross of ESI</mat-label>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field style="width:100%">
+                    <input matInput formControlName="esi_amount"/>
+                    <mat-error
+                    *ngIf="f.esi_amount.errors"
+                    >
+                    <span *ngIf="f.esi_amount.errors?.required">
+                        ESI Amount is required</span
+                    >
+                    <span *ngIf="f.esi_amount.errors?.pattern">
+                        ESI Amount is invalid</span
+                    >
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 m-t-20">
+                    <mat-label>Employee Contribution (%)</mat-label>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field style="width:100%">
+                        <input matInput formControlName="employee_per"/>
+                        <mat-error
+                        *ngIf="f.employee_per.errors"
+                        >
+                        <span *ngIf="f.employee_per.errors?.required">
+                            Employee Contribution Percentage is required</span
+                        >
+                        <span *ngIf="f.employee_per.errors?.pattern">
+                            Employee Contribution is invalid</span
+                        >
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 m-t-20">
+                        <mat-label>Employer Contribution (%)</mat-label>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field style="width:100%">
+                            <input matInput formControlName="employer_per"/>
+                            <mat-error
+                            *ngIf="f.employer_per.errors"
+                            >
+                            <span *ngIf="f.employer_per.errors?.required">
+                                Employer Contribution Percentage is required</span
+                            >
+                            <span *ngIf="f.employer_per.errors?.pattern">
+                                Employer Contribution is invalid</span
+                            >
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 m-t-20">
+                <mat-label>ESI Rates Notes</mat-label>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field style="width:100%">
+                    <textarea
+                    matInput
+                    formControlName="data1"
+                    rows="4" cols="50"></textarea>
+                    <mat-error
+                    *ngIf="f.data1.errors"
+                    >
+                        <span *ngIf="f.data1.errors?.required">
+                                ESI Rates Notes is required</span
+                        >
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3 m-t-20">
+                <mat-label>ESI Period Notes</mat-label>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field style="width:100%">
+                    <textarea
+                    matInput
+                    formControlName="data2"
+                    rows="4" cols="50">
+                    </textarea>
+                    <mat-error
+                    *ngIf="f.data2.errors"
+                    >
+                        <span *ngIf="f.data2.errors?.required">
+                                ESI Period Notes is required</span
+                        >
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-center">
+              <button mat-button (click)="resetForm()">Cancel</button>
+              <button mat-flat-button type="submit" color="primary">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

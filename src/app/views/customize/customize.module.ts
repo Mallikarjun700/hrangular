@@ -19,12 +19,15 @@ import { ProfessionaltaxViewComponent } from './professionaltax/professionaltax-
 import { LwfListComponent } from './lwf/lwf-list/lwf-list.component';
 import { LwfAddComponent } from './lwf/lwf-add/lwf-add.component';
 import { LwfViewComponent } from './lwf/lwf-view/lwf-view.component';
+import { EsiListComponent } from './esi/esi-list/esi-list.component';
+import { EsiAddComponent } from './esi/esi-add/esi-add.component';
 
 
 
 @NgModule({
   declarations: [CustomizeLayoutComponent, ProfessionaltaxListComponent, 
-    ProfessionaltaxAddComponent, ProfessionaltaxViewComponent, LwfListComponent, LwfAddComponent, LwfViewComponent, ],
+    ProfessionaltaxAddComponent, ProfessionaltaxViewComponent, 
+    LwfListComponent, LwfAddComponent, LwfViewComponent, EsiListComponent, EsiAddComponent, ],
   imports: [
     CommonModule,
     CustomizeRoutingModule,
