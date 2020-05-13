@@ -1,0 +1,55 @@
+<h2 class="modal-header" mat-dialog-title>Provident Fund View</h2>
+
+<mat-dialog-content class="modal-body">
+  <div class="row m-b-10">
+    <div class="col-md-12">
+      <table style="width:100%" class="table table-striped">
+        <thead>
+            <th>Account Id</th>
+            <th>Account Name</th>
+            <th>Salary Type</th>
+            <th> Percentage (%)</th>
+            <th> Description</th>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let addr of formdata.pfdetails;">
+            <td>
+              <div class="form-group">
+                <label> {{addr.account_id}}</label>
+               </div>
+            </td>
+            <td>
+                <div class="form-group">
+                  <label> {{addr.account_name}}</label>
+                 </div>
+              </td>
+            <td>
+              <div class="form-group">
+                <label *ngIf="(addr.salary_type == 1)"> Basic </label>
+                <label *ngIf="(addr.salary_type == 2)">  Cap Wages </label>
+                <label *ngIf="(addr.salary_type == 3)">  ESP Wages </label>
+                <label *ngIf="(addr.salary_type == 4)">  EDLI Wages </label>
+              </div>
+            </td>
+            <td>
+                <div class="form-group">
+                  <label> {{addr.salary_per}} </label>
+                 </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <label> {{addr.account_details}}</label>
+                 </div>
+              </td>
+          </tr>
+          <tr *ngIf="formdata.pfdetails.length==0"> <td colspan="9">No data found</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="modal-footer">
+  <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>

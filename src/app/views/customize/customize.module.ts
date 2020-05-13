@@ -17,12 +17,13 @@ import { ProfessionaltaxAddComponent } from './professionaltax/professionaltax-a
 import { ProfessionaltaxViewComponent } from './professionaltax/professionaltax-view/professionaltax-view.component';
 import { LwfListComponent } from './lwf/lwf-list/lwf-list.component';
 import { LwfAddComponent } from './lwf/lwf-add/lwf-add.component';
-
-
+import { ProvidentfundAddComponent } from './providentfund/providentfund-add/providentfund-add.component';
+import { ProvidentfundListComponent } from './providentfund/providentfund-list/providentfund-list.component';
+import { ProvidentfundViewComponent } from './providentfund/providentfund-view/providentfund-view.component';
 
 @NgModule({
   declarations: [CustomizeLayoutComponent, ProfessionaltaxListComponent, 
-    ProfessionaltaxAddComponent, ProfessionaltaxViewComponent, LwfListComponent, LwfAddComponent, ],
+    ProfessionaltaxAddComponent, ProfessionaltaxViewComponent, LwfListComponent, LwfAddComponent, ProvidentfundListComponent, ProvidentfundAddComponent, ProvidentfundViewComponent],
   imports: [
     CommonModule,
     CustomizeRoutingModule,
@@ -37,6 +38,6 @@ import { LwfAddComponent } from './lwf/lwf-add/lwf-add.component';
     MatSlideToggleModule,
     MatDialogModule
   ],
-  entryComponents: [ProfessionaltaxViewComponent]
+  entryComponents: [ProfessionaltaxViewComponent,ProvidentfundViewComponent]
 })
 export class CustomizeModule { }

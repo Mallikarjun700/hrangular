@@ -1,0 +1,199 @@
+<div class="card">
+    <div class="card-header">
+      <i class="fa fa-edit"></i>{{ id ? "Edit" : "Add" }} Provident Fund
+    </div>
+    <div
+      class="card-body"
+      style="overflow: visible; height: auto; display: block;"
+      aria-expanded="true"
+      aria-hidden="false"
+    >
+      <form
+        [formGroup]="providentFundFormGroup"
+        class="form-horizontal"
+        (ngSubmit)="onSubmit()"
+      > 
+       <!-- -->
+       <div class="row m-b-10"> 
+        <div class="col-md-3">
+            <mat-slide-toggle
+                formControlName="pfstatus"
+                color="primary"
+                style="padding-top: 14px;"
+              >PF Status
+              </mat-slide-toggle>
+            </div>
+        <div class="col-md-3">
+            <mat-form-field style="width:100%">
+                <mat-label>Maximum Cap Wages</mat-label>
+                <input matInput formControlName="amount" />
+                <mat-error *ngIf="f.amount.errors">
+                    <span *ngIf="f.amount.errors.required"> Amount is required</span>
+                </mat-error>
+               </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field style="width:100%">
+                <mat-label>Effective Date</mat-label>
+                <input matInput
+                    [matDatepicker]="effective_date"
+                    formControlName="effective_date" >
+                <mat-datepicker-toggle matSuffix
+                                    [for]="effective_date"></mat-datepicker-toggle>
+                <mat-datepicker #effective_date></mat-datepicker>
+                <mat-error *ngIf="f.effective_date.errors">
+                    <span *ngIf="f.effective_date.errors.required"> Effective Date is required</span>
+                </mat-error>
+            </mat-form-field>
+       </div>
+      </div>   
+        <div class="row col-md-12">
+            <div class="col-md-3">
+            <mat-slide-toggle
+                formControlName="vc_allowed"
+                color="primary"
+                style="padding-top: 14px;"
+              > Voluntry Contribution 
+              </mat-slide-toggle>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field style="width:100%">
+                    <mat-label> Age </mat-label>
+                    <input matInput formControlName="stop_age" />
+                  </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field style="width:100%">
+                    <mat-label> Exemption Details </mat-label>
+                    <input matInput formControlName="age_desc" />
+                   </mat-form-field>
+            </div>
+            <div class="col-md-2">
+                <button
+                type="button"
+                class="pull-right"
+                mat-mini-fab [disabled]="(pfdetails.invalid)" (click)="addPFdetailsValue()" 
+                color="primary"
+                > <i class="fa fa-plus" ></i>
+                </button>  
+            </div>
+        </div>
+        
+        
+        <ng-template [ngIf]="pfdetails"></ng-template>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <th>Account Id</th>
+                        <th>Account Name</th>
+                        <th>Salary Type</th>
+                        <th> Percentage (%)</th>
+                        <th> Description</th>
+                        <th>Action</th>
+                    </thead>
+                  
+                    <tbody formArrayName="pfdetails">
+                      <ng-template [ngIf]="pfdetails">
+                        <tr *ngFor="let addr of pfdetails.controls; let i = index"
+                            [formGroupName]="i">
+                            <td> 
+                                <mat-form-field style="width:100%">
+                                    <input matInput formControlName="account_id" />
+                                    <mat-error
+                                    *ngIf="addr.invalid && addr.get('account_id').errors"
+                                  >
+                                    <span *ngIf="addr.get('account_id').errors?.required">
+                                        Account Id is required</span
+                                    >
+                                    <span *ngIf="addr.get('account_id').errors?.pattern">
+                                        Account Id is invalid</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td> 
+                                <mat-form-field style="width:100%">
+                                    <input matInput formControlName="account_name" />
+                                    <mat-error
+                                    *ngIf="addr.invalid && addr.get('account_name').errors"
+                                  >
+                                    <span *ngIf="addr.get('account_name').errors?.required">
+                                        Account Name is required</span
+                                    >
+                                    <span *ngIf="addr.get('account_name').errors?.pattern">
+                                        Account Name is invalid</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td> 
+                                <mat-form-field style="width:100%">
+                                    <select matNativeControl formControlName="salary_type">
+                                        <option value="">--Select Salary Type--</option>
+                                        <option value="1"> Basic </option>
+                                        <option value="2"> Cap Wages </option>
+                                        <option value="3"> ESP Wages </option>
+                                        <option value="4"> EDLI Wages </option>
+                                      </select>
+                                      <mat-error
+                                        *ngIf="addr.invalid && addr.get('salary_type').errors"
+                                      >
+                                        <span *ngIf="addr.get('salary_type').errors?.required"
+                                          >Salary Type is required</span
+                                        >
+                                      </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td> 
+                                <mat-form-field style="width:100%">
+                                    <input matInput formControlName="salary_per" />
+                                    <mat-error
+                                      *ngIf="addr.invalid && addr.get('salary_per').errors"
+                                    >
+                                      <span *ngIf="addr.get('salary_per').errors?.required">
+                                        Salary (%) is required</span
+                                      >
+                                      <span *ngIf="addr.get('salary_per').errors?.pattern">
+                                          Salary (%) is invalid</span
+                                        >
+                                    </mat-error>
+                                  </mat-form-field>
+                            </td>
+                            <td> 
+                                <mat-form-field style="width:100%">
+                                    <textarea
+                                      matInput
+                                      placeholder="Remarks"
+                                      formControlName="account_details"
+                                    ></textarea>
+                                  </mat-form-field>
+                            </td>
+                            <td><button mat-mini-fab
+                                        color="warn"
+                                        type="button"
+                                        [disabled]="(pfdetails.length==1)? true:false" (click)="deletePFdetailsValue(i)"
+                                        ><i 
+                                        class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>
+                      </ng-template>
+                    </tbody>
+                 
+                </table>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="pull-right">
+              <button mat-button (click)="resetForm()">Cancel</button>
+              <button mat-flat-button type="submit" color="primary">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -5,7 +5,8 @@ import { ProfessionaltaxListComponent } from './professionaltax/professionaltax-
 import { ProfessionaltaxAddComponent } from './professionaltax/professionaltax-add/professionaltax-add.component';
 import { LwfListComponent } from './lwf/lwf-list/lwf-list.component';
 import { LwfAddComponent } from './lwf/lwf-add/lwf-add.component';
-
+import { ProvidentfundAddComponent } from './providentfund/providentfund-add/providentfund-add.component';
+import { ProvidentfundListComponent } from './providentfund/providentfund-list/providentfund-list.component';
 
 const routes: Routes = [{
   path: '',
@@ -73,6 +74,36 @@ const routes: Routes = [{
           component: LwfAddComponent,
           data: {
             title: 'Edit LWF'
+          }
+        }
+      ]
+    },
+    {
+      path: 'providentfund',
+      component: CustomizeLayoutComponent,
+      data: {
+        title: 'Provident Fund'
+      },
+      children: [
+        {
+          path: '',
+          component: ProvidentfundListComponent,
+          data: {
+            title: 'Provident Fund'
+          }
+        },
+        {
+          path: 'add',
+          component: ProvidentfundAddComponent,
+          data: {
+            title: 'Add Provident Fund'
+          }
+        },
+        {
+          path: 'edit/:id',
+          component: ProvidentfundAddComponent,
+          data: {
+            title: 'Edit Provident Fund'
           }
         }
       ]
