@@ -5,7 +5,8 @@ import { ProfessionaltaxListComponent } from './professionaltax/professionaltax-
 import { ProfessionaltaxAddComponent } from './professionaltax/professionaltax-add/professionaltax-add.component';
 import { LwfListComponent } from './lwf/lwf-list/lwf-list.component';
 import { LwfAddComponent } from './lwf/lwf-add/lwf-add.component';
-
+import { EsiListComponent } from './esi/esi-list/esi-list.component';
+import { EsiAddComponent } from './esi/esi-add/esi-add.component';
 
 const routes: Routes = [{
   path: '',
@@ -73,6 +74,36 @@ const routes: Routes = [{
           component: LwfAddComponent,
           data: {
             title: 'Edit LWF'
+          }
+        }
+      ]
+    },
+    {
+      path: 'esi',
+      component: CustomizeLayoutComponent,
+      data: {
+        title: 'ESI'
+      },
+      children: [
+        {
+          path: '',
+          component: EsiListComponent,
+          data: {
+            title: 'ESI'
+          }
+        },
+        {
+          path: 'add',
+          component: EsiAddComponent,
+          data: {
+            title: 'Add ESI'
+          }
+        },
+        {
+          path: 'edit/:id',
+          component: EsiAddComponent,
+          data: {
+            title: 'Edit ESI'
           }
         }
       ]
