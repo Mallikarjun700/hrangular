@@ -7,6 +7,8 @@ import { LwfListComponent } from './lwf/lwf-list/lwf-list.component';
 import { LwfAddComponent } from './lwf/lwf-add/lwf-add.component';
 import { ProvidentfundAddComponent } from './providentfund/providentfund-add/providentfund-add.component';
 import { ProvidentfundListComponent } from './providentfund/providentfund-list/providentfund-list.component';
+import { EsiListComponent } from './esi/esi-list/esi-list.component';
+import { EsiAddComponent } from './esi/esi-add/esi-add.component';
 
 const routes: Routes = [{
   path: '',
@@ -83,7 +85,7 @@ const routes: Routes = [{
       component: CustomizeLayoutComponent,
       data: {
         title: 'Provident Fund'
-      },
+       },
       children: [
         {
           path: '',
@@ -104,6 +106,36 @@ const routes: Routes = [{
           component: ProvidentfundAddComponent,
           data: {
             title: 'Edit Provident Fund'
+          }
+        }
+      ]
+    },
+    {
+      path: 'esi',
+      component: CustomizeLayoutComponent,
+      data: {
+        title: 'ESI'
+       },
+      children: [
+        {
+          path: '',
+          component: EsiListComponent,
+          data: {
+            title: 'ESI'
+          }
+        },
+        {
+          path: 'add',
+          component: EsiAddComponent,
+          data: {
+            title: 'Add ESI'
+          }
+        },
+        {
+          path: 'edit/:id',
+          component: EsiAddComponent,
+          data: {
+            title: 'Edit ESI'
           }
         }
       ]

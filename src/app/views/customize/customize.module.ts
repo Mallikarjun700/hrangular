@@ -8,7 +8,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 import { CustomizeRoutingModule } from './customize-routing.module';
 import { CustomizeLayoutComponent } from './customize-layout/customize-layout.component';
@@ -20,10 +21,16 @@ import { LwfAddComponent } from './lwf/lwf-add/lwf-add.component';
 import { ProvidentfundAddComponent } from './providentfund/providentfund-add/providentfund-add.component';
 import { ProvidentfundListComponent } from './providentfund/providentfund-list/providentfund-list.component';
 import { ProvidentfundViewComponent } from './providentfund/providentfund-view/providentfund-view.component';
+import { LwfViewComponent } from './lwf/lwf-view/lwf-view.component';
+import { EsiListComponent } from './esi/esi-list/esi-list.component';
+import { EsiAddComponent } from './esi/esi-add/esi-add.component';
+
+
 
 @NgModule({
   declarations: [CustomizeLayoutComponent, ProfessionaltaxListComponent, 
-    ProfessionaltaxAddComponent, ProfessionaltaxViewComponent, LwfListComponent, LwfAddComponent, ProvidentfundListComponent, ProvidentfundAddComponent, ProvidentfundViewComponent],
+    ProfessionaltaxAddComponent, ProfessionaltaxViewComponent, 
+    LwfListComponent, LwfAddComponent, LwfViewComponent, EsiListComponent, EsiAddComponent,ProvidentfundAddComponent, ProvidentfundListComponent,ProvidentfundViewComponent],
   imports: [
     CommonModule,
     CustomizeRoutingModule,
@@ -38,6 +45,6 @@ import { ProvidentfundViewComponent } from './providentfund/providentfund-view/p
     MatSlideToggleModule,
     MatDialogModule
   ],
-  entryComponents: [ProfessionaltaxViewComponent,ProvidentfundViewComponent]
+  entryComponents: [ProfessionaltaxViewComponent,LwfViewComponent,ProvidentfundViewComponent]
 })
 export class CustomizeModule { }

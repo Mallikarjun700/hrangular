@@ -111,6 +111,11 @@ export const navItems: INavData[] = [
         name: 'LWF',
         url: '/home/customize/lwf',
         icon: 'fa fa-table'
+      },
+      {
+        name: 'ESI',
+        url: '/home/customize/esi',
+        icon: 'fa fa-table'
       }
     ]
   },

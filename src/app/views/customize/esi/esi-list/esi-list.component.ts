@@ -3,13 +3,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CurdcommonserviceService, AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { LwfViewComponent } from '../lwf-view/lwf-view.component';
+
 @Component({
-  selector: 'app-lwf-list',
-  templateUrl: './lwf-list.component.html',
-  styleUrls: ['./lwf-list.component.scss']
+  selector: 'app-esi-list',
+  templateUrl: './esi-list.component.html',
+  styleUrls: ['./esi-list.component.scss']
 })
-export class LwfListComponent implements OnInit {
+export class EsiListComponent implements OnInit {
   public dataList = [];
   public temp: Object = false;
   dtOptions: DataTables.Settings = {};
@@ -22,7 +22,7 @@ export class LwfListComponent implements OnInit {
 
   getList() {
     this.temp = false;
-    this.commonService.get('lwf/get', {})
+    this.commonService.get('esi/get', {})
       .subscribe(
         data => {
           setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
@@ -49,37 +49,12 @@ export class LwfListComponent implements OnInit {
     this.getList();
   }
 
-  openDialog(details: any) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '400px';
-    dialogConfig.width = '1000px';
-    this.commonService.get('lwf/show/' + details.id, {})
-      .subscribe(
-        data => {
-          setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
-          if (data.success) {
-            Object.keys(data.message).forEach((keys: any, vals: any) => {
-              const jsonCheck = this.IsJsonString(data.message[keys])
-              if (jsonCheck) {
-                data.message[keys] = (JSON.parse(data.message[keys]));
-              }
-            });
-            setTimeout(() => {
-              dialogConfig.data = data.message;
-              dialogConfig.data.country_name = details.country_name;
-              dialogConfig.data.state_name = details.state_name;
-              this.matDialog.open(LwfViewComponent, dialogConfig); }, 100);
-          }
-        });
-  }
   deleteAction(params: any) {
-    this.commonService.get('lwf/delete/' + params, {}).subscribe(
+    this.commonService.get('esi/delete/' + params, {}).subscribe(
       data => {
         setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
         if (data.success) {
-          this.toastr.successToastr('LWF deleted sucessfully');
+          this.toastr.successToastr('ESI deleted sucessfully');
           this.getList();
           // this.dataList=data.message;
         }
@@ -87,12 +62,12 @@ export class LwfListComponent implements OnInit {
   }
   toggleStatus(eventchecked: any, params: any) {
     params.status = (eventchecked) ? '1' : '0';
-    this.commonService.post('lwf/update/' + params.id, params)
+    this.commonService.post('esi/update/' + params.id, params)
       .subscribe(
         details => {
           setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
           if (details.success) {
-            this.toastr.successToastr('LWF status changed sucessfully');
+            this.toastr.successToastr('ESI status changed sucessfully');
             this.getList();
           }
         },
@@ -101,4 +76,5 @@ export class LwfListComponent implements OnInit {
           this.toastr.errorToastr(error);
         });
   }
+
 }
