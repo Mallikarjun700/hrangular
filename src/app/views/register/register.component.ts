@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import {removeSpaces}  from '../../_helpers/customvalidator';
+import {removeSpaces} from '../../_helpers/customvalidator';
+import { PopoverDirective } from 'ngx-bootstrap/popover';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'register.component.html'
@@ -16,6 +18,7 @@ export class RegisterComponent implements OnInit {
   loading = false;
   submitted = false;
   error: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,

@@ -1,0 +1,665 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> {{ id ? "Edit" : "Add" }} Salary Structure
+        </div>
+        <div class="card-body">
+          <mat-tab-group mat-align-tabs="start"  mat-stretch-tabs>
+            <mat-tab label="Fixed">
+                <form [formGroup]="fixedFormGroup">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button
+                                class="pull-right"
+                                mat-mini-fab
+                                type="button"
+                                color="primary"
+                                [disabled]="fixeddetails.invalid"
+                                (click)="addFixeddetailsValue()"
+                            >
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            <table class="table table-bordered table-reponsive">
+                                <thead>
+                                    <th>Component</th>
+                                    <th>Pay Type</th>
+                                    <th>Formula</th>
+                                    <th>Action</th>
+                                </thead>
+                                <tbody formArrayName="fixeddetails">
+                                <tr
+                                    *ngFor="
+                                    let addr of fixeddetails.controls;
+                                    let i = index
+                                    "
+                                    [formGroupName]="i"
+                                >
+                                    <td>
+                                        
+                                        <mat-form-field style="width:100%" *ngIf="(addr.get('type')?.value==1)? true : false">
+                                            <input matInput formControlName="component"  />
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('component').errors"
+                                            >
+                                                <span *ngIf="addr.get('component').errors?.required">
+                                                        Component is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <span *ngIf="(addr.get('type')?.value==0)? true : false"> {{addr.get('component')?.value}} </span>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%"  *ngIf="(addr.get('type')?.value==1)? true : false">
+                                            <input matInput formControlName="paytype" [disabled]="(addr.get('type')?.value==0)? true : false"/>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('paytype').errors"
+                                            >
+                                                <span *ngIf="addr.get('paytype').errors?.required">
+                                                        Pay Type is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <span *ngIf="(addr.get('type')?.value==0)? true : false"> {{addr.get('paytype')?.value}} </span>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="formula"
+                                            >
+                                                <option value="">--Select Formula--</option>
+                                                <option *ngFor="let item of dropdown.formula_dependent"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('formula').errors"
+                                            >
+                                                <span *ngIf="addr.get('formula').errors?.required">
+                                                        Formula is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+
+                                    <td>
+                                        <button
+                                            mat-mini-fab
+                                            color="warn"
+                                            type="button"
+                                            [disabled]="(fixeddetails.length >= 1 && addr.get('type')?.value==0)? true : false"
+                                            (click)="deleteFixeddetailsValue(i)"
+                                        >
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="fixeddetails.length == 0">
+                                    <td colspan="5">No data Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <button mat-button (click)="resetForm()">Cancel</button>
+                                <button mat-flat-button type="submit" color="primary">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-tab>
+            <mat-tab label="Flexi">
+                <form [formGroup]="flexiFormGroup">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button
+                                class="pull-right"
+                                mat-mini-fab
+                                type="button"
+                                color="primary"
+                                [disabled]="flexidetails.invalid"
+                                (click)="addFlexidetailsValue()"
+                            >
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            <table class="table table-bordered table-reponsive">
+                                <thead>
+                                    <th>Component</th>
+                                    <th>Pay Type</th>
+                                    <th>Monthly Eligibility</th>
+                                    <th>Annual Elegibility</th>
+                                    <th>To be Paid Monthly</th>
+                                    <th>Monthly Tax Applied</th>
+                                    <th>Proofs to be submitted</th>
+                                    <th>Reimburse/Proof Submission</th>
+                                    <th>LOP Dependent</th>
+                                    <th>Included in CTC</th>
+                                    <th>Action</th>
+                                </thead>
+                                <tbody formArrayName="flexidetails">
+                                <tr
+                                    *ngFor="
+                                    let addr of flexidetails.controls;
+                                    let i = index
+                                    "
+                                    [formGroupName]="i"
+                                >
+                                    <td>
+                                        <mat-form-field style="width:100%" *ngIf="(addr.get('type')?.value==1)? true : false">
+                                            <input matInput formControlName="component"  />
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('component').errors"
+                                            >
+                                                <span *ngIf="addr.get('component').errors?.required">
+                                                        Component is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <span *ngIf="(addr.get('type')?.value==0)? true : false"> {{addr.get('component')?.value}} </span>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%"  *ngIf="(addr.get('type')?.value==1)? true : false">
+                                            <input matInput formControlName="paytype" [disabled]="(addr.get('type')?.value==0)? true : false"/>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('paytype').errors"
+                                            >
+                                                <span *ngIf="addr.get('paytype').errors?.required">
+                                                        Pay Type is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <span *ngIf="(addr.get('type')?.value==0)? true : false"> {{addr.get('paytype')?.value}} </span>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%" >
+                                            <input matInput formControlName="monthly_eligibility"  />
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('monthly_eligibility').errors"
+                                            >
+                                                <span *ngIf="addr.get('monthly_eligibility').errors?.required">
+                                                        Monthly Eligibility is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%" >
+                                            <input matInput formControlName="annual_eligibility"  />
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('annual_eligibility').errors"
+                                            >
+                                                <span *ngIf="addr.get('annual_eligibility').errors?.required">
+                                                        Annual Eligibility is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="paid_monthly"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.yesno_dependent"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('paid_monthly').errors"
+                                            >
+                                                <span *ngIf="addr.get('paid_monthly').errors?.required">
+                                                        Paid Monthly is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="monthly_tax_applied"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.yesno_dependent"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('monthly_tax_applied').errors"
+                                            >
+                                                <span *ngIf="addr.get('monthly_tax_applied').errors?.required">
+                                                        Monthly Tax Applied is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="proofs_submitted"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.yesno_dependent"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('proofs_submitted').errors"
+                                            >
+                                                <span *ngIf="addr.get('proofs_submitted').errors?.required">
+                                                        Proofs to be submitted is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="reimburse_proof_submission"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.month_dependent_include_not"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('reimburse_proof_submission').errors"
+                                            >
+                                                <span *ngIf="addr.get('reimburse_proof_submission').errors?.required">
+                                                        Proof Submission is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="lop_dependent"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.yesno_dependent"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('lop_dependent').errors"
+                                            >
+                                                <span *ngIf="addr.get('lop_dependent').errors?.required">
+                                                        LOP Dependent is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="include_ctc"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.yesno_dependent"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('include_ctc').errors"
+                                            >
+                                                <span *ngIf="addr.get('include_ctc').errors?.required">
+                                                        Included in CTC is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <button
+                                            mat-mini-fab
+                                            color="warn"
+                                            type="button"
+                                            [disabled]="(flexidetails.length >= 1 && addr.get('type')?.value==0)? true : false"
+                                            (click)="deleteFlexidetailsValue(i)"
+                                        >
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="flexidetails.length == 0">
+                                    <td colspan="5">No data Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-right">
+                                    <button mat-button (click)="resetForm()">Cancel</button>
+                                    <button mat-flat-button type="submit" color="primary">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </mat-tab>
+            <mat-tab label="Variable">
+                <form [formGroup]="variableFormGroup">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button
+                                class="pull-right"
+                                mat-mini-fab
+                                type="button"
+                                color="primary"
+                                [disabled]="variabledetails.invalid"
+                                (click)="addVariabledetailsValue()"
+                            >
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            <table class="table table-bordered table-reponsive">
+                                <thead>
+                                    <th>Component</th>
+                                    <th>Pay Type</th>
+                                    <th>Base</th>
+                                    <th>Percentage/Value</th>
+                                    <th>LOP Dependent</th>
+                                    <th>Included in CTC</th>
+                                    <th>Payment Frequency</th>
+                                    <th>Reminder for Payment Month</th>
+                                    <th>Action</th>
+                                </thead>
+                                <tbody formArrayName="variabledetails">
+                                <tr
+                                    *ngFor="
+                                    let addr of variabledetails.controls;
+                                    let i = index
+                                    "
+                                    [formGroupName]="i"
+                                >
+                                    <td>
+                                        <mat-form-field style="width:100%" *ngIf="(addr.get('type')?.value==1)? true : false">
+                                            <input matInput formControlName="component"  />
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('component').errors"
+                                            >
+                                                <span *ngIf="addr.get('component').errors?.required">
+                                                        Component is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <span *ngIf="(addr.get('type')?.value==0)? true : false"> {{addr.get('component')?.value}} </span>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%"  *ngIf="(addr.get('type')?.value==1)? true : false">
+                                            <input matInput formControlName="paytype" [disabled]="(addr.get('type')?.value==0)? true : false"/>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('paytype').errors"
+                                            >
+                                                <span *ngIf="addr.get('paytype').errors?.required">
+                                                        Pay Type is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <span *ngIf="(addr.get('type')?.value==0)? true : false"> {{addr.get('paytype')?.value}} </span>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%" >
+                                            <input matInput formControlName="base"  />
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('base').errors"
+                                            >
+                                                <span *ngIf="addr.get('base').errors?.required">
+                                                        Percentage/Value is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%" >
+                                            <input matInput formControlName="percentage_or_value"  />
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('percentage_or_value').errors"
+                                            >
+                                                <span *ngIf="addr.get('percentage_or_value').errors?.required">
+                                                        Percentage/Value is required</span>
+                                                <span *ngIf="addr.get('percentage_or_value').errors?.pattern">
+                                                        Percentage/Value is invalid</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="lop_dependent"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.yesno_dependent"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('lop_dependent').errors"
+                                            >
+                                                <span *ngIf="addr.get('lop_dependent').errors?.required">
+                                                        LOP Dependent is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="include_ctc"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.yesno_dependent"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('include_ctc').errors"
+                                            >
+                                                <span *ngIf="addr.get('include_ctc').errors?.required">
+                                                        Included in CTC is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="payment_frequency"
+                                            >
+                                                <option value="">-- Select Frequency--</option>
+                                                <option *ngFor="let item of dropdown.month_dependent"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('payment_frequency').errors"
+                                            >
+                                                <span *ngIf="addr.get('payment_frequency').errors?.required">
+                                                        Payment Frequency is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <input matInput
+                                                    [matDatepicker]="payment_reminder"
+                                                    formControlName="payment_reminder">
+                                            <mat-datepicker-toggle matSuffix
+                                                                    [for]="payment_reminder"></mat-datepicker-toggle>
+                                            <mat-datepicker #payment_reminder startView="multi-year"
+                                            panelClass="example-month-picker" (yearSelected)="chosenYearHandler($event,i)"
+                                            (monthSelected)="chosenMonthHandler($event, payment_reminder, i)"></mat-datepicker>
+                                            <mat-error *ngIf="addr.invalid && addr.get('payment_reminder').errors">
+                                                <span *ngIf="addr.get('payment_reminder').errors?.required"> Reminder Month is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <button
+                                            mat-mini-fab
+                                            color="warn"
+                                            type="button"
+                                            [disabled]="(variabledetails.length >= 1 && addr.get('type')?.value==0)? true : false"
+                                            (click)="deleteVariabledetailsValue(i)"
+                                        >
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="variabledetails.length == 0">
+                                    <td colspan="11">No data Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-right">
+                                    <button mat-button (click)="resetForm()">Cancel</button>
+                                    <button mat-flat-button type="submit" color="primary">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                </form>
+            </mat-tab>
+            <mat-tab label="Adhoc Components">
+                <form [formGroup]="adhocFormGroup">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button
+                                class="pull-right"
+                                mat-mini-fab
+                                type="button"
+                                color="primary"
+                                [disabled]="adhocdetails.invalid"
+                                (click)="addAdhocdetailsValue()"
+                            >
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            <table class="table table-bordered table-reponsive">
+                                <thead>
+                                    <th>Component</th>
+                                    <th>Pay Type</th>
+                                    <th>Income Tax Dependent</th>
+                                    <th>PT Dependent</th>
+                                    <th>ESI Dependent</th>
+                                    <th>Action</th>
+                                </thead>
+                                <tbody formArrayName="adhocdetails">
+                                <tr
+                                    *ngFor="
+                                    let addr of adhocdetails.controls;
+                                    let i = index
+                                    "
+                                    [formGroupName]="i"
+                                >
+                                    <td>
+                                        <mat-form-field style="width:100%" *ngIf="(addr.get('type')?.value==1)? true : false">
+                                            <input matInput formControlName="component"  />
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('component').errors"
+                                            >
+                                                <span *ngIf="addr.get('component').errors?.required">
+                                                        Component is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <span *ngIf="(addr.get('type')?.value==0)? true : false"> {{addr.get('component')?.value}} </span>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%"  *ngIf="(addr.get('type')?.value==1)? true : false">
+                                            <input matInput formControlName="paytype" [disabled]="(addr.get('type')?.value==0)? true : false"/>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('paytype').errors"
+                                            >
+                                                <span *ngIf="addr.get('paytype').errors?.required">
+                                                        Pay Type is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <span *ngIf="(addr.get('type')?.value==0)? true : false"> {{addr.get('paytype')?.value}} </span>
+                                    </td>
+                                    
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="tax_dependent"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.yesno_dependent_include_not"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('tax_dependent').errors"
+                                            >
+                                                <span *ngIf="addr.get('tax_dependent').errors?.required">
+                                                        Income Tax Dependent is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="pt_dependent"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.yesno_dependent_include_not"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('pt_dependent').errors"
+                                            >
+                                                <span *ngIf="addr.get('pt_dependent').errors?.required">
+                                                        PT Dependent is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field style="width:100%">
+                                            <select
+                                            matNativeControl
+                                            formControlName="esi_dependent"
+                                            >
+                                                <option value="">-- Select --</option>
+                                                <option *ngFor="let item of dropdown.yesno_dependent_include_not"
+                                                        value="{{item.id}}">{{item.name}}</option>
+                                            </select>
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('esi_dependent').errors"
+                                            >
+                                                <span *ngIf="addr.get('esi_dependent').errors?.required">
+                                                        ESI Dependent is required</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    
+                                    <td>
+                                        <button
+                                            mat-mini-fab
+                                            color="warn"
+                                            type="button"
+                                            [disabled]="(adhocdetails.length >= 1 && addr.get('type')?.value==0)? true : false"
+                                            (click)="deleteAdhocdetailsValue(i)"
+                                        >
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="adhocdetails.length == 0">
+                                    <td colspan="11">No data Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <button mat-button (click)="resetForm()">Cancel</button>
+                                <button mat-flat-button type="submit" color="primary">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

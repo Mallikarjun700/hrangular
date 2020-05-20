@@ -12,7 +12,10 @@ import {removeSpaces}  from '../../../_helpers/customvalidator';
 })
 export class MasterComponent implements OnInit {
   commonDataForm: FormGroup;
+  mappingDataForm: FormGroup;
   dropdown: any;
+  dropdownMappingData: any;
+
   constructor(private _formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -96,7 +99,7 @@ export class MasterComponent implements OnInit {
   deleteSubDepartmentsValue(idx: number) {
     this.sub_departments.removeAt(idx);
   }
-  
+
   createCostCentersFormGroup(data?: any) {
     return this._formBuilder.group({
       cost_centers: [(data) ? data.cost_centers : '', [Validators.required, removeSpaces]]
@@ -241,12 +244,82 @@ export class MasterComponent implements OnInit {
   deletePositionCodeValue(idx: number) {
     this.position_code.removeAt(idx);
   }
+  initiateMappingFormGroup(data?: any) {
+    this.mappingDataForm = this._formBuilder.group({
+      mappingdata: this._formBuilder.array([])
+    });
+  }
+
+  createMappingDataFormGroup(data?: any) {
+    return  this._formBuilder.group({
+      id: [(data) ? data.id : ''],
+      department: [(data) ? data.department : '', [Validators.required, removeSpaces]],
+      designation: [(data) ? data.designation : '', [Validators.required, removeSpaces]],
+      job_title: [(data) ? data.job_title : '', [Validators.required, removeSpaces]],
+      work_levels: [(data) ? data.work_levels : '', [Validators.required, removeSpaces]],
+      job_code: [(data) ? data.job_code : '', [Validators.required, removeSpaces]],
+      cost_centers: [(data) ? data.cost_centers : '', [Validators.required, removeSpaces]],
+    });
+  }
+
+  get mappingdata(): FormArray {
+    return this.mappingDataForm.get('mappingdata') as FormArray;
+  }
+  addMappingDataValue(data?: any) {
+    let invalidCount = 0;
+    if (this.mappingdata.invalid) {
+      invalidCount++;
+    }
+    if (invalidCount === 0) {
+      let fg = this.createMappingDataFormGroup(data);
+      this.mappingdata.push(fg);
+    }
+  }
+  deleteMappingDataValue(idx: number) {
+    this.mappingdata.removeAt(idx);
+  }
 
   ngOnInit() {
     this.dropdown = [];
     this.dropdown.employemntTypes = ['Permanent', 'Contract', 'Vendor', 'Consultant', 'Intern', 'Full Time', 'Part Time'];
     this.dropdown.bereavementLeaves = ['Casual Leave', 'Child Adoption Leave', 'Earned Leave', 'Leave Without Pay', 'Maternity Leaves', 'Optional Holiday', 'Paternity Leaves', 'Sick Leave', 'Wedding Leave'];
-    
+    this.dropdownMappingData = [];
+    this.dropdownMappingData.department = [
+      {id:1,name:'department1'},
+      {id:2,name:'department2'},
+      {id:3,name:'department3'},
+      {id:4,name:'department4'},
+    ];
+    this.dropdownMappingData.designation = [
+      {id:1,name:'designation1'},
+      {id:2,name:'designation2'},
+      {id:3,name:'designation3'},
+      {id:4,name:'designation4'},
+    ];
+    this.dropdownMappingData.job_title = [
+      {id:1,name:'job_title1'},
+      {id:2,name:'job_title2'},
+      {id:3,name:'job_title3'},
+      {id:4,name:'job_title4'},
+    ];
+    this.dropdownMappingData.work_levels = [
+      {id:1,name:'work_levels1'},
+      {id:2,name:'work_levels2'},
+      {id:3,name:'work_levels3'},
+      {id:4,name:'work_levels4'},
+    ];
+    this.dropdownMappingData.job_code = [
+      {id:1,name:'job_code1'},
+      {id:2,name:'job_code2'},
+      {id:3,name:'job_code3'},
+      {id:4,name:'job_code4'},
+    ];
+    this.dropdownMappingData.cost_centers = [
+      {id:1,name:'cost_centers1'},
+      {id:2,name:'cost_centers2'},
+      {id:3,name:'cost_centers3'},
+      {id:4,name:'cost_centers4'},
+    ];
     this.initiateFirstFormGroup();
     this.addLocationValue();
     this.addDepartmentValue();
@@ -260,12 +333,13 @@ export class MasterComponent implements OnInit {
     this.addJobTitleValue();
     this.addWorkLevelsValue();
     this.addPositionCodeValue();
+    this.initiateMappingFormGroup();
+    this.addMappingDataValue();
   }
+
   get f() { return this.commonDataForm.controls; }
 
   onSubmitCommonData() {
-    console.log(this.f)
-
     // stop here if form is invalid
     if (this.commonDataForm.invalid) {
       return;
@@ -301,5 +375,21 @@ export class MasterComponent implements OnInit {
   cancel(){
     
   }
+
+public dropdownUniqueCheck(value: any, indexKey: any): boolean {
+  let re = false;
+  const ctrltask = this.mappingDataForm.get('mappingdata') as FormArray;
+  console.log(ctrltask)
+  console.log(ctrltask.value)
+  ctrltask.value.forEach((val: any, indexval: number) => {
+    console.log(val[indexKey])
+    console.log(value)
+      if (!re && parseInt(val[indexKey]) === parseInt(value)) {
+          re = true;
+      }
+  });
+  console.log(re)
+  return re;
+}
 
 }
