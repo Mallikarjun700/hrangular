@@ -1,400 +1,951 @@
 <div class="animated fadeIn">
-    <router-outlet></router-outlet>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Master
-                </div>
-                <div class="card-body">
-                    <mat-tab-group mat-align-tabs="start">
-                        <mat-tab label="Common Datas">
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <!-- (ngSubmit)="onSubmitCommonData()" -->
-                                    <form [formGroup]="commonDataForm" class="form-horizontal" (ngSubmit)="onSubmitCommonData()">
-                                        <table class="table">
-                                            <tr>
-                                                <td style="width:10%">
-                                                    <mat-label>Locations</mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="locations">
-                                                        <tr *ngFor="let addr of locations.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Locations"
-                                                                        formControlName="location_code" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('location_code').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('location_code').errors?.required">
-                                                                            Location Code is required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="locations.controls.length>1" type="button"
-                                                                    (click)="deleteLocationValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addLocationValue()"><i
-                                                            class="fa fa-plus"></i></button>
-                                                </td>
-                                                <td style="width:10%">
-                                                    <mat-label>Departments </mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="department">
-                                                        <tr *ngFor="let addr of department.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Departments"
-                                                                        formControlName="department" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('department').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('department').errors?.required">
-                                                                            Department
-                                                                            Name is
-                                                                            required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="department.controls.length>1" type="button"
-                                                                    (click)="deleteDepartmentValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addDepartmentValue()"><i
-                                                            class="fa fa-plus"></i></button></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width:10%">
-                                                    <mat-label>Sub Departments</mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="sub_departments">
-                                                        <tr *ngFor="let addr of sub_departments.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Sub Departments"
-                                                                        formControlName="sub_departments" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('sub_departments').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('sub_departments').errors?.required">
-                                                                            Sub Departments is required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="sub_departments.controls.length>1" type="button"
-                                                                    (click)="deleteSubDepartmentsValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addSubDepartmentsValue()"><i
-                                                            class="fa fa-plus"></i></button>
-                                                </td>
-                                                <td style="width:10%">
-                                                    <mat-label>Cost Centers</mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="cost_centers">
-                                                        <tr *ngFor="let addr of cost_centers.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Cost Centers"
-                                                                        formControlName="cost_centers" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('cost_centers').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('cost_centers').errors?.required">
-                                                                            Cost Centers is
-                                                                            required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="cost_centers.controls.length>1" type="button"
-                                                                    (click)="deleteCostCentersValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addCostCentersValue()"><i
-                                                            class="fa fa-plus"></i></button></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width:10%">
-                                                    <mat-label>Pay Grades </mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="pay_grades">
-                                                        <tr *ngFor="let addr of pay_grades.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Pay Grades"
-                                                                        formControlName="pay_grades" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('pay_grades').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('pay_grades').errors?.required">
-                                                                            Pay Grades is required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="pay_grades.controls.length>1" type="button"
-                                                                    (click)="deletePayGradesValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addPayGradesValue()"><i
-                                                            class="fa fa-plus"></i></button>
-                                                </td>
-                                                <td style="width:10%">
-                                                    <mat-label>Bands </mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="bands">
-                                                        <tr *ngFor="let addr of bands.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Bands"
-                                                                        formControlName="bands" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('bands').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('bands').errors?.required">
-                                                                            Bands is
-                                                                            required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="bands.controls.length>1" type="button"
-                                                                    (click)="deleteBandsValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addBandsValue()"><i
-                                                            class="fa fa-plus"></i></button></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width:10%">
-                                                    <mat-label>Designation </mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="designation">
-                                                        <tr *ngFor="let addr of designation.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Designation"
-                                                                        formControlName="designation" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('designation').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('designation').errors?.required">
-                                                                            Designation is required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="designation.controls.length>1" type="button"
-                                                                    (click)="deleteDesignationValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addDesignationValue()"><i
-                                                            class="fa fa-plus"></i></button>
-                                                </td>
-                                                <td style="width:10%">
-                                                    <mat-label>Job Code </mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="job_code">
-                                                        <tr *ngFor="let addr of job_code.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Job Code"
-                                                                        formControlName="job_code" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('job_code').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('job_code').errors?.required">
-                                                                            Job Code is
-                                                                            required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="job_code.controls.length>1" type="button"
-                                                                    (click)="deleteJobCodeValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addJobCodeValue()"><i
-                                                            class="fa fa-plus"></i></button></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width:10%">
-                                                    <mat-label>Job Role </mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="job_role">
-                                                        <tr *ngFor="let addr of job_role.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Job Role"
-                                                                        formControlName="job_role" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('job_role').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('job_role').errors?.required">
-                                                                            Job Role is required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="job_role.controls.length>1" type="button"
-                                                                    (click)="deleteJobRoleValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addJobRoleValue()"><i
-                                                            class="fa fa-plus"></i></button>
-                                                </td>
-                                                <td style="width:10%">
-                                                    <mat-label>Job Title/Profile </mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="job_title">
-                                                        <tr *ngFor="let addr of job_title.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Job Title/Profile"
-                                                                        formControlName="job_title" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('job_title').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('job_title').errors?.required">
-                                                                            Job Title/Profile is
-                                                                            required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="job_title.controls.length>1" type="button"
-                                                                    (click)="deleteJobTitleValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addJobTitleValue()"><i
-                                                            class="fa fa-plus"></i></button></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width:10%">
-                                                    <mat-label>Work Levels </mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="work_levels">
-                                                        <tr *ngFor="let addr of work_levels.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Work Levels"
-                                                                        formControlName="work_levels" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('work_levels').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('work_levels').errors?.required">
-                                                                            Work Levels is required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="work_levels.controls.length>1" type="button"
-                                                                    (click)="deleteWorkLevelsValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addWorkLevelsValue()"><i
-                                                            class="fa fa-plus"></i></button>
-                                                </td>
-                                                <td style="width:10%">
-                                                    <mat-label>Position Code </mat-label>
-                                                </td>
-                                                <td style="width:30%">
-                                                    <table class="table first-td" layout-xs="column" formArrayName="position_code">
-                                                        <tr *ngFor="let addr of position_code.controls; let i = index"
-                                                            [formGroupName]="i">
-                                                            <td>
-                                                                <mat-form-field style="width:100%">
-                                                                    <input matInput placeholder="Position Code"
-                                                                        formControlName="position_code" required>
-                                                                    <mat-error
-                                                                        *ngIf="addr.invalid && addr.get('position_code').errors">
-                                                                        <span
-                                                                            *ngIf="addr.get('position_code').errors?.required">
-                                                                            Position Code is
-                                                                            required</span>
-                                                                    </mat-error>
-                                                                </mat-form-field>
-                                                            </td>
-                                                            <td><button mat-mini-fab color="warn" *ngIf="position_code.controls.length>1" type="button"
-                                                                    (click)="deletePositionCodeValue(i)"><i
-                                                                        class="fa fa-trash"></i></button></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td style="width:10%"><button class="pull-right" mat-mini-fab
-                                                        color="primary" (click)="addPositionCodeValue()"><i
-                                                            class="fa fa-plus"></i></button></td>
-                                            </tr>
-                                        </table>
-                                        <div class="form-actions">
-                                            <button class="btn btn-primary" type="submit">Save changes</button>
-                                            <button class="btn btn-secondary" type="button"
-                                                (click)="cancel()">Cancel</button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
-
-
-                        </mat-tab>
-                        <mat-tab label="Mapping">Mapping Content</mat-tab>
-                    </mat-tab-group>
-                </div>
-            </div>
+  <router-outlet></router-outlet>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Master
         </div>
-        <!--/.col-->
+        <div class="card-body">
+          <mat-tab-group mat-align-tabs="start"  mat-stretch-tabs>
+            <mat-tab label="Common Datas">
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- (ngSubmit)="onSubmitCommonData()" -->
+                  <form
+                    [formGroup]="commonDataForm"
+                    class="form-horizontal"
+                    (ngSubmit)="onSubmitCommonData()"
+                  >
+                    <table class="table">
+                      <tr>
+                        <td style="width:10%">
+                          <mat-label>Locations</mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="locations"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of locations.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Locations"
+                                    formControlName="location_code"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('location_code').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('location_code').errors
+                                          ?.required
+                                      "
+                                    >
+                                      Location Code is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="locations.controls.length > 1"
+                                  type="button"
+                                  (click)="deleteLocationValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addLocationValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                        <td style="width:10%">
+                          <mat-label>Departments </mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="department"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of department.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Departments"
+                                    formControlName="department"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('department').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('department').errors?.required
+                                      "
+                                    >
+                                      Department Name is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="department.controls.length > 1"
+                                  type="button"
+                                  (click)="deleteDepartmentValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addDepartmentValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width:10%">
+                          <mat-label>Sub Departments</mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="sub_departments"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of sub_departments.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Sub Departments"
+                                    formControlName="sub_departments"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('sub_departments').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('sub_departments').errors
+                                          ?.required
+                                      "
+                                    >
+                                      Sub Departments is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="sub_departments.controls.length > 1"
+                                  type="button"
+                                  (click)="deleteSubDepartmentsValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addSubDepartmentsValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                        <td style="width:10%">
+                          <mat-label>Cost Centers</mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="cost_centers"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of cost_centers.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Cost Centers"
+                                    formControlName="cost_centers"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('cost_centers').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('cost_centers').errors
+                                          ?.required
+                                      "
+                                    >
+                                      Cost Centers is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="cost_centers.controls.length > 1"
+                                  type="button"
+                                  (click)="deleteCostCentersValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addCostCentersValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width:10%">
+                          <mat-label>Pay Grades </mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="pay_grades"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of pay_grades.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Pay Grades"
+                                    formControlName="pay_grades"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('pay_grades').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('pay_grades').errors?.required
+                                      "
+                                    >
+                                      Pay Grades is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="pay_grades.controls.length > 1"
+                                  type="button"
+                                  (click)="deletePayGradesValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addPayGradesValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                        <td style="width:10%">
+                          <mat-label>Bands </mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="bands"
+                          >
+                            <tr
+                              *ngFor="let addr of bands.controls; let i = index"
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Bands"
+                                    formControlName="bands"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid && addr.get('bands').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="addr.get('bands').errors?.required"
+                                    >
+                                      Bands is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="bands.controls.length > 1"
+                                  type="button"
+                                  (click)="deleteBandsValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addBandsValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width:10%">
+                          <mat-label>Designation </mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="designation"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of designation.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Designation"
+                                    formControlName="designation"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('designation').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('designation').errors?.required
+                                      "
+                                    >
+                                      Designation is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="designation.controls.length > 1"
+                                  type="button"
+                                  (click)="deleteDesignationValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addDesignationValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                        <td style="width:10%">
+                          <mat-label>Job Code </mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="job_code"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of job_code.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Job Code"
+                                    formControlName="job_code"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('job_code').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('job_code').errors?.required
+                                      "
+                                    >
+                                      Job Code is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="job_code.controls.length > 1"
+                                  type="button"
+                                  (click)="deleteJobCodeValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addJobCodeValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width:10%">
+                          <mat-label>Job Role </mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="job_role"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of job_role.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Job Role"
+                                    formControlName="job_role"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('job_role').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('job_role').errors?.required
+                                      "
+                                    >
+                                      Job Role is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="job_role.controls.length > 1"
+                                  type="button"
+                                  (click)="deleteJobRoleValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addJobRoleValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                        <td style="width:10%">
+                          <mat-label>Job Title/Profile </mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="job_title"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of job_title.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Job Title/Profile"
+                                    formControlName="job_title"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('job_title').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('job_title').errors?.required
+                                      "
+                                    >
+                                      Job Title/Profile is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="job_title.controls.length > 1"
+                                  type="button"
+                                  (click)="deleteJobTitleValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addJobTitleValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width:10%">
+                          <mat-label>Work Levels </mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="work_levels"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of work_levels.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Work Levels"
+                                    formControlName="work_levels"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('work_levels').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('work_levels').errors?.required
+                                      "
+                                    >
+                                      Work Levels is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="work_levels.controls.length > 1"
+                                  type="button"
+                                  (click)="deleteWorkLevelsValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addWorkLevelsValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                        <td style="width:10%">
+                          <mat-label>Position Code </mat-label>
+                        </td>
+                        <td style="width:30%">
+                          <table
+                            class="table first-td"
+                            layout-xs="column"
+                            formArrayName="position_code"
+                          >
+                            <tr
+                              *ngFor="
+                                let addr of position_code.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <td>
+                                <mat-form-field style="width:100%">
+                                  <input
+                                    matInput
+                                    placeholder="Position Code"
+                                    formControlName="position_code"
+                                    required
+                                  />
+                                  <mat-error
+                                    *ngIf="
+                                      addr.invalid &&
+                                      addr.get('position_code').errors
+                                    "
+                                  >
+                                    <span
+                                      *ngIf="
+                                        addr.get('position_code').errors
+                                          ?.required
+                                      "
+                                    >
+                                      Position Code is required</span
+                                    >
+                                  </mat-error>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <button
+                                  mat-mini-fab
+                                  color="warn"
+                                  *ngIf="position_code.controls.length > 1"
+                                  type="button"
+                                  (click)="deletePositionCodeValue(i)"
+                                >
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="width:10%">
+                          <button
+                            class="pull-right"
+                            mat-mini-fab
+                            color="primary"
+                            (click)="addPositionCodeValue()"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <div class="form-actions">
+                      <button class="btn btn-primary" type="submit">
+                        Save changes
+                      </button>
+                      <button
+                        class="btn btn-secondary"
+                        type="button"
+                        (click)="cancel()"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Mapping">
+              <form [formGroup]="mappingDataForm">
+                <div class="row">
+                  <div class="col-md-12">
+                    <button
+                      class="pull-right"
+                      mat-mini-fab
+                      type="button"
+                      color="primary"
+                      [disabled]="mappingdata.invalid"
+                      (click)="addMappingDataValue()"
+                    >
+                      <i class="fa fa-plus"></i>
+                    </button>
+                    <table class="table table-bordered table-reponsive">
+                      <thead>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Job Title/Profile</th>
+                        <th>Work Levels</th>
+                        <th>Job Code</th>
+                        <th>Cost Centers</th>
+                        <th>Action</th>
+                      </thead>
+                      <tbody formArrayName="mappingdata">
+                        <tr
+                          *ngFor="
+                            let addr of mappingdata.controls;
+                            let i = index
+                          "
+                          [formGroupName]="i"
+                        >
+                          <td>
+                            <mat-form-field style="width:100%">
+                              <select
+                                matNativeControl
+                                formControlName="department">
+                                <option value=''>--Select Department--</option>
+                                <option *ngFor="let item of dropdownMappingData.department"
+                                        value="{{item.id}}" 
+                                        [disabled]="dropdownUniqueCheck(item.id, 'department')">{{item.name}}</option>
+                              </select>
+                            </mat-form-field>
+                          </td>
+                          <td>
+                            <mat-form-field style="width:100%">
+                              <select
+                                matNativeControl
+                                formControlName="designation"
+                              >
+                                <option value="">--Select Designation--</option>
+                                <option *ngFor="let item of dropdownMappingData.designation"
+                                        value="{{item.id}}">{{item.name}}</option>
+                              </select>
+                            </mat-form-field>
+                          </td>
+                          <td>
+                            <mat-form-field style="width:100%">
+                              <select
+                                matNativeControl
+                                formControlName="job_title"
+                              >
+                                <option value="">--Select Job Title--</option>
+                                <option *ngFor="let item of dropdownMappingData.job_title"
+                                        value="{{item.id}}">{{item.name}}</option>
+                              </select>
+                            </mat-form-field>
+                          </td>
+                          <td>
+                            <mat-form-field style="width:100%">
+                              <select
+                                matNativeControl
+                                formControlName="work_levels"
+                              >
+                                <option value="">--Select Levels--</option>
+                                <option *ngFor="let item of dropdownMappingData.work_levels"
+                                        value="{{item.id}}">{{item.name}}</option>
+                              </select>
+                            </mat-form-field>
+                          </td>
+                          <td>
+                            <mat-form-field style="width:100%">
+                              <select
+                                matNativeControl
+                                formControlName="job_code"
+                              >
+                                <option value="">--Select Job Code--</option>
+                                <option *ngFor="let item of dropdownMappingData.job_code"
+                                        value="{{item.id}}">{{item.name}}</option>
+                              </select>
+                            </mat-form-field>
+                          </td>
+                          <td>
+                            <mat-form-field style="width:100%">
+                              <select
+                                matNativeControl
+                                formControlName="cost_centers"
+                              >
+                                <option value="">--Select Cost Centers--</option>
+                                <option *ngFor="let item of dropdownMappingData.cost_centers"
+                                        value="{{item.id}}">{{item.name}}</option>
+                              </select>
+                            </mat-form-field>
+                          </td>
+                          <td>
+                            <button
+                              mat-mini-fab
+                              color="warn"
+                              type="button"
+                              [disabled]="
+                                mappingdata.length == 1 ? true : false
+                              "
+                              (click)="deleteMappingDataValue(i)"
+                            >
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr *ngIf="mappingdata.length == 0">
+                          <td colspan="5">No data Found</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </form>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
     </div>
-    <!--/.row-->
+    <!--/.col-->
+  </div>
+  <!--/.row-->
 </div>
