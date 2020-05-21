@@ -54,7 +54,19 @@ export const navItems: INavData[] = [
         icon: 'fa fa-users'
       }
     ]
-  },	
+  },
+  {
+    name: 'Payroll',
+    url: '/home/payroll',
+    icon: 'fa fa-money',
+    children: [
+      {
+        name: 'Salary Structure',
+        url: '/home/payroll/salary-structure',
+        icon: 'fa fa-money'
+      }
+    ]
+  },
   {
     name: 'Settings',
     url: '/home/settings',

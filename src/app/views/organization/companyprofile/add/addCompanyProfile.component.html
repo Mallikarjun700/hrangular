@@ -48,7 +48,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <mat-form-field style="width:100%">
-                                    <mat-label>Name</mat-label>
+                                    <mat-label>Company Name</mat-label>
                                     <input matInput
                                            placeholder="Company name"
                                            formControlName="companyname"
@@ -150,7 +150,9 @@
                             <div class="col-md-12">
                                 <button class="pull-right"
                                         mat-mini-fab
+                                        type="button"
                                         color="primary"
+                                        [disabled]="(register_office.invalid)" 
                                         (click)="addAddressValue()"><i class="fa fa-plus"></i></button>
                                 <table class="table table-bordered table-responsive">
                                     <thead>
@@ -238,6 +240,7 @@
                                             <td><button mat-mini-fab
                                                         color="warn"
                                                         type="button"
+                                                        [disabled]="(register_office.length==1)? true:false" 
                                                         (click)="deleteAddressValue(i)"><i
                                                        class="fa fa-trash"></i></button></td>
                                         </tr>
@@ -249,7 +252,7 @@
                             <button mat-flat-button
                                     color="accent"
                                     matStepperPrevious>Back</button>
-                            <button mat-flat-button
+                            <button class="m-l-10" mat-flat-button
                                     color="primary"
                                     matStepperNext>Next</button>
                         </div>
@@ -305,7 +308,7 @@
                             <button mat-flat-button
                                     color="accent"
                                     matStepperPrevious>Back</button>
-                            <button mat-flat-button
+                            <button class="m-l-10" mat-flat-button
                                     color="primary"
                                     matStepperNext>Next</button>
                         </div>
@@ -383,7 +386,7 @@
                                                 value="{{item.id}}">{{item.name}}</option>
                                     </select>
                                     <mat-error *ngIf="f4.companyentity.errors">
-                                        <span *ngIf="f4.companyentity.errors.required"> CIN is required</span>
+                                        <span *ngIf="f4.companyentity.errors.required"> Company Entity is required</span>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -392,7 +395,7 @@
                             <button mat-flat-button
                                     color="accent"
                                     matStepperPrevious>Back</button>
-                            <button mat-flat-button
+                            <button class="m-l-10" mat-flat-button
                                     color="primary"
                                     matStepperNext>Next</button>
                         </div>
@@ -406,7 +409,9 @@
                             <div class="col-md-12">
                                 <button class="pull-right"
                                         mat-mini-fab
+                                        type="button"
                                         color="primary"
+                                        [disabled]="(bank_details.invalid)" 
                                         (click)="addBankValue()"><i class="fa fa-plus"></i></button>
                                 <table class="table table-bordered">
                                     <thead>
@@ -459,6 +464,7 @@
                                             <td><button mat-mini-fab
                                                         color="warn"
                                                         type="button"
+                                                        [disabled]="(bank_details.length==1)? true:false" 
                                                         (click)="deleteBankValue(i)"><i
                                                        class="fa fa-trash"></i></button>
                                             </td>
@@ -471,7 +477,7 @@
                             <button mat-flat-button
                                     color="accent"
                                     matStepperPrevious>Back</button>
-                            <button mat-flat-button
+                            <button class="m-l-10" mat-flat-button
                                     color="primary"
                                     matStepperNext>Next</button>
                         </div>
@@ -485,7 +491,9 @@
                             <div class="col-md-12">
                                 <button class="pull-right"
                                         mat-mini-fab
+                                        type="button"
                                         color="primary"
+                                        [disabled]="(directors.invalid)" 
                                         (click)="addDirectorsValue()"><i class="fa fa-plus"></i></button>
                                 <table class="table table-bordered">
                                     <thead>
@@ -537,9 +545,13 @@
                                             <td><button mat-mini-fab
                                                         color="warn"
                                                         type="button"
+                                                        [disabled]="(directors.length==1)? true:false" 
                                                         (click)="deleteDirectorsValue(i)"><i
                                                        class="fa fa-trash"></i></button>
                                             </td>
+                                        </tr>
+                                        <tr *ngIf="directors.length==0">
+                                            <td colspan="5"> No data Found</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -549,7 +561,7 @@
                             <button mat-flat-button
                                     color="accent"
                                     matStepperPrevious>Back</button>
-                            <button mat-flat-button
+                            <button class="m-l-10" mat-flat-button
                                     color="primary"
                                     matStepperNext>Next</button>
                         </div>
@@ -563,7 +575,9 @@
                             <div class="col-md-12">
                                 <button class="pull-right"
                                         mat-mini-fab
+                                        type="button"
                                         color="primary"
+                                        [disabled]="(auditors.invalid)" 
                                         (click)="addAuditorsValue()"><i class="fa fa-plus"></i></button>
                                 <table class="table table-bordered">
                                     <thead>
@@ -613,9 +627,13 @@
                                             <td><button mat-mini-fab
                                                         color="warn"
                                                         type="button"
+                                                        [disabled]="(auditors.length==1)? true:false" 
                                                         (click)="deleteAuditorsValue(i)"><i
                                                        class="fa fa-trash"></i></button>
                                             </td>
+                                        </tr>
+                                        <tr *ngIf="auditors.length==0">
+                                            <td colspan="5"> No data Found</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -625,7 +643,7 @@
                             <button mat-flat-button
                                     color="accent"
                                     matStepperPrevious>Back</button>
-                            <button mat-flat-button
+                            <button class="m-l-10" mat-flat-button
                                     color="primary"
                                     matStepperNext>Next</button>
                         </div>
@@ -640,7 +658,9 @@
                             <div class="col-md-12">
                                 <button class="pull-right"
                                         mat-mini-fab
+                                        type="button"
                                         color="primary"
+                                        [disabled]="(companysecretary.invalid)" 
                                         (click)="addCompanySecretaryValue()"><i class="fa fa-plus"></i></button>
                                 <table class="table table-bordered">
                                     <thead>
@@ -679,9 +699,13 @@
                                             <td><button mat-mini-fab
                                                         color="warn"
                                                         type="button"
+                                                        [disabled]="(companysecretary.length==1)? true:false" 
                                                         (click)="deleteCompanySecretaryValue(i)"><i
                                                        class="fa fa-trash"></i></button>
                                             </td>
+                                        </tr>
+                                        <tr *ngIf="companysecretary.length==0">
+                                            <td colspan="4"> No data Found</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -691,9 +715,9 @@
                             <button mat-flat-button
                                     color="accent"
                                     matStepperPrevious>Back</button>
-                            <button mat-button
+                            <button class="m-l-10" mat-button
                                     (click)="stepper.reset()">Reset</button>
-                            <button mat-flat-button
+                            <button class="m-l-10" mat-flat-button
                                     type="submit"
                                     color="primary"
                                     matStepperNext>Submit</button>

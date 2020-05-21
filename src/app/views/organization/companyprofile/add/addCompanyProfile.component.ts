@@ -55,6 +55,8 @@ export class AddCompanyProfileComponent implements OnInit {
     let URL_GET = 'state/get';
     if ((countryId)) {
       URL_GET = 'state/country/' + countryId;
+      console.log('sdfsdf');
+      this.register_office.at(index).patchValue({ state:'', city: '' });
     }
     console.log(index);
     this.dropdown[index].state = [];
@@ -79,6 +81,7 @@ export class AddCompanyProfileComponent implements OnInit {
     let URL_GET = 'city/get';
     if ((stateId)) {
       URL_GET = 'city/state/' + stateId;
+      this.register_office.at(index).patchValue({city: '' });
     }
     this.dropdown[index].city = [];
     if (this.dropdownmain.city.length === 0) {
@@ -90,9 +93,13 @@ export class AddCompanyProfileComponent implements OnInit {
           if (data.success) {
             setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
             this.dropdown[index].city = data.message;
+            console.log(this.dropdownmain.city);
+            console.log(this.dropdownmain.city.length);
+            console.log(data.message);
             if (this.dropdownmain.city.length === 0) {
               this.dropdownmain.city = data.message;
             }
+            console.log(this.dropdownmain.city);
           } else {
             this.dropdown[index].city = [];
           }
@@ -191,39 +198,29 @@ export class AddCompanyProfileComponent implements OnInit {
   }
   initiateFifthFormGroup(data?: any) {
     this.fifthFormGroup = this._formBuilder.group({
-      bank: this._formBuilder.array(
-        [],
-        [Validators.required])
+      bank: this._formBuilder.array([])
     });
   }
   initiateSixthFormGroup(data?: any) {
     this.sixthFormGroup = this._formBuilder.group({
-      director: this._formBuilder.array(
-        [],
-        [Validators.required])
+      director: this._formBuilder.array([])
     });
   }
   initiateSeventhFormGroup(data?: any) {
     this.seventhFormGroup = this._formBuilder.group({
-      auditor: this._formBuilder.array(
-        [],
-        [Validators.required])
+      auditor: this._formBuilder.array([])
     });
   }
   initiateEightFormGroup(data?: any) {
     this.eightFormGroup = this._formBuilder.group({
-      secretary: this._formBuilder.array(
-        [],
-        [Validators.required])
+      secretary: this._formBuilder.array([])
     });
   }
   ngOnInit(): void {
     this.companyentitydropdown = [{ "id": 1, "name": "Pvt Ltd Company" }, { "id": 2, "name": "Public Ltd Listed Company" }, { "id": 3, "name": "Public Ltd Unlisted Company" }, { "id": 4, "name": "Unlimited Company" }, { "id": 5, "name": "Sole Proprietorship" }, { "id": 6, "name": "Joint Hindu Family Business" }, { "id": 7, "name": "Partnership" }, { "id": 8, "name": "Cooperatives" }, { "id": 9, "name": "Limited Liability Partnership" }, { "id": 10, "name": "Liaison Office" }, { "id": 11, "name": "Branch Office" }, { "id": 12, "name": "Project Office" }, { "id": 13, "name": "Subsidiary Company" }, { "id": 14, "name": "Trust" }, { "id": 15, "name": "AOP" }, { "id": 16, "name": "Foreign Endity" }];
     this.dropdown = [{ country: [], state: [], city: [] }];
     this.dropdownmain = { country: [], state: [], city: [] };
-    this.getCountryDependency(0);
-    this.getStateDependency(0);
-    this.getCityDependency(0);
+    
     this.initiateFirstFormGroup();
     this.initiateSecondFormGroup();
     this.initiateThirdFormGroup();
@@ -232,7 +229,9 @@ export class AddCompanyProfileComponent implements OnInit {
     this.initiateSixthFormGroup();
     this.initiateSeventhFormGroup();
     this.initiateEightFormGroup();
-
+    this.getCountryDependency(0);
+    this.getStateDependency(0);
+    this.getCityDependency(0);
     if (this.route.snapshot.params['id']) {
       this.id = this.route.snapshot.params['id'];
       this.commonService.get('companyprofile/show/' + this.id, {})
@@ -349,18 +348,21 @@ export class AddCompanyProfileComponent implements OnInit {
   }
   addAddressValue(data?: any) {
     let lastIndex = (this.register_office.length);
+    console.log(this.dropdownmain);
     if (lastIndex > 0) {
       this.dropdown[lastIndex] = {country: [], state: [], city: [] };
       this.dropdown[lastIndex].country = this.dropdownmain.country;
       this.dropdown[lastIndex].state = this.dropdownmain.state;
       this.dropdown[lastIndex].city = this.dropdownmain.city;
     }
-    console.log(this.dropdown);
     let fg = this.createRegOfficeFormGroup(data);
     this.register_office.push(fg);
   }
   deleteAddressValue(idx: number) {
-    this.dropdown.removeAt(idx);
+    const index = this.dropdown.indexOf(idx, 0);
+    if (index > -1) {
+      this.dropdown.splice(index, 1);
+    }
     this.register_office.removeAt(idx);
   }
 
@@ -407,7 +409,15 @@ export class AddCompanyProfileComponent implements OnInit {
   deleteCompanySecretaryValue(idx: number) {
     this.companysecretary.removeAt(idx);
   }
-
+  IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+  }
+  
   onSubmit() {
     let params = Object.assign({},
       this.firstFormGroup.value,
@@ -418,7 +428,6 @@ export class AddCompanyProfileComponent implements OnInit {
       this.sixthFormGroup.value,
       this.seventhFormGroup.value,
       this.eightFormGroup.value);
-    console.log(params)
     let URL = 'companyprofile/post';
     if (this.route.snapshot.params['id']) {
       URL = 'companyprofile/update/' + this.id
@@ -437,11 +446,17 @@ export class AddCompanyProfileComponent implements OnInit {
         },
         error => {
           setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
-          const error_array = (JSON.parse(error));
-          const keys = Object.keys(error_array);
-          keys.forEach(element => {
-            this.toastr.errorToastr(error_array[element][0]);
-          });
+          console.log(error);
+          if(this.IsJsonString(error)){
+            const error_array = (JSON.parse(error));
+            const keys = Object.keys(error_array);
+            console.log(keys);
+            keys.forEach(element => {
+              this.toastr.errorToastr(error_array[element][0]);
+            });
+          } else {
+            this.toastr.errorToastr(error);
+          }
         });
   }
 }
