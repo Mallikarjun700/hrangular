@@ -61,7 +61,7 @@ export class EsiListComponent implements OnInit {
       });
   }
   toggleStatus(eventchecked: any, params: any) {
-    params.status = (eventchecked) ? '1' : '0';
+    params.status =  (eventchecked) ? '1' : '0';
     this.commonService.post('esi/update/' + params.id, params)
       .subscribe(
         details => {
