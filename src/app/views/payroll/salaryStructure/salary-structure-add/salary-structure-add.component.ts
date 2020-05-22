@@ -61,7 +61,7 @@ export class SalaryStructureAddComponent implements OnInit {
   createFixeddetailsFormGroup(data?: any) {
     return this.formBuilder.group({
       component: [(data) ? data.component : '', [Validators.required, removeSpaces]],
-      paytype: [(data) ? data.paytype : 'Earning', [Validators.required, removeSpaces]],
+      paytype: [(data) ? data.paytype : 1, [Validators.required, removeSpaces]],
       formula: [(data) ? data.formula : '', [Validators.required, removeSpaces]],
       type: [(data) ? data.type : 1]
     });
@@ -94,7 +94,7 @@ export class SalaryStructureAddComponent implements OnInit {
   createFlexidetailsFormGroup(data?: any) {
     return this.formBuilder.group({
       component: [(data) ? data.component : '', [Validators.required, removeSpaces]],
-      paytype: [(data) ? data.paytype : 'Earning', [Validators.required, removeSpaces]],
+      paytype: [(data) ? data.paytype : 1, [Validators.required, removeSpaces]],
       monthly_eligibility: [(data) ? data.monthly_eligibility : '', [Validators.required, removeSpaces]],
       annual_eligibility: [(data) ? data.annual_eligibility : '', [Validators.required, removeSpaces]],
       paid_monthly: [(data) ? data.paid_monthly : 1, [Validators.required, removeSpaces]],
@@ -134,7 +134,7 @@ export class SalaryStructureAddComponent implements OnInit {
   createVariabledetailsFormGroup(data?: any) {
     return this.formBuilder.group({
       component: [(data) ? data.component : '', [Validators.required, removeSpaces]],
-      paytype: [(data) ? data.paytype : 'Earning', [Validators.required, removeSpaces]],
+      paytype: [(data) ? data.paytype : 1, [Validators.required, removeSpaces]],
       base: [(data) ? data.base : '', [Validators.required, removeSpaces]],
       percentage_or_value: [(data) ? data.percentage_or_value : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
       lop_dependent: [(data) ? data.lop_dependent : 1, [Validators.required, removeSpaces]],
@@ -186,7 +186,7 @@ export class SalaryStructureAddComponent implements OnInit {
   createAdhocdetailsFormGroup(data?: any) {
     return this.formBuilder.group({
       component: [(data) ? data.component : '', [Validators.required, removeSpaces]],
-      paytype: [(data) ? data.paytype : 'Earning', [Validators.required, removeSpaces]],
+      paytype: [(data) ? data.paytype : 1, [Validators.required, removeSpaces]],
       tax_dependent: [(data) ? data.tax_dependent : 1, [Validators.required, removeSpaces]],
       pt_dependent: [(data) ? data.pt_dependent : 1, [Validators.required, removeSpaces]],
       esi_dependent: [(data) ? data.pt_dependent : 1, [Validators.required, removeSpaces]],
@@ -214,6 +214,10 @@ export class SalaryStructureAddComponent implements OnInit {
 
   ngOnInit() {
     this.dropdown = {
+      paytype_dependent: [
+        { id: 1, name: 'Earning' },
+        { id: 2, name: 'Deduction' },
+      ],
       formula_dependent: [
         { id: 1, name: 'Formula 1' },
         { id: 2, name: 'Formula 2' },
@@ -239,29 +243,29 @@ export class SalaryStructureAddComponent implements OnInit {
         { id: 4, name: 'Not Applicable' },
       ],
       default_fixed_salary_dependent: [
-        { component: 'Basic', paytype: 'Earnings', type: 0 },
-        { component: 'HRA', paytype: 'Earnings', type: 0 },
-        { component: 'Spl Allowance', paytype: 'Earnings', type: 0 },
-        { component: 'PF Employer', paytype: 'Deduction', type: 0 },
-        { component: 'ESI Employer', paytype: 'Deduction', type: 0 },
+        { component: 'Basic', paytype: 1, type: 0 },
+        { component: 'HRA', paytype: 1, type: 0 },
+        { component: 'Spl Allowance', paytype: 1, type: 0 },
+        { component: 'PF Employer', paytype: 2, type: 0 },
+        { component: 'ESI Employer', paytype: 2, type: 0 },
       ],
       default_flexi_salary_dependent: [
-        { component: 'LTA', paytype: 'Earnings', type: 0 },
-        { component: 'Telephone Allowance', paytype: 'Earnings', type: 0 },
-        { component: 'Fuel Expenses', paytype: 'Earnings', type: 0 },
+        { component: 'LTA', paytype: 1, type: 0 },
+        { component: 'Telephone Allowance', paytype: 1, type: 0 },
+        { component: 'Fuel Expenses', paytype: 1, type: 0 },
       ],
       default_variable_salary_dependent: [
-        { component: 'Variable Pay', paytype: 'Earnings', type: 0, payment_reminder:moment() },
-        { component: 'Annual Bonus', paytype: 'Earnings', type: 0, payment_reminder:moment() },
-        { component: 'Performacnce Bonus', paytype: 'Earnings', type: 0, payment_reminder:moment() }
+        { component: 'Variable Pay', paytype: 1, type: 0, payment_reminder:moment() },
+        { component: 'Annual Bonus', paytype: 1, type: 0, payment_reminder:moment() },
+        { component: 'Performacnce Bonus', paytype: 1, type: 0, payment_reminder:moment() }
       ],
       default_adhoc_salary_dependent: [
-        { component: 'Other Earnings', paytype: 'Earnings', type: 0 },
-        { component: 'Other Earnings (Non Taxable)', paytype: 'Earnings', type: 0 },
-        { component: 'Other Deductions', paytype: 'Deduction', type: 0 },
-        { component: 'Incentive', paytype: 'Deduction', type: 0 },
-        { component: 'Salary Advance', paytype: 'Earnings', type: 0 },
-        { component: 'Salary Advance Recovery', paytype: 'Deduction', type: 0 },
+        { component: 'Other Earnings', paytype: 1, type: 0 },
+        { component: 'Other Earnings (Non Taxable)', paytype: 1, type: 0 },
+        { component: 'Other Deductions', paytype: 2, type: 0 },
+        { component: 'Incentive', paytype: 2, type: 0 },
+        { component: 'Salary Advance', paytype: 1, type: 0 },
+        { component: 'Salary Advance Recovery', paytype: 2, type: 0 },
       ],
     };
 
@@ -283,4 +287,7 @@ export class SalaryStructureAddComponent implements OnInit {
     });
   }
 
+  resetForm(){
+    this.router.navigate(['/home/payroll/salary-structure']);
+  }
 }
