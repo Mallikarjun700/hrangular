@@ -211,7 +211,8 @@ export class SalaryStructureAddComponent implements OnInit {
   deleteAdhocdetailsValue(idx: number) {
     this.adhocdetails.removeAt(idx);
   }
-
+  resetForm(){
+  }
   ngOnInit() {
     this.dropdown = {
       formula_dependent: [
