@@ -16,10 +16,11 @@ import { PayrollRoutingModule } from './payroll-routing.module';
 import { PayrollLayoutComponent } from './payroll-layout/payroll-layout.component';
 import { SalaryStructureListComponent } from './salaryStructure/salary-structure-list/salary-structure-list.component';
 import { SalaryStructureAddComponent } from './salaryStructure/salary-structure-add/salary-structure-add.component';
+import { SubComponentComponent } from './salaryStructure/salary-structure-add/sub-component/sub-component.component';
 
 
 @NgModule({
-  declarations: [PayrollLayoutComponent, SalaryStructureListComponent, SalaryStructureAddComponent],
+  declarations: [PayrollLayoutComponent, SalaryStructureListComponent, SalaryStructureAddComponent, SubComponentComponent],
   imports: [
     CommonModule,
     PayrollRoutingModule,
@@ -34,6 +35,7 @@ import { SalaryStructureAddComponent } from './salaryStructure/salary-structure-
     MatTabsModule,
     MatDialogModule,
     MatSlideToggleModule
-  ]
+  ],
+  entryComponents: [SubComponentComponent]
 })
 export class PayrollModule { }

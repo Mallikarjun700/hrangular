@@ -9,6 +9,8 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import * as _moment from 'moment';
 import {Moment} from 'moment';
 import {MatDatepicker} from '@angular/material/datepicker';
+import { SubComponentComponent } from './sub-component/sub-component.component';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 
 
 const moment = _moment;
@@ -50,7 +52,7 @@ export class SalaryStructureAddComponent implements OnInit {
     private router: Router,
     private commonService: CurdcommonserviceService,
     private authenticationService: AuthenticationService,
-    public toastr: ToastrManager) { }
+    public toastr: ToastrManager, private matDialog: MatDialog) { }
 
   initiateFixedFormGroup(data?: any) {
     this.fixedFormGroup = this.formBuilder.group({
@@ -286,7 +288,21 @@ export class SalaryStructureAddComponent implements OnInit {
       this.addAdhocdetailsValue(element);
     });
   }
+  formulaChange(value: any){
+    if (value.formula !== '') {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.height = '300px';
+      dialogConfig.width = '400px';
+      dialogConfig.data = value;
+      const dialogRef = this.matDialog.open(SubComponentComponent, dialogConfig);
 
+      dialogRef.afterClosed().subscribe(
+          data => console.log("Dialog output:", data)
+      );
+    }
+  }
   resetForm(){
     this.router.navigate(['/home/payroll/salary-structure']);
   }

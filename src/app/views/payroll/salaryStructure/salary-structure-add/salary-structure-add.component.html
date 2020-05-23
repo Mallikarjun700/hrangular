@@ -76,6 +76,7 @@
                                             <select
                                             matNativeControl
                                             formControlName="formula"
+                                            (change)="formulaChange(addr.value)"
                                             >
                                                 <option value="">--Select Formula--</option>
                                                 <option *ngFor="let item of dropdown.formula_dependent"
