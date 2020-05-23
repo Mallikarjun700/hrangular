@@ -1,0 +1,69 @@
+<form
+  [formGroup]="fixedForumulaFormGroup"
+  class="form-horizontal"
+  (ngSubmit)="onSubmit()"
+>
+  <h2 class="modal-header" mat-dialog-title>Formula Calculation</h2>
+
+  <mat-dialog-content class="modal-body">
+    <div class="row">
+      <div class="col-md-2 m-t-20">
+        <mat-label>Base</mat-label>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field style="width:100%">
+          <select matNativeControl formControlName="base">
+            <option value="">--Select Base--</option>
+            <option
+              *ngFor="let item of dropdown.base_dependency"
+              value="{{ item.id }}"
+              >{{ item.name }}</option
+            >
+          </select>
+          <mat-error *ngIf="f.base.errors">
+            <span *ngIf="f.base.errors?.required"> Base is required</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2 m-t-20">
+        <mat-label>Type</mat-label>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field style="width:100%">
+          <select matNativeControl formControlName="type">
+            <option value="">--Select Type--</option>
+            <option
+              *ngFor="let item of dropdown.type_dependency"
+              value="{{ item.id }}"
+              >{{ item.name }}</option
+            >
+          </select>
+          <mat-error *ngIf="f.type.errors">
+            <span *ngIf="f.type.errors?.required"> Type is required</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2 m-t-20">
+        <mat-label>Value</mat-label>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field style="width:100%">
+          <input matInput formControlName="basevalue" />
+          <mat-error *ngIf="f.basevalue.errors">
+            <span *ngIf="f.basevalue.errors?.required"> Value is required</span>
+            <span *ngIf="f.basevalue.errors?.pattern"> Value is invalid</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="modal-footer">
+    <button class="mat-raised-button" type="button" (click)="close()">
+      Close
+    </button>
+    <button mat-flat-button type="submit" color="primary">
+      Submit
+    </button>
+  </mat-dialog-actions>
+</form>
