@@ -7,10 +7,10 @@
 
   <mat-dialog-content class="modal-body">
     <div class="row">
-      <div class="col-md-2 m-t-20">
+      <div class="col-md-1 m-t-20">
         <mat-label>Base</mat-label>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
         <mat-form-field style="width:100%">
           <select matNativeControl formControlName="base">
             <option value="">--Select Base--</option>
@@ -25,10 +25,10 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="col-md-2 m-t-20">
+      <div class="col-md-1 m-t-20">
         <mat-label>Type</mat-label>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
         <mat-form-field style="width:100%">
           <select matNativeControl formControlName="type">
             <option value="">--Select Type--</option>
@@ -43,10 +43,10 @@
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="col-md-2 m-t-20">
+      <div class="col-md-1 m-t-20">
         <mat-label>Value</mat-label>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
         <mat-form-field style="width:100%">
           <input matInput formControlName="basevalue" />
           <mat-error *ngIf="f.basevalue.errors">
@@ -56,6 +56,152 @@
         </mat-form-field>
       </div>
     </div>
+    <div class="row m-t-10" *ngIf="formdata.formula === '2'">
+      <div class="col-md-12">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>S.No.</th>
+              <th>Result Type</th>
+              <th>Result Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="bottom-mapping">1</span></td>
+              <td>
+                <mat-form-field style="width:100%">
+                  <select matNativeControl formControlName="result_if_type">
+                    <option value="">--Select Type--</option>
+                    <option
+                      *ngFor="let item of dropdown.sub_type_dependency"
+                      value="{{ item.id }}"
+                      >{{ item.name }}</option
+                    >
+                  </select>
+                  <mat-error *ngIf="f.result_if_type.errors">
+                    <span *ngIf="f.result_if_type.errors?.required">
+                      Type is required</span
+                    >
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field style="width:100%">
+                  <input matInput formControlName="result_if" />
+                  <mat-error *ngIf="f.result_if.errors">
+                    <span *ngIf="f.result_if.errors?.required">
+                      Value is required</span
+                    >
+                    <span *ngIf="f.result_if.errors?.pattern">
+                      Value is invalid</span
+                    >
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="bottom-mapping">2</span></td>
+              <td>
+                <mat-form-field style="width:100%">
+                  <select matNativeControl formControlName="result_else_type">
+                    <option value="">--Select Type--</option>
+                    <option
+                      *ngFor="let item of dropdown.sub_type_dependency"
+                      value="{{ item.id }}"
+                      >{{ item.name }}</option
+                    >
+                  </select>
+                  <mat-error *ngIf="f.result_else_type.errors">
+                    <span *ngIf="f.result_else_type.errors?.required">
+                      Type is required</span
+                    >
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field style="width:100%">
+                  <input matInput formControlName="result_else" />
+                  <mat-error *ngIf="f.result_else.errors">
+                    <span *ngIf="f.result_else.errors?.required">
+                      Value is required</span
+                    >
+                    <span *ngIf="f.result_else.errors?.pattern">
+                      Value is invalid</span
+                    >
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- <div class="row m-t-10" *ngIf="formdata.formula === '2'">
+        <div class="col-md-1 text-center">
+          Result
+        </div>
+        <div class="col-md-5 text-center">Type</div>
+        <div class="col-md-6 text-center">Value</div>
+    </div>
+    <div class="row" *ngIf="formdata.formula === '2'">
+      <div class="col-md-1">
+        <span class="bottom-mapping">1</span>
+      </div>
+      <div class="col-md-5">
+          <mat-form-field style="width:100%">
+            <select matNativeControl formControlName="result_if_type">
+              <option value="">--Select Type--</option>
+              <option
+                *ngFor="let item of dropdown.sub_type_dependency"
+                value="{{ item.id }}"
+                >{{ item.name }}</option
+              >
+            </select>
+            <mat-error *ngIf="f.result_if_type.errors">
+              <span *ngIf="f.result_if_type.errors?.required"> Type is required</span>
+            </mat-error>
+          </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field style="width:100%">
+          <input matInput formControlName="result_if" />
+          <mat-error *ngIf="f.result_if.errors">
+            <span *ngIf="f.result_if.errors?.required"> Value is required</span>
+            <span *ngIf="f.result_if.errors?.pattern"> Value is invalid</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row" *ngIf="formdata.formula === '2'">
+        <div class="col-md-1">
+          <span class="bottom-mapping">2</span>
+        </div>
+        <div class="col-md-5">
+            <mat-form-field style="width:100%">
+              <select matNativeControl formControlName="result_else_type">
+                <option value="">--Select Type--</option>
+                <option
+                  *ngFor="let item of dropdown.sub_type_dependency"
+                  value="{{ item.id }}"
+                  >{{ item.name }}</option
+                >
+              </select>
+              <mat-error *ngIf="f.result_else_type.errors">
+                <span *ngIf="f.result_else_type.errors?.required"> Type is required</span>
+              </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field style="width:100%">
+            <input matInput formControlName="result_else" />
+            <mat-error *ngIf="f.result_else.errors">
+              <span *ngIf="f.result_else.errors?.required"> Value is required</span>
+              <span *ngIf="f.result_else.errors?.pattern"> Value is invalid</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div> -->
   </mat-dialog-content>
 
   <mat-dialog-actions class="modal-footer">

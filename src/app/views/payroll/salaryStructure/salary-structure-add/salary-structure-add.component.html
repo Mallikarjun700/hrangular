@@ -30,6 +30,7 @@
                                     <th>Component</th>
                                     <th>Pay Type</th>
                                     <th>Formula</th>
+                                    <th>Calculation</th>
                                     <th>Action</th>
                                 </thead>
                                 <tbody formArrayName="fixeddetails">
@@ -72,11 +73,11 @@
                                         </mat-form-field>
                                     </td>
                                     <td>
-                                        <mat-form-field style="width:100%">
+                                        <mat-form-field style="width:100%" *ngIf="(addr.get('formula_enable')?.value==1)? true : false">
                                             <select
                                             matNativeControl
                                             formControlName="formula"
-                                            (change)="formulaChange(addr.value)"
+                                            (change)="formulaChange(addr.value, i)"
                                             >
                                                 <option value="">--Select Formula--</option>
                                                 <option *ngFor="let item of dropdown.formula_dependent"
@@ -90,7 +91,59 @@
                                             </mat-error>
                                         </mat-form-field>
                                     </td>
-
+                                    <td>
+                                        <mat-form-field style="width:100%" *ngIf="(addr.get('formula_enable')?.value==1)? true : false">
+                                            <input matInput formControlName="calculation"  readonly />
+                                            
+                                        </mat-form-field>
+                                        <div formArrayName="calculationdetails" *ngIf="(addr.get('formula')?.value=='1')">
+                                            <div class="row"  *ngFor="
+                                            let subaddr of fixeddetails.controls[i].get('calculationdetails')?.controls;
+                                            let sub = index
+                                            "
+                                            [formGroupName]="sub">
+                                                <div class="col-md-4 m-t-20">
+                                                    {{subaddr.get('basetext')?.value}} 
+                                                </div>
+                                                <div class="col-md-4 m-t-20">
+                                                    {{subaddr.get('typetext')?.value}} 
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <mat-form-field style="width:100%">
+                                                        <input matInput formControlName="basevalue" />
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div formArrayName="calculationdetails" *ngIf="(addr.get('formula')?.value=='2')">
+                                            <div class="row" *ngFor="
+                                            let subaddr of fixeddetails.controls[i].get('calculationdetails')?.controls;
+                                            let sub = index
+                                            "
+                                            [formGroupName]="sub">
+                                                <div class="col-md-12">
+                                                    if {{subaddr.get('basetext')?.value}} {{subaddr.get('typetext')?.value}} 
+                                                    <mat-form-field style="width:20%">
+                                                        <input matInput formControlName="basevalue" />
+                                                    </mat-form-field>
+                                                    <br/>
+                                                    then  
+                                                    <br/>   
+                                                    <mat-form-field style="width:20%">
+                                                        <input matInput formControlName="result_if" />
+                                                    </mat-form-field> {{(subaddr.get('result_if_type')?.value=='1')? subaddr.get('result_if_type_text')?.value : ''}}
+                                                    <br/>
+                                                    else 
+                                                    <br/>
+                                                    <mat-form-field style="width:20%">
+                                                            <input matInput formControlName="result_else" />
+                                                        </mat-form-field> {{(subaddr.get('result_else_type')?.value=='1')? subaddr.get('result_else_type_text')?.value : ''}}
+                                                        <br/>
+                                                        end
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>
                                         <button
                                             mat-mini-fab
@@ -104,7 +157,7 @@
                                     </td>
                                 </tr>
                                 <tr *ngIf="fixeddetails.length == 0">
-                                    <td colspan="5">No data Found</td>
+                                    <td colspan="6">No data Found</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -546,6 +599,7 @@
                                 <thead>
                                     <th>Component</th>
                                     <th>Pay Type</th>
+                                    <th>Amount</th>
                                     <th>Income Tax Dependent</th>
                                     <th>PT Dependent</th>
                                     <th>ESI Dependent</th>
@@ -588,7 +642,19 @@
                                             </mat-error>
                                         </mat-form-field>
                                     </td>
-                                    
+                                    <td>
+                                        <mat-form-field style="width:100%" >
+                                            <input matInput formControlName="amount"  />
+                                            <mat-error
+                                                *ngIf="addr.invalid && addr.get('amount').errors"
+                                            >
+                                                <span *ngIf="addr.get('amount').errors?.required">
+                                                        Amount is required</span>
+                                                <span *ngIf="addr.get('amount').errors?.pattern">
+                                                        Amount is invalid</span>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
                                     <td>
                                         <mat-form-field style="width:100%">
                                             <select
