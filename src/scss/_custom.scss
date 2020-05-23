@@ -110,6 +110,9 @@ $color: #ffffff;
 .m-t-20 {
   margin-top: 20px;
 }
+.m-t-10 {
+  margin-top: 10px;
+}
 .m-b-10 {
   margin-bottom: 10px;
 }
@@ -127,4 +130,7 @@ $color: #ffffff;
 }
 .mat-tab-body-content{
   overflow: hidden !important;
+}
+.mat-dialog-container{
+  padding-top: 0px !important;
 }

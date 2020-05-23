@@ -64,9 +64,34 @@ export class SalaryStructureAddComponent implements OnInit {
     return this.formBuilder.group({
       component: [(data) ? data.component : '', [Validators.required, removeSpaces]],
       paytype: [(data) ? data.paytype : 1, [Validators.required, removeSpaces]],
-      formula: [(data) ? data.formula : '', [Validators.required, removeSpaces]],
-      type: [(data) ? data.type : 1]
+      formula: [(data) ? data.formula : ''],
+      calculation: [(data) ? data.calculation : ''],
+      calculationdetails: this.formBuilder.array([]),
+      type: [(data) ? data.type : 1],
+      formula_enable: [(data) ? data.formula_enable : 1]
     });
+  }
+  createCalculationdetailsFormGroup(data?: any) {
+    return this.formBuilder.group({
+      base: [(data) ? data.base : 1],
+      basetext: [(data) ? data.basetext : 1],
+      typetext: [(data) ? data.typetext : 1],
+      type: [(data) ? data.type : 1],
+      basevalue: [(data) ? data.basevalue : 1],
+      result_if_type: [(data) ? data.result_if_type : 1],
+      result_if: [(data) ? data.result_if : 0],
+      result_if_type_text: [(data) ? data.result_if_type_text : 0],
+      result_else_type_text: [(data) ? data.result_else_type_text : 0],
+      result_else_type: [(data) ? data.result_else_type : 1],
+      result_else: [(data) ? data.result_else : 0]
+    });
+  }
+
+  addCalculationdetailsValue(data?: any, index?:any) {
+    const ctrl = (<FormArray>this.fixedFormGroup.get('fixeddetails')).at(index).get('calculationdetails') as FormArray;
+    ctrl.clear();
+    let fg = this.createCalculationdetailsFormGroup(data);
+    ctrl.push(fg);
   }
   get fixeddetails(): FormArray {
     return this.fixedFormGroup.get('fixeddetails') as FormArray;
@@ -192,6 +217,7 @@ export class SalaryStructureAddComponent implements OnInit {
       tax_dependent: [(data) ? data.tax_dependent : 1, [Validators.required, removeSpaces]],
       pt_dependent: [(data) ? data.pt_dependent : 1, [Validators.required, removeSpaces]],
       esi_dependent: [(data) ? data.pt_dependent : 1, [Validators.required, removeSpaces]],
+      amount: [(data) ? data.amount : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
       type: [(data) ? data.type : 1]
     });
   }
@@ -244,11 +270,11 @@ export class SalaryStructureAddComponent implements OnInit {
         { id: 4, name: 'Not Applicable' },
       ],
       default_fixed_salary_dependent: [
-        { component: 'Basic', paytype: 1, type: 0 },
-        { component: 'HRA', paytype: 1, type: 0 },
-        { component: 'Spl Allowance', paytype: 1, type: 0 },
-        { component: 'PF Employer', paytype: 2, type: 0 },
-        { component: 'ESI Employer', paytype: 2, type: 0 },
+        { component: 'Basic', paytype: 1, type: 0, formula_enable: 1 },
+        { component: 'HRA', paytype: 1, type: 0, formula_enable: 1 },
+        { component: 'Spl Allowance', paytype: 1, type: 0, formula_enable: 0 },
+        { component: 'PF Employer', paytype: 2, type: 0, formula_enable: 0 },
+        { component: 'ESI Employer', paytype: 2, type: 0, formula_enable: 0 },
       ],
       default_flexi_salary_dependent: [
         { component: 'LTA', paytype: 1, type: 0 },
@@ -287,19 +313,47 @@ export class SalaryStructureAddComponent implements OnInit {
       this.addAdhocdetailsValue(element);
     });
   }
-  formulaChange(value: any){
+  formulaChange(value: any, index: any) {
     if (value.formula !== '') {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-      dialogConfig.height = '300px';
-      dialogConfig.width = '400px';
+      dialogConfig.height = (value.formula === '1') ? '260px' : '480px';
+      dialogConfig.width = '600px';
       dialogConfig.data = value;
       const dialogRef = this.matDialog.open(SubComponentComponent, dialogConfig);
 
       dialogRef.afterClosed().subscribe(
-          data => console.log("Dialog output:", data)
-      );
+        data  => {
+          if (data){
+            if (value.formula === '1') {
+              const ctrl = this.fixedFormGroup.get('fixeddetails') as FormArray;
+              let calculation = '';
+              if (data.type === '1') {
+                calculation = (data.basetext + ' * ' + data.basevalue + '' + data.typetext)
+              } else {
+                calculation = (data.basevalue)
+              }
+              ctrl.at(index).patchValue({ calculation: calculation});
+            } else if (value.formula === '2') {
+              const ctrl = this.fixedFormGroup.get('fixeddetails') as FormArray;
+              let calculation = 'if '+data.basetext + '' + data.typetext + data.basevalue+' then ';
+              if (data.result_if_type === '1') {
+                calculation += (data.basetext + ' * ' + data.result_if + '' + data.result_if_type_text) +' else ';
+              } else {
+                calculation += (data.result_if) +' else ';
+              }
+              if (data.result_else_type === '1') {
+                calculation += (data.basetext + ' * ' + data.result_else + '' + data.result_else_type_text)+' end ';
+              } else {
+                calculation += (data.result_else)+' end ';
+              }
+              ctrl.at(index).patchValue({ calculation: calculation});
+            }
+            this.addCalculationdetailsValue(data,index)
+            console.log(this.fixedFormGroup.value);
+          }
+        });
     }
   }
   resetForm(){

@@ -469,6 +469,9 @@
                                                        class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
+                                        <tr *ngIf="(bank_details.length==0)">
+                                            <td colspan="5"></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

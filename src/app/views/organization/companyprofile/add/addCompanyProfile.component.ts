@@ -273,9 +273,9 @@ export class AddCompanyProfileComponent implements OnInit {
       this.addSocialValue();
       this.addAddressValue();
       this.addBankValue();
-      this.addDirectorsValue();
-      this.addAuditorsValue();
-      this.addCompanySecretaryValue();
+      // this.addDirectorsValue();
+      // this.addAuditorsValue();
+      // this.addCompanySecretaryValue();
     }
   }
   // convenience getter for easy access to form fields
