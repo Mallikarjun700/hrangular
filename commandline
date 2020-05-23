@@ -3,3 +3,6 @@ Second create --> ng generate component companyevent-layout
 
 Git command to add all but not one folder
 git add -- . ':!node_modules'
+git commit -m “[ Type in the commit message]”
+git push https://github.com/Mallikarjun700/hrangular.git 
+
