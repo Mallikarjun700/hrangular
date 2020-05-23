@@ -334,7 +334,7 @@ export class MasterComponent implements OnInit {
   }
 
   cancel() {
-
+    this.commonDataForm.reset();
   }
 
   public dropdownUniqueCheck(value: any, indexKey: any): boolean {
