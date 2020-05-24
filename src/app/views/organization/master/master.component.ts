@@ -249,7 +249,7 @@ export class MasterComponent implements OnInit {
 
   createMappingDataFormGroup(data?: any) {
     return this._formBuilder.group({
-      id: [(data) ? data.id : ''],
+      id: [(data) ? data.id : '7'],
       department_map: [(data) ? data.department_map : '', [Validators.required, removeSpaces]],
       designation_map: [(data) ? data.designation_map : '', [Validators.required, removeSpaces]],
       job_title_map: [(data) ? data.job_title_map : '', [Validators.required, removeSpaces]],
