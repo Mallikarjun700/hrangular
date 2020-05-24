@@ -7,16 +7,15 @@
           <i class="fa fa-align-justify"></i> Master
         </div>
         <div class="card-body">
-          <mat-tab-group mat-align-tabs="start"  mat-stretch-tabs>
-            <mat-tab label="Common Datas">
-              <div class="row">
-                <div class="col-md-12">
-                  <!-- (ngSubmit)="onSubmitCommonData()" -->
-                  <form
+          <form
                     [formGroup]="commonDataForm"
                     class="form-horizontal"
                     (ngSubmit)="onSubmitCommonData()"
                   >
+          <mat-tab-group mat-align-tabs="start"  mat-stretch-tabs>
+            <mat-tab label="Common Datas">
+              <div class="row">
+                <div class="col-md-12">
                     <table class="table">
                       <tr>
                         <td style="width:10%">
@@ -79,13 +78,15 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(locations.invalid)"
+                            type="button"
                             (click)="addLocationValue()"
                           >
                             <i class="fa fa-plus"></i>
                           </button>
                         </td>
                         <td style="width:10%">
-                          <mat-label>Departments </mat-label>
+                          <mat-label>Departments</mat-label>
                         </td>
                         <td style="width:30%">
                           <table
@@ -143,6 +144,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(department.invalid)"
+                            type="button"
                             (click)="addDepartmentValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -157,11 +160,11 @@
                           <table
                             class="table first-td"
                             layout-xs="column"
-                            formArrayName="sub_departments"
+                            formArrayName="subdepartment"
                           >
                             <tr
                               *ngFor="
-                                let addr of sub_departments.controls;
+                                let addr of subdepartment.controls;
                                 let i = index
                               "
                               [formGroupName]="i"
@@ -171,18 +174,18 @@
                                   <input
                                     matInput
                                     placeholder="Sub Departments"
-                                    formControlName="sub_departments"
+                                    formControlName="subdepartment"
                                     required
                                   />
                                   <mat-error
                                     *ngIf="
                                       addr.invalid &&
-                                      addr.get('sub_departments').errors
+                                      addr.get('subdepartment').errors
                                     "
                                   >
                                     <span
                                       *ngIf="
-                                        addr.get('sub_departments').errors
+                                        addr.get('subdepartment').errors
                                           ?.required
                                       "
                                     >
@@ -195,7 +198,7 @@
                                 <button
                                   mat-mini-fab
                                   color="warn"
-                                  *ngIf="sub_departments.controls.length > 1"
+                                  *ngIf="subdepartment.controls.length > 1"
                                   type="button"
                                   (click)="deleteSubDepartmentsValue(i)"
                                 >
@@ -210,6 +213,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(subdepartment.invalid)"
+                            type="button"
                             (click)="addSubDepartmentsValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -275,6 +280,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(cost_centers.invalid)"
+                            type="button"
                             (click)="addCostCentersValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -341,6 +348,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(pay_grades.invalid)"
+                            type="button"
                             (click)="addPayGradesValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -353,10 +362,10 @@
                           <table
                             class="table first-td"
                             layout-xs="column"
-                            formArrayName="bands"
+                            formArrayName="brands"
                           >
                             <tr
-                              *ngFor="let addr of bands.controls; let i = index"
+                              *ngFor="let addr of brands.controls; let i = index"
                               [formGroupName]="i"
                             >
                               <td>
@@ -364,16 +373,16 @@
                                   <input
                                     matInput
                                     placeholder="Bands"
-                                    formControlName="bands"
+                                    formControlName="brands"
                                     required
                                   />
                                   <mat-error
                                     *ngIf="
-                                      addr.invalid && addr.get('bands').errors
+                                      addr.invalid && addr.get('brands').errors
                                     "
                                   >
                                     <span
-                                      *ngIf="addr.get('bands').errors?.required"
+                                      *ngIf="addr.get('brands').errors?.required"
                                     >
                                       Bands is required</span
                                     >
@@ -384,7 +393,7 @@
                                 <button
                                   mat-mini-fab
                                   color="warn"
-                                  *ngIf="bands.controls.length > 1"
+                                  *ngIf="brands.controls.length > 1"
                                   type="button"
                                   (click)="deleteBandsValue(i)"
                                 >
@@ -399,6 +408,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(brands.invalid)"
+                            type="button"
                             (click)="addBandsValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -465,6 +476,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(designation.invalid)"
+                            type="button"
                             (click)="addDesignationValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -529,6 +542,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(job_code.invalid)"
+                            type="button"
                             (click)="addJobCodeValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -595,6 +610,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(job_role.invalid)"
+                            type="button"
                             (click)="addJobRoleValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -607,11 +624,11 @@
                           <table
                             class="table first-td"
                             layout-xs="column"
-                            formArrayName="job_title"
+                            formArrayName="job_profile"
                           >
                             <tr
                               *ngFor="
-                                let addr of job_title.controls;
+                                let addr of job_profile.controls;
                                 let i = index
                               "
                               [formGroupName]="i"
@@ -621,18 +638,18 @@
                                   <input
                                     matInput
                                     placeholder="Job Title/Profile"
-                                    formControlName="job_title"
+                                    formControlName="job_profile"
                                     required
                                   />
                                   <mat-error
                                     *ngIf="
                                       addr.invalid &&
-                                      addr.get('job_title').errors
+                                      addr.get('job_profile').errors
                                     "
                                   >
                                     <span
                                       *ngIf="
-                                        addr.get('job_title').errors?.required
+                                        addr.get('job_profile').errors?.required
                                       "
                                     >
                                       Job Title/Profile is required</span
@@ -644,7 +661,7 @@
                                 <button
                                   mat-mini-fab
                                   color="warn"
-                                  *ngIf="job_title.controls.length > 1"
+                                  *ngIf="job_profile.controls.length > 1"
                                   type="button"
                                   (click)="deleteJobTitleValue(i)"
                                 >
@@ -659,6 +676,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(job_profile.invalid)"
+                            type="button"
                             (click)="addJobTitleValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -673,11 +692,11 @@
                           <table
                             class="table first-td"
                             layout-xs="column"
-                            formArrayName="work_levels"
+                            formArrayName="work_level"
                           >
                             <tr
                               *ngFor="
-                                let addr of work_levels.controls;
+                                let addr of work_level.controls;
                                 let i = index
                               "
                               [formGroupName]="i"
@@ -687,18 +706,18 @@
                                   <input
                                     matInput
                                     placeholder="Work Levels"
-                                    formControlName="work_levels"
+                                    formControlName="work_level"
                                     required
                                   />
                                   <mat-error
                                     *ngIf="
                                       addr.invalid &&
-                                      addr.get('work_levels').errors
+                                      addr.get('work_level').errors
                                     "
                                   >
                                     <span
                                       *ngIf="
-                                        addr.get('work_levels').errors?.required
+                                        addr.get('work_level').errors?.required
                                       "
                                     >
                                       Work Levels is required</span
@@ -710,7 +729,7 @@
                                 <button
                                   mat-mini-fab
                                   color="warn"
-                                  *ngIf="work_levels.controls.length > 1"
+                                  *ngIf="work_level.controls.length > 1"
                                   type="button"
                                   (click)="deleteWorkLevelsValue(i)"
                                 >
@@ -725,6 +744,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(work_level.invalid)"
+                            type="button"
                             (click)="addWorkLevelsValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -790,6 +811,8 @@
                             class="pull-right"
                             mat-mini-fab
                             color="primary"
+                            [disabled]="(position_code.invalid)"
+                            type="button"
                             (click)="addPositionCodeValue()"
                           >
                             <i class="fa fa-plus"></i>
@@ -797,25 +820,10 @@
                         </td>
                       </tr>
                     </table>
-
-                    <div class="form-actions">
-                      <button class="btn btn-primary" type="submit">
-                        Save changes
-                      </button>
-                      <button
-                        class="btn btn-secondary"
-                        type="button"
-                        (click)="cancel()"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </mat-tab>
             <mat-tab label="Mapping">
-              <form [formGroup]="mappingDataForm">
                 <div class="row">
                   <div class="col-md-12">
                     <button
@@ -823,11 +831,15 @@
                       mat-mini-fab
                       type="button"
                       color="primary"
-                      [disabled]="mappingdata.invalid"
+                      [disabled]="mapdata.invalid"
                       (click)="addMappingDataValue()"
                     >
                       <i class="fa fa-plus"></i>
                     </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12" style="overflow-y: scroll;">
                     <table class="table table-bordered table-reponsive">
                       <thead>
                         <th>Department</th>
@@ -838,10 +850,10 @@
                         <th>Cost Centers</th>
                         <th>Action</th>
                       </thead>
-                      <tbody formArrayName="mappingdata">
+                      <tbody formArrayName="mapdata">
                         <tr
                           *ngFor="
-                            let addr of mappingdata.controls;
+                            let addr of mapdata.controls;
                             let i = index
                           "
                           [formGroupName]="i"
@@ -850,23 +862,23 @@
                             <mat-form-field style="width:100%">
                               <select
                                 matNativeControl
-                                formControlName="department">
+                                formControlName="department_map">
                                 <option value=''>--Select Department--</option>
-                                <option *ngFor="let item of dropdownMappingData.department"
-                                        value="{{item.id}}" 
-                                        [disabled]="dropdownUniqueCheck(item.id, 'department')">{{item.name}}</option>
+                                <option *ngFor="let item of commonDataForm.get('department')?.value"
+                                        value="{{item.department}}" 
+                                        [disabled]="dropdownUniqueCheck(item.department, 'department_map')">{{item.department}}</option>
                               </select>
                             </mat-form-field>
                           </td>
                           <td>
-                            <mat-form-field style="width:100%">
+                            <mat-form-field style="width:100%" >
                               <select
                                 matNativeControl
-                                formControlName="designation"
+                                formControlName="designation_map" 
                               >
                                 <option value="">--Select Designation--</option>
-                                <option *ngFor="let item of dropdownMappingData.designation"
-                                        value="{{item.id}}">{{item.name}}</option>
+                                <option *ngFor="let item of commonDataForm.get('designation')?.value"
+                                        value="{{item.designation}}">{{item.designation}}</option>
                               </select>
                             </mat-form-field>
                           </td>
@@ -874,11 +886,11 @@
                             <mat-form-field style="width:100%">
                               <select
                                 matNativeControl
-                                formControlName="job_title"
+                                formControlName="job_title_map"
                               >
                                 <option value="">--Select Job Title--</option>
-                                <option *ngFor="let item of dropdownMappingData.job_title"
-                                        value="{{item.id}}">{{item.name}}</option>
+                                <option *ngFor="let item of commonDataForm.get('job_profile')?.value"
+                                        value="{{item.job_profile}}">{{item.job_profile}}</option>
                               </select>
                             </mat-form-field>
                           </td>
@@ -886,11 +898,11 @@
                             <mat-form-field style="width:100%">
                               <select
                                 matNativeControl
-                                formControlName="work_levels"
+                                formControlName="work_levels_map"
                               >
                                 <option value="">--Select Levels--</option>
-                                <option *ngFor="let item of dropdownMappingData.work_levels"
-                                        value="{{item.id}}">{{item.name}}</option>
+                                <option *ngFor="let item of commonDataForm.get('work_level')?.value"
+                                        value="{{item.work_level}}">{{item.work_level}}</option>
                               </select>
                             </mat-form-field>
                           </td>
@@ -898,11 +910,11 @@
                             <mat-form-field style="width:100%">
                               <select
                                 matNativeControl
-                                formControlName="job_code"
+                                formControlName="job_code_map"
                               >
                                 <option value="">--Select Job Code--</option>
-                                <option *ngFor="let item of dropdownMappingData.job_code"
-                                        value="{{item.id}}">{{item.name}}</option>
+                                <option *ngFor="let item of commonDataForm.get('job_code')?.value"
+                                        value="{{item.job_code}}">{{item.job_code}}</option>
                               </select>
                             </mat-form-field>
                           </td>
@@ -910,11 +922,11 @@
                             <mat-form-field style="width:100%">
                               <select
                                 matNativeControl
-                                formControlName="cost_centers"
+                                formControlName="cost_centers_map"
                               >
                                 <option value="">--Select Cost Centers--</option>
-                                <option *ngFor="let item of dropdownMappingData.cost_centers"
-                                        value="{{item.id}}">{{item.name}}</option>
+                                <option *ngFor="let item of commonDataForm.get('cost_centers')?.value"
+                                        value="{{item.cost_centers}}">{{item.cost_centers}}</option>
                               </select>
                             </mat-form-field>
                           </td>
@@ -924,7 +936,7 @@
                               color="warn"
                               type="button"
                               [disabled]="
-                                mappingdata.length == 1 ? true : false
+                              mapdata.length == 1 ? true : false
                               "
                               (click)="deleteMappingDataValue(i)"
                             >
@@ -932,16 +944,28 @@
                             </button>
                           </td>
                         </tr>
-                        <tr *ngIf="mappingdata.length == 0">
+                        <tr *ngIf="mapdata.length == 0">
                           <td colspan="5">No data Found</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-              </form>
             </mat-tab>
           </mat-tab-group>
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">
+              Save changes
+            </button>
+            <button
+              class="btn btn-secondary"
+              type="button"
+              (click)="cancel()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
         </div>
       </div>
     </div>
