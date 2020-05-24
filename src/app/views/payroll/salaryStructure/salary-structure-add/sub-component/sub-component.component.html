@@ -26,12 +26,12 @@
         </mat-form-field>
       </div>
       <div class="col-md-1 m-t-20">
-        <mat-label>Type</mat-label>
+        <mat-label>Annual</mat-label>
       </div>
       <div class="col-md-5">
         <mat-form-field style="width:100%">
           <select matNativeControl formControlName="type">
-            <option value="">--Select Type--</option>
+            <option value="">--Select Annual--</option>
             <option
               *ngFor="let item of dropdown.type_dependency"
               value="{{ item.id }}"
@@ -39,14 +39,14 @@
             >
           </select>
           <mat-error *ngIf="f.type.errors">
-            <span *ngIf="f.type.errors?.required"> Type is required</span>
+            <span *ngIf="f.type.errors?.required"> Annual is required</span>
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="col-md-1 m-t-20">
+      <div class="col-md-1 m-t-20" *ngIf="f.type.value!=''">
         <mat-label>Value</mat-label>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-5" *ngIf="f.type.value!=''">
         <mat-form-field style="width:100%">
           <input matInput formControlName="basevalue" />
           <mat-error *ngIf="f.basevalue.errors">
@@ -56,7 +56,7 @@
         </mat-form-field>
       </div>
     </div>
-    <div class="row m-t-10" *ngIf="formdata.formula === '2'">
+    <div class="row m-t-10" *ngIf="formdata.formula === '2' && (f.type.value!='' && f.basevalue.value!='')">
       <div class="col-md-12">
         <table class="table">
           <thead class="thead-light">
