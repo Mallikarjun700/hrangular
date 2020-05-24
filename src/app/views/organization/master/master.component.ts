@@ -15,6 +15,7 @@ export class MasterComponent implements OnInit {
   mappingDataForm: FormGroup;
   dropdown: any;
   dropdownMappingData: any;
+  id : any = '7';
 
   constructor(private _formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -27,7 +28,7 @@ export class MasterComponent implements OnInit {
 
   initiateFirstFormGroup(data?: any) {
     this.commonDataForm = this._formBuilder.group({
-      id: [(data) ? data.id : 0],
+      id: [(data) ? data.id : 7],
       locations: this._formBuilder.array([]),
       department: this._formBuilder.array([]),
       subdepartment: this._formBuilder.array([]),
@@ -275,7 +276,14 @@ export class MasterComponent implements OnInit {
     this.mapdata.removeAt(idx);
   }
 
-
+  IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+  }
   ngOnInit() {
     this.dropdown = [];
     this.dropdown.employemntTypes = ['Permanent', 'Contract', 'Vendor', 'Consultant', 'Intern', 'Full Time', 'Part Time'];
@@ -294,6 +302,64 @@ export class MasterComponent implements OnInit {
     this.addWorkLevelsValue();
     this.addPositionCodeValue();
     this.addMappingDataValue();
+
+
+    this.commonService.get('masterlist/' + this.id, {})
+    .subscribe(
+      data => {
+        setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
+        if (data.success) {
+          console.log(data.message);
+          Object.keys(data.message).forEach((keys: any, vals: any) => {
+            const jsonCheck = this.IsJsonString(data.message[keys])
+            if (jsonCheck) {
+              data.message[keys] = (JSON.parse(data.message[keys]));
+            }
+          });
+          this.initiateFirstFormGroup(data.message);
+          data.message.locations.forEach(element => {
+            this.addLocationValue(element);
+          });
+          data.message.department	.forEach(element => {
+            this.addDepartmentValue(element);
+          });
+          data.message.subdepartment.forEach(element => {
+            this.addSubDepartmentsValue(element);
+          });	
+          data.message.cost_centers.forEach(element => {
+            this.addCostCentersValue(element);
+          });
+          data.message.pay_grades.forEach(element => {
+            this.addPayGradesValue(element);
+          });
+          data.message.brands.forEach(element => {
+            this.addBandsValue(element);
+          });
+          data.message.designation.forEach(element => {
+            this.addDesignationValue(element);
+          });
+          data.message.job_code.forEach(element => {
+            this.addJobCodeValue(element);
+          });
+          data.message.job_role.forEach(element => {
+            this.addJobRoleValue(element);
+          });
+          data.message.job_profile.forEach(element => {
+            this.addJobTitleValue(element);
+          });
+          data.message.work_level.forEach(element => {
+            this.addWorkLevelsValue(element);
+          });
+          data.message.position_code.forEach(element => {
+            this.addPositionCodeValue(element);
+          });
+          data.message.mapdata.forEach(element => {
+            this.addMappingDataValue(element);
+          });
+        }
+      });
+
+
   }
 
   get f() { return this.commonDataForm.controls; }
@@ -318,7 +384,7 @@ export class MasterComponent implements OnInit {
           setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
           console.log(details);
           if (details.success) {
-            this.toastr.successToastr('Profile saved sucessfully');
+            this.toastr.successToastr('Master Data Updated sucessfully');
             // this.router.navigate(['/home/onboarding/personalinfo']);
           } else {
             this.toastr.errorToastr(details.message);
