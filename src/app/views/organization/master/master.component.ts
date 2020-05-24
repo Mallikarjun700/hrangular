@@ -15,7 +15,7 @@ export class MasterComponent implements OnInit {
   mappingDataForm: FormGroup;
   dropdown: any;
   dropdownMappingData: any;
-  id : any = '7';
+  id: any = '7';
 
   constructor(private _formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -54,7 +54,6 @@ export class MasterComponent implements OnInit {
     return this.commonDataForm.get('locations') as FormArray;
   }
   addLocationValue(data?: any) {
-    console.log(this.locations.controls)
     let invalidCount = 0;
     this.locations.controls.forEach(element => {
       if (element.invalid && element.get('location_code').errors) {
@@ -249,7 +248,8 @@ export class MasterComponent implements OnInit {
 
   createMappingDataFormGroup(data?: any) {
     return this._formBuilder.group({
-      id: [(data) ? data.id : '7'],
+      id: [(data) ? data.id : ''],
+      master_data_id: [(data) ? data.master_data_id : '7'],
       department_map: [(data) ? data.department_map : '', [Validators.required, removeSpaces]],
       designation_map: [(data) ? data.designation_map : '', [Validators.required, removeSpaces]],
       job_title_map: [(data) ? data.job_title_map : '', [Validators.required, removeSpaces]],
@@ -278,9 +278,9 @@ export class MasterComponent implements OnInit {
 
   IsJsonString(str) {
     try {
-        JSON.parse(str);
+      JSON.parse(str);
     } catch (e) {
-        return false;
+      return false;
     }
     return true;
   }
@@ -289,75 +289,96 @@ export class MasterComponent implements OnInit {
     this.dropdown.employemntTypes = ['Permanent', 'Contract', 'Vendor', 'Consultant', 'Intern', 'Full Time', 'Part Time'];
     this.dropdown.bereavementLeaves = ['Casual Leave', 'Child Adoption Leave', 'Earned Leave', 'Leave Without Pay', 'Maternity Leaves', 'Optional Holiday', 'Paternity Leaves', 'Sick Leave', 'Wedding Leave'];
     this.initiateFirstFormGroup();
-    this.addLocationValue();
-    this.addDepartmentValue();
-    this.addSubDepartmentsValue();
-    this.addCostCentersValue();
-    this.addPayGradesValue();
-    this.addBandsValue();
-    this.addDesignationValue();
-    this.addJobCodeValue();
-    this.addJobRoleValue();
-    this.addJobTitleValue();
-    this.addWorkLevelsValue();
-    this.addPositionCodeValue();
-    this.addMappingDataValue();
+    // this.addLocationValue();
+    // this.addDepartmentValue();
+    // this.addSubDepartmentsValue();
+    // this.addCostCentersValue();
+    // this.addPayGradesValue();
+    // this.addBandsValue();
+    // this.addDesignationValue();
+    // this.addJobCodeValue();
+    // this.addJobRoleValue();
+    // this.addJobTitleValue();
+    // this.addWorkLevelsValue();
+    // this.addPositionCodeValue();
+    // this.addMappingDataValue();
 
 
     this.commonService.get('masterlist/' + this.id, {})
-    .subscribe(
-      data => {
-        setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
-        if (data.success) {
-          console.log(data.message);
-          Object.keys(data.message).forEach((keys: any, vals: any) => {
-            const jsonCheck = this.IsJsonString(data.message[keys])
-            if (jsonCheck) {
-              data.message[keys] = (JSON.parse(data.message[keys]));
-            }
-          });
-          this.initiateFirstFormGroup(data.message);
-          data.message.locations.forEach(element => {
-            this.addLocationValue(element);
-          });
-          data.message.department	.forEach(element => {
-            this.addDepartmentValue(element);
-          });
-          data.message.subdepartment.forEach(element => {
-            this.addSubDepartmentsValue(element);
-          });	
-          data.message.cost_centers.forEach(element => {
-            this.addCostCentersValue(element);
-          });
-          data.message.pay_grades.forEach(element => {
-            this.addPayGradesValue(element);
-          });
-          data.message.brands.forEach(element => {
-            this.addBandsValue(element);
-          });
-          data.message.designation.forEach(element => {
-            this.addDesignationValue(element);
-          });
-          data.message.job_code.forEach(element => {
-            this.addJobCodeValue(element);
-          });
-          data.message.job_role.forEach(element => {
-            this.addJobRoleValue(element);
-          });
-          data.message.job_profile.forEach(element => {
-            this.addJobTitleValue(element);
-          });
-          data.message.work_level.forEach(element => {
-            this.addWorkLevelsValue(element);
-          });
-          data.message.position_code.forEach(element => {
-            this.addPositionCodeValue(element);
-          });
-          data.message.mapdata.forEach(element => {
-            this.addMappingDataValue(element);
-          });
-        }
-      });
+      .subscribe(
+        data => {
+          setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+          if (data.success) {
+            console.log(data.message);
+            Object.keys(data.message).forEach((keys: any, vals: any) => {
+              const jsonCheck = this.IsJsonString(data.message[keys])
+              if (jsonCheck) {
+                data.message[keys] = (JSON.parse(data.message[keys]));
+              }
+            });
+            this.initiateFirstFormGroup(data.message);
+            data.message.locations.forEach(element => {
+              this.addLocationValue(element);
+            });
+            data.message.department.forEach(element => {
+              this.addDepartmentValue(element);
+            });
+            data.message.subdepartment.forEach(element => {
+              this.addSubDepartmentsValue(element);
+            });
+            data.message.cost_centers.forEach(element => {
+              this.addCostCentersValue(element);
+            });
+            data.message.pay_grades.forEach(element => {
+              this.addPayGradesValue(element);
+            });
+            data.message.brands.forEach(element => {
+              this.addBandsValue(element);
+            });
+            data.message.designation.forEach(element => {
+              this.addDesignationValue(element);
+            });
+            data.message.job_code.forEach(element => {
+              this.addJobCodeValue(element);
+            });
+            data.message.job_role.forEach(element => {
+              this.addJobRoleValue(element);
+            });
+            data.message.job_profile.forEach(element => {
+              this.addJobTitleValue(element);
+            });
+            data.message.work_level.forEach(element => {
+              this.addWorkLevelsValue(element);
+            });
+            data.message.position_code.forEach(element => {
+              this.addPositionCodeValue(element);
+            });
+            data.message.mapdata.forEach(element => {
+              const jsonCheck = this.IsJsonString(element.mapdata);
+              let mapdata = {
+                id: element.id,
+                master_data_id: element.master_data_id,
+                department_map: '',
+                designation_map: '',
+                job_title_map: '',
+                work_levels_map: '',
+                job_code_map: '',
+                cost_centers_map: ''
+              }
+              console.log(jsonCheck)
+              if (jsonCheck) {
+                let data1 = (JSON.parse(element.mapdata));
+                mapdata.department_map = data1.department_map;
+                mapdata.designation_map = data1.designation_map;
+                mapdata.job_title_map = data1.job_title_map;
+                mapdata.work_levels_map = data1.work_levels_map;
+                mapdata.job_code_map = data1.job_code_map;
+                mapdata.cost_centers_map = data1.cost_centers_map;
+              }
+              this.addMappingDataValue(mapdata);
+            });
+          }
+        });
 
 
   }
@@ -369,20 +390,18 @@ export class MasterComponent implements OnInit {
     if (this.commonDataForm.invalid) {
       return;
     }
-    
+
     let params = this.commonDataForm.value;
-    let URL = 'masterlist/update/'+params.id;
+    let URL = 'masterlist/update/' + params.id;
     Object.keys(params).forEach((keys: any, vals: any) => {
-      if (typeof params[keys] !== 'string' && params[keys].length > 0 && keys!='mapdata') {
+      if (typeof params[keys] !== 'string' && params[keys].length > 0 && keys != 'mapdata') {
         params[keys] = (JSON.stringify(params[keys]));
       }
     });
-    console.log(params);
     this.commonService.post(URL, params)
       .subscribe(
         details => {
           setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
-          console.log(details);
           if (details.success) {
             this.toastr.successToastr('Master Data Updated sucessfully');
             // this.router.navigate(['/home/onboarding/personalinfo']);

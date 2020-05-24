@@ -134,3 +134,13 @@ $color: #ffffff;
 .mat-dialog-container{
   padding-top: 0px !important;
 }
+
+.switch-toggle label:not(.disabled) {
+  cursor: pointer;
+}
+.switch-toggle input + label{
+  font-size: 12px;
+}
+.custom-salarymodalbox {
+  max-width: 480px;
+}

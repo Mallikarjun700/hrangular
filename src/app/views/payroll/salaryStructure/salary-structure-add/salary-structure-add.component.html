@@ -29,7 +29,7 @@
                                 <thead>
                                     <th>Component</th>
                                     <th>Pay Type</th>
-                                    <th>Formula</th>
+                                    <th style="width:22%">Formula</th>
                                     <th>Calculation</th>
                                     <th>Action</th>
                                 </thead>
@@ -73,8 +73,19 @@
                                         </mat-form-field>
                                     </td>
                                     <td>
-                                        <mat-form-field style="width:100%" *ngIf="(addr.get('formula_enable')?.value==1)? true : false">
-                                            <select
+                                        <div class="switch-toggle switch-3 switch-candy"  *ngIf="(addr.get('formula_enable')?.value==1)? true : false">
+                                            <input id="{{ 'on' + i}}" type="radio" formControlName="formula"  value="1" (change)="formulaChange(addr.value, i)"/>
+                                            <label for="{{ 'on' + i}}" (click)="formulaClick(addr.value, i)">Formula1</label>
+                                            
+                                            <input id="{{ 'na' + i}}" type="radio"  formControlName="formula"  [disabled]="true" checked="checked" value="" (change)="formulaChange(addr.value, i)"/>
+                                            <label for="{{ 'na' + i}}" class="disabled">&nbsp;</label>
+                                            
+                                            <input id="{{ 'off' + i}}" formControlName="formula"  type="radio" value="2" (change)="formulaChange(addr.value, i)"/>
+                                            <label for="{{ 'off' + i}}" (click)="formulaClick(addr.value, i)">Formula2</label>
+                                            
+                                            <a></a>
+                                        </div>
+                                            <!-- <select
                                             matNativeControl
                                             formControlName="formula"
                                             (change)="formulaChange(addr.value, i)"
@@ -82,21 +93,14 @@
                                                 <option value="">--Select Formula--</option>
                                                 <option *ngFor="let item of dropdown.formula_dependent"
                                                         value="{{item.id}}">{{item.name}}</option>
-                                            </select>
-                                            <mat-error
-                                                *ngIf="addr.invalid && addr.get('formula').errors"
-                                            >
-                                                <span *ngIf="addr.get('formula').errors?.required">
-                                                        Formula is required</span>
-                                            </mat-error>
-                                        </mat-form-field>
+                                            </select> -->
                                     </td>
                                     <td>
                                         <mat-form-field style="width:100%" *ngIf="(addr.get('formula_enable')?.value==1)? true : false">
                                             <input matInput formControlName="calculation"  readonly />
                                             
                                         </mat-form-field>
-                                        <div formArrayName="calculationdetails" *ngIf="(addr.get('formula')?.value=='1')">
+                                        <!-- <div formArrayName="calculationdetails" *ngIf="(addr.get('formula')?.value=='1')">
                                             <div class="row"  *ngFor="
                                             let subaddr of fixeddetails.controls[i].get('calculationdetails')?.controls;
                                             let sub = index
@@ -114,8 +118,8 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
-                                            </div>
-                                            <div formArrayName="calculationdetails" *ngIf="(addr.get('formula')?.value=='2')">
+                                            </div> -->
+                                            <!-- <div formArrayName="calculationdetails" *ngIf="(addr.get('formula')?.value=='2')">
                                             <div class="row" *ngFor="
                                             let subaddr of fixeddetails.controls[i].get('calculationdetails')?.controls;
                                             let sub = index
@@ -142,7 +146,7 @@
                                                         end
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </td>
                                     <td>
                                         <button

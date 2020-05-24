@@ -64,7 +64,7 @@ export class SalaryStructureAddComponent implements OnInit {
     return this.formBuilder.group({
       component: [(data) ? data.component : '', [Validators.required, removeSpaces]],
       paytype: [(data) ? data.paytype : 1, [Validators.required, removeSpaces]],
-      formula: [(data) ? data.formula : ''],
+      formula: [(data) ? data.formula : ""],
       calculation: [(data) ? data.calculation : ''],
       calculationdetails: this.formBuilder.array([]),
       type: [(data) ? data.type : 1],
@@ -270,8 +270,8 @@ export class SalaryStructureAddComponent implements OnInit {
         { id: 4, name: 'Not Applicable' },
       ],
       default_fixed_salary_dependent: [
-        { component: 'Basic', paytype: 1, type: 0, formula_enable: 1 },
-        { component: 'HRA', paytype: 1, type: 0, formula_enable: 1 },
+        { component: 'Basic', paytype: 1, type: 0, formula_enable: 1, formula:"" },
+        { component: 'HRA', paytype: 1, type: 0, formula_enable: 1, formula:"" },
         { component: 'Spl Allowance', paytype: 1, type: 0, formula_enable: 0 },
         { component: 'PF Employer', paytype: 2, type: 0, formula_enable: 0 },
         { component: 'ESI Employer', paytype: 2, type: 0, formula_enable: 0 },
@@ -313,37 +313,43 @@ export class SalaryStructureAddComponent implements OnInit {
       this.addAdhocdetailsValue(element);
     });
   }
+  formulaClick(value: any, index: any) {
+    this.formulaChange(value, index)
+  }
   formulaChange(value: any, index: any) {
-    if (value.formula !== '') {
+    const ctrl = this.fixedFormGroup.get('fixeddetails') as FormArray;
+    ctrl.at(index).patchValue({ calculation: ''});
+    if (value.formula !== '' && value.formula!=null) {
+      this.matDialog.closeAll();
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-      dialogConfig.height = (value.formula === '1') ? '260px' : '480px';
+      // dialogConfig.height = (value.formula === '1') ? '260px' : '480px';
       dialogConfig.width = '600px';
       dialogConfig.data = value;
+      dialogConfig.panelClass= 'custom-salarymodalbox';
       const dialogRef = this.matDialog.open(SubComponentComponent, dialogConfig);
 
       dialogRef.afterClosed().subscribe(
         data  => {
           if (data){
+            console.log(data);
             if (value.formula === '1') {
-              const ctrl = this.fixedFormGroup.get('fixeddetails') as FormArray;
               let calculation = '';
-              if (data.type === '1') {
+              if (parseInt(data.type) === 1) {
                 calculation = (data.basetext + ' * ' + data.basevalue + '' + data.typetext)
               } else {
                 calculation = (data.basevalue)
               }
               ctrl.at(index).patchValue({ calculation: calculation});
             } else if (value.formula === '2') {
-              const ctrl = this.fixedFormGroup.get('fixeddetails') as FormArray;
               let calculation = 'if '+data.basetext + '' + data.typetext + data.basevalue+' then ';
-              if (data.result_if_type === '1') {
+              if (parseInt(data.result_if_type) === 1) {
                 calculation += (data.basetext + ' * ' + data.result_if + '' + data.result_if_type_text) +' else ';
               } else {
                 calculation += (data.result_if) +' else ';
               }
-              if (data.result_else_type === '1') {
+              if (parseInt(data.result_else_type) === 1) {
                 calculation += (data.basetext + ' * ' + data.result_else + '' + data.result_else_type_text)+' end ';
               } else {
                 calculation += (data.result_else)+' end ';
