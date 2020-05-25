@@ -14,37 +14,38 @@
         (ngSubmit)="onSubmit()"
       >
         <!-- -->
-        <div class="row">
-            <div class="col-md-10">
-              <div class="col-md-3">
-                    <button
-                    type="button"
-                    class="pull-right"
-                    mat-mini-fab
-                    [disabled]="adhocdetails.invalid"
-                    (click)="addAdhocdetailsValue()"
-                    color="primary"
-                    >
-                    <i class="fa fa-plus"></i>
-                    </button>
-               </div>
-            </div>
+        <div class="row m-b-10">
+        <div class="col-md-6">
+            <button
+              type="button"
+              class="pull-right"
+              mat-mini-fab
+              [disabled]="adhocdetails.invalid"
+              (click)="addAdhocdetailsValue()"
+              color="primary"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
         </div>
+  
+        <ng-template [ngIf]="adhocdetails"></ng-template>
         <div class="row">
-          <div class="col-md-10">
-            <table class="table table-bordered table-reponsive">
-                <thead>
-                    <th>Component</th>
-                    <th>Pay Type</th>
-                    <th>Amount</th>
-                    <th>Income Tax Dependent</th>
-                    <th>PT Dependent</th>
-                    <th>ESI Dependent</th>
-                    <th>Action</th>
-                </thead>
-                <tbody formArrayName="adhocdetails">
-                    <ng-template [ngIf]="adhocdetails">
-                <tr
+          <div class="col-md-12">
+            <table class="table table-bordered table-responsive">
+              <thead>
+                <th>Component</th>
+                <th>Pay Type</th>
+                <th>Amount</th>
+                <th>Income Tax Dependent</th>
+                <th>PT Dependent</th>
+                <th>ESI Dependent</th>
+                <th>Action</th>
+              </thead>
+  
+              <tbody formArrayName="adhocdetails">
+                <ng-template [ngIf]="adhocdetails">
+                    <tr
                     *ngFor="
                     let addr of adhocdetails.controls;
                     let i = index
@@ -161,7 +162,7 @@
                     </td>
                 </tr>
                 </ng-template>
-                </tbody>
+              </tbody>
             </table>
           </div>
         </div>
