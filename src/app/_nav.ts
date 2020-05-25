@@ -64,6 +64,11 @@ export const navItems: INavData[] = [
         name: 'Salary Structure',
         url: '/home/payroll/salary-structure',
         icon: 'fa fa-money'
+      },
+      {
+        name: 'Adhoc',
+        url: '/home/payroll/adhoc',
+        icon: 'fa fa-money'
       }
     ]
   },

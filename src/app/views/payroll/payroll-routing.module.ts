@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { PayrollLayoutComponent } from './payroll-layout/payroll-layout.component';
 import { SalaryStructureListComponent } from './salaryStructure/salary-structure-list/salary-structure-list.component';
 import { SalaryStructureAddComponent } from './salaryStructure/salary-structure-add/salary-structure-add.component';
-
+import { AdhocAddComponent } from './adhoc/adhoc-add/adhoc-add.component';
+import { AdhocListComponent } from './adhoc/adhoc-list/adhoc-list.component';
 const routes: Routes = [{
   path: '',
   data: {
@@ -40,6 +41,36 @@ const routes: Routes = [{
           component: SalaryStructureAddComponent,
           data: {
             title: 'Edit Salary Structure'
+          }
+        }
+      ]
+    },
+    {
+      path: 'adhoc',
+      component: PayrollLayoutComponent,
+      data: {
+        title: 'Adhoc'
+      },
+      children: [
+        {
+          path: '',
+          component: AdhocListComponent,
+          data: {
+            title: 'Adhoc'
+          }
+        },
+        {
+          path: 'add',
+          component: AdhocAddComponent,
+          data: {
+            title: 'Add Adhoc'
+          }
+        },
+        {
+          path: 'edit/:id',
+          component: AdhocAddComponent,
+          data: {
+            title: 'Edit Adhoc'
           }
         }
       ]

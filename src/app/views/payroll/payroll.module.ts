@@ -17,10 +17,12 @@ import { PayrollLayoutComponent } from './payroll-layout/payroll-layout.componen
 import { SalaryStructureListComponent } from './salaryStructure/salary-structure-list/salary-structure-list.component';
 import { SalaryStructureAddComponent } from './salaryStructure/salary-structure-add/salary-structure-add.component';
 import { SubComponentComponent } from './salaryStructure/salary-structure-add/sub-component/sub-component.component';
+import { AdhocListComponent } from './adhoc/adhoc-list/adhoc-list.component';
+import { AdhocAddComponent } from './adhoc/adhoc-add/adhoc-add.component';
 
 
 @NgModule({
-  declarations: [PayrollLayoutComponent, SalaryStructureListComponent, SalaryStructureAddComponent, SubComponentComponent],
+  declarations: [PayrollLayoutComponent, SalaryStructureListComponent, SalaryStructureAddComponent, SubComponentComponent, AdhocListComponent, AdhocAddComponent],
   imports: [
     CommonModule,
     PayrollRoutingModule,

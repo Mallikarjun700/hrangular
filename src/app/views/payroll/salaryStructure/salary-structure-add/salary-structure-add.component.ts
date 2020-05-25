@@ -337,7 +337,7 @@ export class SalaryStructureAddComponent implements OnInit {
             if (value.formula === '1') {
               let calculation = '';
               if (parseInt(data.type) === 1) {
-                calculation = (data.basetext + ' * ' + data.basevalue + '' + data.typetext)
+                calculation = (data.basetext + ' * ' + (data.basevalue/100) + '' + data.typetext)
               } else {
                 calculation = (data.basevalue)
               }
@@ -345,12 +345,12 @@ export class SalaryStructureAddComponent implements OnInit {
             } else if (value.formula === '2') {
               let calculation = 'if '+data.basetext + '' + data.typetext + data.basevalue+' then ';
               if (parseInt(data.result_if_type) === 1) {
-                calculation += (data.basetext + ' * ' + data.result_if + '' + data.result_if_type_text) +' else ';
+                calculation += (data.basetext + ' * ' + (data.result_if/100) + '' + data.result_if_type_text) +' else ';
               } else {
                 calculation += (data.result_if) +' else ';
               }
               if (parseInt(data.result_else_type) === 1) {
-                calculation += (data.basetext + ' * ' + data.result_else + '' + data.result_else_type_text)+' end ';
+                calculation += (data.basetext + ' * ' + (data.result_else/100) + '' + data.result_else_type_text)+' end ';
               } else {
                 calculation += (data.result_else)+' end ';
               }

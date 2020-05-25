@@ -118,7 +118,7 @@ export class SubComponentComponent implements OnInit {
     params.typetext = this.dropdown.type_dependency.find(x => x.id === parseInt(params.type)).name;
     
     if ( this.formdata.formula === '2') {
-      params.result_if = (params.result_if_type === '1') ? (params.result_if / 100).toFixed(2) : params.basevalue;
+      params.result_if = (params.result_if_type === '1') ? (params.result_if / 100).toFixed(2) : params.result_if;
       params.result_else = (params.result_else_type === '1') ? (params.result_else / 100).toFixed(2) : params.result_else;
       params.result_if_type_text = this.dropdown.sub_type_dependency.find(x => x.id === parseInt(params.result_if_type)).name;
       params.result_else_type_text = this.dropdown.sub_type_dependency.find(x => x.id === parseInt(params.result_else_type)).name;
