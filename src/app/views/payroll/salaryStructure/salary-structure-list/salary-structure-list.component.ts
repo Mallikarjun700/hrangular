@@ -23,25 +23,16 @@ export class SalaryStructureListComponent implements OnInit {
 
   getList() {
     this.temp = true;
-    this.dataList = [
-      {
-        id: 1,
-        salaryname: 'salary1',
-      },
-      {
-        id: 2,
-        salaryname: 'salary2',
-      }
-    ];
-    // this.commonService.get('esi/get', {})
-    //   .subscribe(
-    //     data => {
-    //       setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
-    //       if (data.success) {
-    //         this.dataList = data.message;
-    //         this.temp = true;
-    //       }
-    //     });
+    this.dataList = [];
+    this.commonService.get('salarystructure/get', {})
+      .subscribe(
+        data => {
+          setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+          if (data.success) {
+            this.dataList = data.message;
+            this.temp = true;
+          }
+        });
   }
 
   IsJsonString(str) {
@@ -63,30 +54,29 @@ export class SalaryStructureListComponent implements OnInit {
   }
 
   deleteAction(params: any) {
-    // this.commonService.get('esi/delete/' + params, {}).subscribe(
-    //   data => {
-    //     setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
-    //     if (data.success) {
-    //       this.toastr.successToastr('ESI deleted sucessfully');
-    //       this.getList();
-    //       // this.dataList=data.message;
-    //     }
-    //   });
+    this.commonService.get('salarystructure/delete/' + params, {}).subscribe(
+      data => {
+        setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+        if (data.success) {
+          this.toastr.successToastr('Salary Structure deleted sucessfully');
+          this.getList();
+        }
+      });
   }
   toggleStatus(eventchecked: any, params: any) {
     params.status = (eventchecked) ? '1' : '0';
-    // this.commonService.post('esi/update/' + params.id, params)
-    //   .subscribe(
-    //     details => {
-    //       setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
-    //       if (details.success) {
-    //         this.toastr.successToastr('ESI status changed sucessfully');
-    //         this.getList();
-    //       }
-    //     },
-    //     error => {
-    //       setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
-    //       this.toastr.errorToastr(error);
-    //     });
+    this.commonService.post('salarystructure/update/' + params.id, params)
+      .subscribe(
+        details => {
+          setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+          if (details.success) {
+            this.toastr.successToastr('Salary Structure status changed sucessfully');
+            this.getList();
+          }
+        },
+        error => {
+          setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+          this.toastr.errorToastr(error);
+        });
   }
 }

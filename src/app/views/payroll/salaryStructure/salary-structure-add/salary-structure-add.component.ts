@@ -3,12 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { CurdcommonserviceService, AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import {removeSpaces} from '../../../../_helpers/customvalidator';
-import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { removeSpaces } from '../../../../_helpers/customvalidator';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment from 'moment';
-import {Moment} from 'moment';
-import {MatDatepicker} from '@angular/material/datepicker';
+import { Moment } from 'moment';
+import { MatDatepicker } from '@angular/material/datepicker';
 import { SubComponentComponent } from './sub-component/sub-component.component';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 
@@ -36,17 +36,17 @@ export const MY_FORMATS = {
     useClass: MomentDateAdapter,
     deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
   },
-{provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},]
+  { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },]
 })
 export class SalaryStructureAddComponent implements OnInit {
   public fixedFormGroup: FormGroup;
   public flexiFormGroup: FormGroup;
   public variableFormGroup: FormGroup;
-  public adhocFormGroup: FormGroup;
+  public applysalaryFormGroup: FormGroup;
   public NUMBER = /^(0|[1-9][0-9]*)$/;
   dropdown: any;
   id: any;
-  
+
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -56,16 +56,15 @@ export class SalaryStructureAddComponent implements OnInit {
 
   initiateFixedFormGroup(data?: any) {
     this.fixedFormGroup = this.formBuilder.group({
-      id: [(data) ? data.id : ''],
       fixeddetails: this.formBuilder.array([]),
     });
   }
   createFixeddetailsFormGroup(data?: any) {
     return this.formBuilder.group({
-      component: [(data) ? data.component : '', [Validators.required, removeSpaces]],
-      paytype: [(data) ? data.paytype : 1, [Validators.required, removeSpaces]],
-      formula: [(data) ? data.formula : ""],
-      calculation: [(data) ? data.calculation : ''],
+      component: [(data && data.component) ? data.component : '', [Validators.required, removeSpaces]],
+      paytype: [(data && data.paytype) ? data.paytype : 1, [Validators.required, removeSpaces]],
+      formula: [(data && data.formula) ? data.formula : ""],
+      calculation: [(data && data.calculation) ? data.calculation : ''],
       calculationdetails: this.formBuilder.array([]),
       type: [(data) ? data.type : 1],
       formula_enable: [(data) ? data.formula_enable : 1]
@@ -73,21 +72,21 @@ export class SalaryStructureAddComponent implements OnInit {
   }
   createCalculationdetailsFormGroup(data?: any) {
     return this.formBuilder.group({
-      base: [(data) ? data.base : 1],
-      basetext: [(data) ? data.basetext : 1],
-      typetext: [(data) ? data.typetext : 1],
+      base: [(data && data.base) ? data.base : 1],
+      basetext: [(data && data.basetext) ? data.basetext : 1],
+      typetext: [(data && data.typetext) ? data.typetext : 1],
       type: [(data) ? data.type : 1],
-      basevalue: [(data) ? data.basevalue : 1],
-      result_if_type: [(data) ? data.result_if_type : 1],
-      result_if: [(data) ? data.result_if : 0],
-      result_if_type_text: [(data) ? data.result_if_type_text : 0],
-      result_else_type_text: [(data) ? data.result_else_type_text : 0],
-      result_else_type: [(data) ? data.result_else_type : 1],
-      result_else: [(data) ? data.result_else : 0]
+      basevalue: [(data && data.basevalue) ? data.basevalue : 1],
+      result_if_type: [(data && data.result_if_type) ? data.result_if_type : 1],
+      result_if: [(data && data.result_if) ? data.result_if : 0],
+      result_if_type_text: [(data && data.result_if_type_text) ? data.result_if_type_text : 0],
+      result_else_type_text: [(data && data.result_else_type_text) ? data.result_else_type_text : 0],
+      result_else_type: [(data && data.result_else_type) ? data.result_else_type : 1],
+      result_else: [(data && data.result_else) ? data.result_else : 0]
     });
   }
 
-  addCalculationdetailsValue(data?: any, index?:any) {
+  addCalculationdetailsValue(data?: any, index?: any) {
     const ctrl = (<FormArray>this.fixedFormGroup.get('fixeddetails')).at(index).get('calculationdetails') as FormArray;
     ctrl.clear();
     let fg = this.createCalculationdetailsFormGroup(data);
@@ -99,7 +98,7 @@ export class SalaryStructureAddComponent implements OnInit {
   addFixeddetailsValue(data?: any) {
     let invalidCount = 0;
     this.fixeddetails.controls.forEach(element => {
-      if (element.invalid && element.get('type').value!==0) {
+      if (element.invalid && element.get('type').value !== 0) {
         invalidCount++;
       }
     });
@@ -114,22 +113,21 @@ export class SalaryStructureAddComponent implements OnInit {
 
   initiateFlexiFormGroup(data?: any) {
     this.flexiFormGroup = this.formBuilder.group({
-      id: [(data) ? data.id : ''],
       flexidetails: this.formBuilder.array([]),
     });
   }
   createFlexidetailsFormGroup(data?: any) {
     return this.formBuilder.group({
-      component: [(data) ? data.component : '', [Validators.required, removeSpaces]],
-      paytype: [(data) ? data.paytype : 1, [Validators.required, removeSpaces]],
-      monthly_eligibility: [(data) ? data.monthly_eligibility : '', [Validators.required, removeSpaces]],
-      annual_eligibility: [(data) ? data.annual_eligibility : '', [Validators.required, removeSpaces]],
-      paid_monthly: [(data) ? data.paid_monthly : 1, [Validators.required, removeSpaces]],
-      monthly_tax_applied: [(data) ? data.monthly_tax_applied : 1, [Validators.required, removeSpaces]],
-      proofs_submitted: [(data) ? data.proofs_submitted : 1, [Validators.required, removeSpaces]],
-      reimburse_proof_submission: [(data) ? data.reimburse_proof_submission : 1, [Validators.required, removeSpaces]],
-      lop_dependent: [(data) ? data.lop_dependent : 1, [Validators.required, removeSpaces]],
-      include_ctc: [(data) ? data.include_ctc : 1, [Validators.required, removeSpaces]],
+      component: [(data && data.component) ? data.component : '', [Validators.required, removeSpaces]],
+      paytype: [(data && data.paytype) ? data.paytype : 1, [Validators.required, removeSpaces]],
+      monthly_eligibility: [(data && data.monthly_eligibility) ? data.monthly_eligibility : '', [Validators.required, removeSpaces]],
+      annual_eligibility: [(data && data.annual_eligibility) ? data.annual_eligibility : '', [Validators.required, removeSpaces]],
+      paid_monthly: [(data && data.paid_monthly) ? data.paid_monthly : 1, [Validators.required, removeSpaces]],
+      monthly_tax_applied: [(data && data.monthly_tax_applied) ? data.monthly_tax_applied : 1, [Validators.required, removeSpaces]],
+      proofs_submitted: [(data && data.proofs_submitted) ? data.proofs_submitted : 1, [Validators.required, removeSpaces]],
+      reimburse_proof_submission: [(data && data.reimburse_proof_submission) ? data.reimburse_proof_submission : 1, [Validators.required, removeSpaces]],
+      lop_dependent: [(data && data.lop_dependent) ? data.lop_dependent : 1, [Validators.required, removeSpaces]],
+      include_ctc: [(data && data.include_ctc) ? data.include_ctc : 1, [Validators.required, removeSpaces]],
       type: [(data) ? data.type : 1]
     });
   }
@@ -139,7 +137,7 @@ export class SalaryStructureAddComponent implements OnInit {
   addFlexidetailsValue(data?: any) {
     let invalidCount = 0;
     this.flexidetails.controls.forEach(element => {
-      if (element.invalid && element.get('type').value!==0) {
+      if (element.invalid && element.get('type').value !== 0) {
         invalidCount++;
       }
     });
@@ -154,20 +152,19 @@ export class SalaryStructureAddComponent implements OnInit {
 
   initiateVariableFormGroup(data?: any) {
     this.variableFormGroup = this.formBuilder.group({
-      id: [(data) ? data.id : ''],
       variabledetails: this.formBuilder.array([]),
     });
   }
   createVariabledetailsFormGroup(data?: any) {
     return this.formBuilder.group({
-      component: [(data) ? data.component : '', [Validators.required, removeSpaces]],
-      paytype: [(data) ? data.paytype : 1, [Validators.required, removeSpaces]],
-      base: [(data) ? data.base : '', [Validators.required, removeSpaces]],
-      percentage_or_value: [(data) ? data.percentage_or_value : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
-      lop_dependent: [(data) ? data.lop_dependent : 1, [Validators.required, removeSpaces]],
-      include_ctc: [(data) ? data.include_ctc : 1, [Validators.required, removeSpaces]],
-      payment_frequency: [(data) ? data.payment_frequency : 1, [Validators.required, removeSpaces]],
-      payment_reminder: [(data) ? data.payment_reminder : moment(), [Validators.required, removeSpaces]],
+      component: [(data && data.component) ? data.component : '', [Validators.required, removeSpaces]],
+      paytype: [(data && data.paytype) ? data.paytype : 1, [Validators.required, removeSpaces]],
+      base: [(data && data.base) ? data.base : '', [Validators.required, removeSpaces]],
+      percentage_or_value: [(data && data.percentage_or_value) ? data.percentage_or_value : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
+      lop_dependent: [(data && data.lop_dependent) ? data.lop_dependent : 1, [Validators.required, removeSpaces]],
+      include_ctc: [(data && data.include_ctc) ? data.include_ctc : 1, [Validators.required, removeSpaces]],
+      payment_frequency: [(data && data.payment_frequency) ? data.payment_frequency : 1, [Validators.required, removeSpaces]],
+      payment_reminder: [(data && data.payment_reminder) ? data.payment_reminder : moment(), [Validators.required, removeSpaces]],
       type: [(data) ? data.type : 1]
     });
   }
@@ -191,7 +188,7 @@ export class SalaryStructureAddComponent implements OnInit {
   addVariabledetailsValue(data?: any) {
     let invalidCount = 0;
     this.variabledetails.controls.forEach(element => {
-      if (element.invalid && element.get('type').value!==0) {
+      if (element.invalid && element.get('type').value !== 0) {
         invalidCount++;
       }
     });
@@ -204,41 +201,44 @@ export class SalaryStructureAddComponent implements OnInit {
     this.variabledetails.removeAt(idx);
   }
 
-  initiateAdhocFormGroup(data?: any) {
-    this.adhocFormGroup = this.formBuilder.group({
-      id: [(data) ? data.id : ''],
-      adhocdetails: this.formBuilder.array([]),
+  initiateApplySalaryFormGroup(data?: any) {
+    this.applysalaryFormGroup = this.formBuilder.group({
+      applysalary: this.formBuilder.array([]),
     });
   }
-  createAdhocdetailsFormGroup(data?: any) {
+  createApplySalaryFormGroup(data?: any) {
     return this.formBuilder.group({
-      component: [(data) ? data.component : '', [Validators.required, removeSpaces]],
-      paytype: [(data) ? data.paytype : 1, [Validators.required, removeSpaces]],
-      tax_dependent: [(data) ? data.tax_dependent : 1, [Validators.required, removeSpaces]],
-      pt_dependent: [(data) ? data.pt_dependent : 1, [Validators.required, removeSpaces]],
-      esi_dependent: [(data) ? data.pt_dependent : 1, [Validators.required, removeSpaces]],
-      amount: [(data) ? data.amount : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
-      type: [(data) ? data.type : 1]
+      designation: [(data && data.designation) ? data.designation : '', [Validators.required, removeSpaces]]
     });
   }
-  get adhocdetails(): FormArray {
-    return this.adhocFormGroup.get('adhocdetails') as FormArray;
+  get applysalary(): FormArray {
+    return this.applysalaryFormGroup.get('applysalary') as FormArray;
   }
-  addAdhocdetailsValue(data?: any) {
+  addApplySalaryValue(data?: any) {
     let invalidCount = 0;
-    this.adhocdetails.controls.forEach(element => {
-      if (element.invalid && element.get('type').value!==0) {
+    this.applysalary.controls.forEach(element => {
+      if (element.invalid) {
         invalidCount++;
       }
     });
     if (invalidCount == 0) {
-      let fg = this.createAdhocdetailsFormGroup(data);
-      this.adhocdetails.push(fg);
+      let fg = this.createApplySalaryFormGroup(data);
+      this.applysalary.push(fg);
     }
   }
-  deleteAdhocdetailsValue(idx: number) {
-    this.adhocdetails.removeAt(idx);
+  deleteApplySalaryValue(idx: number) {
+    this.applysalary.removeAt(idx);
   }
+
+  IsJsonString(str) {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+
   ngOnInit() {
     this.dropdown = {
       paytype_dependent: [
@@ -270,8 +270,8 @@ export class SalaryStructureAddComponent implements OnInit {
         { id: 4, name: 'Not Applicable' },
       ],
       default_fixed_salary_dependent: [
-        { component: 'Basic', paytype: 1, type: 0, formula_enable: 1, formula:"" },
-        { component: 'HRA', paytype: 1, type: 0, formula_enable: 1, formula:"" },
+        { component: 'Basic', paytype: 1, type: 0, formula_enable: 1, formula: "" },
+        { component: 'HRA', paytype: 1, type: 0, formula_enable: 1, formula: "" },
         { component: 'Spl Allowance', paytype: 1, type: 0, formula_enable: 0 },
         { component: 'PF Employer', paytype: 2, type: 0, formula_enable: 0 },
         { component: 'ESI Employer', paytype: 2, type: 0, formula_enable: 0 },
@@ -282,87 +282,188 @@ export class SalaryStructureAddComponent implements OnInit {
         { component: 'Fuel Expenses', paytype: 1, type: 0 },
       ],
       default_variable_salary_dependent: [
-        { component: 'Variable Pay', paytype: 1, type: 0, payment_reminder:moment() },
-        { component: 'Annual Bonus', paytype: 1, type: 0, payment_reminder:moment() },
-        { component: 'Performacnce Bonus', paytype: 1, type: 0, payment_reminder:moment() }
+        { component: 'Variable Pay', paytype: 1, type: 0, payment_reminder: moment() },
+        { component: 'Annual Bonus', paytype: 1, type: 0, payment_reminder: moment() },
+        { component: 'Performacnce Bonus', paytype: 1, type: 0, payment_reminder: moment() }
       ],
-      default_adhoc_salary_dependent: [
-        { component: 'Other Earnings', paytype: 1, type: 0 },
-        { component: 'Other Earnings (Non Taxable)', paytype: 1, type: 0 },
-        { component: 'Other Deductions', paytype: 2, type: 0 },
-        { component: 'Incentive', paytype: 2, type: 0 },
-        { component: 'Salary Advance', paytype: 1, type: 0 },
-        { component: 'Salary Advance Recovery', paytype: 2, type: 0 },
-      ],
+      designation: []
     };
-
+    this.commonService.get('masterlist/7', {})
+      .subscribe(
+        data => {
+          setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+          if (data.success) {
+            this.dropdown.designation = (data.message.designation);
+          }
+        });
     this.initiateFixedFormGroup();
-    this.dropdown.default_fixed_salary_dependent.forEach(element => {
-      this.addFixeddetailsValue(element);
-    });
     this.initiateFlexiFormGroup();
-    this.dropdown.default_flexi_salary_dependent.forEach(element => {
-      this.addFlexidetailsValue(element);
-    });
     this.initiateVariableFormGroup();
-    this.dropdown.default_variable_salary_dependent.forEach(element => {
-      this.addVariabledetailsValue(element);
-    });
-    this.initiateAdhocFormGroup();
-    this.dropdown.default_adhoc_salary_dependent.forEach(element => {
-      this.addAdhocdetailsValue(element);
-    });
+    this.initiateApplySalaryFormGroup();
+
+    if (this.route.snapshot.params['id']) {
+      this.id = this.route.snapshot.params['id'];
+      this.commonService.get('professionaltax/show/' + this.id, {})
+        .subscribe(
+          data => {
+            setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
+            if (data.success) {
+              console.log(data.message);
+              Object.keys(data.message).forEach((keys: any, vals: any) => {
+                const jsonCheck = this.IsJsonString(data.message[keys])
+                if (jsonCheck) {
+                  data.message[keys] = (JSON.parse(data.message[keys]));
+                }
+              });
+              this.initiateFixedFormGroup(data.message);
+              data.message.fixed.forEach(element => {
+                this.addFixeddetailsValue(element);
+              });
+              this.initiateFlexiFormGroup();
+              data.message.flexi.forEach(element => {
+                this.addFixeddetailsValue(element);
+              });
+              this.initiateVariableFormGroup();
+              data.message.variable.forEach(element => {
+                this.addFixeddetailsValue(element);
+              });
+              this.initiateApplySalaryFormGroup();
+              data.message.apply_salary.forEach(element => {
+                this.addApplySalaryValue(element);
+              });
+            }
+          });
+    } else {
+      this.dropdown.default_fixed_salary_dependent.forEach(element => {
+        this.addFixeddetailsValue(element);
+      });
+      this.dropdown.default_flexi_salary_dependent.forEach(element => {
+        this.addFlexidetailsValue(element);
+      });
+      this.dropdown.default_variable_salary_dependent.forEach(element => {
+        this.addVariabledetailsValue(element);
+      });
+      this.addApplySalaryValue();
+    }
   }
+
+
   formulaClick(value: any, index: any) {
     this.formulaChange(value, index)
   }
+
+  public dropdownUniqueCheck(value: any, indexKey: any): boolean {
+    let re = false;
+    const ctrltask = this.applysalaryFormGroup.get('applysalary') as FormArray;
+    ctrltask.value.forEach((val: any, indexval: number) => {
+      if (!re && (val[indexKey]) === (value)) {
+        re = true;
+      }
+    });
+    return re;
+  }
+
   formulaChange(value: any, index: any) {
     const ctrl = this.fixedFormGroup.get('fixeddetails') as FormArray;
-    ctrl.at(index).patchValue({ calculation: ''});
-    if (value.formula !== '' && value.formula!=null) {
+    ctrl.at(index).patchValue({ calculation: '' });
+    if (value.formula !== '' && value.formula != null) {
       this.matDialog.closeAll();
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-      // dialogConfig.height = (value.formula === '1') ? '260px' : '480px';
       dialogConfig.width = '600px';
       dialogConfig.data = value;
-      dialogConfig.panelClass= 'custom-salarymodalbox';
+      dialogConfig.panelClass = 'custom-salarymodalbox';
       const dialogRef = this.matDialog.open(SubComponentComponent, dialogConfig);
 
       dialogRef.afterClosed().subscribe(
-        data  => {
-          if (data){
+        data => {
+          if (data) {
             console.log(data);
             if (value.formula === '1') {
               let calculation = '';
               if (parseInt(data.type) === 1) {
-                calculation = (data.basetext + ' * ' + (data.basevalue/100) + '' + data.typetext)
+                calculation = (data.basetext + ' * ' + (data.basevalue / 100) + '' + data.typetext)
               } else {
                 calculation = (data.basevalue)
               }
-              ctrl.at(index).patchValue({ calculation: calculation});
+              ctrl.at(index).patchValue({ calculation: calculation });
             } else if (value.formula === '2') {
-              let calculation = 'if '+data.basetext + '' + data.typetext + data.basevalue+' then ';
+              let calculation = 'if ' + data.basetext + '' + data.typetext + data.basevalue + ' then ';
               if (parseInt(data.result_if_type) === 1) {
-                calculation += (data.basetext + ' * ' + (data.result_if/100) + '' + data.result_if_type_text) +' else ';
+                calculation += (data.basetext + ' * ' + (data.result_if / 100) + '' + data.result_if_type_text) + ' else ';
               } else {
-                calculation += (data.result_if) +' else ';
+                calculation += (data.result_if) + ' else ';
               }
               if (parseInt(data.result_else_type) === 1) {
-                calculation += (data.basetext + ' * ' + (data.result_else/100) + '' + data.result_else_type_text)+' end ';
+                calculation += (data.basetext + ' * ' + (data.result_else / 100) + '' + data.result_else_type_text) + ' end ';
               } else {
-                calculation += (data.result_else)+' end ';
+                calculation += (data.result_else) + ' end ';
               }
-              ctrl.at(index).patchValue({ calculation: calculation});
+              ctrl.at(index).patchValue({ calculation: calculation });
             }
-            this.addCalculationdetailsValue(data,index)
+            this.addCalculationdetailsValue(data, index)
             console.log(this.fixedFormGroup.value);
           }
         });
     }
   }
-  resetForm(){
+
+  onSubmit() {
+    if (this.fixedFormGroup.invalid || this.flexiFormGroup.invalid || this.variableFormGroup.invalid || this.applysalaryFormGroup.invalid) {
+      this.fixedFormGroup.markAllAsTouched();
+      this.flexiFormGroup.markAllAsTouched();
+      this.variableFormGroup.markAllAsTouched();
+      this.applysalaryFormGroup.markAllAsTouched();
+      // this.validateAllFields(this.fixedFormGroup); 
+      // this.validateAllFields(this.flexiFormGroup); 
+      // this.validateAllFields(this.variableFormGroup); 
+      // this.validateAllFields(this.applysalaryFormGroup); 
+      return;
+    }
+    let params = Object.assign({},
+      this.fixedFormGroup.value,
+      this.flexiFormGroup.value,
+      this.variableFormGroup.value,
+      this.applysalaryFormGroup.value,);
+    let URL = 'salarystructure/post';
+    if (this.route.snapshot.params['id']) {
+      URL = 'salarystructure/update/' + this.id;
+    }
+    Object.keys(params).forEach((keys: any, vals: any) => {
+      if(typeof params[keys] !== 'string' && params[keys].length > 0){
+        params[keys] = (JSON.stringify(params[keys]));
+      }
+    });
+    let convertParam={
+      fixed:params.fixeddetails,
+      flexi:params.flexidetails,
+      variable:params.variabledetails,
+      apply_salary:params.applysalary,
+    }
+    this.commonService.post(URL, convertParam)
+      .subscribe(
+        details => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
+          if (details.success) {
+            this.toastr.successToastr('Salary structure saved sucessfully');
+            this.router.navigate(['/home/payroll/salary-structure']);
+          } else {
+            this.toastr.errorToastr(details.message);
+          }
+        },
+        error => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
+          const error_array = (JSON.parse(error));
+          const keys = Object.keys(error_array);
+          keys.forEach(element => {
+            this.toastr.errorToastr(error_array[element][0]);
+          });
+        });
+  }
+
+
+  resetForm() {
     this.router.navigate(['/home/payroll/salary-structure']);
   }
 }
