@@ -321,11 +321,11 @@ export class SalaryStructureAddComponent implements OnInit {
               });
               this.initiateFlexiFormGroup();
               data.message.flexi.forEach(element => {
-                this.addFixeddetailsValue(element);
+                this.addFlexidetailsValue(element);
               });
               this.initiateVariableFormGroup();
               data.message.variable.forEach(element => {
-                this.addFixeddetailsValue(element);
+                this.addVariabledetailsValue(element);
               });
               this.initiateApplySalaryFormGroup();
               data.message.apply_salary.forEach(element => {
