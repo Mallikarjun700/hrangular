@@ -303,7 +303,7 @@ export class SalaryStructureAddComponent implements OnInit {
 
     if (this.route.snapshot.params['id']) {
       this.id = this.route.snapshot.params['id'];
-      this.commonService.get('professionaltax/show/' + this.id, {})
+      this.commonService.get('salarystructure/' + this.id, {})
         .subscribe(
           data => {
             setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
@@ -426,9 +426,9 @@ export class SalaryStructureAddComponent implements OnInit {
       this.flexiFormGroup.value,
       this.variableFormGroup.value,
       this.applysalaryFormGroup.value,);
-    let URL = 'salarystructure/post';
+    let URL = 'salarystructure';
     if (this.route.snapshot.params['id']) {
-      URL = 'salarystructure/update/' + this.id;
+      URL = 'salarystructure/' + this.id;
     }
     Object.keys(params).forEach((keys: any, vals: any) => {
       if(typeof params[keys] !== 'string' && params[keys].length > 0){

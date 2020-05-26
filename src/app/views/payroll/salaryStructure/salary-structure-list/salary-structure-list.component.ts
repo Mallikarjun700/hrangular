@@ -22,9 +22,9 @@ export class SalaryStructureListComponent implements OnInit {
     private matDialog: MatDialog) { }
 
   getList() {
-    this.temp = true;
+    this.temp = false;
     this.dataList = [];
-    this.commonService.get('salarystructure/get', {})
+    this.commonService.get('salarystructure', {})
       .subscribe(
         data => {
           setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);
@@ -65,7 +65,7 @@ export class SalaryStructureListComponent implements OnInit {
   }
   toggleStatus(eventchecked: any, params: any) {
     params.status = (eventchecked) ? '1' : '0';
-    this.commonService.post('salarystructure/update/' + params.id, params)
+    this.commonService.post('salarystructure/' + params.id, params)
       .subscribe(
         details => {
           setTimeout(() => { this.authenticationService.loaderEnd(); }, 10);

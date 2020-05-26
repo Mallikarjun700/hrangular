@@ -18,7 +18,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let group of dataList">
-                                <td>{{group.salaryname}}</td>
+                                <td>Salary Structure {{group.id}}</td>
                                 <td>
                                     <mat-slide-toggle (change)="toggleStatus($event.checked, group)"
                                                         [(ngModel)]="group.status"
