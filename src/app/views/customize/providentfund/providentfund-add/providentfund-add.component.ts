@@ -141,9 +141,6 @@ export class ProvidentfundAddComponent implements OnInit {
         });
   }
 
-  toggleExemptionStatus(eventchecked: any, params: any) {
-    params.status = (eventchecked) ? '1' : '0';
-  }
   resetForm(){
     this.providentFundFormGroup.reset();
     this.router.navigate(['/home/customize/providentfund']);

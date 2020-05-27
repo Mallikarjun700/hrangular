@@ -40,6 +40,43 @@ export const navItems: INavData[] = [
         name: 'Calender',
         url: '/home/organization/calender',
         icon: 'fa fa-calendar'
+      },
+      {
+        name: 'ESS SETTINGS',
+        url: '',
+        icon: 'fa fa-calendar'
+      },
+      {
+        name: 'Query Support Desk',
+        url: '',
+        icon: 'fa fa-calendar'
+      },
+      {
+        name: 'Labour Law Guide',
+        url: '',
+        icon: 'fa fa-calendar'
+      }
+    ]
+  },
+  {
+    name: 'Recruitment',
+    url: '/home/onboarding',
+    icon: 'fa fa-th',
+    children: [
+      {
+        name: 'R Dashboard',
+        url: '',
+        icon: 'fa fa-users'
+      },
+      {
+        name: 'Requisition',
+        url: '',
+        icon: 'fa fa-users'
+      },
+      {
+        name: 'Invite & Recruit',
+        url: '',
+        icon: 'fa fa-users'
       }
     ]
   },
@@ -49,8 +86,18 @@ export const navItems: INavData[] = [
     icon: 'fa fa-th',
     children: [
       {
+        name: 'O Dashboard',
+        url: '',
+        icon: 'fa fa-users'
+      },
+      {
         name: 'Personal Info',
         url: '/home/onboarding/personalinfo',
+        icon: 'fa fa-users'
+      },
+      {
+        name: 'Assign Emp',
+        url: '',
         icon: 'fa fa-users'
       }
     ]
@@ -61,6 +108,11 @@ export const navItems: INavData[] = [
     icon: 'fa fa-money',
     children: [
       {
+        name: 'Pay Dashboard',
+        url: '/home/payroll/salary-structure',
+        icon: 'fa fa-money'
+      },
+      {
         name: 'Salary Structure',
         url: '/home/payroll/salary-structure',
         icon: 'fa fa-money'
@@ -69,6 +121,105 @@ export const navItems: INavData[] = [
         name: 'Adhoc',
         url: '/home/payroll/adhoc',
         icon: 'fa fa-money'
+      },
+      {
+        name: 'Payroll Settings',
+        url: '',
+        icon: 'fa fa-money'
+      },
+      {
+        name: 'Process Engine',
+        url: '',
+        icon: 'fa fa-money'
+      },
+      {
+        name: 'AUTO Run',
+        url: '',
+        icon: 'fa fa-money'
+      },
+      {
+        name: 'Payslips',
+        url: '',
+        icon: 'fa fa-money'
+      },
+      {
+        name: 'ITCS',
+        url: '',
+        icon: 'fa fa-money'
+      },
+      {
+        name: 'YTD Statement',
+        url: '',
+        icon: 'fa fa-money'
+      },
+      {
+        name: 'PF Cont Statement',
+        url: '',
+        icon: 'fa fa-money'
+      },
+      {
+        name: 'Form 16s',
+        url: '',
+        icon: 'fa fa-money'
+      }
+    ]
+  },
+  {
+    name: 'COMP & BEN',
+    url: '/home/onboarding',
+    icon: 'fa fa-th',
+    children: [
+      {
+        name: 'CTC',
+        url: '',
+        icon: 'fa fa-users'
+      },
+      {
+        name: 'IT Declaration',
+        url: '',
+        icon: 'fa fa-users'
+      },
+      {
+        name: 'IT Proofs',
+        url: '',
+        icon: 'fa fa-users'
+      },
+      {
+        name: 'Flexi Planning',
+        url: '',
+        icon: 'fa fa-users'
+      },
+      {
+        name: 'Flexi Reimbursement',
+        url: '',
+        icon: 'fa fa-users'
+      }
+    ]
+  }, 
+  {
+    name: 'Customize',
+    url: '/home/customize',
+    icon: 'fa fa-cog',
+    children: [
+      {
+        name: 'Provident Fund',
+        url: '/home/customize/providentfund',
+        icon: 'fa fa-table'
+      },
+      {
+        name: 'Professional Tax',
+        url: '/home/customize/professionaltax',
+        icon: 'fa fa-table'
+      },
+      {
+        name: 'LWF',
+        url: '/home/customize/lwf',
+        icon: 'fa fa-table'
+      },
+      {
+        name: 'ESI',
+        url: '/home/customize/esi',
+        icon: 'fa fa-table'
       }
     ]
   },
@@ -110,31 +261,28 @@ export const navItems: INavData[] = [
     ]
   },
   {
-    name: 'Customize',
-    url: '/home/customize',
-    icon: 'fa fa-cog',
-    children: [
-      {
-        name: 'Provident Fund',
-        url: '/home/customize/providentfund',
-        icon: 'fa fa-table'
-      },
-      {
-        name: 'Professional Tax',
-        url: '/home/customize/professionaltax',
-        icon: 'fa fa-table'
-      },
-      {
-        name: 'LWF',
-        url: '/home/customize/lwf',
-        icon: 'fa fa-table'
-      },
-      {
-        name: 'ESI',
-        url: '/home/customize/esi',
-        icon: 'fa fa-table'
-      }
-    ]
+    name: 'SEPARATION',
+    url: '',
+    icon: 'icon-speedometer'
+  },
+  {
+    name: 'TIME & ATTENDANCE',
+    url: '',
+    icon: 'icon-speedometer'
+  },
+  {
+    name: 'LEAVE MANAGEMENT',
+    url: '',
+    icon: 'icon-speedometer'
+  },
+  {
+    name: 'REPORTS',
+    url: '',
+    icon: 'icon-speedometer'
+  }, {
+    name: 'ANALYTICS',
+    url: '',
+    icon: 'icon-speedometer'
   },
   {
     divider: true

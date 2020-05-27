@@ -7,6 +7,10 @@ import { CurdcommonserviceService, AuthenticationService } from '../../_services
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
+  public employeeDataList = [];
+  public temp: Object = false;
+  dtOptions: DataTables.Settings = {};
+
   constructor(private commonService: CurdcommonserviceService, private authenticationService: AuthenticationService) {
     setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
   }
@@ -380,7 +384,26 @@ export class DashboardComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
+  getEmployeeList() {
+    this.temp = false;
+    this.commonService.get('employee/get', {})
+      .subscribe(
+        data => {
+          setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
+          if (data.success) {
+            this.employeeDataList = data.message;
+            this.temp = true;
+          }
+        });
+  }
+
   ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      processing: true
+    };
+    this.getEmployeeList();
     // generate random values for mainChart
     for (let i = 0; i <= this.mainChartElements; i++) {
       this.mainChartData1.push(this.random(50, 200));

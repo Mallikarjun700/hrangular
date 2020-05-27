@@ -23,7 +23,7 @@
                                 <td>
                                     {{group.pfstatus}}
                                 </td>
-                                <td>{{group.effective_date}}</td>
+                                <td>{{group.effective_date | date:'shortDate'}}</td>
                                 <td>{{group.amount}}</td>
                                 <td>
                                     <mat-slide-toggle (change)="toggleStatus($event.checked, group)"
