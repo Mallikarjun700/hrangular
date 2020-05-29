@@ -1,18 +1,113 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { CurdcommonserviceService, AuthenticationService } from '../../_services';
+import { ChartComponent } from 'ng-apexcharts';
+
+import {
+  ApexNonAxisChartSeries,
+  ApexResponsive,
+  ApexChart
+} from 'ng-apexcharts';
+
+
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
+  public genderDiversityChartOptions: any;
+  public employeeStatusChartOptions: any;
+  public headCountChartOptions: any;
+  public salaryChartOptions: any;
+
   public employeeDataList = [];
   public temp: Object = false;
   dtOptions: DataTables.Settings = {};
 
   constructor(private commonService: CurdcommonserviceService, private authenticationService: AuthenticationService) {
     setTimeout(() => {this.authenticationService.loaderEnd();}, 10);
+    this.genderDiversityChartOptions = {
+        chart: {
+            id: null,
+            height: 250,
+            type: 'donut',
+            animations: { enabled: false }, toolbar: { show: true, tools: { download: true } },
+        },
+        labels: ['Male', 'Female'],
+        series: [44, 55],
+        legend: {
+            show: true,
+            position: 'bottom',
+        },
+        dataLabels: {
+            enabled: false,
+        }
+    };
+    this.employeeStatusChartOptions = {
+        chart: {
+            id: null,
+            height: 250,
+            type: 'donut',
+            animations: { enabled: false }, toolbar: { show: true, tools: { download: true } },
+        },
+        labels: ['Active', 'In-Active', 'Permanent', 'Contract'],
+        series: [25, 25, 25, 25],
+        legend: {
+            show: true,
+            position: 'bottom',
+        },
+        dataLabels: {
+            enabled: false,
+        }
+    };
+    this.headCountChartOptions = {
+        chart: {
+            id: null,
+            height: 250,
+            type: 'pie',
+            animations: { enabled: false }, toolbar: { show: true, tools: { download: true } },
+        },
+        labels: ['Department', 'Location'],
+        series: [75, 25],
+        legend: {
+            show: true,
+            position: 'bottom',
+        },
+        dataLabels: {
+            enabled: false,
+        }
+    };
+    this.salaryChartOptions = {
+        chart: {
+            id: null, height: '300', 
+            width: '100%', type: 'bar', 
+            animations: { enabled: false }, 
+            toolbar: { show: true, tools: { download: true } },
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+            },
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        colors: ['#086451'],
+        series: [
+          {
+            name: 'basic',
+            data: [400, 430, 448, 470, 1200, 580, 690, 1100, 1200, 1380, 582, 55]
+          }
+        ],
+        xaxis: {
+            type: 'category',
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        },
+        tooltip: {
+            enabled: true,
+        },
+    };
   }
   radioModel: string = 'Month';
 

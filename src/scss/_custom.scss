@@ -106,7 +106,12 @@ $color: #ffffff;
 .expansion-header-custom .mat-expansion-panel-header-title{
   margin-top: 5px;
 }
-
+.p-4 {
+  padding: 1.5rem!important;
+}
+.m-r-15{
+  margin-right: 15px;
+}
 .m-t-20 {
   margin-top: 20px;
 }
@@ -115,6 +120,9 @@ $color: #ffffff;
 }
 .m-b-10 {
   margin-bottom: 10px;
+}
+.m-b-1{
+  margin-bottom: 1px;
 }
 .m-l-10 {
   margin-left: 10px !important;
@@ -143,4 +151,43 @@ $color: #ffffff;
 }
 .custom-salarymodalbox {
   max-width: 480px;
+}
+.chart{
+  margin-bottom: 0px !important; 
+}
+.chart .card-header{
+  background-color: #fff !important; 
+  border-bottom: none !important; 
+}
+.bg-gradient-primary {
+  background: #1f1498!important;
+  background: linear-gradient(45deg,#321fdb 0%,#1f1498 100%)!important;
+  border-color: #1f1498!important;
+  color:#fff;
+}
+
+.bg-gradient-info {
+  background: #2982cc!important;
+  background: linear-gradient(45deg,#39f 0%,#2982cc 100%)!important;
+  border-color: #2982cc!important;
+  color:#fff;
+}
+
+.bg-gradient-warning {
+  background: #f6960b!important;
+  background: linear-gradient(45deg,#f9b115 0%,#f6960b 100%)!important;
+  border-color: #f6960b!important;
+  color:#fff;
+}
+.bg-gradient-success {
+  background: #75db1b!important;
+  background: linear-gradient(45deg,#85db1b 0%,#75db1b 100%)!important;
+  border-color: #75db1b!important;
+  color:#fff;
+}
+.bg-gradient-danger {
+  background: #d93737!important;
+  background: linear-gradient(45deg,#e55353 0%,#d93737 100%)!important;
+  border-color: #d93737!important;
+  color:#fff;
 }
