@@ -105,6 +105,154 @@
   </div><!--/.row-->
   <div class="card">
     <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card chart">
+                  <div class="card-header">Gender Diversity</div>
+                  <div class="card-body">
+                    <apx-chart
+                      [series]="genderDiversityChartOptions.series"
+                      [chart]="genderDiversityChartOptions.chart"
+                      [labels]="genderDiversityChartOptions.labels"
+                      [legend]="genderDiversityChartOptions.legend"
+                    ></apx-chart>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card chart">
+                  <div class="card-header">Employee Status</div>
+                  <div class="card-body">
+                    <apx-chart
+                    [series]="employeeStatusChartOptions.series"
+                    [chart]="employeeStatusChartOptions.chart"
+                    [labels]="employeeStatusChartOptions.labels"
+                    [legend]="employeeStatusChartOptions.legend"
+                    ></apx-chart>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card chart">
+                <div class="card-header">Head Count</div>
+                <div class="card-body">
+                  <apx-chart
+                  [series]="headCountChartOptions.series"
+                  [chart]="headCountChartOptions.chart"
+                  [labels]="headCountChartOptions.labels"
+                  [legend]="headCountChartOptions.legend"
+                  ></apx-chart>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card chart">
+                  <div class="card-header">Joiners &nbsp;
+                    <select >
+                       <option value="">--Select Month--</option>
+                       <option value="1"> Last Month </option>
+                       <option value="2"> Next Month </option>
+                     </select></div>
+                  <div class="card-body">
+                    <div class="card overflow-hidden">
+                      <div class="card-body p-0 d-flex align-items-center">
+                          <div class="bg-gradient-info p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
+                        <div>
+                          <div class="text-value text-primary">$1.999,50</div>
+                          <div class="text-muted font-weight-bold small">Yet to release the offer letter</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card overflow-hidden">
+                      <div class="card-body p-0 d-flex align-items-center">
+                          <div class="bg-gradient-warning p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
+                        <div>
+                          <div class="text-value text-primary">$1.999,50</div>
+                          <div class="text-muted font-weight-bold small">Yet to be onboarded</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card overflow-hidden">
+                      <div class="card-body p-0 d-flex align-items-center">
+                          <div class="bg-gradient-success p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
+                        <div>
+                          <div class="text-value text-primary">$1.999,50</div>
+                          <div class="text-muted font-weight-bold small">Joined</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card chart">
+                <div class="card-header">Atrition &nbsp;
+                  <select >
+                     <option value="">--Select Month--</option>
+                     <option value="1"> Last Month </option>
+                     <option value="2"> Next Month </option>
+                   </select></div>
+                <div class="card-body">
+                  <div class="card overflow-hidden">
+                    <div class="card-body p-0 d-flex align-items-center">
+                        <div class="bg-gradient-danger p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
+                      <div>
+                        <div class="text-value text-primary">$1.999,50</div>
+                        <div class="text-muted font-weight-bold small">Resigned</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card overflow-hidden">
+                    <div class="card-body p-0 d-flex align-items-center">
+                        <div class="bg-gradient-warning p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
+                      <div>
+                        <div class="text-value text-primary">$1.999,50</div>
+                        <div class="text-muted font-weight-bold small">Left the Service</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card overflow-hidden">
+                    <div class="card-body p-0 d-flex align-items-center">
+                        <div class="bg-gradient-info p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
+                      <div>
+                        <div class="text-value text-primary">$1.999,50</div>
+                        <div class="text-muted font-weight-bold small">FFS Pending</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+            <div class="col-md-6">
+              <div class="card chart">
+                <div class="card-header">Salary Cost Analysis &nbsp;
+                    <select >
+                       <option value="">--Select Year--</option>
+                       <option value="1"> Year Only </option>
+                     </select>
+                </div>
+                <div class="card-body">
+                  <apx-chart
+                  [series]="salaryChartOptions.series"
+                  [chart]="salaryChartOptions.chart"
+                  [dataLabels]="salaryChartOptions.dataLabels"
+                  [plotOptions]="salaryChartOptions.plotOptions"
+                  [xaxis]="salaryChartOptions.xaxis"
+                  ></apx-chart>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
       <div class="row">
         <div class="col-sm-5">       
             <div class="chart-wrapper mt-3 mx-3" style="height:70px;">

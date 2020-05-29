@@ -4,11 +4,11 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import {MatButtonModule} from  '@angular/material/button';
+import {MatButtonModule} from '@angular/material/button';
 import {DataTablesModule} from 'angular-datatables';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-
+import { NgApexchartsModule } from 'ng-apexcharts';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +19,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     MatButtonModule,
     BsDropdownModule,
     DataTablesModule,
+    NgApexchartsModule,
     ButtonsModule.forRoot()
   ],
   declarations: [ DashboardComponent ]
