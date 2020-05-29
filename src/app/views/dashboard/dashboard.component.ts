@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
     this.genderDiversityChartOptions = {
         chart: {
             id: null,
-            height: 250,
+            height: 320,
             type: 'donut',
             animations: { enabled: false }, toolbar: { show: true, tools: { download: true } },
         },
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
     this.employeeStatusChartOptions = {
         chart: {
             id: null,
-            height: 250,
+            height: 320,
             type: 'donut',
             animations: { enabled: false }, toolbar: { show: true, tools: { download: true } },
         },
@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
     this.headCountChartOptions = {
         chart: {
             id: null,
-            height: 250,
+            height: 320,
             type: 'pie',
             animations: { enabled: false }, toolbar: { show: true, tools: { download: true } },
         },
