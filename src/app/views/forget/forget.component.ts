@@ -10,7 +10,7 @@ import {removeSpaces}  from '../../_helpers/customvalidator';
   templateUrl: 'forget.component.html'
 })
 export class ForgetComponent implements OnInit {
-  public EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  public EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
   forgetForm: FormGroup;
   loading = false;
   mailExist = false;

@@ -28,7 +28,7 @@ export class AddCompanyProfileComponent implements OnInit {
   public seventhFormGroup: FormGroup;
   public eightFormGroup: FormGroup;
   public isOptional = false;
-  public EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  public EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
   public URL_REGEX = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
   constructor(
     private _formBuilder: FormBuilder,
