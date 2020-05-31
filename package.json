@@ -1,7 +1,7 @@
 {
-    "name": "HRMS",
+    "name": "CraftHR",
     "version": "2.7.4",
-    "description": "HRMS",
+    "description": "We are the one stop solution provider for all your HR related activities. The modules that are part of CraftHR are Attendance software, Payroll software, HR Analytics, shared services, labour law or HR Consulting.",
     "author": {
         "name": "Pandi"
     },
@@ -11,7 +11,7 @@
         }
     ],
     "homepage": "https://coreui.io/angular",
-    "copyright": "Copyright 2020 HRMS",
+    "copyright": "Copyright 2020 CraftPay",
     "license": "MIT",
     "scripts": {
         "ng": "ng",

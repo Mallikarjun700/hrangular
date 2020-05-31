@@ -1,139 +1,6 @@
 <div class="animated fadeIn">
-  <div class="row">
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-info">
-        <div class="card-body pb-0">
-          <button type="button" class="btn btn-transparent p-0 float-right">
-            <i class="icon-location-pin"></i>
-          </button>
-          <div class="text-value">9.823</div>
-          <div>Members online</div>
-        </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height: 70px;">
-          <canvas
-            baseChart
-            class="chart"
-            [datasets]="lineChart2Data"
-            [labels]="lineChart2Labels"
-            [options]="lineChart2Options"
-            [colors]="lineChart2Colours"
-            [legend]="lineChart2Legend"
-            [chartType]="lineChart2Type"
-          ></canvas>
-        </div>
-      </div>
-    </div>
-    <!--/.col-->
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-primary">
-        <div class="card-body pb-0">
-          <div class="btn-group float-right" dropdown>
-            <button
-              type="button"
-              class="btn btn-transparent dropdown-toggle p-0"
-              dropdownToggle
-            >
-              <i class="icon-settings"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-          <div class="text-value">9.823</div>
-          <div>Members online</div>
-        </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height: 70px;">
-          <canvas
-            baseChart
-            class="chart"
-            [datasets]="lineChart1Data"
-            [labels]="lineChart1Labels"
-            [options]="lineChart1Options"
-            [colors]="lineChart1Colours"
-            [legend]="lineChart1Legend"
-            [chartType]="lineChart1Type"
-          ></canvas>
-        </div>
-      </div>
-    </div>
-    <!--/.col-->
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-warning">
-        <div class="card-body pb-0">
-          <div class="btn-group float-right" dropdown>
-            <button
-              type="button"
-              class="btn btn-transparent dropdown-toggle p-0"
-              dropdownToggle
-            >
-              <i class="icon-settings"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-          <div class="text-value">9.823</div>
-          <div>Members online</div>
-        </div>
-        <div class="chart-wrapper mt-3" style="height: 70px;">
-          <canvas
-            baseChart
-            class="chart"
-            [datasets]="lineChart3Data"
-            [labels]="lineChart3Labels"
-            [options]="lineChart3Options"
-            [colors]="lineChart3Colours"
-            [legend]="lineChart3Legend"
-            [chartType]="lineChart3Type"
-          ></canvas>
-        </div>
-      </div>
-    </div>
-    <!--/.col-->
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-danger">
-        <div class="card-body pb-0">
-          <div class="btn-group float-right" dropdown>
-            <button
-              type="button"
-              class="btn btn-transparent dropdown-toggle p-0"
-              dropdownToggle
-            >
-              <i class="icon-settings"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-          <div class="text-value">9.823</div>
-          <div>Members online</div>
-        </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height: 70px;">
-          <canvas
-            baseChart
-            class="chart"
-            [datasets]="barChart1Data"
-            [labels]="barChart1Labels"
-            [options]="barChart1Options"
-            [colors]="barChart1Colours"
-            [legend]="barChart1Legend"
-            [chartType]="barChart1Type"
-          ></canvas>
-        </div>
-      </div>
-    </div>
-    <!--/.col-->
-  </div>
-  <!--/.row-->
-  
-  <div class="row">
+
+  <div class="row"> 
     <div class="col-sm-6 col-lg-3">
       <div class="card chartcustom">
         <div class="card-header">Gender Diversity</div>
@@ -175,7 +42,7 @@
       </div>
     </div>
     <div class="col-sm-6 col-lg-3">
-      <div class="card chartcustom">
+      <div class="card ">
         <div class="card-header">Pendding Tasks</div>
         <div class="card-body pb-0 text-center">
           <div class="marqueecontainer">
@@ -203,7 +70,7 @@ Whether that task becomes the purview of the CEO, an outsourced HR provider or i
             <div class="card-body p-0 d-flex align-items-center">
                 <div class="bg-gradient-info p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
               <div>
-                <div class="text-value text-primary">$1.999,50</div>
+                <div class="text-value text-primary">5</div>
                 <div class="text-muted font-weight-bold small">Yet to release the offer letter</div>
               </div>
             </div>
@@ -212,7 +79,7 @@ Whether that task becomes the purview of the CEO, an outsourced HR provider or i
             <div class="card-body p-0 d-flex align-items-center">
                 <div class="bg-gradient-warning p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
               <div>
-                <div class="text-value text-primary">$1.999,50</div>
+                <div class="text-value text-primary">10</div>
                 <div class="text-muted font-weight-bold small">Yet to be onboarded</div>
               </div>
             </div>
@@ -221,7 +88,7 @@ Whether that task becomes the purview of the CEO, an outsourced HR provider or i
             <div class="card-body p-0 d-flex align-items-center">
                 <div class="bg-gradient-success p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
               <div>
-                <div class="text-value text-primary">$1.999,50</div>
+                <div class="text-value text-primary">5</div>
                 <div class="text-muted font-weight-bold small">Joined</div>
               </div>
             </div>
@@ -242,7 +109,7 @@ Whether that task becomes the purview of the CEO, an outsourced HR provider or i
             <div class="card-body p-0 d-flex align-items-center">
                 <div class="bg-gradient-danger p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
               <div>
-                <div class="text-value text-primary">$1.999,50</div>
+                <div class="text-value text-primary">0</div>
                 <div class="text-muted font-weight-bold small">Resigned</div>
               </div>
             </div>
@@ -251,7 +118,7 @@ Whether that task becomes the purview of the CEO, an outsourced HR provider or i
             <div class="card-body p-0 d-flex align-items-center">
                 <div class="bg-gradient-warning p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
               <div>
-                <div class="text-value text-primary">$1.999,50</div>
+                <div class="text-value text-primary">2</div>
                 <div class="text-muted font-weight-bold small">Left the Service</div>
               </div>
             </div>
@@ -260,7 +127,7 @@ Whether that task becomes the purview of the CEO, an outsourced HR provider or i
             <div class="card-body p-0 d-flex align-items-center">
                 <div class="bg-gradient-info p-4 m-r-15"><i class="fa fa-2x fa-users"></i></div>
               <div>
-                <div class="text-value text-primary">$1.999,50</div>
+                <div class="text-value text-primary">1</div>
                 <div class="text-muted font-weight-bold small">FFS Pending</div>
               </div>
             </div>
@@ -313,11 +180,11 @@ Whether that task becomes the purview of the CEO, an outsourced HR provider or i
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-12 col-lg-12">
+    <div class="col-lg-12">
       <div class="card">
-        <div class="card-body pb-0">
+        <div class="card-body">
           <div class="alert alert-info" *ngIf="!this.temp">No Data found</div>
-          <table class="table table-striped table-bordered table-responsive table-sm row-border hover" datatable
+          <table class="table table-striped table-bordered table-sm row-border hover" datatable
               [dtOptions]="dtOptions" *ngIf="this.temp">
             <thead class="thead-light">
               <tr>
@@ -340,32 +207,32 @@ Whether that task becomes the purview of the CEO, an outsourced HR provider or i
                     <span class="avatar-status badge-success"></span>
                   </div>
                 </td>
-                <td>
+               <td class="text-center">
                   {{edata.employee_id}}
                 </td>
-                <td style="width:21%">
+                <td >
                   <div>{{edata.date_of_birth}}</div>
                   <div class="small text-muted">
                     <span>New</span> | Registered: Jan 1, 2015
                   </div>
                 </td>
-                <td>
+               <td class="text-center">
                   <span *ngIf="!edata.status"> InActive</span>
                   <span *ngIf="edata.status"> Active</span>
                 </td>
-                <td>
-                  <div> </div>
+               <td class="text-center">
+                  Software Engg
                 </td>
-                <td>
-                  <div> </div>
+               <td class="text-center">
+                   Info Tech
                 </td>
-                <td>
-                  <div> </div>
+               <td class="text-center">
+                  Xyz
                 </td>
-                <td>
-                  <div> </div>
+               <td class="text-center">
+                  Bangalore
                 </td>
-                <td>
+               <td class="text-center">
                   <button mat-mini-fab color="primary" type="button"
                   [routerLink]="['/home/onboarding/personalinfo/edit',edata.id]"><i
                       class="fa fa-edit"></i></button>

@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-    //  apiUrl: 'http://bv-b25.yuvanetworks.in/hrlaravel/public/api/'
-    apiUrl: 'http://localhost/php_workout/hrms/hrlaravel/public/api/'
+      apiUrl: 'http://bv-b25.yuvanetworks.in/hrlaravel/public/api/'
+    //apiUrl: 'http://localhost/php_workout/hrms/hrlaravel/public/api/'
 };
