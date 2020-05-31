@@ -23,7 +23,7 @@ export class AddPersonalInfoComponent implements OnInit {
   public seventhFormGroup: FormGroup;
   public eightFormGroup: FormGroup;
   public nineFormGroup: FormGroup;
-  public EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  public EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
   public PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/;
   public MOBILE = /^[0-9]{10,10}$/;
   constructor(

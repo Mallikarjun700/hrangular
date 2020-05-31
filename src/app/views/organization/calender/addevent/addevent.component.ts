@@ -25,7 +25,7 @@ export class AddeventComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   public firstFormGroup: FormGroup;
   dropdown: any;
-  public EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  public EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
   editorConfig: AngularEditorConfig = {
     editable: true,
