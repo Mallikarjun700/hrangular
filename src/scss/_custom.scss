@@ -152,12 +152,22 @@ $color: #ffffff;
 .custom-salarymodalbox {
   max-width: 480px;
 }
-.chart{
-  margin-bottom: 0px !important; 
-}
-.chart .card-header{
+.chartcustom{
   background-color: #fff !important; 
-  border-bottom: none !important; 
+}
+.chartcustom .card-header{
+  background-color: #fff !important; 
+  border-bottom: none !important;;
+} 
+.chartcustom .card-body{
+  padding-top: 10px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+.chartbodycustom {
+  padding-top: 10px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 .bg-gradient-primary {
   background: #1f1498!important;
@@ -190,4 +200,58 @@ $color: #ffffff;
   background: linear-gradient(45deg,#e55353 0%,#d93737 100%)!important;
   border-color: #d93737!important;
   color:#fff;
+}
+
+
+
+.marqueecontainer {
+  height: 235px;
+  overflow: hidden;
+  background: white;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.marquee {
+  top: 6em;
+  position: relative;
+  box-sizing: border-box;
+  animation: marquee 15s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Make it move! */
+@keyframes marquee {
+  0%   { top:   8em }
+  100% { top: -11em }
+}
+
+/* Make it look pretty */
+.marqueecontainer .marquee {
+margin: 0;
+  padding: 0 1em;
+  line-height: 1.5em;
+  font: 1em 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+}
+
+.marqueecontainer:before, .marqueecontainer::before,
+.marqueecontainer:after,  .marqueecontainer::after {
+  left: 0;
+  z-index: 1;
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  width: 100%; height: 2em;
+}
+
+.marqueecontainer:after, .marqueecontainer::after {
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+.marqueecontainer:before, .marqueecontainer::before {
+  top: 0;
 }
