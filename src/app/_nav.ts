@@ -9,37 +9,37 @@ export const navItems: INavData[] = [
   {
     name: 'Organization',
     url: '/home/organization',
-    icon: 'fa fa-th',
+    icon: 'fas fa-city',
     children: [
       {
         name: 'Company Profile',
         url: '/home/organization/companyprofile',
-        icon: 'fa fa-users'
+        icon: 'fas fa-clipboard-check' 
       },
       {
         name: 'Control Panel',
         url: '/home/organization/controlpanel',
-        icon: 'fa fa-wrench'
+        icon: 'fab fa-cpanel'
       },
       {
         name: 'Master',
         url: '/home/organization/master',
-        icon: 'fa fa-cogs'
+        icon: 'fas fa-clipboard-list'
       },
       {
         name: 'User Management',
         url: '/home/organization/usermanagement',
-        icon: 'fa fa-user-o'
+        icon: 'fas fa-diagnoses'
       },
       {
         name: 'Audit Log',
         url: '/home/organization/auditlog',
-        icon: 'fa fa-file-text-o'
+        icon: 'fas fa-file-alt'
       },
       {
         name: 'Calender',
         url: '/home/organization/calender',
-        icon: 'fa fa-calendar'
+        icon: 'fab fa-elementor'
       },
       {
         name: 'ESS SETTINGS',
@@ -49,19 +49,19 @@ export const navItems: INavData[] = [
       {
         name: 'Query Support Desk',
         url: '',
-        icon: 'fa fa-calendar'
+        icon: 'fas fa-hands-helping'
       },
       {
         name: 'Labour Law Guide',
         url: '',
-        icon: 'fa fa-calendar'
+        icon: 'fas fa-industry'
       }
     ]
   },
   {
     name: 'Recruitment',
     url: '/home/onboarding',
-    icon: 'fa fa-th',
+    icon: 'fas fa-address-card',
     children: [
       {
         name: 'R Dashboard',
@@ -83,7 +83,7 @@ export const navItems: INavData[] = [
   {
     name: 'Onboarding',
     url: '/home/onboarding',
-    icon: 'fa fa-th',
+    icon: 'fas fa-book-reader',
     children: [
       {
         name: 'O Dashboard',
@@ -105,12 +105,12 @@ export const navItems: INavData[] = [
   {
     name: 'Payroll',
     url: '/home/payroll',
-    icon: 'fa fa-money',
+    icon: 'fas fa-compress-arrows-alt',
     children: [
       {
         name: 'Pay Dashboard',
         url: '/home/payroll/salary-structure',
-        icon: 'fa fa-money'
+        icon: 'fas fa-rupee-sign'
       },
       {
         name: 'Salary Structure',
@@ -167,7 +167,7 @@ export const navItems: INavData[] = [
   {
     name: 'COMP & BEN',
     url: '/home/onboarding',
-    icon: 'fa fa-th',
+    icon: 'fas fa-edit',
     children: [
       {
         name: 'CTC',
@@ -263,12 +263,12 @@ export const navItems: INavData[] = [
   {
     name: 'SEPARATION',
     url: '',
-    icon: 'icon-speedometer'
+    icon: 'fas fa-dice-d20'
   },
   {
     name: 'TIME & ATTENDANCE',
     url: '',
-    icon: 'icon-speedometer'
+    icon: 'fas fa-chalkboard-teacher'
   },
   {
     name: 'LEAVE MANAGEMENT',
@@ -278,11 +278,11 @@ export const navItems: INavData[] = [
   {
     name: 'REPORTS',
     url: '',
-    icon: 'icon-speedometer'
+    icon: 'fab fa-dropbox'
   }, {
     name: 'ANALYTICS',
     url: '',
-    icon: 'icon-speedometer'
+    icon: 'far fa-chart-bar'
   },
   {
     divider: true
