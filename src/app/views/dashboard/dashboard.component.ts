@@ -83,8 +83,8 @@ export class DashboardComponent implements OnInit {
     };
     this.salaryChartOptions = {
         chart: {
-            id: null, height: 300 , 
-            width: 240, type: 'bar', 
+            id: null, height: 500 , 
+            width: 1024, type: 'bar', 
             animations: { enabled: false }
         },
         plotOptions: {
