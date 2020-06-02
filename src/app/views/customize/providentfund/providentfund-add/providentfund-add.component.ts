@@ -15,6 +15,7 @@ export class ProvidentfundAddComponent implements OnInit {
   dropdownmain: any;
   id: any;
   public NUMBER = /^(0|[1-9][0-9]*)$/;
+  public PERCENTAGE = /(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)/;
   public providentFundFormGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -29,7 +30,7 @@ export class ProvidentfundAddComponent implements OnInit {
         account_id: [(data) ? data.account_id : '', [Validators.required, removeSpaces]],
         account_name: [(data) ? data.account_name : '', [Validators.required, removeSpaces]],
         salary_type: [(data) ? data.salary_type : [Validators.required]],
-        salary_per: [(data) ? data.salary_per : 0, [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
+        salary_per: [(data) ? data.salary_per : 0, [Validators.required, removeSpaces, Validators.pattern(this.PERCENTAGE)]],
         account_details: [(data) ? data.account_details : ''],
       });
     }
