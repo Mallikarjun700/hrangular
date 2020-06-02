@@ -151,7 +151,7 @@
                     <td>
                         <!-- [required]="addr.get('dod').value!=''" -->
                         <mat-form-field style="width:100%">
-                            <input matInput
+                            <input matInput readonly 
                                     [matDatepicker]="dod"
                                     formControlName="dod" >
                             <mat-datepicker-toggle matSuffix
@@ -164,7 +164,7 @@
                     </td>
                     <td>
                         <mat-form-field style="width:100%">
-                            <input matInput
+                            <input matInput readonly 
                                     [matDatepicker]="last_dod"
                                     formControlName="last_dod" >
                             <mat-datepicker-toggle matSuffix

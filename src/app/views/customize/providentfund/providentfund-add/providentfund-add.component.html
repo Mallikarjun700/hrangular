@@ -36,6 +36,7 @@
             <mat-form-field style="width:100%">
                 <mat-label>Effective Date</mat-label>
                 <input matInput
+                readonly 
                     [matDatepicker]="effective_date"
                     formControlName="effective_date" >
                 <mat-datepicker-toggle matSuffix
@@ -47,7 +48,7 @@
             </mat-form-field>
        </div>
       </div>   
-        <div class="row col-md-12">
+        <div class="row">
             <div class="col-md-3">
             <mat-slide-toggle
                 formControlName="vc_allowed"
