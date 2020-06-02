@@ -39,10 +39,10 @@ export class ProvidentfundAddComponent implements OnInit {
       this.providentFundFormGroup = this.formBuilder.group({
         id: [(data) ? data.id : ''],
         pfstatus: [(data) ? data.pfstatus : 0],
-        amount: [(data) ? data.amount : '', [Validators.required, removeSpaces]],
+        amount: [(data) ? data.amount : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
         effective_date: [(data) ? data.effective_date : ''],
         vc_allowed: [(data) ? data.vc_allowed : 0],
-        stop_age: [(data) ? data.stop_age : '', [Validators.required, removeSpaces]],
+        stop_age: [(data) ? data.stop_age : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
         age_desc: [(data) ? data.age_desc : ''],
         pfdetails: this.formBuilder.array([]),
       });

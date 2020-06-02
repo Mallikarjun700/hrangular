@@ -29,6 +29,7 @@
                 <input matInput formControlName="amount" />
                 <mat-error *ngIf="f.amount.errors">
                     <span *ngIf="f.amount.errors.required"> Amount is required</span>
+                    <span *ngIf="f.amount.errors.pattern"> Amount is invalid</span>
                 </mat-error>
                </mat-form-field>
         </div>
@@ -61,6 +62,16 @@
                 <mat-form-field style="width:100%">
                     <mat-label> Age </mat-label>
                     <input matInput formControlName="stop_age" />
+                    <mat-error
+                    *ngIf="f.stop_age.errors"
+                  >
+                    <span *ngIf="f.amount.errors.required">
+                      Age is required</span
+                    >
+                    <span *ngIf="f.amount.errors.pattern">
+                      Age is invalid</span
+                    >
+                  </mat-error>
                   </mat-form-field>
             </div>
             <div class="col-md-4" >
