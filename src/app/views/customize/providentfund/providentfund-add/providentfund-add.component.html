@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-      <i class="fa fa-edit"></i>{{ id ? "Edit" : "Add" }} Provident Fund
+      <i class="fas fa-edit"></i>{{ id ? "Edit" : "Add" }} Provident Fund
     </div>
     <div
       class="card-body"
@@ -74,7 +74,7 @@
                 class="pull-right"
                 mat-mini-fab [disabled]="(pfdetails.invalid)" (click)="addPFdetailsValue()" 
                 color="primary"
-                > <i class="fa fa-plus" ></i>
+                > <i class="fas fa-plus" ></i>
                 </button>  
             </div>
         </div>
@@ -174,7 +174,7 @@
                                         type="button"
                                         [disabled]="(pfdetails.length==1)? true:false" (click)="deletePFdetailsValue(i)"
                                         ><i 
-                                        class="fa fa-trash"></i></button>
+                                        class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                       </ng-template>

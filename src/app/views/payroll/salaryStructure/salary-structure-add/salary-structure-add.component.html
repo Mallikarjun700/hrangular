@@ -3,7 +3,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-align-justify"></i> {{ id ? "Edit" : "Add" }} Salary Structure
+          <i class="fas fa-align-justify"></i> {{ id ? "Edit" : "Add" }} Salary Structure
         </div>
         <div class="card-body">
           <mat-tab-group mat-align-tabs="start"  mat-stretch-tabs>
@@ -19,7 +19,7 @@
                                 [disabled]="fixeddetails.invalid"
                                 (click)="addFixeddetailsValue()"
                             >
-                                <i class="fa fa-plus"></i>
+                                <i class="fas fa-plus"></i>
                             </button>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                                             [disabled]="(fixeddetails.length >= 1 && addr.get('type')?.value==0)? true : false"
                                             (click)="deleteFixeddetailsValue(i)"
                                         >
-                                            <i class="fa fa-trash"></i>
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -191,7 +191,7 @@
                                 [disabled]="flexidetails.invalid"
                                 (click)="addFlexidetailsValue()"
                             >
-                                <i class="fa fa-plus"></i>
+                                <i class="fas fa-plus"></i>
                             </button>
                         </div>
                     </div>
@@ -387,7 +387,7 @@
                                             [disabled]="(flexidetails.length >= 1 && addr.get('type')?.value==0)? true : false"
                                             (click)="deleteFlexidetailsValue(i)"
                                         >
-                                            <i class="fa fa-trash"></i>
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -412,7 +412,7 @@
                                 [disabled]="variabledetails.invalid"
                                 (click)="addVariabledetailsValue()"
                             >
-                                <i class="fa fa-plus"></i>
+                                <i class="fas fa-plus"></i>
                             </button>
                         </div>
                     </div>
@@ -568,7 +568,7 @@
                                             [disabled]="(variabledetails.length >= 1 && addr.get('type')?.value==0)? true : false"
                                             (click)="deleteVariabledetailsValue(i)"
                                         >
-                                            <i class="fa fa-trash"></i>
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -593,7 +593,7 @@
                                 [disabled]="applysalary.invalid"
                                 (click)="addApplySalaryValue()"
                             >
-                                <i class="fa fa-plus"></i>
+                                <i class="fas fa-plus"></i>
                             </button>
                         </div>
                     </div>
@@ -637,7 +637,7 @@
                                             [disabled]="(applysalary.length <= 1 )? true : false"
                                             (click)="deleteApplySalaryValue(i)"
                                         >
-                                            <i class="fa fa-trash"></i>
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
