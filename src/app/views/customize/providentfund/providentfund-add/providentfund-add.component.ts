@@ -29,8 +29,8 @@ export class ProvidentfundAddComponent implements OnInit {
       return this.formBuilder.group({
         account_id: [(data) ? data.account_id : '', [Validators.required, removeSpaces]],
         account_name: [(data) ? data.account_name : '', [Validators.required, removeSpaces]],
-        salary_type: [(data) ? data.salary_type : [Validators.required]],
-        salary_per: [(data) ? data.salary_per : 0, [Validators.required, removeSpaces, Validators.pattern(this.PERCENTAGE)]],
+        salary_type: [(data) ? data.salary_type  : '',[Validators.required]],
+        salary_per: [(data) ? data.salary_per  : '', [Validators.required, removeSpaces, Validators.pattern(this.PERCENTAGE)]],
         account_details: [(data) ? data.account_details : ''],
       });
     }
@@ -40,7 +40,7 @@ export class ProvidentfundAddComponent implements OnInit {
         id: [(data) ? data.id : ''],
         pfstatus: [(data) ? data.pfstatus : 0],
         amount: [(data) ? data.amount : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
-        effective_date: [(data) ? data.effective_date : ''],
+        effective_date: [(data) ? data.effective_date : '',[Validators.required, removeSpaces]],
         vc_allowed: [(data) ? data.vc_allowed : 0],
         stop_age: [(data) ? data.stop_age : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
         age_desc: [(data) ? data.age_desc : ''],
