@@ -44,7 +44,7 @@ export const navItems: INavData[] = [
       {
         name: 'ESS SETTINGS',
         url: '',
-        icon: 'fa fa-calendar'
+        icon: 'fas fa-calendar'
       },
       {
         name: 'Query Support Desk',
@@ -66,17 +66,17 @@ export const navItems: INavData[] = [
       {
         name: 'R Dashboard',
         url: '',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       },
       {
         name: 'Requisition',
         url: '',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       },
       {
         name: 'Invite & Recruit',
         url: '',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       }
     ]
   },
@@ -88,17 +88,17 @@ export const navItems: INavData[] = [
       {
         name: 'O Dashboard',
         url: '',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       },
       {
         name: 'Personal Info',
         url: '/home/onboarding/personalinfo',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       },
       {
         name: 'Assign Emp',
         url: '',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       }
     ]
   },
@@ -115,52 +115,52 @@ export const navItems: INavData[] = [
       {
         name: 'Salary Structure',
         url: '/home/payroll/salary-structure',
-        icon: 'fa fa-money'
+        icon: 'fas fa-money'
       },
       {
         name: 'Adhoc',
         url: '/home/payroll/adhoc',
-        icon: 'fa fa-money'
+        icon: 'fas fa-money'
       },
       {
         name: 'Payroll Settings',
         url: '',
-        icon: 'fa fa-money'
+        icon: 'fas fa-money'
       },
       {
         name: 'Process Engine',
         url: '',
-        icon: 'fa fa-money'
+        icon: 'fas fa-money'
       },
       {
         name: 'AUTO Run',
         url: '',
-        icon: 'fa fa-money'
+        icon: 'fas fa-money'
       },
       {
         name: 'Payslips',
         url: '',
-        icon: 'fa fa-money'
+        icon: 'fas fa-money'
       },
       {
         name: 'ITCS',
         url: '',
-        icon: 'fa fa-money'
+        icon: 'fas fa-money'
       },
       {
         name: 'YTD Statement',
         url: '',
-        icon: 'fa fa-money'
+        icon: 'fas fa-money'
       },
       {
         name: 'PF Cont Statement',
         url: '',
-        icon: 'fa fa-money'
+        icon: 'fas fa-money'
       },
       {
         name: 'Form 16s',
         url: '',
-        icon: 'fa fa-money'
+        icon: 'fas fa-money'
       }
     ]
   },
@@ -172,91 +172,91 @@ export const navItems: INavData[] = [
       {
         name: 'CTC',
         url: '',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       },
       {
         name: 'IT Declaration',
         url: '',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       },
       {
         name: 'IT Proofs',
         url: '',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       },
       {
         name: 'Flexi Planning',
         url: '',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       },
       {
         name: 'Flexi Reimbursement',
         url: '',
-        icon: 'fa fa-users'
+        icon: 'fas fa-users'
       }
     ]
   }, 
   {
     name: 'Customize',
     url: '/home/customize',
-    icon: 'fa fa-cog',
+    icon: 'fas fa-cog',
     children: [
       {
         name: 'Provident Fund',
         url: '/home/customize/providentfund',
-        icon: 'fa fa-table'
+        icon: 'fas fa-table'
       },
       {
         name: 'Professional Tax',
         url: '/home/customize/professionaltax',
-        icon: 'fa fa-table'
+        icon: 'fas fa-table'
       },
       {
         name: 'LWF',
         url: '/home/customize/lwf',
-        icon: 'fa fa-table'
+        icon: 'fas fa-table'
       },
       {
         name: 'ESI',
         url: '/home/customize/esi',
-        icon: 'fa fa-table'
+        icon: 'fas fa-table'
       }
     ]
   },
   {
     name: 'Settings',
     url: '/home/settings',
-    icon: 'fa fa-cogs',
+    icon: 'fas fa-cogs',
     children: [
       {
         name: 'Country',
         url: '/home/settings/country',
-        icon: 'fa fa-globe'
+        icon: 'fas fa-globe'
       },
       {
         name: 'State',
         url: '/home/settings/state',
-        icon: 'fa fa-globe'
+        icon: 'fas fa-globe'
       },
       {
         name: 'City',
         url: '/home/settings/city',
-        icon: 'fa fa-globe'
+        icon: 'fas fa-globe'
       },
       {
         name: 'Roles',
         url: '/home/settings/role',
-        icon: 'fa fa-user'
+        icon: 'fas fa-user'
       },
       {
         name: 'Company Events',
         url: '/home/settings/companyevent',
-        icon: 'fa fa-table'
+        icon: 'fas fa-table'
       },
       {
         name: 'System Settings',
         url: '/home/settings/systemsettings',
-        icon: 'fa fa-table'
+        icon: 'fas fa-table'
       }
     ]
   },

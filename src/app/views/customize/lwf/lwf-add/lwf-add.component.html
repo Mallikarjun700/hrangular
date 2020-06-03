@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-      <i class="fa fa-edit"></i>{{ id ? "Edit" : "Add" }} LWF
+      <i class="fas fa-edit"></i>{{ id ? "Edit" : "Add" }} LWF
     </div>
     <div
       class="card-body"
@@ -65,7 +65,7 @@
               (click)="addLWFDetailsValue()"
               color="primary"
             >
-              <i class="fa fa-plus"></i>
+              <i class="fas fa-plus"></i>
             </button>
           </div>
         </div>
@@ -151,7 +151,7 @@
                     <td>
                         <!-- [required]="addr.get('dod').value!=''" -->
                         <mat-form-field style="width:100%">
-                            <input matInput
+                            <input matInput readonly 
                                     [matDatepicker]="dod"
                                     formControlName="dod" >
                             <mat-datepicker-toggle matSuffix
@@ -164,7 +164,7 @@
                     </td>
                     <td>
                         <mat-form-field style="width:100%">
-                            <input matInput
+                            <input matInput readonly 
                                     [matDatepicker]="last_dod"
                                     formControlName="last_dod" >
                             <mat-datepicker-toggle matSuffix
@@ -198,7 +198,7 @@
                         [disabled]="lwfdetails.length == 1 ? true : false"
                         (click)="deleteLWFDetailsValue(i)"
                       >
-                        <i class="fa fa-trash"></i>
+                        <i class="fas fa-trash"></i>
                       </button>
                     </td>
                   </tr>

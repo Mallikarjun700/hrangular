@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-header"><i class="fa fa-edit"></i>{{(id)?'Edit':'Add'}} Event
+  <div class="card-header"><i class="fas fa-edit"></i>{{(id)?'Edit':'Add'}} Event
   </div>
   <div class="card-body" style="overflow: visible; height: auto; display: block;" aria-expanded="true"
     aria-hidden="false">
@@ -42,7 +42,7 @@
         <div class="col-md-8">
           <mat-form-field style="width:100%">
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="startdate" formControlName="startdate">
+            <input matInput readonly  [matDatepicker]="startdate" formControlName="startdate">
             <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
             <mat-datepicker #startdate></mat-datepicker>
             <mat-error *ngIf="f1.startdate.errors">
@@ -58,7 +58,7 @@
         <div class="col-md-8">
           <mat-form-field style="width:100%">
             <mat-label>Choose a date {{ f1.errors | json }}</mat-label>
-            <input matInput [matDatepicker]="enddate" formControlName="enddate" [min]="f1.startdate.value">
+            <input matInput readonly  [matDatepicker]="enddate" formControlName="enddate" [min]="f1.startdate.value">
             <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
             <mat-datepicker #enddate></mat-datepicker>
             <mat-error *ngIf="f1.enddate.errors">
@@ -78,7 +78,7 @@
               <mat-chip [selectable]="true" *ngFor="let emailkey of emailList" (click)="onChipSelect(chip)"
                 [removable]="removable" (removed)="remove(emailkey)">
                 {{emailkey.email}}
-                <mat-icon matChipRemove *ngIf="removable"><i class="fa fa-times"></i></mat-icon>
+                <mat-icon matChipRemove *ngIf="removable"><i class="fas fa-times"></i></mat-icon>
               </mat-chip>
               <input placeholder="New Emails..." [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"

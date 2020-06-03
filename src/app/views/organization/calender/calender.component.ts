@@ -54,7 +54,7 @@ export class CalenderComponent implements OnInit {
                 groupId: obj.company_events_id,
                 backgroundColor: '#6610f2',
                 textColor: '#fff',
-                icon: 'fa fa-birthday-cake'
+                icon: 'fas fa-birthday-cake'
               });
             });
             this.calendarOptions.events = (eventList);
@@ -63,8 +63,8 @@ export class CalenderComponent implements OnInit {
   }
   eventRender(info: any) {
     console.log(info);
-    info.el.innerHTML = info.el.innerHTML.replace('$ICON', "<i class='fa fa-birthday-cake'></i>");
-    // info.find(".fc-title").prepend("<i class='fa fa-"+event.icon+"'></i>");
+    info.el.innerHTML = info.el.innerHTML.replace('$ICON', "<i class='fas fa-birthday-cake'></i>");
+    // info.find(".fc-title").prepend("<i class='fas fa-"+event.icon+"'></i>");
   }
   eventClick(info: any) {
     console.log(info);

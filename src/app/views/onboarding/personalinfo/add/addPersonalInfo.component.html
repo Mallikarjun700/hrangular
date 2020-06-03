@@ -135,7 +135,7 @@
                             <div class="col-md-4">
                                 <mat-form-field style="width:100%">
                                     <mat-label>Choose a date</mat-label>
-                                    <input matInput
+                                    <input matInput readonly 
                                            [matDatepicker]="date_of_birth"
                                            formControlName="date_of_birth">
                                     <mat-datepicker-toggle matSuffix
@@ -170,7 +170,7 @@
                             <div class="col-md-4">
                                 <mat-form-field style="width:100%">
                                     <mat-label>Date Of Join</mat-label>
-                                    <input matInput
+                                    <input matInput readonly 
                                            [matDatepicker]="date_of_join"
                                            formControlName="date_of_join">
                                     <mat-datepicker-toggle matSuffix
@@ -324,7 +324,7 @@
                                 <div class="col-md-4">
                                     <mat-form-field style="width:100%">
                                         <mat-label>Passport Valid From</mat-label>
-                                        <input matInput
+                                        <input matInput readonly 
                                                [matDatepicker]="valid_from"
                                                formControlName="valid_from" [required]="addr.get('number').value!=''">
                                         <mat-datepicker-toggle matSuffix
@@ -339,7 +339,7 @@
                                 <div class="col-md-4">
                                     <mat-form-field style="width:100%">
                                         <mat-label>Passport Valid Till</mat-label>
-                                        <input matInput
+                                        <input matInput readonly 
                                                [matDatepicker]="valid_till"
                                                formControlName="valid_till" [required]="addr.get('number').value!=''">
                                         <mat-datepicker-toggle matSuffix
@@ -476,7 +476,7 @@
                                 <button class="pull-right"
                                         mat-mini-fab
                                         color="primary"
-                                        (click)="addEducationValue()"><i class="fa fa-plus"></i></button>
+                                        (click)="addEducationValue()"><i class="fas fa-plus"></i></button>
                                 <table class="table table-bordered table-responsive">
                                     <thead>
                                         <th>Name</th>
@@ -526,7 +526,7 @@
                                             </td>
                                             <td>
                                                 <mat-form-field style="width:100%">
-                                                    <input matInput
+                                                    <input matInput readonly 
                                                            [matDatepicker]="start_date"
                                                            formControlName="start_date">
                                                     <mat-datepicker-toggle matSuffix
@@ -536,7 +536,7 @@
                                             </td>
                                             <td>
                                                 <mat-form-field style="width:100%">
-                                                    <input matInput
+                                                    <input matInput readonly 
                                                            [matDatepicker]="end_date"
                                                            formControlName="end_date">
                                                     <mat-datepicker-toggle matSuffix
@@ -567,7 +567,7 @@
                                                         color="warn"
                                                         type="button"
                                                         (click)="deleteLocationValue(i)"><i
-                                                       class="fa fa-trash"></i></button>
+                                                       class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -593,7 +593,7 @@
                                 <button class="pull-right"
                                         mat-mini-fab
                                         color="primary"
-                                        (click)="addRelationShipValue()"><i class="fa fa-plus"></i></button>
+                                        (click)="addRelationShipValue()"><i class="fas fa-plus"></i></button>
                                 <table class="table table-bordered table-responsive">
                                     <thead>
                                         <th>Name</th>
@@ -621,7 +621,7 @@
                                             </td>
                                             <td>
                                                 <mat-form-field style="width:100%">
-                                                    <input matInput
+                                                    <input matInput readonly 
                                                            [matDatepicker]="date_of_birth"
                                                            formControlName="date_of_birth">
                                                     <mat-datepicker-toggle matSuffix
@@ -658,7 +658,7 @@
                                                         color="warn"
                                                         type="button"
                                                         (click)="deleteRelationShipValue(i)"><i
-                                                       class="fa fa-trash"></i></button>
+                                                       class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -684,7 +684,7 @@
                                 <button class="pull-right"
                                         mat-mini-fab
                                         color="primary"
-                                        (click)="addPreviousCompanyValue()"><i class="fa fa-plus"></i></button>
+                                        (click)="addPreviousCompanyValue()"><i class="fas fa-plus"></i></button>
                                 <table class="table table-bordered table-responsive">
                                     <thead>
                                         <th>Organization Name</th>
@@ -718,7 +718,7 @@
                                             </td>
                                             <td>
                                                 <mat-form-field style="width:100%">
-                                                    <input matInput
+                                                    <input matInput readonly 
                                                            [matDatepicker]="experience_from"
                                                            formControlName="experience_from">
                                                     <mat-datepicker-toggle matSuffix
@@ -729,7 +729,7 @@
                                             </td>
                                             <td>
                                                 <mat-form-field style="width:100%">
-                                                    <input matInput
+                                                    <input matInput readonly 
                                                            [matDatepicker]="experience_to"
                                                            formControlName="experience_to">
                                                     <mat-datepicker-toggle matSuffix
@@ -755,7 +755,7 @@
                                                         color="warn"
                                                         type="button"
                                                         (click)="deletePreviousCompanyValue(i)"><i
-                                                       class="fa fa-trash"></i></button>
+                                                       class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -781,7 +781,7 @@
                                 <button class="pull-right"
                                         mat-mini-fab
                                         color="primary"
-                                        (click)="addBankDetailsValue()"><i class="fa fa-plus"></i></button>
+                                        (click)="addBankDetailsValue()"><i class="fas fa-plus"></i></button>
                                 <table class="table table-bordered">
                                     <thead>
                                         <th>Account No</th>
@@ -837,7 +837,7 @@
                                                         color="warn"
                                                         type="button"
                                                         (click)="deleteBankDetailsValue(i)"><i
-                                                       class="fa fa-trash"></i></button>
+                                                       class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>

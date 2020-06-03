@@ -4,8 +4,8 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Company Profile
-                    <div class="pull-right"><a class="btn btn-primary" [routerLink]="['/home/organization/companyprofile/add']"><i class="fa fa-plus"></i> &nbsp;Add Profile</a></div>
+                    <i class="fas fa-align-justify"></i> Company Profile
+                    <div class="pull-right"><a class="btn btn-primary" [routerLink]="['/home/organization/companyprofile/add']"><i class="fas fa-plus"></i> &nbsp;Add Profile</a></div>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info" *ngIf="!this.temp">No Data found</div>
@@ -26,9 +26,9 @@
                                 <td>
                                     <button mat-mini-fab color="primary" type="button"
                                         [routerLink]="['/home/organization/companyprofile/edit',group.id]"><i
-                                            class="fa fa-edit"></i></button>
+                                            class="fas fa-edit"></i></button>
                                     <button mat-mini-fab color="warn" type="button" (click)="deleteAction(group.id)"><i
-                                            class="fa fa-trash"></i></button>
+                                            class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
