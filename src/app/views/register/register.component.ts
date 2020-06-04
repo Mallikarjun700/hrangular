@@ -75,6 +75,7 @@ onSubmit() {
         .subscribe(
             data => {
                 if (data.success) {
+                  this.loading = false;
                   this.toastr.successToastr('Welcome to dashboard');
                   window.location.reload();
                 }

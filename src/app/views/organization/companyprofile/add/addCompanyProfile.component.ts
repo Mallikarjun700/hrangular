@@ -29,6 +29,12 @@ export class AddCompanyProfileComponent implements OnInit {
   public eightFormGroup: FormGroup;
   public isOptional = false;
   public EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+  public PH_REGEX = /^[\+\d]?(?:[\d-.\s()]*)$/;
+  public ACNO_REGEX = /^\d{9,18}$/;
+  public IFSC_REGEX = /^[A-Za-z]{4}[a-zA-Z0-9]{7}$/;
+  public PAN_REGEX = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+  public CIN_REGEX = /^([L|U]{1})([0-9]{5})([A-Z]{2})([0-9]{4})([A-Z]{3})([0-9]{6})$/;
+  public GST_REGEX = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
   public URL_REGEX = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
   constructor(
     private _formBuilder: FormBuilder,
@@ -109,7 +115,7 @@ export class AddCompanyProfileComponent implements OnInit {
     return this._formBuilder.group({
       id: [(data) ? data.id : ''],
       address: [(data) ? data.address : '', [Validators.required, removeSpaces]],
-      pincode: [(data) ? data.pincode : '', [Validators.required, removeSpaces, Validators.pattern("^[0-9]*$"), Validators.min(6)]],
+      pincode: [(data) ? data.pincode : '', [Validators.required, removeSpaces, Validators.pattern(this.PH_REGEX), Validators.min(6)]],
       city: [(data) ? data.city : '', [Validators.required, removeSpaces]],
       state: [(data) ? data.state : '', [Validators.required, removeSpaces]],
       country: [(data) ? data.country : '', [Validators.required, removeSpaces]],
@@ -119,9 +125,9 @@ export class AddCompanyProfileComponent implements OnInit {
     return this._formBuilder.group({
       id: [(data) ? data.id : ''],
       bankname: [(data) ? data.bankname : '', [Validators.required, removeSpaces]],
-      accountnumber: [(data) ? data.accountnumber : '', [Validators.required, removeSpaces]],
+      accountnumber: [(data) ? data.accountnumber : '', [Validators.required,Validators.pattern(this.ACNO_REGEX), removeSpaces]],
       branch: [(data) ? data.branch : '', [Validators.required, removeSpaces]],
-      ifsc: [(data) ? data.ifsc : '', [Validators.required, removeSpaces]],
+      ifsc: [(data) ? data.ifsc : '', [Validators.required,Validators.pattern(this.IFSC_REGEX), removeSpaces]],
     })
   }
   createDirectorsGroup(data?: any) {
@@ -131,7 +137,7 @@ export class AddCompanyProfileComponent implements OnInit {
       name: [(data) ? data.name : ''],
       emailid: [(data) ? data.emailid : '', [Validators.pattern(this.EMAIL_REGEX), removeSpaces]],
       din: [(data) ? data.din : ''],
-      phonenumber: [(data) ? data.phonenumber : '', [Validators.pattern("^[0-9]*$"), removeSpaces, Validators.min(10)]],
+      phonenumber: [(data) ? data.phonenumber : '', [Validators.pattern(this.PH_REGEX), removeSpaces, Validators.min(10)]],
     })
   }
   createAuditorsFormGroup(data?: any) {
@@ -141,7 +147,7 @@ export class AddCompanyProfileComponent implements OnInit {
       name: [(data) ? data.name : ''],
       emailid: [(data) ? data.emailid : '', [Validators.pattern(this.EMAIL_REGEX), removeSpaces]],
       type: [(data) ? data.type : ''],
-      phonenumber: [(data) ? data.phonenumber : '', [Validators.pattern("^[0-9]*$"), removeSpaces, Validators.min(10)]],
+      phonenumber: [(data) ? data.phonenumber : '', [Validators.pattern(this.PH_REGEX), removeSpaces, Validators.min(10)]],
     })
   }
   createCompanySecretaryFormGroup(data?: any) {
@@ -150,7 +156,7 @@ export class AddCompanyProfileComponent implements OnInit {
       peoplestype: ['3'],
       name: [(data) ? data.name : ''],
       emailid: [(data) ? data.emailid : '', [Validators.pattern(this.EMAIL_REGEX)]],
-      phonenumber: [(data) ? data.phonenumber : '', [Validators.pattern("^[0-9]*$"), Validators.min(10)]],
+      phonenumber: [(data) ? data.phonenumber : '', [Validators.pattern(this.PH_REGEX), Validators.min(10)]],
     })
   }
   createSocialFormGroup(data?: any) {
@@ -183,16 +189,16 @@ export class AddCompanyProfileComponent implements OnInit {
   initiateThirdFormGroup(data?: any) {
     this.thirdFormGroup = this._formBuilder.group({
       contactperson: [(data) ? data.contactperson : '', [Validators.required, removeSpaces]],
-      phonenumber: [(data) ? data.phonenumber : '', [Validators.required, removeSpaces, Validators.min(10)]],
+      phonenumber: [(data) ? data.phonenumber : '', [Validators.required,Validators.pattern(this.PH_REGEX), removeSpaces, Validators.min(10)]],
       emialid: [(data) ? data.emialid : '', [Validators.required, removeSpaces, Validators.pattern(this.EMAIL_REGEX)]],
     });
   }
   initiateFourthFormGroup(data?: any) {
     this.fourthFormGroup = this._formBuilder.group({
-      pan: [(data) ? data.pan : '', [Validators.required, removeSpaces]],
-      tan: [(data) ? data.tan : '', [Validators.required, removeSpaces]],
-      gstin: [(data) ? data.gstin : '', [Validators.required, removeSpaces]],
-      cin: [(data) ? data.cin : '', [Validators.required, removeSpaces]],
+      pan: [(data) ? data.pan : '', [Validators.required,Validators.pattern(this.PAN_REGEX), removeSpaces]],
+      tan: [(data) ? data.tan : '', [Validators.required,Validators.pattern(this.PAN_REGEX), removeSpaces]],
+      gstin: [(data) ? data.gstin : '', [Validators.required,Validators.pattern(this.GST_REGEX), removeSpaces]],
+      cin: [(data) ? data.cin : '', [Validators.required,Validators.pattern(this.CIN_REGEX), removeSpaces]],
       companyentity: [(data) ? data.companyentity : ''],
     });
   }

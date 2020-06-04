@@ -353,6 +353,7 @@
                                            formControlName="gstin" required>
                                     <mat-error *ngIf="f4.gstin.errors">
                                         <span *ngIf="f4.gstin.errors.required"> GSTN is required</span>
+                                        <span *ngIf="f4.gstin.errors.pattern"> GSTN is invalid</span>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -367,6 +368,7 @@
                                            required>
                                     <mat-error *ngIf="f4.cin.errors">
                                         <span *ngIf="f4.cin.errors.required"> CIN is required</span>
+                                        <span *ngIf="f4.cin.errors.pattern"> CIN is invalid</span>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -440,6 +442,7 @@
                                                            formControlName="accountnumber" required>
                                                     <mat-error *ngIf="addr.invalid && addr.get('accountnumber').errors">
                                                         <span *ngIf="addr.get('accountnumber').errors?.required"> Account No. is required</span>
+                                                        <span *ngIf="addr.get('accountnumber').errors?.pattern"> Account No. is invalid</span>
                                                     </mat-error>
                                                 </mat-form-field>
                                             </td>
@@ -458,6 +461,7 @@
                                                            formControlName="ifsc" required>
                                                     <mat-error *ngIf="addr.invalid && addr.get('ifsc').errors">
                                                             <span *ngIf="addr.get('ifsc').errors?.required"> IFSC is required</span>
+                                                            <span *ngIf="addr.get('ifsc').errors?.pattern"> IFSC No. is invalid</span>
                                                     </mat-error>
                                                 </mat-form-field>
                                             </td>
