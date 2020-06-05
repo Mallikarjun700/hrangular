@@ -1,0 +1,54 @@
+<form class="form-horizontal">
+  <h2 class="modal-header"
+      mat-dialog-title>Proof Entry</h2>
+
+  <mat-dialog-content class="modal-body">
+    <div class="row">
+      <div class="col-md-4 m-t-20">
+        <mat-label>Investment Type</mat-label>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field style="width:100%">
+          <select matNativeControl>
+            <option value="">--Select Investment--</option>
+            <!-- <option *ngFor="let item of dropdown.base_dependency"
+                    value="{{ item.id }}">{{ item.name }}</option> -->
+          </select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 m-t-20">
+        <mat-label>Amount Value</mat-label>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field style="width:100%">
+          <input matInput />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 m-t-20">
+        <mat-label>Policy/Certificate/Pan</mat-label>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field style="width:100%">
+          <input matInput />
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="modal-footer">
+    <button class="mat-raised-button"
+            type="button"
+            (click)="close()">
+      Close
+    </button>
+    <button mat-flat-button
+            type="submit"
+            color="primary">
+      Submit
+    </button>
+  </mat-dialog-actions>
+</form>
