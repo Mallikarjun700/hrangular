@@ -126,6 +126,11 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () => import('./views/payroll/payroll.module').then(m => m.PayrollModule)
       },
+      {
+        path: 'compben',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./views/compben/compben.module').then(m => m.CompbenModule)
+      },
     ]
   },
   { path: '**', component: P404Component }

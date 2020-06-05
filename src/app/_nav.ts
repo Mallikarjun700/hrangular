@@ -14,7 +14,7 @@ export const navItems: INavData[] = [
       {
         name: 'Company Profile',
         url: '/home/organization/companyprofile',
-        icon: 'fas fa-clipboard-check' 
+        icon: 'fas fa-clipboard-check'
       },
       {
         name: 'Control Panel',
@@ -176,7 +176,7 @@ export const navItems: INavData[] = [
       },
       {
         name: 'IT Declaration',
-        url: '',
+        url: '/home/compben/it-declaration',
         icon: 'fa fa-users'
       },
       {
@@ -195,7 +195,7 @@ export const navItems: INavData[] = [
         icon: 'fa fa-users'
       }
     ]
-  }, 
+  },
   {
     name: 'Customize',
     url: '/home/customize',

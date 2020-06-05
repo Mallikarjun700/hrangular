@@ -1,0 +1,57 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> IT Declaration
+                </div>
+                <div class="card-body">
+                    <mat-tab-group mat-align-tabs="start"
+                                   mat-stretch-tabs>
+                        <div *ngFor="let tabVal of tabData;">
+                            <mat-tab label="{{tabVal.name}}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-reponsive">
+                                                <thead>
+                                                    <th class="col-md-2"></th>
+                                                    <th class="col-md-2">Max</th>
+                                                    <th class="col-md-2">Declared</th>
+                                                    <th class="col-md-2">Submitted Amount</th>
+                                                    <th class="col-md-2">Verified Amount</th>
+                                                    <th class="col-md-2">Proof Entry</th>
+                                                    <th class="col-md-1">Status</th>
+                                                </thead>
+                                                <tbody>
+                                                    <ng-container *ngFor="let itVal of itData;let i = index">
+                                                        <tr *ngIf="tabVal.tabid===itVal.tabid">
+                                                            <td>{{itVal.name}}</td>
+                                                            <td><input type="text"
+                                                                       [(ngModel)]="itVal.max_amount"></td>
+                                                            <td><input type="text"
+                                                                       [(ngModel)]="itVal.declared_amount"></td>
+                                                            <td><input type="text"
+                                                                       [(ngModel)]="itVal.submitted_amount"></td>
+                                                            <td><input type="text"
+                                                                       [(ngModel)]="itVal.verified_amount"
+                                                                       readonly></td>
+                                                            <td><button class="btn btn-primary"
+                                                                        (click)="addProof(itVal, i)">Add Proof</button>
+                                                            </td>
+                                                            <td><i class='fa fa-file-excel'></i></td>
+                                                        </tr>
+                                                    </ng-container>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                        </div>
+                    </mat-tab-group>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
