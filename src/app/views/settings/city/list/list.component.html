@@ -4,9 +4,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> City List
+                    <i class="fas fa-align-justify"></i> City List
                     <div class="pull-right"><a class="btn btn-primary" [routerLink]="['/home/settings/city/add']"><i
-                                class="fa fa-plus"></i> &nbsp;Add City</a></div>
+                                class="fas fa-plus"></i> &nbsp;Add City</a></div>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info" *ngIf="!this.temp">No Data found</div>
@@ -35,9 +35,9 @@
                                 <td>
                                     <button mat-mini-fab color="primary" type="button"
                                         [routerLink]="['/home/settings/city/edit',group.id]"><i
-                                            class="fa fa-edit"></i></button>
+                                            class="fas fa-edit"></i></button>
                                     <button mat-mini-fab color="warn" type="button" (click)="deleteAction(group.id)"><i
-                                            class="fa fa-trash"></i></button>
+                                            class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>

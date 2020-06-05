@@ -18,8 +18,9 @@
                         <div *ngIf="f.email.errors.pattern">Email is invalid</div>
                     </div>
                 </div>
-                
-                <button type="submit" *ngIf="mailExist" class="btn btn-block btn-success">Submit</button>
+                <div class="col-md-12">
+                <button type="submit" *ngIf="mailExist" [ngClass]="{'submitspinner' : loading}" [disabled]="loading" class="btn btn-block btn-success">Submit</button>
+                </div>
                 <a class="btn pull-right" [routerLink]="['/login']"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> &nbsp;Back to Login</a>
               </form>
             </div>

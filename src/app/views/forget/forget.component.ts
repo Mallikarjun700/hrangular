@@ -42,15 +42,18 @@ checkExist(){
   if (this.f.email.invalid) {
       return;
   }
+  this.loading = true;
   this.authenticationService.registerMailCheck(this.f.email.value)
     .pipe(first())
     .subscribe(
       data => {
         if (data.success) {
           this.mailExist = true;
+          this.loading = false;
         }
       },
       error => {
+        this.loading = false;
         this.toastr.errorToastr(error);
       });
 }

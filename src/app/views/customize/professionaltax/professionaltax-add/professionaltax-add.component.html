@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <i class="fa fa-edit"></i>{{ id ? "Edit" : "Add" }} Professional Tax
+    <i class="fas fa-edit"></i>{{ id ? "Edit" : "Add" }} Professional Tax
   </div>
   <div
     class="card-body"
@@ -63,7 +63,7 @@
             mat-mini-fab [disabled]="(taxdetails.invalid)" (click)="addTaxdetailsValue()" 
             color="primary"
           >
-            <i class="fa fa-plus" ></i>
+            <i class="fas fa-plus" ></i>
           </button>  
         </div>
       </div>
@@ -231,7 +231,7 @@
                                       type="button"
                                       [disabled]="(taxdetails.length==1)? true:false" (click)="deleteTaxdetailsValue(i)"
                                       ><i 
-                                      class="fa fa-trash"></i></button>
+                                      class="fas fa-trash"></i></button>
                           </td>
                       </tr>
                     </ng-template>

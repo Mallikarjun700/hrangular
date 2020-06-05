@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-      <i class="fa fa-edit"></i>{{ id ? "Edit" : "Add" }} Adhoc
+      <i class="fas fa-edit"></i>{{ id ? "Edit" : "Add" }} Adhoc
     </div>
     <div
       class="card-body"
@@ -24,7 +24,7 @@
               (click)="addAdhocdetailsValue()"
               color="primary"
             >
-              <i class="fa fa-plus"></i>
+              <i class="fas fa-plus"></i>
             </button>
           </div>
         </div>
@@ -157,7 +157,7 @@
                             [disabled]="(adhocdetails.length >= 1 && addr.get('type')?.value==0)? true : false"
                             (click)="deleteAdhocdetailsValue(i)"
                         >
-                            <i class="fa fa-trash"></i>
+                            <i class="fas fa-trash"></i>
                         </button>
                     </td>
                 </tr>
