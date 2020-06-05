@@ -255,3 +255,25 @@ margin: 0;
 .marqueecontainer:before, .marqueecontainer::before {
   top: 0;
 }
+
+
+
+@keyframes submitspinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.submitspinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: submitspinner .8s linear infinite;
+}
