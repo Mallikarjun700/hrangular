@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CurdcommonserviceService,AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
@@ -29,9 +29,9 @@ export class AddCompanyProfileComponent implements OnInit {
   public eightFormGroup: FormGroup;
   public isOptional = false;
   public EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-  public PH_REGEX = /^[\+\d]?(?:[\d-.\s()]*)$/;
+  public PH_REGEX = /^[\+\d]+(?:[\d]*)$/;
   public ACNO_REGEX = /^\d{9,18}$/;
-  public IFSC_REGEX = /^[A-Za-z]{4}[a-zA-Z0-9]{7}$/;
+  public IFSC_REGEX = /^[A-Za-z]{4}[0-9]{7}$/;
   public PAN_REGEX = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
   public CIN_REGEX = /^([L|U]{1})([0-9]{5})([A-Z]{2})([0-9]{4})([A-Z]{3})([0-9]{6})$/;
   public GST_REGEX = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;

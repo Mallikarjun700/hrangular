@@ -32,8 +32,7 @@
                                            required>
                                     <mat-error *ngIf="f1.password.errors">
                                         <span *ngIf="f1.password.errors.required"> Brand name is required</span>
-                                        <span *ngIf="f1.password.errors.pattern">Password is must be combination of
-                                            upper case,lower case and numbers with minimum 7 letters</span>
+                                        <span *ngIf="f1.password.errors.pattern">Password is must be combination of alphabets,numbers and special characters with minimum 7 letters</span>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -134,8 +133,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <mat-form-field style="width:100%">
-                                    <mat-label>Choose a date</mat-label>
-                                    <input matInput readonly 
+                                    <mat-label>Date Of Birth</mat-label>
+                                    <input matInput readonly  [max]="hidetomorrow" 
                                            [matDatepicker]="date_of_birth"
                                            formControlName="date_of_birth">
                                     <mat-datepicker-toggle matSuffix
@@ -143,6 +142,7 @@
                                     <mat-datepicker #date_of_birth></mat-datepicker>
                                     <mat-error *ngIf="f1.date_of_birth.errors">
                                         <span *ngIf="f1.date_of_birth.errors.required">Date Of Birth is required</span>
+                                        <span *ngIf="f1.date_of_birth.errors.overEighteen">Date of birth is less than the age of 18 years.</span>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -177,7 +177,7 @@
                                                            [for]="date_of_join"></mat-datepicker-toggle>
                                     <mat-datepicker #date_of_join></mat-datepicker>
                                     <mat-error *ngIf="f1.date_of_join.errors">
-                                        <span *ngIf="f1.date_of_join.errors.required">Date Of Birth is required</span>
+                                        <span *ngIf="f1.date_of_join.errors.required">Date Of Join is required</span>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -225,6 +225,7 @@
                                            placeholder="Mobile Number"
                                            formControlName="mobile_number">
                                     <mat-error *ngIf="f1.mobile_number.errors">
+                                        <span *ngIf="f1.mobile_number.errors.required"> Mobile Number is required</span>
                                         <span *ngIf="f1.mobile_number.errors.pattern"> Mobile Number is invalid</span>
                                     </mat-error>
                                 </mat-form-field>
@@ -261,18 +262,21 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <mat-form-field style="width:100%">
-                                    <mat-label>Temporary Address</mat-label>
-                                    <textarea matInput
-                                              placeholder="Temporary Address"
-                                              formControlName="temporary_address"></textarea>
-                                </mat-form-field>
-                            </div>
-                            <div class="col-md-4">
-                                <mat-form-field style="width:100%">
                                     <mat-label>Permanent Address</mat-label>
                                     <textarea matInput
                                               placeholder="Permanent Address"
                                               formControlName="permanent_address"></textarea>
+                                    <mat-error *ngIf="f1.permanent_address.errors">
+                                        <span *ngIf="f1.permanent_address.errors.required"> Permanent Address is required</span>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Temporary Address</mat-label>
+                                    <textarea matInput
+                                              placeholder="Temporary Address"
+                                              formControlName="temporary_address"></textarea>
                                 </mat-form-field>
                             </div>
                             <div class="col-md-4">
@@ -324,9 +328,9 @@
                                 <div class="col-md-4">
                                     <mat-form-field style="width:100%">
                                         <mat-label>Passport Valid From</mat-label>
-                                        <input matInput readonly 
+                                        <input matInput readonly  [max]="hidetomorrow" 
                                                [matDatepicker]="valid_from"
-                                               formControlName="valid_from" [required]="addr.get('number').value!=''">
+                                               formControlName="valid_from">
                                         <mat-datepicker-toggle matSuffix
                                                                [for]="valid_from"></mat-datepicker-toggle>
                                         <mat-datepicker #valid_from></mat-datepicker>
@@ -339,9 +343,9 @@
                                 <div class="col-md-4">
                                     <mat-form-field style="width:100%">
                                         <mat-label>Passport Valid Till</mat-label>
-                                        <input matInput readonly 
+                                        <input matInput readonly  [min]="(addr.get('valid_from').value)?(addr.get('valid_from').value):hidetomorrow"
                                                [matDatepicker]="valid_till"
-                                               formControlName="valid_till" [required]="addr.get('number').value!=''">
+                                               formControlName="valid_till" >
                                         <mat-datepicker-toggle matSuffix
                                                                [for]="valid_till"></mat-datepicker-toggle>
                                         <mat-datepicker #valid_till></mat-datepicker>
@@ -359,7 +363,7 @@
                                     matStepperPrevious>Back</button>
                             <button mat-flat-button
                                     color="primary"
-                                    matStepperNext>Next</button>
+                                    (click)="passwordValidation()">Next</button>
                         </div>
                     </form>
                 </mat-step>
@@ -475,7 +479,7 @@
                             <div class="col-md-12">
                                 <button class="pull-right"
                                         mat-mini-fab
-                                        color="primary"
+                                        color="primary" [disabled]="(education.invalid)" 
                                         (click)="addEducationValue()"><i class="fas fa-plus"></i></button>
                                 <table class="table table-bordered table-responsive">
                                     <thead>
@@ -566,7 +570,8 @@
                                             <td><button mat-mini-fab
                                                         color="warn"
                                                         type="button"
-                                                        (click)="deleteLocationValue(i)"><i
+                                                        [disabled]="(education.length==1)? true:false" 
+                                                        (click)="deleteEducationValue(i)"><i
                                                        class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>

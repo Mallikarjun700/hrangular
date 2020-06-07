@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CurdcommonserviceService, AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import {removeSpaces}  from '../../../../_helpers/customvalidator';
+import {removeSpaces,overEighteen,passwordDateConditionallyRequiredValidator}  from '../../../../_helpers/customvalidator';
+import { MatStepper } from '@angular/material/stepper';
 @Component({
   selector: 'app-add-personal-info',
   templateUrl: './addPersonalInfo.component.html',
@@ -13,6 +14,8 @@ export class AddPersonalInfoComponent implements OnInit {
   dropdown: any;
   dropdownmain: any;
   id: any;
+  hidetomorrow = new Date(); 
+  @ViewChild('stepper') stepper: MatStepper;
   public isOptional : FormGroup;
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
@@ -26,6 +29,7 @@ export class AddPersonalInfoComponent implements OnInit {
   public EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
   public PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/;
   public MOBILE = /^[0-9]{10,10}$/;
+  public PH_REGEX = /^[\+\d]+(?:[\d]*)$/;
   constructor(
     private _formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -77,14 +81,14 @@ export class AddPersonalInfoComponent implements OnInit {
       name: this._formBuilder.array([]),
       gender: [(data) ? data.gender : '1', [Validators.required, removeSpaces]],
       family: this._formBuilder.array([]),
-      date_of_birth: [(data) ? data.date_of_birth : '', [Validators.required, removeSpaces]],
+      date_of_birth: [(data) ? data.date_of_birth : '', [Validators.required, removeSpaces,overEighteen]],
       blood_group: [(data) ? data.blood_group : '1', [Validators.required, removeSpaces]],
       email: this._formBuilder.array([]),
       date_of_join: [(data) ? data.date_of_join : '', [Validators.required, removeSpaces]],
       mobile_number: [(data) ? data.mobile_number : '', [Validators.required, removeSpaces, Validators.pattern(this.MOBILE)]],
       marital_status: [(data) ? data.marital_status : '1', [Validators.required, removeSpaces]],
-      phone_number: [(data) ? data.mobile_number : '', [Validators.pattern(this.MOBILE)]],
-      temporary_address: [(data) ? data.temporary_address : '', [Validators.required, removeSpaces]],
+      phone_number: [(data) ? data.phone_number : '', [Validators.pattern(this.PH_REGEX)]],
+      temporary_address: [(data) ? data.temporary_address : '', [removeSpaces]],
       permanent_address: [(data) ? data.permanent_address : '', [Validators.required, removeSpaces]],
       international_worker: [(data) ? data.international_worker : 1],
       country_origin: [(data) ? data.country_origin : '', [Validators.required, removeSpaces]],
@@ -119,6 +123,7 @@ export class AddPersonalInfoComponent implements OnInit {
       valid_till: [(data) ? data.valid_till : ''],
     });
   }
+  
   initiateSecondFormGroup(data?: any) {
     this.secondFormGroup = this._formBuilder.group({
       passport: this._formBuilder.array(
@@ -133,13 +138,26 @@ export class AddPersonalInfoComponent implements OnInit {
     let fg = this.createPassportFormGroup(data);
     this.passport.push(fg);
   }
-
+  passwordValidation(){
+    const ctrl = this.secondFormGroup.get('passport') as FormArray;
+    if (this.passport.controls[0].value && this.passport.controls[0].value.number!='') {
+        if(this.passport.controls[0].value.valid_from==''){
+          ctrl.at(0).get('valid_from').setErrors( {required: true} );
+        }
+        if(this.passport.controls[0].value.valid_till==''){
+          ctrl.at(0).get('valid_till').setErrors( {required: true} );
+        }
+    }
+    if(this.secondFormGroup.valid){
+      this.stepper.next();
+    }
+  }
   createGDFormGroup(data?: any) {
     return this._formBuilder.group({
-      phisically_handicapped: [(data) ? data.phisically_handicapped : '', [Validators.required, removeSpaces]],
-      locomotive: [(data) ? data.locomotive : '', [Validators.required, removeSpaces]],
-      hearing: [(data) ? data.hearing : '', [Validators.required, removeSpaces]],
-      visual: [(data) ? data.visual : '', [Validators.required, removeSpaces]],
+      phisically_handicapped: [(data) ? data.phisically_handicapped : ''],
+      locomotive: [(data) ? data.locomotive : ''],
+      hearing: [(data) ? data.hearing : ''],
+      visual: [(data) ? data.visual : ''],
     });
   }
   initiateThirdFormGroup(data?: any) {
