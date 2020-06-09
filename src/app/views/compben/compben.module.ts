@@ -16,10 +16,12 @@ import { CompbenRoutingModule } from './compben-routing.module';
 import { CompbenLayoutComponent } from './compben-layout/compben-layout.component';
 import { ItDeclarationComponent } from './it-declaration/it-declaration.component';
 import { SubComponentComponent } from './it-declaration/sub-component/sub-component.component';
+import { InvestmenttypeListComponent } from './investmenttype/investmenttype-list/investmenttype-list.component';
+import { InvestmenttypeAddComponent } from './investmenttype/investmenttype-add/investmenttype-add.component';
 
 
 @NgModule({
-  declarations: [CompbenLayoutComponent, ItDeclarationComponent, SubComponentComponent],
+  declarations: [CompbenLayoutComponent, ItDeclarationComponent, SubComponentComponent, InvestmenttypeListComponent, InvestmenttypeAddComponent],
   imports: [
     CommonModule,
     CompbenRoutingModule,

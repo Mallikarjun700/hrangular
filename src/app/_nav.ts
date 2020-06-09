@@ -175,6 +175,11 @@ export const navItems: INavData[] = [
         icon: 'fas fa-users'
       },
       {
+        name: 'Investment Type',
+        url: '/home/compben/investmenttype',
+        icon: 'fas fa-money'
+      },
+      {
         name: 'IT Declaration',
         url: '/home/compben/it-declaration',
         icon: 'fas fa-users'

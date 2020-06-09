@@ -1,0 +1,124 @@
+<div class="card">
+    <div class="card-header">
+      <i class="fas fa-edit"></i>{{ id ? "Edit" : "Add" }} Investment Type
+    </div>
+    <div
+      class="card-body"
+      style="overflow: visible; height: auto; display: block;"
+      aria-expanded="true"
+      aria-hidden="false"
+    >
+      <form
+        [formGroup]="investtypeFormGroup"
+        class="form-horizontal"
+        (ngSubmit)="onSubmit()"
+      >
+        <!-- -->
+        <div class="row">
+             
+            <div class="col-md-12">
+                <mat-label>Investment Type</mat-label>
+                <mat-form-field style="width:100%">
+                    <textarea
+                    matInput
+                    formControlName="name"
+                    rows="3" cols="50"></textarea>
+                    <mat-error
+                    *ngIf="f.name.errors"
+                    >
+                    <span *ngIf="f.name.errors?.required">
+                        Investment Type is required</span
+                    >
+                    <span *ngIf="f.name.errors?.pattern">
+                        Investment Type is invalid</span
+                    >
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            
+                <div class="col-md-6">
+                    <mat-label>Max Amount</mat-label>
+                    <mat-form-field style="width:100%">
+                        <input matInput formControlName="max_amount"/>
+                        <mat-error
+                        *ngIf="f.max_amount.errors"
+                        >
+                        <span *ngIf="f.max_amount.errors?.required">
+                            Max Amount is required</span
+                        >
+                        <span *ngIf="f.max_amount.errors?.pattern">
+                            Max Amount is invalid</span
+                        >
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+             
+                    <div class="col-md-6">
+                        <mat-label>Description</mat-label>
+                        <mat-form-field style="width:100%">
+                            <input matInput formControlName="description"/>
+                            <mat-error
+                            *ngIf="f.description.errors"
+                            >
+                            <span *ngIf="f.description.errors?.required">
+                                Description is required</span
+                            >
+                            <span *ngIf="f.description.errors?.pattern">
+                                Description is invalid</span
+                            >
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-label>Exemption Limit</mat-label>
+                <mat-form-field style="width:100%">
+                    <textarea
+                    matInput
+                    formControlName="exemption_limit"
+                    rows="7" cols="50"></textarea>
+                    <mat-error
+                    *ngIf="f.exemption_limit.errors"
+                    >
+                        <span *ngIf="f.exemption_limit.errors?.required">
+                            Exemption Limit is required</span
+                        >
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-md-6">
+                <mat-label>Supporting Document</mat-label>
+                <mat-form-field style="width:100%">
+                    <textarea
+                    matInput
+                    formControlName="supporting_docs"
+                    rows="7" cols="50">
+                    </textarea>
+                    <mat-error
+                    *ngIf="f.supporting_docs.errors"
+                    >
+                        <span *ngIf="f.supporting_docs.errors?.required">
+                                Supporting Document is required</span
+                        >
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-right">
+              <button mat-button (click)="resetForm()">Cancel</button>
+              <button mat-flat-button type="submit" color="primary">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
