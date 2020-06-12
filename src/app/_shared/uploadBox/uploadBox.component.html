@@ -1,0 +1,54 @@
+<h2 class="modal-header" mat-dialog-title>Bulk Upload</h2>
+<mat-dialog-content class="modal-body">
+  <div class="col-md-12 Upload-Box">
+    <div class=" text-center" *ngIf="this.config.downloadFile">
+      <a href="{{ this.config.downloadFile }}">
+        <button class="btn btn-danger mb-0 border-radious-4">
+          <i class="fas fa-file-excel"></i>
+          Click Download Template
+        </button>
+      </a>
+      <h6 class="upload-text">Or Upload filled template</h6>
+      <p class="mb-0 upload-arrow text-center">
+        <i class="feather icon-arrow-down"></i>
+      </p>
+    </div>
+    <div class="col-md-12">
+        <form [formGroup]="demoForm">
+            <!-- File name Input -->
+            <div class="col-md-12">
+                <mat-label>Upload File</mat-label>
+                <file-upload class="commonBulkUpload"
+                             formControlName="files"
+                             [accept]="config.accept"></file-upload>
+                <div class="text-danger"
+                     *ngIf="submitted && this.demoForm.get('files').errors">
+                    <p *ngIf="this.demoForm.get('files').errors.sizeRange">
+                        Kindly upload less then {{imageSizeConverion(this.config.max)}} bytes
+                    </p>
+                    <p *ngIf="this.demoForm.get('files').errors.fileTypes">
+                        Invalid File format
+                    </p>
+                    <p *ngIf="this.demoForm.get('files').errors.filesLimit">
+                        Maximum limit is
+                        {{this.demoForm.get('files').errors.filesLimit.max}}
+                    </p>
+                    <p *ngIf="this.demoForm.get('files').errors.required"> Required</p>
+                </div>
+                <div>
+                    <p>
+                        <i class="feather icon-info"></i> {{this.config.note}}</p>
+                </div>
+            </div>
+            <div class="float-right">
+                <button class="btn btn-secondary btn-sm"
+                        (click)="cancel()"
+                        style="margin-right: 10px">Cancel</button>
+                <button type="submit"
+                        (click)="submit()"
+                        class="btn btn-primary btn-sm">Upload</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</mat-dialog-content>

@@ -9,7 +9,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { FileUploadModule } from '@iplab/ngx-file-upload';
 // Tabs Component
 import { TabsModule } from 'ngx-bootstrap/tabs';
 // Import routing module
@@ -18,10 +19,10 @@ import { PersonalinfoLayoutComponent } from './personalinfo/personalinfo-layout/
 import { PersonalinfoComponent } from './personalinfo/personalinfo.component';
 import { AddPersonalInfoComponent } from './personalinfo/add/addPersonalInfo.component';
 
-
+import { UploadboxComponent } from '../../_shared/uploadBox/uploadBox.component';
 
 @NgModule({
-  declarations: [PersonalinfoComponent,PersonalinfoLayoutComponent, AddPersonalInfoComponent],
+  declarations: [PersonalinfoComponent,PersonalinfoLayoutComponent, AddPersonalInfoComponent,UploadboxComponent],
   imports: [
     CommonModule,
 	  OnboardingRoutingModule,
@@ -35,7 +36,10 @@ import { AddPersonalInfoComponent } from './personalinfo/add/addPersonalInfo.com
     MatStepperModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
-  ]
+    MatCheckboxModule,
+    MatDialogModule,
+    FileUploadModule
+  ],
+  entryComponents: [UploadboxComponent]
 })
 export class OnboardingModule { }
