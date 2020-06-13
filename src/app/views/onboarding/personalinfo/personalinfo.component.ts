@@ -4,6 +4,8 @@ import { CurdcommonserviceService,AuthenticationService } from '../../../_servic
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { UploadboxComponent } from '../../../_shared/uploadBox/uploadBox.component';
+import { environment } from '../../../../environments/environment';
+
 @Component({
   selector: 'app-personalinfo',
   templateUrl: './personalinfo.component.html',
@@ -81,7 +83,7 @@ export class PersonalinfoComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       accept: 'application/kset,text/comma-separated-values,application/excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/kset,application/kswps,application/vnd.ms-excel,application/ms-excel,application/vnd.msexcel,application/csv,text/csv,application/msexcel',
       note: 'File format (XLS, XLSX) and File size is maximum 20MB',
-      downloadFile: '/api/storage/app/bulkupload/EmployeeRecords.csv',
+      downloadFile: environment.downloadUrl +'storage/app/bulkupload/EmployeeRecords.csv',
       serviceURL: 'employee/bulkimport',
       title: 'Employee',
       redirect: '/home/onboarding/personalinfo',
