@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CurdcommonserviceService,AuthenticationService } from '../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
-
+import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
+import { UploadboxComponent } from '../../../_shared/uploadBox/uploadBox.component';
 @Component({
   selector: 'app-personalinfo',
   templateUrl: './personalinfo.component.html',
@@ -12,8 +13,10 @@ export class PersonalinfoComponent implements OnInit {
   public dataList = [];
   public temp: Object = false;
   dtOptions: DataTables.Settings = {};
-  constructor(private commonService: CurdcommonserviceService,private authenticationService: AuthenticationService, private route: ActivatedRoute,
-    private router: Router, public toastr: ToastrManager) { }
+  constructor(private commonService: CurdcommonserviceService, 
+    private authenticationService: AuthenticationService, 
+    private route: ActivatedRoute,
+    private router: Router, public toastr: ToastrManager, private matDialog: MatDialog) { }
 
   getList() {
     this.temp = false;
@@ -64,6 +67,26 @@ export class PersonalinfoComponent implements OnInit {
           // this.dataList=data.message;
         }
       });
+  }
+  openBulkUploadDialog(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.minWidth = '50vw';
+    dialogConfig.maxWidth = '50vh';
+    dialogConfig.data = {
+      limit: 1,
+      min: 1,
+      max: 20971520,
+      // tslint:disable-next-line:max-line-length
+      accept: 'application/kset,text/comma-separated-values,application/excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/kset,application/kswps,application/vnd.ms-excel,application/ms-excel,application/vnd.msexcel,application/csv,text/csv,application/msexcel',
+      note: 'File format (XLS, XLSX) and File size is maximum 20MB',
+      downloadFile: '/api/storage/app/bulkupload/EmployeeRecords.csv',
+      serviceURL: 'employee/bulkimport',
+      title: 'Employee',
+      redirect: '/home/onboarding/personalinfo',
+    };
+    this.matDialog.open(UploadboxComponent, dialogConfig);
   }
 
 }
