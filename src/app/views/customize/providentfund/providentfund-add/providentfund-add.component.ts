@@ -42,8 +42,8 @@ export class ProvidentfundAddComponent implements OnInit {
         amount: [(data) ? data.amount : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
         effective_date: [(data) ? data.effective_date : '',[Validators.required, removeSpaces]],
         vc_allowed: [(data) ? data.vc_allowed : 0],
-        stop_age: [(data) ? data.stop_age : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
-        age_desc: [(data) ? data.age_desc : ''],
+        stop_age: [(data) ? data.stop_age : '', [removeSpaces, Validators.pattern(this.NUMBER)]],
+        age_desc: [(data) ? data.age_desc : '', [removeSpaces]],
         pfdetails: this.formBuilder.array([]),
       });
     }
