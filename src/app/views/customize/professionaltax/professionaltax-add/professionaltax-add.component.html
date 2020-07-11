@@ -124,7 +124,7 @@
                             <br>
                            
                                 <mat-form-field style="width:100%"  *ngIf="addr.get('salary_range')?.value == 2">
-                                  <input matInput formControlName="salary_to" />
+                                  <input matInput formControlName="salary_to" [min]="((addr.get('salary_from')?.value>0)?addr.get('salary_from')?.value:0)"/>
                                   <mat-error
                                     *ngIf="addr.invalid && addr.get('salary_to').errors"
                                   >
@@ -182,12 +182,29 @@
                      
                             <mat-form-field style="width:100%" *ngIf="addr.get('exemption')?.value">
                               <mat-label> Age </mat-label>
-                              <input matInput formControlName="exemption_age" />
+                              <input matInput formControlName="exemption_age" [required]="addr.get('exemption')?.value==1"/>
+                              <mat-error
+                                *ngIf="addr.invalid && addr.get('exemption_age').errors"
+                              >
+                                <span *ngIf="addr.get('exemption_age').errors?.required">
+                                  Age is required</span
+                                >
+                                <span *ngIf="addr.get('exemption_age').errors?.pattern">
+                                  Age is invalid</span
+                                >
+                              </mat-error>
                             </mat-form-field>
                         
                             <mat-form-field style="width:100%" *ngIf="addr.get('exemption')?.value">
                               <mat-label> Exemption Details </mat-label>
-                              <input matInput formControlName="exemption_details" />
+                              <input matInput formControlName="exemption_details" [required]="addr.get('exemption')?.value==1"/>
+                              <mat-error
+                                *ngIf="addr.invalid && addr.get('exemption_details').errors"
+                              >
+                                <span *ngIf="addr.get('exemption_details').errors?.required">
+                                  Exemption Details is required</span
+                                >
+                              </mat-error>
                              </mat-form-field>
                           </td>
                           <td>

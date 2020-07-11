@@ -26,10 +26,14 @@ export class AddPersonalInfoComponent implements OnInit {
   public seventhFormGroup: FormGroup;
   public eightFormGroup: FormGroup;
   public nineFormGroup: FormGroup;
+  
   public EMAIL_REGEX = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
   public PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/;
   public MOBILE = /^[0-9]{10,10}$/;
   public PH_REGEX = /^[\+\d]+(?:[\d]*)$/;
+  public ACNO_REGEX = /^\d{9,18}$/;
+  public IFSC_REGEX = /^[A-Za-z]{4}[0-9]{7}$/;
+
   constructor(
     private _formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -288,10 +292,10 @@ export class AddPersonalInfoComponent implements OnInit {
 
   createBankDetailsFormGroup(data?: any) {
     return this._formBuilder.group({
-      account_no: [(data) ? data.account_no : '', [Validators.required, removeSpaces]],
+      account_no: [(data) ? data.account_no : '', [Validators.required,Validators.pattern(this.ACNO_REGEX), removeSpaces]],
       bank_name: [(data) ? data.bank_name : '', [Validators.required, removeSpaces]],
       branch: [(data) ? data.branch : '', [Validators.required, removeSpaces]],
-      ifsc_code: [(data) ? data.ifsc_code : '', [Validators.required, removeSpaces]],
+      ifsc_code: [(data) ? data.ifsc_code : '',[Validators.required,Validators.pattern(this.IFSC_REGEX), removeSpaces]],
     })
   }
   get bank_details(): FormArray {

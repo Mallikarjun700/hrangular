@@ -28,8 +28,8 @@
                 <mat-label>Maximum Cap Wages</mat-label>
                 <input matInput formControlName="amount" />
                 <mat-error *ngIf="f.amount.errors">
-                    <span *ngIf="f.amount.errors.required"> Amount is required</span>
-                    <span *ngIf="f.amount.errors.pattern"> Amount is invalid</span>
+                    <span *ngIf="f.amount.errors.required"> Maximum Cap Wages is required</span>
+                    <span *ngIf="f.amount.errors.pattern"> Maximum Cap Wages is invalid</span>
                 </mat-error>
                </mat-form-field>
         </div>
@@ -55,13 +55,13 @@
                 formControlName="vc_allowed"
                 color="primary"
                 style="padding-top: 14px;"
-              > Voluntry Contribution 
+              > Voluntary Contribution 
               </mat-slide-toggle>
             </div>
             <div class="col-md-3">
                 <mat-form-field style="width:100%">
                     <mat-label> Age </mat-label>
-                    <input matInput formControlName="stop_age" />
+                    <input matInput formControlName="stop_age" [required]="f.vc_allowed.value==1"/>
                     <mat-error
                     *ngIf="f.stop_age.errors"
                   >
@@ -77,8 +77,15 @@
             <div class="col-md-4" >
                 <mat-form-field style="width:100%">
                     <mat-label> Exemption Details </mat-label>
-                    <input matInput formControlName="age_desc" />
-                   </mat-form-field>
+                    <input matInput formControlName="age_desc"  [required]="f.vc_allowed.value==1"/>
+                    <mat-error
+                    *ngIf="f.age_desc.errors"
+                  >
+                    <span *ngIf="f.age_desc.errors.required">
+                      Exemption Details is required</span
+                    >
+                  </mat-error>
+                </mat-form-field>
             </div>
             <div class="col-md-2">
                 <button

@@ -136,7 +136,7 @@
                                     <mat-label>Date Of Birth</mat-label>
                                     <input matInput readonly  [max]="hidetomorrow" 
                                            [matDatepicker]="date_of_birth"
-                                           formControlName="date_of_birth">
+                                           formControlName="date_of_birth" required>
                                     <mat-datepicker-toggle matSuffix
                                                            [for]="date_of_birth"></mat-datepicker-toggle>
                                     <mat-datepicker #date_of_birth></mat-datepicker>
@@ -478,7 +478,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <button class="pull-right"
-                                        mat-mini-fab
+                                        mat-mini-fab type="button" 
                                         color="primary" [disabled]="(education.invalid)" 
                                         (click)="addEducationValue()"><i class="fas fa-plus"></i></button>
                                 <table class="table table-bordered table-responsive">
@@ -530,7 +530,7 @@
                                             </td>
                                             <td>
                                                 <mat-form-field style="width:100%">
-                                                    <input matInput readonly 
+                                                    <input matInput readonly [max]="hidetomorrow"  
                                                            [matDatepicker]="start_date"
                                                            formControlName="start_date">
                                                     <mat-datepicker-toggle matSuffix
@@ -540,7 +540,8 @@
                                             </td>
                                             <td>
                                                 <mat-form-field style="width:100%">
-                                                    <input matInput readonly 
+                                                    <input matInput readonly [max]="hidetomorrow" 
+                                                    [min]="(addr.get('start_date').value)"
                                                            [matDatepicker]="end_date"
                                                            formControlName="end_date">
                                                     <mat-datepicker-toggle matSuffix
@@ -595,8 +596,8 @@
                         <ng-template matStepLabel>Relationship</ng-template>
                         <div class="row">
                             <div class="col-md-12">
-                                <button class="pull-right"
-                                        mat-mini-fab
+                                <button class="pull-right" type="button" 
+                                        mat-mini-fab  [disabled]="(relationship.invalid)" 
                                         color="primary"
                                         (click)="addRelationShipValue()"><i class="fas fa-plus"></i></button>
                                 <table class="table table-bordered table-responsive">
@@ -626,7 +627,7 @@
                                             </td>
                                             <td>
                                                 <mat-form-field style="width:100%">
-                                                    <input matInput readonly 
+                                                    <input matInput readonly [max]="hidetomorrow" 
                                                            [matDatepicker]="date_of_birth"
                                                            formControlName="date_of_birth">
                                                     <mat-datepicker-toggle matSuffix
@@ -661,7 +662,7 @@
                                             </td>
                                             <td><button mat-mini-fab
                                                         color="warn"
-                                                        type="button"
+                                                        type="button" [disabled]="(relationship.length==1)? true:false" 
                                                         (click)="deleteRelationShipValue(i)"><i
                                                        class="fas fa-trash"></i></button>
                                             </td>
@@ -687,8 +688,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <button class="pull-right"
-                                        mat-mini-fab
-                                        color="primary"
+                                        mat-mini-fab type="button"
+                                        color="primary"   [disabled]="(previous_company.invalid)" 
                                         (click)="addPreviousCompanyValue()"><i class="fas fa-plus"></i></button>
                                 <table class="table table-bordered table-responsive">
                                     <thead>
@@ -723,7 +724,7 @@
                                             </td>
                                             <td>
                                                 <mat-form-field style="width:100%">
-                                                    <input matInput readonly 
+                                                    <input matInput readonly [max]="hidetomorrow" 
                                                            [matDatepicker]="experience_from"
                                                            formControlName="experience_from">
                                                     <mat-datepicker-toggle matSuffix
@@ -734,7 +735,8 @@
                                             </td>
                                             <td>
                                                 <mat-form-field style="width:100%">
-                                                    <input matInput readonly 
+                                                    <input matInput readonly [max]="hidetomorrow" 
+                                                    [min]="(addr.get('experience_from').value)"
                                                            [matDatepicker]="experience_to"
                                                            formControlName="experience_to">
                                                     <mat-datepicker-toggle matSuffix
@@ -758,7 +760,7 @@
                                             </td>
                                             <td><button mat-mini-fab
                                                         color="warn"
-                                                        type="button"
+                                                        type="button"  [disabled]="(previous_company.length==1)? true:false" 
                                                         (click)="deletePreviousCompanyValue(i)"><i
                                                        class="fas fa-trash"></i></button>
                                             </td>
@@ -784,8 +786,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <button class="pull-right"
-                                        mat-mini-fab
-                                        color="primary"
+                                        mat-mini-fab type="button" 
+                                        color="primary"   [disabled]="(bank_details.invalid)" 
                                         (click)="addBankDetailsValue()"><i class="fas fa-plus"></i></button>
                                 <table class="table table-bordered">
                                     <thead>
@@ -840,7 +842,7 @@
                                             </td>
                                             <td><button mat-mini-fab
                                                         color="warn"
-                                                        type="button"
+                                                        type="button"  [disabled]="(bank_details.length==1)? true:false" 
                                                         (click)="deleteBankDetailsValue(i)"><i
                                                        class="fas fa-trash"></i></button>
                                             </td>

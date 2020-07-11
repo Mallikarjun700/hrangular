@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ValidatorFn } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CurdcommonserviceService, AuthenticationService } from '../../../../_services';
 import { ToastrManager } from 'ng6-toastr-notifications';
@@ -53,10 +53,10 @@ export class ProfessionaltaxAddComponent implements OnInit {
   createTaxdetailsFormGroup(data?: any) {
     return this.formBuilder.group({
       salary_range: [(data) ? data.salary_range : 1, [Validators.required, removeSpaces]],
-      salary_from: [(data) ? data.salary_from : 0, [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
-      salary_to: [(data) ? data.salary_to : 0, [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
-      slab: [(data) ? data.slab : 1, [Validators.required, removeSpaces]],
-      pt_amount: [(data) ? data.pt_amount : 1, [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
+      salary_from: [(data) ? data.salary_from : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
+      salary_to: [(data) ? data.salary_to : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
+      slab: [(data) ? data.slab : '', [Validators.required, removeSpaces]],
+      pt_amount: [(data) ? data.pt_amount : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
       exemption: [(data) ? data.exemption : 0],
       exemption_age: [(data) ? data.exemption_age : '', Validators.pattern(this.NUMBER)],
       exemption_details: [(data) ? data.exemption_details : ''],
@@ -66,7 +66,7 @@ export class ProfessionaltaxAddComponent implements OnInit {
       document_name: [(data) ? data.document_name : '']
     });
   }
-
+  
   initiateProfessionalTaxFormGroup(data?: any) {
     this.professionalTaxFormGroup = this.formBuilder.group({
       id: [(data) ? data.id : ''],
