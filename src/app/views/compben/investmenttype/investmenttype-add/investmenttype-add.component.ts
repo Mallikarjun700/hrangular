@@ -12,8 +12,8 @@ import {removeSpaces} from '../../../../_helpers/customvalidator';
 })
 export class InvestmenttypeAddComponent implements OnInit {
   id: any;
-  public NUMBER = /^(0|[1-9][0-9]*)$/;
- // public PERCENTAGE = /(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)/;
+  //public NUMBER = /^(0|[1-9][0-9]*)$/;
+  public PERCENTAGE = /(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)/;
 
   public investtypeFormGroup: FormGroup;
   constructor(private formBuilder: FormBuilder,
@@ -25,9 +25,9 @@ export class InvestmenttypeAddComponent implements OnInit {
 
   initiateInvestTypeFormGroup(data?: any) {
     this.investtypeFormGroup = this.formBuilder.group({
-      id: [(data) ? data.id : '0'],
+      id: [(data) ? data.id : ''],
       name: [(data) ? data.name : '', [Validators.required, removeSpaces]],
-      max_amount: [(data) ? data.max_amount : '', [Validators.required, removeSpaces, Validators.pattern(this.NUMBER)]],
+      max_amount: [(data) ? data.max_amount : '', [Validators.required, removeSpaces, Validators.pattern(this.PERCENTAGE)]],
       description: [(data) ? data.description : '', [Validators.required, removeSpaces]],
       exemption_limit: [(data) ? data.exemption_limit : '', [Validators.required, removeSpaces]],
       supporting_docs: [(data) ? data.supporting_docs : '', [Validators.required, removeSpaces]],
