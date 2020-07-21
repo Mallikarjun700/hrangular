@@ -59,6 +59,11 @@ export class InvestmenttypeAddComponent implements OnInit {
     if (this.route.snapshot.params['id']) {
       URL = 'investmenttype/' + this.id;
     }
+    Object.keys(params).forEach((keys: any, vals: any) => {
+      if (typeof params[keys] !== 'string' && params[keys].length > 0) {
+        params[keys] = (JSON.stringify(params[keys]));
+      }
+    });
     this.commonService.post(URL, params)
       .subscribe(
         details => {
